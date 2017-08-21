@@ -22,7 +22,7 @@ import os.path
 import json
 import subprocess
 import requests
-
+import time
 import google.oauth2.credentials
 
 from google.assistant.library import Assistant
@@ -55,9 +55,12 @@ def process_event(event, assistant):
         if (len(returned) > 4 and "".join(returned[:2]) == "canyou"):
             returned = returned[2:]
             print(returned)
-        if (len(returned) > 1 and returned[0] == 'turn'):
+        if (len(returned) > 1 and (returned[0] == 'turn' or returned[0] == 'dim' or returned[0] == 'brighten' )):
             action = returned[1]
             object = "".join(returned[2:])
+            if (returned[0] == 'dim' or returned[0] == 'brighten'):
+                action = 'on'
+                object = "".join(returned[1:])
             devices = {
                 'thelamps': 'energenieb_',
                 'thelamp': 'energenieb_',
@@ -74,8 +77,20 @@ def process_event(event, assistant):
                 'theconsoles': 'energeniec_',
                 'theconsole': 'energeniec_',
                 'theceiling': 'energeniea_',
-                'everything': 'energenieall_',
-                'allthelights': ['energenieb_', 'energeniea_']
+                'everything': ['energenieall_','x10a_', 'x10b_', 'x10c_', 'x10d_', 'all_'],
+                'allthelights': ['energenieb_', 'energeniea_'],
+                'bedroomlights': 'x10a_',
+                'thebedroomlights': 'x10a_',
+                'bedroomlight': 'x10a_',
+                'thebedroomlight': 'x10a_',
+                'bedlight': 'x10b_',
+                'thebedlight': 'x10b_',
+                'thekitchenlights': 'a_',
+                'thekitchenlight': 'a_',
+                'kitchenlights': 'a_',
+                'theLEDstrip': 'a_',
+                'thewaterfall': 'waterfall_',
+                'waterfall': 'waterfall_',
             }
             print(action)
             print(object)
@@ -90,8 +105,16 @@ def process_event(event, assistant):
                         subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", d + action ])
                 else:
                     subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", device + action ])
+                if (returned[0] == 'dim' and 'x10' in device):
+                    time.sleep(0.05)
+                    subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", 'x10dim' ])
+                if (returned[0] == 'brighten' and 'x10' in device):
+                    time.sleep(0.05)
+                    subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", 'x10bright' ])
         if (len(returned) > 0 and (returned[0] == 'reboot' or returned[0] == 'restart')):            
             subprocess.call(["shutdown", "-r", "now"])
+        if (len(returned) > 0 and (returned[0] == 'shutdown' or (len(returned) > 1 and returned[0] + returned[1] == 'shutdown'))):
+            subprocess.call(["shutdown", "-h", "now"])
         if (len(returned) > 1 and ("".join(returned[:2]) == 'makea'or "".join(returned[:2]) == 'makethe' or returned[0] == 'make')):
             print(returned[2])
             r = requests.post("http://192.168.0.176", data={'colour': returned[2]})

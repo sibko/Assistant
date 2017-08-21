@@ -53,7 +53,6 @@ extended_delay = 0.0096
 waterfall_sdelay = 0.00035
 waterfall_ldelay = 0.00115
 waterfall_edelay = 0.01171
-NUM_ATTEMPTS = 10
 TRANSMIT_PIN = 24
 
 def transmit_code(code, argument):
@@ -69,6 +68,9 @@ def transmit_code(code, argument):
     print(str(sdelay))
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(TRANSMIT_PIN, GPIO.OUT)
+    NUM_ATTEMPTS = 10
+    if ('x10dim' in argument or 'x10bright' in argument):
+        NUM_ATTEMPTS=25
     for t in range(NUM_ATTEMPTS):
         if 'energenie' in argument:
             edelay=energenieextended_delay
