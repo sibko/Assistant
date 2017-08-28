@@ -16,7 +16,7 @@
 
 
 from __future__ import print_function
-
+import sys
 import argparse
 import os.path
 import json
@@ -29,7 +29,7 @@ from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
 from google.assistant.library.file_helpers import existing_file
 
-
+playingmusic=""
 def process_event(event, assistant):
     """Pretty prints events.
 
@@ -149,7 +149,38 @@ def process_event(event, assistant):
                 device = devices[device]
                 subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action])
                 assistant.stop_conversation()
-        
+        if (len(returned) > 0 and returned[0] == 'play'):
+            assistant.stop_conversation()
+            search = returned[1:]
+            print(search)
+            command = []
+            command.append("/usr/bin/find")
+            command.append("/music")
+            command.append("-path")
+            command.append("/music/trashbox")
+            command.append("-prune")
+            command.append("-o")
+            command.append("-type")
+            command.append("f")
+            command.append("-iname")
+            command.append("*" + returned[1] + "*")
+            for word in returned:
+                if (word == returned[0] or word == returned[1] or word == "the" or word == "it" or word == "a"):
+                    continue
+                command.append("-a")
+                command.append("-iname")
+                command.append("*" + word + "*mp3")
+            command.append("-print")
+            # \( -name \"*tornado*\" -and -iname \"*little*\" -and -iname \"*mp3\" \)")
+            print(command)
+            results = subprocess.check_output(command)
+            results = results.decode(sys.stdout.encoding).split("\n")
+            print(results[0])
+            global playingmusic
+            playingmusic=subprocess.Popen(['mplayer', results[0]])
+        if (len(returned) > 0 and returned[0] == 'end'):
+            global playingmusic
+            playingmusic.terminate()
 def main():
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawTextHelpFormatter)
