@@ -41,7 +41,7 @@ def process_event(event, assistant):
     """
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         print()
-        subprocess.call(["ogg123", "/home/pi/Downloads/r2d2_whisles002-notification_sound-1920809.ogg"])
+        subprocess.call(["ogg123", "/home/pi/hail.ogg"])
 
     print(event)
 
@@ -50,18 +50,7 @@ def process_event(event, assistant):
         print()
 
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED):
-        print(event.args['text'])
-        returned = event.args['text'].split()
-        if (len(returned) > 4 and "".join(returned[:2]) == "canyou"):
-            returned = returned[2:]
-            print(returned)
-        if (len(returned) > 1 and (returned[0] == 'turn' or returned[0] == 'dim' or returned[0] == 'brighten' )):
-            action = returned[1]
-            object = "".join(returned[2:])
-            if (returned[0] == 'dim' or returned[0] == 'brighten'):
-                action = 'on'
-                object = "".join(returned[1:])
-            devices = {
+        devices = {
                 'thelamps': 'energenieb_',
                 'thelamp': 'energenieb_',
                 'thealarms': 'energenieb_',
@@ -91,10 +80,33 @@ def process_event(event, assistant):
                 'theLEDstrip': 'a_',
                 'thewaterfall': 'waterfall_',
                 'waterfall': 'waterfall_',
+                'TV': 'infrabedroomTV',
+                'theTV': 'infrabedroomTV',
+                'soundbar': 'infrasoundbar',
+                'thesoundbar': 'infrasoundbar',
+                'aircon': 'infraaircon',
+                'theaircon': 'infraaircon',
+                'theicon': 'infraaircon',
+                'icon': 'infraaircon',
+                'theacon': 'infraaircon',
+                'acon': 'infraaircon',
+                'iPhone': 'infraaircon',
+                'theiPhone': 'infraaircon'
             }
+        print(event.args['text'])
+        returned = event.args['text'].split()
+        if (len(returned) > 4 and "".join(returned[:2]) == "canyou"):
+            returned = returned[2:]
+            print(returned)
+        if (len(returned) > 1 and (returned[0] == 'turn' or returned[0] == 'dim' or returned[0] == 'brighten' )):
+            action = returned[1]
+            object = "".join(returned[2:])
+            if (returned[0] == 'dim' or returned[0] == 'brighten'):
+                action = 'on'
+                object = "".join(returned[1:])
             print(action)
             print(object)
-            if (object in devices and (action == "on" or action == "off")):
+            if (object in devices and (action == "on" or action == "off" or action =="up" or action == "down")):
                 print(action)
                 print(object)
                 assistant.stop_conversation()
@@ -103,6 +115,12 @@ def process_event(event, assistant):
                 if (isinstance(device, list)):
                     for d in device:
                         subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", d + action ])
+                elif ('infra' in device):
+                    if (action=="up" and 'TV' in object):
+                        action="volumeup"
+                    if (action=="down" and 'TV' in object):
+                        action="volumedown"
+                    subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action])
                 else:
                     subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", device + action ])
                 if (returned[0] == 'dim' and 'x10' in device):
@@ -115,12 +133,22 @@ def process_event(event, assistant):
             subprocess.call(["shutdown", "-r", "now"])
         if (len(returned) > 0 and (returned[0] == 'shutdown' or (len(returned) > 1 and returned[0] + returned[1] == 'shutdown'))):
             subprocess.call(["shutdown", "-h", "now"])
-        if (len(returned) > 1 and ("".join(returned[:2]) == 'makea'or "".join(returned[:2]) == 'makethe' or returned[0] == 'make')):
+        if (len(returned) > 1 and ("".join(returned[:2]) == 'createa' or returned[0] == 'create')):
             print(returned[2])
-            r = requests.post("http://192.168.0.176", data={'colour': returned[2]})
+            try:
+                r = requests.post("http://192.168.0.176", data={'colour': returned[2]})
+            except requests.exceptions.RequestException as e:
+                print(e)
             assistant.stop_conversation()            
-        
-
+        if (len(returned) > 1 and ("".join(returned[:2]) == 'makethe' or returned[0] == 'make')):
+            action = returned[len(returned) -1]
+            device = "".join(returned[2:len(returned) -1])
+            print(action)
+            print(device)
+            if (device in devices):
+                device = devices[device]
+                subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action])
+                assistant.stop_conversation()
         
 def main():
     parser = argparse.ArgumentParser(
