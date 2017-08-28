@@ -28,7 +28,7 @@ import google.oauth2.credentials
 from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
 from google.assistant.library.file_helpers import existing_file
-
+from subprocess import PIPE
 playingmusic=""
 def process_event(event, assistant):
     """Pretty prints events.
@@ -51,6 +51,11 @@ def process_event(event, assistant):
 
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED):
         devices = {
+                'thelights': ['energenieb_', 'energeniea_'],
+                'allthelights': ['energenieb_', 'energeniea_'],
+                'TV': 'infrabedroomTV',
+                'theTV': 'infrabedroomTV',
+                'everything': ['energenieall_','x10a_', 'x10b_', 'x10c_', 'x10d_', 'all_'],  
                 'thelamps': 'energenieb_',
                 'thelamp': 'energenieb_',
                 'thealarms': 'energenieb_',
@@ -66,8 +71,6 @@ def process_event(event, assistant):
                 'theconsoles': 'energeniec_',
                 'theconsole': 'energeniec_',
                 'theceiling': 'energeniea_',
-                'everything': ['energenieall_','x10a_', 'x10b_', 'x10c_', 'x10d_', 'all_'],
-                'allthelights': ['energenieb_', 'energeniea_'],
                 'bedroomlights': 'x10a_',
                 'thebedroomlights': 'x10a_',
                 'bedroomlight': 'x10a_',
@@ -80,8 +83,6 @@ def process_event(event, assistant):
                 'theLEDstrip': 'a_',
                 'thewaterfall': 'waterfall_',
                 'waterfall': 'waterfall_',
-                'TV': 'infrabedroomTV',
-                'theTV': 'infrabedroomTV',
                 'soundbar': 'infrasoundbar',
                 'thesoundbar': 'infrasoundbar',
                 'aircon': 'infraaircon',
@@ -98,8 +99,12 @@ def process_event(event, assistant):
         if (len(returned) > 4 and "".join(returned[:2]) == "canyou"):
             returned = returned[2:]
             print(returned)
+
+
+
+#DIRECT TURN ON STUFF
         if (len(returned) > 1 and (returned[0] == 'turn' or returned[0] == 'dim' or returned[0] == 'brighten' )):
-            action = returned[1]
+            action = returned[1].lower()
             object = "".join(returned[2:])
             if (returned[0] == 'dim' or returned[0] == 'brighten'):
                 action = 'on'
@@ -129,19 +134,29 @@ def process_event(event, assistant):
                 if (returned[0] == 'brighten' and 'x10' in device):
                     time.sleep(0.05)
                     subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", 'x10bright' ])
-        if (len(returned) > 0 and (returned[0] == 'reboot' or returned[0] == 'restart')):            
-            subprocess.call(["shutdown", "-r", "now"])
-        if (len(returned) > 0 and (returned[0] == 'shutdown' or (len(returned) > 1 and returned[0] + returned[1] == 'shutdown'))):
-            subprocess.call(["shutdown", "-h", "now"])
-        if (len(returned) > 1 and ("".join(returned[:2]) == 'createa' or returned[0] == 'create')):
+
+
+#SYSTEM COMMANDS
+        if (len(returned) > 0 and (returned[0].lower() == 'reboot' or returned[0].lower() == 'restart')):            
+            subprocess.call(["sudo", "shutdown", "-r", "now"])
+        if (len(returned) > 0 and (returned[0].lower() == 'shutdown' or (len(returned) > 1 and returned[0].lower() + returned[1].lower() == 'shutdown'))):
+            subprocess.call(["sudo", "shutdown", "-h", "now"])
+
+
+#LED COMMANDS
+        if (len(returned) > 1 and ("".join(returned[:2]).lower() == 'createa' or returned[0].lower() == 'create')):
             print(returned[2])
             try:
                 r = requests.post("http://192.168.0.176", data={'colour': returned[2]})
             except requests.exceptions.RequestException as e:
                 print(e)
             assistant.stop_conversation()            
-        if (len(returned) > 1 and ("".join(returned[:2]) == 'makethe' or returned[0] == 'make')):
-            action = returned[len(returned) -1]
+
+
+
+#INFRARED COMMANDS
+        if (len(returned) > 1 and ("".join(returned[:2]).lower() == 'makethe' or returned[0].lower() == 'make')):
+            action = returned[len(returned) -1].lower()
             device = "".join(returned[2:len(returned) -1])
             print(action)
             print(device)
@@ -149,7 +164,50 @@ def process_event(event, assistant):
                 device = devices[device]
                 subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action])
                 assistant.stop_conversation()
-        if (len(returned) > 0 and returned[0] == 'play'):
+
+
+
+#MUSIC CONTROL
+        #mplayer -playlist 00-little_big_town-a_place_to_land_\(deluxe\)-2008.m3u -shuffle
+        if (len(returned) > 0 and returned[0] == 'skip'):
+            assistant.stop_conversation()
+            global playingmusic
+            #playingmusic.communicate(input=b'\n')
+            playingmusic.stdin.write(b'\n')
+            #playingmusic.stdin.close()
+        if (len(returned) > 2 and ("".join(returned[:2]).lower() == 'startplaylist' or "".join(returned[:2]).lower() == 'stopplaylist' or "".join(returned[:3]).lower() == 'startplaylist')):
+            assistant.stop_conversation()
+            command=[]
+            command.append("/usr/bin/find")
+            command.append("/music")
+            command.append("-path")
+            command.append("/music/trashbox")
+            command.append("-prune")
+            command.append("-o")
+            command.append("-type")
+            command.append("f")
+            for word in returned:
+                if (word == returned[0] or word.lower() == "start" or word.lower() == "play" or word.lower() == "list" or word.lower() == 'playlist' or word.lower() == 'shuffle'):
+                    continue
+                if (word != returned[1]):
+                    command.append("-a")
+                command.append("-iwholename")
+                command.append("*" + word + "*")
+            command.append("-print")
+            print(command)
+            results = subprocess.check_output(command)
+            results = results.decode(sys.stdout.encoding).split("\n")
+            print(results)
+            for mfile in results:
+                if ('m3u' in mfile or 'pls' in mfile or 'asx' in mfile):
+                    global playingmusic
+                    if ('shuffle' in returned or 'Shuffle' in returned):
+                        playingmusic=subprocess.Popen(['mplayer', '-playlist', mfile, '-shuffle'], stdin=PIPE)
+                    else:
+                        playingmusic=subprocess.Popen(['mplayer', '-playlist', mfile], stdin=PIPE)
+                    break
+
+        if (len(returned) > 2 and returned[0].lower() == 'play'):
             assistant.stop_conversation()
             search = returned[1:]
             print(search)
@@ -162,25 +220,30 @@ def process_event(event, assistant):
             command.append("-o")
             command.append("-type")
             command.append("f")
-            command.append("-iname")
-            command.append("*" + returned[1] + "*")
             for word in returned:
-                if (word == returned[0] or word == returned[1] or word == "the" or word == "it" or word == "a"):
+                if (word == returned[0] or word.lower() == "the" or word.lower() == "it" or word.lower() == "a" or word.lower() == 'by'):
                     continue
-                command.append("-a")
-                command.append("-iname")
-                command.append("*" + word + "*mp3")
+                if (word != returned[1]):
+                    command.append("-a")
+                command.append("-iwholename")
+                command.append("*" + word + "*")
             command.append("-print")
-            # \( -name \"*tornado*\" -and -iname \"*little*\" -and -iname \"*mp3\" \)")
             print(command)
             results = subprocess.check_output(command)
             results = results.decode(sys.stdout.encoding).split("\n")
-            print(results[0])
-            global playingmusic
-            playingmusic=subprocess.Popen(['mplayer', results[0]])
-        if (len(returned) > 0 and returned[0] == 'end'):
+            print(results)
+            for mfile in results:
+                if ('flac' in mfile or 'mp3' in mfile):
+                    global playingmusic
+                    playingmusic=subprocess.Popen(['mplayer', mfile])
+                    break
+        if (len(returned) > 0 and (returned[0] == 'end' or "".join(returned[:2]).lower() == 'stopmusic' or "".join(returned[:3]).lower() == 'stopthemusic')):
             global playingmusic
             playingmusic.terminate()
+        if (len(returned) > 0 and returned[0] == 'volume'):
+            subprocess.call(['amixer', 'sset', 'PCM,0', returned[1]])
+
+
 def main():
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawTextHelpFormatter)
