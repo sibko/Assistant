@@ -40,7 +40,7 @@ class mplayer():
              mplayerexists.terminate()
         command='mplayer '
         if playlist : command +='-playlist '
-        command += mfile
+        command += '"' + mfile + '"'
         if shuffle : command +=' -shuffle'        
         print(command)
         self.player=pexpect.spawn(command)
@@ -49,6 +49,7 @@ class mplayer():
     def setVolume(self, volume):
         if (not self.player.isalive()):
             return
+        volume=int(volume)
         print('Setting volume to ' + str(volume))        
         i=0
         while i<15:
@@ -56,24 +57,24 @@ class mplayer():
             self.player.send('9999')
         i=0
         while i < volume:
-            i+=4
-            self.player.send('00')
+            i+=3
+            self.player.send('0')
 
     def moveVolume(self, direction):
         if (not self.player.isalive()):
             return
         print('moving volume ' + direction)
         i=0
-        while i < 5:
+        while i < 10:
             if (direction == "up"):
-                self.player.send('00')
+                self.player.send('0')
             else:
                 self.player.send('9')
             i+=1
     def skip(self):
         if (not self.player.isalive()):
             return
-        self.player.send('\n')
+        self.player.sendline('\n')
 
     def stop(self):
         if (not self.player.isalive()):
@@ -286,8 +287,8 @@ def process_event(event, assistant):
                     break
         if (len(returned) > 0 and (returned[0].lower() == 'end' or "".join(returned[:2]).lower() == 'stopmusic' or "".join(returned[:3]).lower() == 'stopthemusic')):
             assistant.stop_conversation()
-	    global isplaying
-            isplaying.terminate()
+            global isplaying
+            isplaying.stop()
         if (len(returned) > 1 and returned[0].lower() == 'volume'):
             subprocess.call(['amixer', 'sset', 'PCM,0', returned[1]])
         if (len(returned) > 1 and returned[0].lower() == 'music' and returned[1].lower() == 'volume'):
