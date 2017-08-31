@@ -38,12 +38,12 @@ class mplayer():
         global mplayerexists
         if (mplayerexists and mplayerexists.isalive()):
              mplayerexists.terminate()
-        command='mplayer '
+        command='mplayer -quiet '
         if playlist : command +='-playlist '
         command += '"' + mfile + '"'
         if shuffle : command +=' -shuffle'        
         print(command)
-        self.player=pexpect.spawn(command)
+        self.player=pexpect.spawn(command, timeout=None, maxread=None)
         mplayerexists = self.player
 
     def setVolume(self, volume):
@@ -54,11 +54,11 @@ class mplayer():
         i=0
         while i<15:
             i+=1
-            self.player.send('9999')
+            self.player.send("9999")
         i=0
         while i < volume:
             i+=3
-            self.player.send('0')
+            self.player.send("0")
 
     def moveVolume(self, direction):
         if (not self.player.isalive()):
