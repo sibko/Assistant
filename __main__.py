@@ -29,7 +29,57 @@ from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
 from google.assistant.library.file_helpers import existing_file
 from subprocess import PIPE
-playingmusic=""
+isplaying=False
+mplayerexists=False
+import pexpect
+
+class mplayer():
+    def __init__(self, mfile, playlist, shuffle):
+        global mplayerexists
+        if (mplayerexists and mplayerexists.isalive()):
+             mplayerexists.terminate()
+        command='mplayer '
+        if playlist : command +='-playlist '
+        command += mfile
+        if shuffle : command +=' -shuffle'        
+        print(command)
+        self.player=pexpect.spawn(command)
+        mplayerexists = self.player
+
+    def setVolume(self, volume):
+        if (not self.player.isalive()):
+            return
+        print('Setting volume to ' + str(volume))        
+        i=0
+        while i<15:
+            i+=1
+            self.player.send('9999')
+        i=0
+        while i < volume:
+            i+=4
+            self.player.send('00')
+
+    def moveVolume(self, direction):
+        if (not self.player.isalive()):
+            return
+        print('moving volume ' + direction)
+        i=0
+        while i < 5:
+            if (direction == "up"):
+                self.player.send('00')
+            else:
+                self.player.send('9')
+            i+=1
+    def skip(self):
+        if (not self.player.isalive()):
+            return
+        self.player.send('\n')
+
+    def stop(self):
+        if (not self.player.isalive()):
+            return
+        self.player.terminate()
+
 def process_event(event, assistant):
     """Pretty prints events.
 
@@ -168,13 +218,10 @@ def process_event(event, assistant):
 
 
 #MUSIC CONTROL
-        #mplayer -playlist 00-little_big_town-a_place_to_land_\(deluxe\)-2008.m3u -shuffle
         if (len(returned) > 0 and returned[0] == 'skip'):
             assistant.stop_conversation()
-            global playingmusic
-            #playingmusic.communicate(input=b'\n')
-            playingmusic.stdin.write(b'\n')
-            #playingmusic.stdin.close()
+            global isplaying
+            isplaying.skip()
         if (len(returned) > 2 and ("".join(returned[:2]).lower() == 'startplaylist' or "".join(returned[:2]).lower() == 'stopplaylist' or "".join(returned[:3]).lower() == 'startplaylist')):
             assistant.stop_conversation()
             command=[]
@@ -200,11 +247,11 @@ def process_event(event, assistant):
             print(results)
             for mfile in results:
                 if ('m3u' in mfile or 'pls' in mfile or 'asx' in mfile):
-                    global playingmusic
+                    global isplaying
                     if ('shuffle' in returned or 'Shuffle' in returned):
-                        playingmusic=subprocess.Popen(['mplayer', '-playlist', mfile, '-shuffle'], stdin=PIPE)
+                        isplaying=mplayer(mfile, True, True)
                     else:
-                        playingmusic=subprocess.Popen(['mplayer', '-playlist', mfile], stdin=PIPE)
+                        isplaying=mplayer(mfile, True, False)
                     break
 
         if (len(returned) > 2 and returned[0].lower() == 'play'):
@@ -234,15 +281,31 @@ def process_event(event, assistant):
             print(results)
             for mfile in results:
                 if ('flac' in mfile or 'mp3' in mfile):
-                    global playingmusic
-                    playingmusic=subprocess.Popen(['mplayer', mfile])
+                    global isplaying
+                    isplaying=mplayer(mfile, False, False)
                     break
-        if (len(returned) > 0 and (returned[0] == 'end' or "".join(returned[:2]).lower() == 'stopmusic' or "".join(returned[:3]).lower() == 'stopthemusic')):
-            global playingmusic
-            playingmusic.terminate()
-        if (len(returned) > 0 and returned[0] == 'volume'):
+        if (len(returned) > 0 and (returned[0].lower() == 'end' or "".join(returned[:2]).lower() == 'stopmusic' or "".join(returned[:3]).lower() == 'stopthemusic')):
+            assistant.stop_conversation()
+	    global isplaying
+            isplaying.terminate()
+        if (len(returned) > 1 and returned[0].lower() == 'volume'):
             subprocess.call(['amixer', 'sset', 'PCM,0', returned[1]])
+        if (len(returned) > 1 and returned[0].lower() == 'music' and returned[1].lower() == 'volume'):
+            assistant.stop_conversation()
+            global isplaying
+            if (returned[2] == 'up'):
+                isplaying.moveVolume('up')
+            elif (returned[2] == 'down'):
+                isplaying.moveVolume('down')
+            elif (isInt(returned[2])):
+                isplaying.setVolume(returned[2])
 
+def isInt(i):
+    try:
+        int(i)
+        return True
+    except ValueError:
+        return False
 
 def main():
     parser = argparse.ArgumentParser(
