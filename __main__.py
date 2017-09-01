@@ -40,17 +40,20 @@ conffile = open("settings.conf", "r")
 config = ast.literal_eval(conffile.read())
 print(config)
 logging.basicConfig(filename='/home/pi/assLogs.log', level=logging.Debug, format='%(asctime)s %(levelname)-8s %(message)s')
-
+hasVideo=False
+if ('hasVideo' in config and config['hasVideo'] == True):
+    hasVideo=True
 
 class mplayer():
-    def __init__(self, mfile, playlist, shuffle):
+    def __init__(self, mfile, playlist, shuffle, video):
         global mplayerexists
         if (mplayerexists and mplayerexists.isalive()):
              mplayerexists.terminate()
-        command='mplayer -quiet '
+        command='mplayer -quiet -really-quiet '
+	if video: command += '-fs '
         if playlist : command +='-playlist '
         command += '"' + mfile + '"'
-        if shuffle : command +=' -shuffle'        
+        if (shuffle and playlist) : command +=' -shuffle'        
         logging.info(command)
 	print(command)
         self.player=pexpect.spawn(command, timeout=None, maxread=None)
@@ -250,7 +253,7 @@ def process_event(event, assistant):
 
 
 
-#MUSIC CONTROL
+#Media CONTROL
         if (len(returned) > 0 and returned[0] == 'skip'):
             assistant.stop_conversation()
             global isplaying
@@ -284,27 +287,32 @@ def process_event(event, assistant):
                 if ('m3u' in mfile or 'pls' in mfile or 'asx' in mfile):
                     global isplaying
                     if ('shuffle' in returned or 'Shuffle' in returned):
-                        isplaying=mplayer(mfile, True, True)
+                        isplaying=mplayer(mfile, True, True, False)
                     else:
-                        isplaying=mplayer(mfile, True, False)
+                        isplaying=mplayer(mfile, True, False, False)
                     break
 
         if (len(returned) > 2 and returned[0].lower() == 'play'):
+	    global hasVideo
             assistant.stop_conversation()
-            search = returned[1:]
+            path='/music'
+	    search = returned[1:]
+	    if (hasVideo and returned[1].lower() == 'video'):
+	        search = returned[2:]
+		path = '/videos'
             logging.info('SONG lookup %s', search)
             print(search)
             command = []
             command.append("/usr/bin/find")
-            command.append("/music")
+            command.append(path)
             command.append("-path")
             command.append("/music/trashbox")
             command.append("-prune")
             command.append("-o")
             command.append("-type")
             command.append("f")
-            for word in returned:
-                if (word == returned[0] or word.lower() == "the" or word.lower() == "it" or word.lower() == "a" or word.lower() == 'by'):
+            for word in search:
+                if (word.lower() == "the" or word.lower() == "it" or word.lower() == "a" or word.lower() == 'by'):
                     continue
                 if (word != returned[1]):
                     command.append("-a")
@@ -318,9 +326,13 @@ def process_event(event, assistant):
             logging.info('SONG lookup %s', results)
             print(results)
             for mfile in results:
-                if ('flac' in mfile or 'mp3' in mfile):
+                if ('flac' in mfile or 'mp3' in mfile or 'wma' in mfile):
                     global isplaying
-                    isplaying=mplayer(mfile, False, False)
+                    isplaying=mplayer(mfile, False, False, False)
+                    break
+                if ('wmv' in mfile or 'avi' in mfile or 'mkv' in mfile or 'mp4' in mfile):
+                    global isplaying
+                    isplaying=mplayer(mfile, False, False, True)
                     break
         if (len(returned) > 0 and (returned[0].lower() == 'end' or "".join(returned[:2]).lower() == 'stopmusic' or "".join(returned[:3]).lower() == 'stopthemusic')):
             logging.info('stop music')
