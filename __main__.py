@@ -26,6 +26,7 @@ import time
 import google.oauth2.credentials
 import ast
 import pexpect
+import logging
 
 from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
@@ -38,7 +39,7 @@ mplayerexists=False
 conffile = open("settings.conf", "r")
 config = ast.literal_eval(conffile.read())
 print(config)
-
+logging.basicConfig(filename='/home/pi/assLogs.log', level=logging.Debug, format='%(asctime)s %(levelname)-8s %(message)s')
 
 
 class mplayer():
@@ -50,7 +51,8 @@ class mplayer():
         if playlist : command +='-playlist '
         command += '"' + mfile + '"'
         if shuffle : command +=' -shuffle'        
-        print(command)
+        logging.info(command)
+	print(command)
         self.player=pexpect.spawn(command, timeout=None, maxread=None)
         mplayerexists = self.player
 
@@ -59,7 +61,8 @@ class mplayer():
             return
         volume=int(volume)
         print('Setting volume to ' + str(volume))        
-        i=0
+        logging.info('setting volume to %s', str(volume))
+	i=0
         while i<15:
             i+=1
             self.player.send("9999")
@@ -72,7 +75,8 @@ class mplayer():
         if (not self.player.isalive()):
             return
         print('moving volume ' + direction)
-        i=0
+        logging.info('moving volume %s', direction)
+	i=0
         while i < 10:
             if (direction == "up"):
                 self.player.send('0')
@@ -104,6 +108,7 @@ def process_event(event, assistant):
     """
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         print()
+	logging.info('Convo started')
 	global isplaying
 	if (isplaying and isplaying.isalive()):
 	    isplaying.pause()
@@ -117,6 +122,7 @@ def process_event(event, assistant):
         if (isplaying and isplaying.isalive()):
             isplaying.pause()
         print()
+	logging.info('Convo finished')
 
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED):
         devices = {
@@ -167,6 +173,7 @@ def process_event(event, assistant):
         for depdevice in config['devices']:
             device[depdevice] = config['devices'][depdevice]
         print(event.args['text'])
+	logging.info('Received %s', event.args['text'])
         returned = event.args['text'].split()
         if (len(returned) > 4 and "".join(returned[:2]) == "canyou"):
             returned = returned[2:]
@@ -182,10 +189,10 @@ def process_event(event, assistant):
                 action = 'on'
                 object = "".join(returned[1:].lower())
             print(action)
+	    logging.info(action)
             print(object)
+	    logging.info(object)
             if (object in devices and (action == "on" or action == "off" or action =="up" or action == "down")):
-                print(action)
-                print(object)
                 assistant.stop_conversation()
                 device = devices[object]                
                 house = "1"
@@ -209,17 +216,20 @@ def process_event(event, assistant):
 
 
 #SYSTEM COMMANDS
-        if (len(returned) > 0 and (returned[0].lower() == 'reboot' or returned[0].lower() == 'restart')):            
+        if (len(returned) > 0 and (returned[0].lower() == 'reboot' or returned[0].lower() == 'restart')):           
+            logging.info('system restart')
             subprocess.call(["sudo", "shutdown", "-r", "now"])
         if (len(returned) > 0 and (returned[0].lower() == 'shutdown' or (len(returned) > 1 and returned[0].lower() + returned[1].lower() == 'shutdown'))):
+            logging.info('system shutdown')
             subprocess.call(["sudo", "shutdown", "-h", "now"])
 
 
 #LED COMMANDS
         if (len(returned) > 1 and ("".join(returned[:2]).lower() == 'createa' or returned[0].lower() == 'create')):
-            print(returned[2])
-            try:
-                r = requests.post("http://192.168.0.176", data={'colour': returned[2]})
+            print(returned[2:])
+            logging.info('create a %s', returned[2:])
+	    try:
+                r = requests.post("http://192.168.0.176", data={'colour': "".join(returned[2:]).lower()})
             except requests.exceptions.RequestException as e:
                 print(e)
             assistant.stop_conversation()            
@@ -230,6 +240,7 @@ def process_event(event, assistant):
         if (len(returned) > 1 and ("".join(returned[:2]).lower() == 'makethe' or returned[0].lower() == 'make')):
             action = returned[len(returned) -1].lower()
             device = "".join(returned[2:len(returned) -1])
+            logging.info('infra red command to %s - %s', device, action)
             print(action)
             print(device)
             if (device in devices):
@@ -263,10 +274,12 @@ def process_event(event, assistant):
                 command.append("-iwholename")
                 command.append("*" + word + "*")
             command.append("-print")
-            print(command)
+            logging.info(command)
+            print('PLAYLIST lookup %s', command)
             results = subprocess.check_output(command)
             results = results.decode(sys.stdout.encoding).split("\n")
-            print(results)
+            logging.info(results)
+            print('PLAYLIST lookup %s', results)
             for mfile in results:
                 if ('m3u' in mfile or 'pls' in mfile or 'asx' in mfile):
                     global isplaying
@@ -279,6 +292,7 @@ def process_event(event, assistant):
         if (len(returned) > 2 and returned[0].lower() == 'play'):
             assistant.stop_conversation()
             search = returned[1:]
+            logging.info('SONG lookup %s', search)
             print(search)
             command = []
             command.append("/usr/bin/find")
@@ -297,9 +311,11 @@ def process_event(event, assistant):
                 command.append("-iwholename")
                 command.append("*" + word + "*")
             command.append("-print")
+            logging.info('SONG lookup %s', command)
             print(command)
             results = subprocess.check_output(command)
             results = results.decode(sys.stdout.encoding).split("\n")
+            logging.info('SONG lookup %s', results)
             print(results)
             for mfile in results:
                 if ('flac' in mfile or 'mp3' in mfile):
@@ -307,13 +323,16 @@ def process_event(event, assistant):
                     isplaying=mplayer(mfile, False, False)
                     break
         if (len(returned) > 0 and (returned[0].lower() == 'end' or "".join(returned[:2]).lower() == 'stopmusic' or "".join(returned[:3]).lower() == 'stopthemusic')):
+            logging.info('stop music')
             assistant.stop_conversation()
             global isplaying
             isplaying.stop()
         if (len(returned) > 1 and returned[0].lower() == 'volume'):
+            logging.info('set volume %s', returned[1])
             subprocess.call(['amixer', 'sset', 'PCM,0', returned[1]])
         if (len(returned) > 1 and returned[0].lower() == 'music' and returned[1].lower() == 'volume'):
             assistant.stop_conversation()
+            logging.info('music volume %s' returned[2])
             global isplaying
             if (returned[2] == 'up'):
                 isplaying.moveVolume('up')
@@ -322,6 +341,7 @@ def process_event(event, assistant):
             elif (isInt(returned[2])):
                 isplaying.setVolume(returned[2])
 	if (len(returned) > 0 and returned[0].lower() == 'pause'):
+            logging.info('pause')
 	    global isplaying
 	    isplaying.pause()
 
