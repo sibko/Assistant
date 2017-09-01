@@ -36,10 +36,10 @@ from subprocess import PIPE
 isplaying=False
 mplayerexists=False
 
-conffile = open("settings.conf", "r")
+conffile = open("/home/pi/settings.conf", "r")
 config = ast.literal_eval(conffile.read())
 print(config)
-logging.basicConfig(filename='/home/pi/assLogs.log', level=logging.Debug, format='%(asctime)s %(levelname)-8s %(message)s')
+logging.basicConfig(filename='/home/pi/assLogs.log', level=logging.DEBUG, format='%(asctime)s %(levelname)-8s %(message)s')
 hasVideo=False
 if ('hasVideo' in config and config['hasVideo'] == True):
     hasVideo=True
@@ -50,13 +50,14 @@ class mplayer():
         if (mplayerexists and mplayerexists.isalive()):
              mplayerexists.terminate()
         command='mplayer -quiet -really-quiet '
-	if video: command += '-fs '
+        if video: command += '-fs '
         if playlist : command +='-playlist '
         command += '"' + mfile + '"'
         if (shuffle and playlist) : command +=' -shuffle'        
         logging.info(command)
-	print(command)
+        print(command)
         self.player=pexpect.spawn(command, timeout=None, maxread=None)
+        self.playing=True
         mplayerexists = self.player
 
     def setVolume(self, volume):
@@ -65,7 +66,7 @@ class mplayer():
         volume=int(volume)
         print('Setting volume to ' + str(volume))        
         logging.info('setting volume to %s', str(volume))
-	i=0
+        i=0
         while i<15:
             i+=1
             self.player.send("9999")
@@ -79,7 +80,7 @@ class mplayer():
             return
         print('moving volume ' + direction)
         logging.info('moving volume %s', direction)
-	i=0
+        i=0
         while i < 10:
             if (direction == "up"):
                 self.player.send('0')
@@ -96,9 +97,17 @@ class mplayer():
             return
         self.player.terminate()
     def pause(self):
-        if (not self.player.isalive()):
-	    return
+        if (not self.player.isalive() or not self.playing):
+            return
+        self.playing=False
         self.player.send('p')
+    def resume(self):
+        if (not self.player.isalive() or self.playing):
+            return
+        self.playing=True
+        self.player.send('p')
+    def isalive(self):
+        return self.player.isalive()
 
 def process_event(event, assistant):
     """Pretty prints events.
@@ -111,23 +120,23 @@ def process_event(event, assistant):
     """
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         print()
-	logging.info('Convo started')
-	global isplaying
-	if (isplaying and isplaying.isalive()):
-	    isplaying.pause()
+        logging.info('Convo started')
+        global isplaying
+        if (isplaying and isplaying.player.isalive()):
+            isplaying.pause()
         subprocess.call(["ogg123", config['greeting']])
 
     print(event)
 
     if (event.type == EventType.ON_CONVERSATION_TURN_FINISHED and
             event.args and not event.args['with_follow_on_turn']):
-	global isplaying
-        if (isplaying and isplaying.isalive()):
-            isplaying.pause()
         print()
-	logging.info('Convo finished')
+        logging.info('Convo finished')
 
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED):
+        global isplaying
+        if (isplaying and isplaying.isalive()):
+            isplaying.resume()
         devices = {
                 'thelights': ['energenieb_', 'energeniea_'],
                 'allthelights': ['energenieb_', 'energeniea_'],
@@ -174,9 +183,9 @@ def process_event(event, assistant):
             }
         global config
         for depdevice in config['devices']:
-            device[depdevice] = config['devices'][depdevice]
+            devices[depdevice] = config['devices'][depdevice]
         print(event.args['text'])
-	logging.info('Received %s', event.args['text'])
+        logging.info('Received %s', event.args['text'])
         returned = event.args['text'].split()
         if (len(returned) > 4 and "".join(returned[:2]) == "canyou"):
             returned = returned[2:]
@@ -192,9 +201,9 @@ def process_event(event, assistant):
                 action = 'on'
                 object = "".join(returned[1:].lower())
             print(action)
-	    logging.info(action)
+            logging.info(action)
             print(object)
-	    logging.info(object)
+            logging.info(object)
             if (object in devices and (action == "on" or action == "off" or action =="up" or action == "down")):
                 assistant.stop_conversation()
                 device = devices[object]                
@@ -231,7 +240,7 @@ def process_event(event, assistant):
         if (len(returned) > 1 and ("".join(returned[:2]).lower() == 'createa' or returned[0].lower() == 'create')):
             print(returned[2:])
             logging.info('create a %s', returned[2:])
-	    try:
+            try:
                 r = requests.post("http://192.168.0.176", data={'colour': "".join(returned[2:]).lower()})
             except requests.exceptions.RequestException as e:
                 print(e)
@@ -292,14 +301,14 @@ def process_event(event, assistant):
                         isplaying=mplayer(mfile, True, False, False)
                     break
 
-        if (len(returned) > 2 and returned[0].lower() == 'play'):
-	    global hasVideo
+        if (len(returned) > 1 and returned[0].lower() == 'play'):
+            global hasVideo
             assistant.stop_conversation()
             path='/music'
-	    search = returned[1:]
-	    if (hasVideo and returned[1].lower() == 'video'):
-	        search = returned[2:]
-		path = '/videos'
+            search = returned[1:]
+            if (hasVideo and returned[1].lower() == 'video'):
+                search = returned[2:]
+                path = '/videos'
             logging.info('SONG lookup %s', search)
             print(search)
             command = []
@@ -344,7 +353,7 @@ def process_event(event, assistant):
             subprocess.call(['amixer', 'sset', 'PCM,0', returned[1]])
         if (len(returned) > 1 and returned[0].lower() == 'music' and returned[1].lower() == 'volume'):
             assistant.stop_conversation()
-            logging.info('music volume %s' returned[2])
+            logging.info('music volume %s', returned[2])
             global isplaying
             if (returned[2] == 'up'):
                 isplaying.moveVolume('up')
@@ -352,11 +361,16 @@ def process_event(event, assistant):
                 isplaying.moveVolume('down')
             elif (isInt(returned[2])):
                 isplaying.setVolume(returned[2])
-	if (len(returned) > 0 and returned[0].lower() == 'pause'):
+        if (len(returned) > 0 and returned[0].lower() == 'pause'):
+            assistant.stop_conversation()
             logging.info('pause')
-	    global isplaying
-	    isplaying.pause()
-
+            global isplaying
+            isplaying.pause()
+        if (len(returned) > 0 and returned[0].lower() == 'resume'):
+            assistant.stop_conversation()
+            logging.info('resume')
+            global isplaying
+            isplaying.resume()
 def isInt(i):
     try:
         int(i)
