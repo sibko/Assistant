@@ -107,7 +107,7 @@ def process_event(event, assistant):
 	global isplaying
 	if (isplaying and isplaying.isalive()):
 	    isplaying.pause()
-        subprocess.call(["ogg123", config['greeting'])
+        subprocess.call(["ogg123", config['greeting']])
 
     print(event)
 
