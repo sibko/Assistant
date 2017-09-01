@@ -24,14 +24,22 @@ import subprocess
 import requests
 import time
 import google.oauth2.credentials
+import ast
+import pexpect
 
 from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
 from google.assistant.library.file_helpers import existing_file
 from subprocess import PIPE
+
 isplaying=False
 mplayerexists=False
-import pexpect
+
+conffile = open("settings.conf", "r")
+config = ast.literal_eval(conffile.read())
+print(config)
+
+
 
 class mplayer():
     def __init__(self, mfile, playlist, shuffle):
@@ -80,6 +88,10 @@ class mplayer():
         if (not self.player.isalive()):
             return
         self.player.terminate()
+    def pause(self):
+        if (not self.player.isalive()):
+	    return
+        self.player.send('p')
 
 def process_event(event, assistant):
     """Pretty prints events.
@@ -92,20 +104,26 @@ def process_event(event, assistant):
     """
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         print()
-        subprocess.call(["ogg123", "/home/pi/hail.ogg"])
+	global isplaying
+	if (isplaying and isplaying.isalive()):
+	    isplaying.pause()
+        subprocess.call(["ogg123", config['greeting'])
 
     print(event)
 
     if (event.type == EventType.ON_CONVERSATION_TURN_FINISHED and
             event.args and not event.args['with_follow_on_turn']):
+	global isplaying
+        if (isplaying and isplaying.isalive()):
+            isplaying.pause()
         print()
 
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED):
         devices = {
                 'thelights': ['energenieb_', 'energeniea_'],
                 'allthelights': ['energenieb_', 'energeniea_'],
-                'TV': 'infrabedroomTV',
-                'theTV': 'infrabedroomTV',
+                'tv': 'infrabedroomTV',
+                'thetv': 'infrabedroomTV',
                 'everything': ['energenieall_','x10a_', 'x10b_', 'x10c_', 'x10d_', 'all_'],  
                 'thelamps': 'energenieb_',
                 'thelamp': 'energenieb_',
@@ -131,7 +149,7 @@ def process_event(event, assistant):
                 'thekitchenlights': 'a_',
                 'thekitchenlight': 'a_',
                 'kitchenlights': 'a_',
-                'theLEDstrip': 'a_',
+                'theledstrip': 'a_',
                 'thewaterfall': 'waterfall_',
                 'waterfall': 'waterfall_',
                 'soundbar': 'infrasoundbar',
@@ -145,6 +163,9 @@ def process_event(event, assistant):
                 'iPhone': 'infraaircon',
                 'theiPhone': 'infraaircon'
             }
+        global config
+        for depdevice in config['devices']:
+            device[depdevice] = config['devices'][depdevice]
         print(event.args['text'])
         returned = event.args['text'].split()
         if (len(returned) > 4 and "".join(returned[:2]) == "canyou"):
@@ -159,7 +180,7 @@ def process_event(event, assistant):
             object = "".join(returned[2:])
             if (returned[0] == 'dim' or returned[0] == 'brighten'):
                 action = 'on'
-                object = "".join(returned[1:])
+                object = "".join(returned[1:].lower())
             print(action)
             print(object)
             if (object in devices and (action == "on" or action == "off" or action =="up" or action == "down")):
@@ -172,9 +193,9 @@ def process_event(event, assistant):
                     for d in device:
                         subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", d + action ])
                 elif ('infra' in device):
-                    if (action=="up" and 'TV' in object):
+                    if (action=="up" and 'tv' in object):
                         action="volumeup"
-                    if (action=="down" and 'TV' in object):
+                    if (action=="down" and 'tv' in object):
                         action="volumedown"
                     subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action])
                 else:
@@ -300,6 +321,9 @@ def process_event(event, assistant):
                 isplaying.moveVolume('down')
             elif (isInt(returned[2])):
                 isplaying.setVolume(returned[2])
+	if (len(returned) > 0 and returned[0].lower() == 'pause'):
+	    global isplaying
+	    isplaying.pause()
 
 def isInt(i):
     try:
