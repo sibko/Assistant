@@ -206,13 +206,19 @@ def process_event(event, assistant):
             logging.info(action)
             print(objects)
             logging.info(objects)
+            print(returned[2:])
             for word in ['and', 'on'] :
-                if (word in returned) :
-                    wordindex = returned.index(word)
+                if (word in returned[2:]) :
+                    print(word + ' is here')
+                    wordindex = returned[2:].index(word) + 2
+                    print(wordindex)
                     objects = ["".join(returned[2:wordindex]).lower()]
+                    print(objects)
                     if (returned[0] == 'dim' or returned[0] == 'brighten'):
                         objects = ["".join(returned[1:wordindex]).lower()]
+                    print(objects)
                     objects.append("".join(returned[wordindex+1:]).lower())
+                    print(objects)
             for object in objects:
                 if (object in devices and (action == "on" or action == "off" or action =="up" or action == "down")):
                     assistant.stop_conversation()
