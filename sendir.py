@@ -3,7 +3,7 @@ import requests
 import json
 import subprocess
 
-bedroomHost = "http://192.168.0.184"
+bedroomHost = "http://192.168.0.193"
 kitchenHost = ""
 upsittingHost = ""
 downsittingHost = ""
@@ -13,7 +13,7 @@ bedroomTV = {
     'on': "[{'type':'samsung','data':'E0E040BF','length':32,'repeat':2,'rdelay':800}]",
     'source': "[{'type':'samsung','data':'E0E0807F','length':32,'repeat':2,'rdelay':800}]",
     'mute': "[{'type':'samsung','data':'E0E0F00F','length':32,'repeat':2,'rdelay':800}]",
-    'volumeup': "[{'type':'samsung','data':'E0E0E01F','length':32,'repeat':2,'rdelay':800}]",
+    'volumeup': "[{'type':'samsung','data':'E0E0E01F','length':32,'repeat':6,'rdelay':800}]",
     'volumedown': "[{'type':'samsung','data':'E0E0D02F','length':32,'repeat':2,'rdelay':800}]",
     'tools': "[{'type':'samsung','data':'E0E0D22D','length':32,'repeat':2,'rdelay':800}]",
     'up': "[{'type':'samsung','data':'E0E006F9','length':32,'repeat':2,'rdelay':800}]",
@@ -44,7 +44,7 @@ soundbar = {
 
 
 def sendRequest(device, action):
-    subprocess.call(["wget", "http://192.168.0.184/json?simple=1&plain=" + device[action], "-O-"])
+    subprocess.call(["wget", device['host'] + "/json?simple=1&plain=" + device[action], "-O-"])
 device = sys.argv[1]
 action = sys.argv[2]
 print(device + action)

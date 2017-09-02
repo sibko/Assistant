@@ -164,6 +164,8 @@ def process_event(event, assistant):
                 'thebedroomlight': 'x10a_',
                 'bedlight': 'x10b_',
                 'thebedlight': 'x10b_',
+                'bedlights': 'x10b_',
+                'thebedlights': 'x10b_',
                 'thekitchenlights': 'a_',
                 'thekitchenlight': 'a_',
                 'kitchenlights': 'a_',
@@ -196,35 +198,46 @@ def process_event(event, assistant):
 #DIRECT TURN ON STUFF
         if (len(returned) > 1 and (returned[0] == 'turn' or returned[0] == 'dim' or returned[0] == 'brighten' )):
             action = returned[1].lower()
-            object = "".join(returned[2:])
+            objects = ["".join(returned[2:]).lower()]
             if (returned[0] == 'dim' or returned[0] == 'brighten'):
                 action = 'on'
-                object = "".join(returned[1:].lower())
+                objects = ["".join(returned[1:]).lower()]
             print(action)
             logging.info(action)
-            print(object)
-            logging.info(object)
-            if (object in devices and (action == "on" or action == "off" or action =="up" or action == "down")):
-                assistant.stop_conversation()
-                device = devices[object]                
-                house = "1"
-                if (isinstance(device, list)):
-                    for d in device:
-                        subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", d + action ])
-                elif ('infra' in device):
-                    if (action=="up" and 'tv' in object):
-                        action="volumeup"
-                    if (action=="down" and 'tv' in object):
-                        action="volumedown"
-                    subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action])
-                else:
-                    subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", device + action ])
-                if (returned[0] == 'dim' and 'x10' in device):
-                    time.sleep(0.05)
-                    subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", 'x10dim' ])
-                if (returned[0] == 'brighten' and 'x10' in device):
-                    time.sleep(0.05)
-                    subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", 'x10bright' ])
+            print(objects)
+            logging.info(objects)
+            for word in ['and', 'on'] :
+                if (word in returned) :
+                    wordindex = returned.index(word)
+                    objects = ["".join(returned[2:wordindex]).lower()]
+                    if (returned[0] == 'dim' or returned[0] == 'brighten'):
+                        objects = ["".join(returned[1:wordindex]).lower()]
+                    objects.append("".join(returned[wordindex+1:]).lower())
+            for object in objects:
+                if (object in devices and (action == "on" or action == "off" or action =="up" or action == "down")):
+                    assistant.stop_conversation()
+                    device = devices[object]                
+                    house = "1"
+                    if (isinstance(device, list)):
+                        for d in device:
+                            subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", d + action ])
+                    elif ('infra' in device):
+                        if (action=="up" and 'tv' in object):
+                            action="volumeup"
+                        if (action=="down" and 'tv' in object):
+                            action="volumedown"
+                        subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action])
+                    else:
+                        subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", device + action ])
+                    print(returned[0])
+                    print(device)
+                    if (returned[0] == 'dim' and 'x10' in device):
+                        print('dimming')
+                        time.sleep(0.05)
+                        subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", 'x10dim' ])
+                    if (returned[0] == 'brighten' and 'x10' in device):
+                        time.sleep(0.05)
+                        subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", 'x10bright' ])
 
 
 #SYSTEM COMMANDS
@@ -251,7 +264,8 @@ def process_event(event, assistant):
 #INFRARED COMMANDS
         if (len(returned) > 1 and ("".join(returned[:2]).lower() == 'makethe' or returned[0].lower() == 'make')):
             action = returned[len(returned) -1].lower()
-            device = "".join(returned[2:len(returned) -1])
+            device = "".join(returned[2:len(returned) -1]).lower()
+            if device == 'tv' : device = 'thetv'
             logging.info('infra red command to %s - %s', device, action)
             print(action)
             print(device)
