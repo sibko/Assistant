@@ -53,7 +53,7 @@ extended_delay = 0.0096
 waterfall_sdelay = 0.00035
 waterfall_ldelay = 0.00115
 waterfall_edelay = 0.01171
-TRANSMIT_PIN = 16
+TRANSMIT_PIN = 24
 
 def transmit_code(code, argument):
     '''Transmit a chosen code string using the GPIO transmitter'''
