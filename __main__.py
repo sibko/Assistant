@@ -170,6 +170,10 @@ def process_event(event, assistant):
                 'thekitchenlight': 'a_',
                 'kitchenlights': 'a_',
                 'theledstrip': 'a_',
+                'sittingroomlamp': 'b_',
+                'thesittingroomlamp': 'b_',
+                'sittingroomlamps': 'b_',
+                'thesittingroomlamps': 'b_',
                 'thewaterfall': 'waterfall_',
                 'waterfall': 'waterfall_',
                 'soundbar': 'infrasoundbar',
@@ -196,10 +200,10 @@ def process_event(event, assistant):
 
 
 #DIRECT TURN ON STUFF
-        if (len(returned) > 1 and (returned[0] == 'turn' or returned[0] == 'dim' or returned[0] == 'brighten' )):
+        if (len(returned) > 1 and (returned[0].lower() == 'turn' or returned[0].lower() == 'dim' or returned[0].lower() == 'brighten' )):
             action = returned[1].lower()
             objects = ["".join(returned[2:]).lower()]
-            if (returned[0] == 'dim' or returned[0] == 'brighten'):
+            if (returned[0].lower() == 'dim' or returned[0].lower() == 'brighten'):
                 action = 'on'
                 objects = ["".join(returned[1:]).lower()]
             print(action)
@@ -214,7 +218,7 @@ def process_event(event, assistant):
                     print(wordindex)
                     objects = ["".join(returned[2:wordindex]).lower()]
                     print(objects)
-                    if (returned[0] == 'dim' or returned[0] == 'brighten'):
+                    if (returned[0].lower() == 'dim' or returned[0].lower() == 'brighten'):
                         objects = ["".join(returned[1:wordindex]).lower()]
                     print(objects)
                     objects.append("".join(returned[wordindex+1:]).lower())
