@@ -107,7 +107,10 @@ if (action == 'off'):
 devicemap = {
     'bedroomTV': bedroomTV,
     'aircon': aircon,
-    'soundbar': soundbar
+    'soundbar': soundbar,
+    'loungeTV': loungeTV,
+    'sittingRoomTV': sittingRoomTV,
+    'bluray': bluray
 }
 
 

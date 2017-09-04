@@ -190,6 +190,10 @@ def process_event(event, assistant):
 		'sittingroomtv': 'infrasittingRoomTV',
 		'thesittingroomtv': 'infrasittingRoomTV',
 		'theblurayplayer': 'infrabluray',
+                'theblu-rayplayer': 'infrabluray',
+                'blu-rayplayer': 'infrabluray',
+                'theblu-ray': 'infrabluray',
+                'blu-ray': 'infrabluray',
 		'blurayplayer': 'infrabluray',
 		'bedroomtv': 'infrabedroomTV',
 		'thebedroomtv': 'infrabedroomTV'
