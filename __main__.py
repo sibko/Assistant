@@ -291,14 +291,27 @@ def process_event(event, assistant):
                 subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action])
                 assistant.stop_conversation()
         if (len(returned) >3 and returned[0].lower() == 'press' and 'on' in returned):
-            action="".join(returned[1:returned.index('on')]).lower()
+            action=returned[1:returned.index('on')]
+            i=0
+            then=0
+            while ('then' in action):
+                now=action.index('then')
+                action[i] = "".join(action[then:now]).lower()
+                then = now
+                del action[then]
+                i+=1
+            if (not 'then' in action):
+                action[i] = "".join(action[then:]).lower()
+                i+=1
+            action=action[0:i]
             device="".join(returned[returned.index('on')+1:]).lower()
             print(action)
             print(device)
             if (device in devices):
-                device=devices[device]
-                subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action])
-                assistant.stop_conversation()
+	        for act in action:
+                    device=devices[device]
+                    subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], act])
+                    assistant.stop_conversation()
 
 
 #Media CONTROL
