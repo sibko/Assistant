@@ -185,7 +185,14 @@ def process_event(event, assistant):
                 'theacon': 'infraaircon',
                 'acon': 'infraaircon',
                 'iPhone': 'infraaircon',
-                'theiPhone': 'infraaircon'
+                'theloungetv': 'infraloungeTV',
+		'loungetv': 'infraloungeTV',
+		'sittingroomtv': 'infrasittingRoomTV',
+		'thesittingroomtv': 'infrasittingRoomTV',
+		'theblurayplayer': 'infrabluray',
+		'blurayplayer': 'infrabluray',
+		'bedroomtv': 'infrabedroomTV',
+		'thebedroomtv': 'infrabedroomTV'
             }
         global config
         for depdevice in config['devices']:
@@ -283,7 +290,13 @@ def process_event(event, assistant):
                 device = devices[device]
                 subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action])
                 assistant.stop_conversation()
-
+        if (len(returned) >3 and returned[0].lower() == 'press' and 'on' in returned):
+            action="".join(returned[1:returned.index('on')]).lower()
+            device="".join(returned[returned.index('on'):]).lower()
+            if (device in devices):
+	        device=devices[device]
+                subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action])
+                assistant.stop_conversation()
 
 
 #Media CONTROL
