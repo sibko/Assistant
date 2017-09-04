@@ -22,7 +22,8 @@ bedroomTV = {
     'down': "[{'type':'samsung','data':'E0E08679','length':32,'repeat':1,'rdelay':800}]",
     'enter': "[{'type':'samsung','data':'E0E016E9','length':32,'repeat':1,'rdelay':800}]",
     'return': "[{'type':'samsung','data':'E0E01AE5','length':32,'repeat':1,'rdelay':800}]",
-    'exit': "[{'type':'samsung','data':'E0E0B44B','length':32,'repeat':1,'rdelay':800}]"
+    'exit': "[{'type':'samsung','data':'E0E0B44B','length':32,'repeat':1,'rdelay':800}]",
+    'hdmi': "[{'data':[4600,4550, 550,1750, 500,1800, 550,1800, 550,600, 550,600, 550,600, 550,600, 550,600, 500,1800, 500,1800, 550,1700, 600,600, 600,600, 550,600, 550,600, 550,600, 600,1750, 550,1750, 550,600, 550,1750, 500,650, 600,600, 550,600, 600,1750, 550,600, 500,700, 550,1700, 600,600, 550,1800, 550,1750, 550,1750, 500,700, 550], 'type':'raw', 'khz':38}]"
 }
 
 aircon = {

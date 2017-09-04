@@ -309,13 +309,22 @@ def process_event(event, assistant):
                 i+=1
             action=action[0:i]
             device="".join(returned[returned.index('on')+1:]).lower()
+            times=1
+            if (returned[len(returned)-1] == 'times'):
+                if(isInt(returned[len(returned)-2])):
+                    device="".join(returned[returned.index('on')+1:len(returned)-2]).lower()
+                    times=int(returned[len(returned)-2])
             print(action)
             print(device)
             if (device in devices):
                 assistant.stop_conversation()
                 for act in action:
                     dev=devices[device]
-                    subprocess.call(["python", "/home/pi/Assistant/sendir.py", dev[5:], act])
+                    n=0
+                    while(n < times):
+                        logging.info('SENDIR %s %s', dev[5:], act)
+                        subprocess.call(["python", "/home/pi/Assistant/sendir.py", dev[5:], act])
+                        n+=1
 
 
 #Media CONTROL
