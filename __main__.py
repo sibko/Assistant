@@ -187,16 +187,16 @@ def process_event(event, assistant):
                 'iPhone': 'infraaircon',
                 'theloungetv': 'infraloungeTV',
                 'loungetv': 'infraloungeTV',
-		'sittingroomtv': 'infrasittingRoomTV',
-		'thesittingroomtv': 'infrasittingRoomTV',
-		'theblurayplayer': 'infrabluray',
+                'sittingroomtv': 'infrasittingRoomTV',
+                'thesittingroomtv': 'infrasittingRoomTV',
+                'theblurayplayer': 'infrabluray',
                 'theblu-rayplayer': 'infrabluray',
                 'blu-rayplayer': 'infrabluray',
                 'theblu-ray': 'infrabluray',
                 'blu-ray': 'infrabluray',
-		'blurayplayer': 'infrabluray',
-		'bedroomtv': 'infrabedroomTV',
-		'thebedroomtv': 'infrabedroomTV'
+                'blurayplayer': 'infrabluray',
+                'bedroomtv': 'infrabedroomTV',
+                'thebedroomtv': 'infrabedroomTV'
             }
         global config
         global log
@@ -333,11 +333,10 @@ def process_event(event, assistant):
 #Media CONTROL
         if (len(returned) > 0 and returned[0] == 'skip'):
             assistant.stop_conversation()
-            global isplaying
             isplaying.skip()
         if (len(returned) > 2 and ("".join(returned[:2]).lower() == 'startplaylist' or "".join(returned[:2]).lower() == 'stopplaylist' or "".join(returned[:3]).lower() == 'startplaylist')):
             assistant.stop_conversation()
-            locateregex="\"(\/music\/.*)"
+            locateregex="(\/music\/.*)"
             command=[]
             command.append("/usr/bin/find")
             command.append("/music")
@@ -355,7 +354,7 @@ def process_event(event, assistant):
                 command.append("-iwholename")
                 command.append("*" + word + "*")
                 locateregex+="(.*" + word + ".*)"
-            locateregex+="(.*.m3u)(.*.pls)(.*.asx)\""
+            locateregex+="(.*.m3u)(.*.pls)(.*.asx)"
             command.append("-print")
             logging.info(command)
             print('PLAYLIST lookup %s', command)
@@ -376,7 +375,6 @@ def process_event(event, assistant):
             print('PLAYLIST lookup %s', results)
             for mfile in results:
                 if ('m3u' in mfile or 'pls' in mfile or 'asx' in mfile):
-                    global isplaying
                     if ('shuffle' in returned or 'Shuffle' in returned):
                         isplaying=mplayer(mfile, True, True, False)
                     else:
@@ -384,7 +382,6 @@ def process_event(event, assistant):
                     break
 
         if (len(returned) > 1 and returned[0].lower() == 'play'):
-            global hasVideo
             assistant.stop_conversation()
             path='/music'
             search = returned[1:]
@@ -402,7 +399,7 @@ def process_event(event, assistant):
             command.append("-o")
             command.append("-type")
             command.append("f")
-            locateregex="\"(" + path + ".*)"
+            locateregex="(" + path + ".*)"
             for word in search:
                 if (word.lower() == "the" or word.lower() == "it" or word.lower() == "a" or word.lower() == 'by'):
                     continue
@@ -411,7 +408,6 @@ def process_event(event, assistant):
                 command.append("-iwholename")
                 command.append("*" + word + "*")
                 locateregex+="(.*" + word + ".*)"
-            locateregex+="\""
             locatecommand=[]
             locatecommand.append("locate")
             locatecommand.append("-i")
@@ -432,17 +428,14 @@ def process_event(event, assistant):
             print(results)
             for mfile in results:
                 if ('flac' in mfile or 'mp3' in mfile or 'wma' in mfile):
-                    global isplaying
                     isplaying=mplayer(mfile, False, False, False)
                     break
                 if ('wmv' in mfile or 'avi' in mfile or 'mkv' in mfile or 'mp4' in mfile):
-                    global isplaying
                     isplaying=mplayer(mfile, False, False, True)
                     break
         if (len(returned) > 0 and (returned[0].lower() == 'end' or "".join(returned[:2]).lower() == 'stopmusic' or "".join(returned[:3]).lower() == 'stopthemusic')):
             logging.info('stop music')
             assistant.stop_conversation()
-            global isplaying
             isplaying.stop()
         if (len(returned) > 1 and returned[0].lower() == 'volume'):
             assistant.stop_conversation()
@@ -451,7 +444,6 @@ def process_event(event, assistant):
         if (len(returned) > 1 and returned[0].lower() == 'music' and returned[1].lower() == 'volume'):
             assistant.stop_conversation()
             logging.info('music volume %s', returned[2])
-            global isplaying
             if (returned[2] == 'up'):
                 isplaying.moveVolume('up')
             elif (returned[2] == 'down'):
@@ -461,12 +453,10 @@ def process_event(event, assistant):
         if (len(returned) > 0 and returned[0].lower() == 'pause'):
             assistant.stop_conversation()
             logging.info('pause')
-            global isplaying
             isplaying.pause()
         if (len(returned) > 0 and returned[0].lower() == 'resume'):
             assistant.stop_conversation()
             logging.info('resume')
-            global isplaying
             isplaying.resume()
 def isInt(i):
     try:
