@@ -336,6 +336,7 @@ def process_event(event, assistant):
             isplaying.skip()
         if (len(returned) > 2 and ("".join(returned[:2]).lower() == 'startplaylist' or "".join(returned[:2]).lower() == 'stopplaylist' or "".join(returned[:3]).lower() == 'startplaylist')):
             assistant.stop_conversation()
+	    locateregex="(\/music\/.*)"
             command=[]
             command.append("/usr/bin/find")
             command.append("/music")
@@ -352,9 +353,17 @@ def process_event(event, assistant):
                     command.append("-a")
                 command.append("-iwholename")
                 command.append("*" + word + "*")
+                locateregex+="(.*" + word + ".*)"
+            locateregex+="(.*.m3u)(.*.pls)(.*.asx)"
             command.append("-print")
             logging.info(command)
             print('PLAYLIST lookup %s', command)
+            locatecommand=[]
+            locatecommand.append("locate")
+            locatecommand.append("-i")
+            locatecommand.append("--regex")
+            locatecommand.append(locateregex)
+	    logging.info(locatecommand)
             results = subprocess.check_output(command)
             results = results.decode(sys.stdout.encoding).split("\n")
             logging.info(results)
@@ -387,6 +396,7 @@ def process_event(event, assistant):
             command.append("-o")
             command.append("-type")
             command.append("f")
+	    locateregex="(" + path + ".*)"
             for word in search:
                 if (word.lower() == "the" or word.lower() == "it" or word.lower() == "a" or word.lower() == 'by'):
                     continue
@@ -394,6 +404,7 @@ def process_event(event, assistant):
                     command.append("-a")
                 command.append("-iwholename")
                 command.append("*" + word + "*")
+		locateregex+="(.*" + word + ".*)"
             command.append("-print")
             logging.info('SONG lookup %s', command)
             print(command)
