@@ -96,23 +96,24 @@ sittingRoomTV = {
    'back': "[{'data':[8950,4550, 550,600, 550,600, 550,600, 550,600, 550,600, 550,600, 550,1750, 550,600, 550,1700, 550,1750, 550,1750, 550,1750, 550,1750, 550,1750, 550,650, 550,1750, 550,650, 550,650, 550,1750, 550,650, 550,650, 550,1750, 550,1750, 550,650, 550,1750, 550,1750, 550,650, 550,1750, 550,1750, 550,650, 550,600, 550,1750, 500], 'type':'raw', 'khz':38}]"
 }
 
-
+log=open("/home/pi/assLogs.log", "a")
 def sendRequest(device, action):
-    subprocess.call(["wget", device['host'] + "/json?simple=1&plain=" + device[action], "-O-"])
+    subprocess.call(["wget", device['host'] + "/json?simple=1&plain=" + device[action], "-O-"], stdout=log, stderr=subprocess.STDOUT)
+
 device = sys.argv[1]
-action = sys.argv[2]
-if (action == 'sauce'): action = 'source'
-print(device + action)
-if (action == 'off'):
-    action='on'
-devicemap = {
-    'bedroomTV': bedroomTV,
-    'aircon': aircon,
-    'soundbar': soundbar,
-    'loungeTV': loungeTV,
-    'sittingRoomTV': sittingRoomTV,
-    'bluray': bluray
-}
+for action in sysargv[2:]:
+    if (action == 'sauce'): action = 'source'
+    print(device + action)
+    if (action == 'off'):
+        action='on'
+    devicemap = {
+        'bedroomTV': bedroomTV,
+        'aircon': aircon,
+        'soundbar': soundbar,
+        'loungeTV': loungeTV,
+        'sittingRoomTV': sittingRoomTV,
+        'bluray': bluray
+    }
 
 
-sendRequest(devicemap[device], action)
+    sendRequest(devicemap[device], action)
