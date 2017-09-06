@@ -337,27 +337,11 @@ def process_event(event, assistant):
         if (len(returned) > 2 and ("".join(returned[:2]).lower() == 'startplaylist' or "".join(returned[:2]).lower() == 'stopplaylist' or "".join(returned[:3]).lower() == 'startplaylist')):
             assistant.stop_conversation()
             locateregex="(\/music\/.*)"
-            command=[]
-            command.append("/usr/bin/find")
-            command.append("/music")
-            command.append("-path")
-            command.append("/music/trashbox")
-            command.append("-prune")
-            command.append("-o")
-            command.append("-type")
-            command.append("f")
             for word in returned:
                 if (word == returned[0] or word.lower() == "start" or word.lower() == "play" or word.lower() == "list" or word.lower() == 'playlist' or word.lower() == 'shuffle'):
                     continue
-                if (word != returned[1]):
-                    command.append("-a")
-                command.append("-iwholename")
-                command.append("*" + word + "*")
                 locateregex+="(.*" + word + ".*)"
-            locateregex+="(.*.m3u)(.*.pls)(.*.asx)"
-            command.append("-print")
-            logging.info(command)
-            print('PLAYLIST lookup %s', command)
+            locateregex+="(.*.m3u|.*.pls|.*.asx)"
             locatecommand=[]
             locatecommand.append("locate")
             locatecommand.append("-i")
@@ -365,21 +349,21 @@ def process_event(event, assistant):
             locatecommand.append("posix-awk")
             locatecommand.append("--regex")
             locatecommand.append(locateregex)
-            locateresults=subprocess.check_output(locatecommand)
-            locateresults=locateresults.decode(sys.stdout.encoding).split("\n")
-            logging.info(locateresults)
             logging.info(locatecommand)
-            results = subprocess.check_output(command)
-            results = results.decode(sys.stdout.encoding).split("\n")
+            results=[]
+            try:
+                results=subprocess.check_output(locatecommand)
+                results=results.decode(sys.stdout.encoding).split("\n")
+            except subprocess.CalledProcessError as e:
+                logging.info("nothing found")
             logging.info(results)
             print('PLAYLIST lookup %s', results)
             for mfile in results:
-                if ('m3u' in mfile or 'pls' in mfile or 'asx' in mfile):
-                    if ('shuffle' in returned or 'Shuffle' in returned):
-                        isplaying=mplayer(mfile, True, True, False)
-                    else:
-                        isplaying=mplayer(mfile, True, False, False)
-                    break
+                if ('shuffle' in returned or 'Shuffle' in returned):
+                    isplaying=mplayer(mfile, True, True, False)
+                else:
+                    isplaying=mplayer(mfile, True, False, False)
+                break
 
         if (len(returned) > 1 and returned[0].lower() == 'play'):
             assistant.stop_conversation()
@@ -390,23 +374,10 @@ def process_event(event, assistant):
                 path = '/videos'
             logging.info('SONG lookup %s', search)
             print(search)
-            command = []
-            command.append("/usr/bin/find")
-            command.append(path)
-            command.append("-path")
-            command.append("/music/trashbox")
-            command.append("-prune")
-            command.append("-o")
-            command.append("-type")
-            command.append("f")
             locateregex="(" + path + ".*)"
             for word in search:
                 if (word.lower() == "the" or word.lower() == "it" or word.lower() == "a" or word.lower() == 'by'):
                     continue
-                if (word != returned[1]):
-                    command.append("-a")
-                command.append("-iwholename")
-                command.append("*" + word + "*")
                 locateregex+="(.*" + word + ".*)"
             locatecommand=[]
             locatecommand.append("locate")
@@ -416,14 +387,13 @@ def process_event(event, assistant):
             locatecommand.append("--regex")
             locatecommand.append(locateregex)
             logging.info(locatecommand)
-            locateresults=subprocess.check_output(locatecommand)
-            locateresults=locateresults.decode(sys.stdout.encoding).split("\n")
-            logging.info(locateresults)
-            command.append("-print")
-            logging.info('SONG lookup %s', command)
-            print(command)
-            results = subprocess.check_output(command)
-            results = results.decode(sys.stdout.encoding).split("\n")
+            print(locatecommand)
+            results=[]
+            try:
+                results = subprocess.check_output(locatecommand)
+                results = results.decode(sys.stdout.encoding).split("\n")
+            except subprocess.CalledProcessError as e:
+                logging.info("nothing found")
             logging.info('SONG lookup %s', results)
             print(results)
             for mfile in results:
