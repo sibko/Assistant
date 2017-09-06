@@ -336,19 +336,10 @@ def process_event(event, assistant):
             isplaying.skip()
         if (len(returned) > 2 and ("".join(returned[:2]).lower() == 'startplaylist' or "".join(returned[:2]).lower() == 'stopplaylist' or "".join(returned[:3]).lower() == 'startplaylist')):
             assistant.stop_conversation()
-            locateregex="(\/music\/.*)"
-            for word in returned:
-                if (word == returned[0] or word.lower() == "start" or word.lower() == "play" or word.lower() == "list" or word.lower() == 'playlist' or word.lower() == 'shuffle'):
-                    continue
-                locateregex+="(.*" + word + ".*)"
-            locateregex+="(.*.m3u|.*.pls|.*.asx)"
             locatecommand=[]
             locatecommand.append("locate")
             locatecommand.append("-i")
-            locatecommand.append("--regextype")
-            locatecommand.append("posix-awk")
-            locatecommand.append("--regex")
-            locatecommand.append(locateregex)
+            locatecommand.append("/music/*" + returned[2] + "*")
             logging.info(locatecommand)
             results=[]
             try:
@@ -359,33 +350,35 @@ def process_event(event, assistant):
             logging.info(results)
             print('PLAYLIST lookup %s', results)
             for mfile in results:
-                if ('shuffle' in returned or 'Shuffle' in returned):
-                    isplaying=mplayer(mfile, True, True, False)
-                else:
-                    isplaying=mplayer(mfile, True, False, False)
-                break
+                gotamatch=False
+                for word in returned[2:]:
+                    if (word.lower() in mfile.lower()):
+                        gotamatch=True
+                    else:
+                        gotamatch=False
+                        break
+                if (gotamatch and ('m3u' in mfile or 'pls' in mfile or 'asx' in mfile)): 
+                    if ('shuffle' in returned or 'Shuffle' in returned):
+                        isplaying=mplayer(mfile, True, True, False)
+                    else:
+                        isplaying=mplayer(mfile, True, False, False)
+                    break
 
         if (len(returned) > 1 and returned[0].lower() == 'play'):
             assistant.stop_conversation()
-            path='/music'
+            path='/music/'
             search = returned[1:]
             if (hasVideo and returned[1].lower() == 'video'):
                 search = returned[2:]
-                path = '/videos'
+                path = '/videos/'
             logging.info('SONG lookup %s', search)
             print(search)
             locateregex="(" + path + ".*)"
-            for word in search:
-                if (word.lower() == "the" or word.lower() == "it" or word.lower() == "a" or word.lower() == 'by'):
-                    continue
-                locateregex+="(.*" + word + ".*)"
+            locateregex+="(.*" + returned[1] + ".*)"
             locatecommand=[]
             locatecommand.append("locate")
             locatecommand.append("-i")
-            locatecommand.append("--regextype")
-            locatecommand.append("posix-awk")
-            locatecommand.append("--regex")
-            locatecommand.append(locateregex)
+            locatecommand.append(path + "*" + returned[1] + "*")
             logging.info(locatecommand)
             print(locatecommand)
             results=[]
@@ -396,13 +389,23 @@ def process_event(event, assistant):
                 logging.info("nothing found")
             logging.info('SONG lookup %s', results)
             print(results)
+
             for mfile in results:
-                if ('flac' in mfile or 'mp3' in mfile or 'wma' in mfile):
-                    isplaying=mplayer(mfile, False, False, False)
-                    break
-                if ('wmv' in mfile or 'avi' in mfile or 'mkv' in mfile or 'mp4' in mfile):
-                    isplaying=mplayer(mfile, False, False, True)
-                    break
+                gotamatch=False
+                for word in returned[1:]:
+                    if (word.lower() in mfile.lower()):
+                        gotamatch=True
+                    else:
+                        gotamatch=False
+                        break
+                if (gotamatch):
+                    if ('flac' in mfile or 'mp3' in mfile or 'wma' in mfile):
+                        isplaying=mplayer(mfile, False, False, False)
+                        break
+                    if ('wmv' in mfile or 'avi' in mfile or 'mkv' in mfile or 'mp4' in mfile):
+                        isplaying=mplayer(mfile, False, False, True)
+                        break
+
         if (len(returned) > 0 and (returned[0].lower() == 'end' or "".join(returned[:2]).lower() == 'stopmusic' or "".join(returned[:3]).lower() == 'stopthemusic')):
             logging.info('stop music')
             assistant.stop_conversation()
