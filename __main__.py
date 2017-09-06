@@ -186,7 +186,7 @@ def process_event(event, assistant):
                 'acon': 'infraaircon',
                 'iPhone': 'infraaircon',
                 'theloungetv': 'infraloungeTV',
-		'loungetv': 'infraloungeTV',
+                'loungetv': 'infraloungeTV',
 		'sittingroomtv': 'infrasittingRoomTV',
 		'thesittingroomtv': 'infrasittingRoomTV',
 		'theblurayplayer': 'infrabluray',
@@ -199,6 +199,7 @@ def process_event(event, assistant):
 		'thebedroomtv': 'infrabedroomTV'
             }
         global config
+        global log
         for depdevice in config['devices']:
             devices[depdevice] = config['devices'][depdevice]
         print(event.args['text'])
@@ -249,7 +250,7 @@ def process_event(event, assistant):
                             action="volumedown"
                         subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action],stdout=log, stderr=subprocess.STDOUT)
                     else:
-                        subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", device + action ]stdout=log, stderr=subprocess.STDOUT)
+                        subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", device + action ],stdout=log, stderr=subprocess.STDOUT)
                     print(returned[0])
                     print(device)
                     if (returned[0] == 'dim' and 'x10' in device):
@@ -336,7 +337,7 @@ def process_event(event, assistant):
             isplaying.skip()
         if (len(returned) > 2 and ("".join(returned[:2]).lower() == 'startplaylist' or "".join(returned[:2]).lower() == 'stopplaylist' or "".join(returned[:3]).lower() == 'startplaylist')):
             assistant.stop_conversation()
-	    locateregex="(\/music\/.*)"
+            locateregex="\"(\/music\/.*)"
             command=[]
             command.append("/usr/bin/find")
             command.append("/music")
@@ -354,16 +355,21 @@ def process_event(event, assistant):
                 command.append("-iwholename")
                 command.append("*" + word + "*")
                 locateregex+="(.*" + word + ".*)"
-            locateregex+="(.*.m3u)(.*.pls)(.*.asx)"
+            locateregex+="(.*.m3u)(.*.pls)(.*.asx)\""
             command.append("-print")
             logging.info(command)
             print('PLAYLIST lookup %s', command)
             locatecommand=[]
             locatecommand.append("locate")
             locatecommand.append("-i")
+            locatecommand.append("--regextype")
+            locatecommand.append("posix-awk")
             locatecommand.append("--regex")
             locatecommand.append(locateregex)
-	    logging.info(locatecommand)
+            locateresults=subprocess.check_output(locatecommand)
+            locateresults=locateresults.decode(sys.stdout.encoding).split("\n")
+            logging.info(locateresults)
+            logging.info(locatecommand)
             results = subprocess.check_output(command)
             results = results.decode(sys.stdout.encoding).split("\n")
             logging.info(results)
@@ -396,7 +402,7 @@ def process_event(event, assistant):
             command.append("-o")
             command.append("-type")
             command.append("f")
-	    locateregex="(" + path + ".*)"
+            locateregex="\"(" + path + ".*)"
             for word in search:
                 if (word.lower() == "the" or word.lower() == "it" or word.lower() == "a" or word.lower() == 'by'):
                     continue
@@ -404,7 +410,19 @@ def process_event(event, assistant):
                     command.append("-a")
                 command.append("-iwholename")
                 command.append("*" + word + "*")
-		locateregex+="(.*" + word + ".*)"
+                locateregex+="(.*" + word + ".*)"
+            locateregex+="\""
+            locatecommand=[]
+            locatecommand.append("locate")
+            locatecommand.append("-i")
+            locatecommand.append("--regextype")
+            locatecommand.append("posix-awk")
+            locatecommand.append("--regex")
+            locatecommand.append(locateregex)
+            logging.info(locatecommand)
+            locateresults=subprocess.check_output(locatecommand)
+            locateresults=locateresults.decode(sys.stdout.encoding).split("\n")
+            logging.info(locateresults)
             command.append("-print")
             logging.info('SONG lookup %s', command)
             print(command)
@@ -427,7 +445,7 @@ def process_event(event, assistant):
             global isplaying
             isplaying.stop()
         if (len(returned) > 1 and returned[0].lower() == 'volume'):
-	    assistant.stop_conversation()
+            assistant.stop_conversation()
             logging.info('set volume %s', returned[1])
             subprocess.call(['amixer', 'sset', 'PCM,0', returned[1]])
         if (len(returned) > 1 and returned[0].lower() == 'music' and returned[1].lower() == 'volume'):

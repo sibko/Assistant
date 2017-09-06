@@ -101,7 +101,7 @@ def sendRequest(device, action):
     subprocess.call(["wget", device['host'] + "/json?simple=1&plain=" + device[action], "-O-"], stdout=log, stderr=subprocess.STDOUT)
 
 device = sys.argv[1]
-for action in sysargv[2:]:
+for action in sys.argv[2:]:
     if (action == 'sauce'): action = 'source'
     print(device + action)
     if (action == 'off'):
