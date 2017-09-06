@@ -31,7 +31,6 @@ import logging
 from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
 from google.assistant.library.file_helpers import existing_file
-from subprocess import PIPE
 
 isplaying=False
 mplayerexists=False
@@ -43,6 +42,7 @@ logging.basicConfig(filename='/home/pi/assLogs.log', level=logging.DEBUG, format
 hasVideo=False
 if ('hasVideo' in config and config['hasVideo'] == True):
     hasVideo=True
+log=open("assLogs.log", "a")
 
 class mplayer():
     def __init__(self, mfile, playlist, shuffle, video):
@@ -124,7 +124,7 @@ def process_event(event, assistant):
         global isplaying
         if (isplaying and isplaying.player.isalive()):
             isplaying.pause()
-        subprocess.call(["ogg123", config['greeting']])
+        subprocess.call(["ogg123", config['greeting']],stdout=log, stderr=subprocess.STDOUT)
 
     print(event)
 
@@ -241,31 +241,33 @@ def process_event(event, assistant):
                     house = "1"
                     if (isinstance(device, list)):
                         for d in device:
-                            subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", d + action ])
+                            subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", d + action ],stdout=log, stderr=subprocess.STDOUT)
                     elif ('infra' in device):
                         if (action=="up" and 'tv' in object):
                             action="volumeup"
                         if (action=="down" and 'tv' in object):
                             action="volumedown"
-                        subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action])
+                        subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action],stdout=log, stderr=subprocess.STDOUT)
                     else:
-                        subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", device + action ])
+                        subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", device + action ]stdout=log, stderr=subprocess.STDOUT)
                     print(returned[0])
                     print(device)
                     if (returned[0] == 'dim' and 'x10' in device):
                         print('dimming')
                         time.sleep(0.05)
-                        subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", 'x10dim' ])
+                        subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", 'x10dim' ],stdout=log, stderr=subprocess.STDOUT)
                     if (returned[0] == 'brighten' and 'x10' in device):
                         time.sleep(0.05)
-                        subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", 'x10bright' ])
+                        subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", 'x10bright' ],stdout=log, stderr=subprocess.STDOUT)
 
 
 #SYSTEM COMMANDS
-        if (len(returned) > 0 and (returned[0].lower() == 'reboot' or returned[0].lower() == 'restart')):           
+        if (len(returned) > 0 and (returned[0].lower() == 'reboot' or returned[0].lower() == 'restart')):                
+            assistant.stop_conversation()
             logging.info('system restart')
             subprocess.call(["sudo", "shutdown", "-r", "now"])
         if (len(returned) > 0 and (returned[0].lower() == 'shutdown' or (len(returned) > 1 and returned[0].lower() + returned[1].lower() == 'shutdown'))):
+            assistant.stop_conversation()
             logging.info('system shutdown')
             subprocess.call(["sudo", "shutdown", "-h", "now"])
 
@@ -292,7 +294,7 @@ def process_event(event, assistant):
             print(device)
             if (device in devices):
                 device = devices[device]
-                subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action])
+                subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action],stdout=log, stderr=subprocess.STDOUT)
                 assistant.stop_conversation()
         if (len(returned) >3 and returned[0].lower() == 'press' and 'on' in returned):
             action=returned[1:returned.index('on')]
@@ -323,7 +325,7 @@ def process_event(event, assistant):
                     n=0
                     while(n < times):
                         logging.info('SENDIR %s %s', dev[5:], act)
-                        subprocess.call(["python", "/home/pi/Assistant/sendir.py", dev[5:], act])
+                        subprocess.call(["python", "/home/pi/Assistant/sendir.py", dev[5:], act],stdout=log, stderr=subprocess.STDOUT)
                         n+=1
 
 
@@ -414,6 +416,7 @@ def process_event(event, assistant):
             global isplaying
             isplaying.stop()
         if (len(returned) > 1 and returned[0].lower() == 'volume'):
+	    assistant.stop_conversation()
             logging.info('set volume %s', returned[1])
             subprocess.call(['amixer', 'sset', 'PCM,0', returned[1]])
         if (len(returned) > 1 and returned[0].lower() == 'music' and returned[1].lower() == 'volume'):
