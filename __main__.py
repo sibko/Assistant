@@ -357,7 +357,7 @@ def process_event(event, assistant):
                     else:
                         gotamatch=False
                         break
-                if (gotamatch and ('m3u' in mfile or 'pls' in mfile or 'asx' in mfile)): 
+                if (gotamatch and ('m3u' == mfile[len(mfile)-3:] or 'pls' == mfile[len(mfile)-3:] or 'asx' == mfile[len(mfile)-3:])): 
                     if ('shuffle' in returned or 'Shuffle' in returned):
                         isplaying=mplayer(mfile, True, True, False)
                     else:
@@ -373,8 +373,6 @@ def process_event(event, assistant):
                 path = '/videos/'
             logging.info('SONG lookup %s', search)
             print(search)
-            locateregex="(" + path + ".*)"
-            locateregex+="(.*" + returned[1] + ".*)"
             locatecommand=[]
             locatecommand.append("locate")
             locatecommand.append("-i")
@@ -399,10 +397,10 @@ def process_event(event, assistant):
                         gotamatch=False
                         break
                 if (gotamatch):
-                    if ('flac' in mfile or 'mp3' in mfile or 'wma' in mfile):
+                    if ('flac' == mfile[len(mfile)-4:] or 'mp3' == mfile[len(mfile)-3:] or 'wma' == mfile[len(mfile)-3:]):
                         isplaying=mplayer(mfile, False, False, False)
                         break
-                    if ('wmv' in mfile or 'avi' in mfile or 'mkv' in mfile or 'mp4' in mfile):
+                    if ('wmv' == mfile[len(mfile)-3:] or 'avi' == mfile[len(mfile)-3:] or 'mkv' == mfile[len(mfile)-3:] or 'mp4' == mfile[len(mfile)-3:]):
                         isplaying=mplayer(mfile, False, False, True)
                         break
 
