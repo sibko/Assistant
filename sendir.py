@@ -6,7 +6,7 @@ import subprocess
 bedroomHost = "http://192.168.0.193"
 kitchenHost = ""
 loungeHost = "http://192.168.0.194"
-sittingRoomHost = "http://192.168.0.195"
+sittingRoomHost = "http://192.168.0.197"
 
 bedroomTV = {
     'host': bedroomHost,

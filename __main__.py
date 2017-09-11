@@ -138,8 +138,8 @@ def process_event(event, assistant):
         if (isplaying and isplaying.isalive()):
             isplaying.resume()
         devices = {
-                'thelights': ['energenieb_', 'energeniea_'],
-                'allthelights': ['energenieb_', 'energeniea_'],
+                'thelights': ['energenieb_', 'energeniea_','energeniee_'],
+                'allthelights': ['energenieb_', 'energeniea_','energeniee_'],
                 'tv': 'infrabedroomTV',
                 'thetv': 'infrabedroomTV',
                 'everything': ['energenieall_','x10a_', 'x10b_', 'x10c_', 'x10d_', 'all_'],  
@@ -158,6 +158,10 @@ def process_event(event, assistant):
                 'theconsoles': 'energeniec_',
                 'theconsole': 'energeniec_',
                 'theceiling': 'energeniea_',
+                'theturntablelight':'energeniee_',
+                'turntablelight': 'energeniee_',
+                'themusiclight': 'energeniee_',
+                'musiclight': 'energeniee_',
                 'bedroomlights': 'x10a_',
                 'thebedroomlights': 'x10a_',
                 'bedroomlight': 'x10a_',
