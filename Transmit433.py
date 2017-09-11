@@ -132,7 +132,7 @@ def transmit_code(code, argument):
 
 if __name__ == '__main__':
     for argument in sys.argv[1:]:
-        if ('x10' in argument):
+#        if ('x10' in argument):
 #            print("sending to other pi")
 #            subprocess.call(['/home/pi/sendelsewhere.sh', argument])
         exec('transmit_code(' + str(argument) + ', argument)')
