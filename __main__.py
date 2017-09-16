@@ -401,7 +401,8 @@ def process_event(event, assistant):
                         gotamatch=False
                         break
                 if (gotamatch):
-                    if ('flac' == mfile[len(mfile)-4:] or 'mp3' == mfile[len(mfile)-3:] or 'wma' == mfile[len(mfile)-3:]):
+                    if ('flac' == mfile[len(mfile)-4:] or 'mp3' == mfile[len(mfile)-3:] or 'wma' == mfile[len(mfile)-3:] or 'm4a' == mfile[len(mfile)-3:]):
+
                         isplaying=mplayer(mfile, False, False, False)
                         break
                     if ('wmv' == mfile[len(mfile)-3:] or 'avi' == mfile[len(mfile)-3:] or 'mkv' == mfile[len(mfile)-3:] or 'mp4' == mfile[len(mfile)-3:]):
