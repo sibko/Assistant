@@ -353,6 +353,10 @@ def process_event(event, assistant):
                 logging.info("nothing found")
             logging.info(results)
             print('PLAYLIST lookup %s', results)
+            shuffle=False
+            if ('shuffle' == "".join(returned[len(returned)-1:]).lower()):
+                shuffle=True
+                returned = returned[:len(returned)-1]
             for mfile in results:
                 gotamatch=False
                 for word in returned[2:]:
@@ -362,7 +366,7 @@ def process_event(event, assistant):
                         gotamatch=False
                         break
                 if (gotamatch and ('m3u' == mfile[len(mfile)-3:] or 'pls' == mfile[len(mfile)-3:] or 'asx' == mfile[len(mfile)-3:])): 
-                    if ('shuffle' in returned or 'Shuffle' in returned):
+                    if (shuffle == True):
                         isplaying=mplayer(mfile, True, True, False)
                     else:
                         isplaying=mplayer(mfile, True, False, False)
