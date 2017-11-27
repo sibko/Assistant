@@ -178,7 +178,19 @@ def process_event(event, assistant):
                 'thesittingroomlamp': 'b_',
                 'sittingroomlamps': 'b_',
                 'thesittingroomlamps': 'b_',
-                'thewaterfall': 'waterfall_',
+		'loungechristmastree': 'c_',
+		'theloungechristmastree': 'c_',
+		'theloungechristmaslights': 'c_',
+		'loungechristmaslights': 'c_',
+		'sittingroomchristmastree': 'd_',
+		'thesittingroomchristmastree': 'd_',
+		'sittingroomchristmaslights': 'd_',
+		'thesittingroomchristmaslights': 'd_',
+		'outsidelights': 'energenief_',
+		'theoutsidelights': 'energenief_',
+                'halllights': 'x10c_',
+		'thehalllights': 'x10c_',
+		'thewaterfall': 'waterfall_',
                 'waterfall': 'waterfall_',
                 'soundbar': 'infrasoundbar',
                 'thesoundbar': 'infrasoundbar',
@@ -279,13 +291,20 @@ def process_event(event, assistant):
 
 #LED COMMANDS
         if (len(returned) > 1 and ("".join(returned[:2]).lower() == 'createa' or returned[0].lower() == 'create')):
+            assistant.stop_conversation()
             print(returned[2:])
             logging.info('create a %s', returned[2:])
+            if ("".join(returned).lower() == "createacinema"):
+                print('creating a cinema')
+                logging.info('creating a cinema')
+                subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", devices['theceiling'] + 'on' ],stdout=log, stderr=subprocess.STDOUT)
+                time.sleep(0.50)
+                subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", devices['thelights'] + 'off' ],stdout=log, stderr=subprocess.STDOUT)
+                time.sleep(4.00)
             try:
                 r = requests.post("http://192.168.0.176", data={'colour': "".join(returned[2:]).lower()})
             except requests.exceptions.RequestException as e:
                 print(e)
-            assistant.stop_conversation()            
 
 
 
@@ -354,9 +373,12 @@ def process_event(event, assistant):
             logging.info(results)
             print('PLAYLIST lookup %s', results)
             shuffle=False
+            print("".join(returned[len(returned)-1:]).lower())
             if ('shuffle' == "".join(returned[len(returned)-1:]).lower()):
+                print('got shuffle')
                 shuffle=True
                 returned = returned[:len(returned)-1]
+                print(returned)
             for mfile in results:
                 gotamatch=False
                 for word in returned[2:]:

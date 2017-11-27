@@ -26,6 +26,8 @@ energenied_on = '1111111111111111111011001'
 energenied_off = '1111111111111111111011011'
 energeniee_on = '1111111111111111110011001'
 energeniee_off = '1111111111111111101011011'
+energenief_on = '1111111111111111110000001'
+energenief_off = '1111111111111111101000011'
 energenieall_on = '1111111111111111111000101'
 energenieall_off = '1111111111111111111000111'
 energenieshorton_delay = 0.00024
@@ -132,8 +134,8 @@ def transmit_code(code, argument):
 
 if __name__ == '__main__':
     for argument in sys.argv[1:]:
-#        if ('x10' in argument):
-#            print("sending to other pi")
-#            subprocess.call(['/home/pi/sendelsewhere.sh', argument])
+        if ('x10' in argument):
+            print("sending to other pi")
+            subprocess.call(['/home/pi/sendelsewhere.sh', argument])
         exec('transmit_code(' + str(argument) + ', argument)')
 
