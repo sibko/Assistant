@@ -2,6 +2,7 @@ import time
 import sys
 import RPi.GPIO as GPIO
 import subprocess
+import socket
 
 a_on = '1000010111101111001100001'
 a_off = '1000010111101111001100011'
@@ -135,8 +136,9 @@ def transmit_code(code, argument):
     GPIO.cleanup()
 
 if __name__ == '__main__':
+    
     for argument in sys.argv[1:]:
-        if ('x10' in argument):
+        if ('x10' in argument and socket.gethostname() == 'bedroompi'):
             print("sending to other pi")
             subprocess.call(['/home/pi/sendelsewhere.sh', argument])
         exec('transmit_code(' + str(argument) + ', argument)')
