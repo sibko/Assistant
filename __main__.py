@@ -132,7 +132,14 @@ def process_event(event, assistant):
             event.args and not event.args['with_follow_on_turn']):
         print()
         logging.info('Convo finished')
-
+    if (event.type == EventType.ON_ALERT_STARTED):
+        print("CAUGHT IT")
+        if (isplaying and isplaying.player.isalive()):
+            isplaying.pause()
+    if (event.type == EventType.ON_ALERT_FINISHED):
+        print("CAUGHT IT")
+        if (isplaying and isplaying.player.isalive()):
+            isplaying.resume()
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED):
         global isplaying
         if (isplaying and isplaying.isalive()):
