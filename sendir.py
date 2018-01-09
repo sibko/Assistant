@@ -124,7 +124,8 @@ for action in sys.argv[2:]:
         'soundbar': soundbar,
         'loungeTV': loungeTV,
         'sittingRoomTV': sittingRoomTV,
-        'bluray': bluray
+        'bluray': bluray,
+        'colorlight': colorlight
     }
 
 
