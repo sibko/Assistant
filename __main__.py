@@ -221,7 +221,9 @@ def process_event(event, assistant):
                 'blu-ray': 'infrabluray',
                 'blurayplayer': 'infrabluray',
                 'bedroomtv': 'infrabedroomTV',
-                'thebedroomtv': 'infrabedroomTV'
+                'thebedroomtv': 'infrabedroomTV',
+                'thecolorlight': 'infracolorlight',
+                'colorlight': 'infracolorlight'
             }
         global config
         global log
@@ -330,7 +332,7 @@ def process_event(event, assistant):
                 subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action],stdout=log, stderr=subprocess.STDOUT)
                 assistant.stop_conversation()
         actions = [ 'volume', 'source', 'hdmi', 'mute', 'exit', 'return', 'enter']
-        if (len(returned) >3 and ( returned[0].lower() in actions or returned[0].lower() in [ 'press', 'push', 'mash' ]) and 'on' in returned):
+        if (len(returned) >3 and ( returned[0].lower() in actions or returned[0].lower() in [ 'press', 'push', 'mash', 'set', 'hit' ]) and 'on' in returned):
             action=returned[1:returned.index('on')]
             if (returned[0].lower() in actions):
                 action=returned[0:returned.index('on')]
