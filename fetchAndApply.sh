@@ -2,4 +2,4 @@
 
 cd /home/pi/Assistant
 git pull
-pkill goog
+pkill -f __main
