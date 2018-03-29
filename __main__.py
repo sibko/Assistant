@@ -223,7 +223,8 @@ def process_event(event, assistant):
                 'bedroomtv': 'infrabedroomTV',
                 'thebedroomtv': 'infrabedroomTV',
                 'thecolorlight': 'infracolorlight',
-                'colorlight': 'infracolorlight'
+                'colorlight': 'infracolorlight',
+                'color': 'infracolorlight'
             }
         global config
         global log
@@ -365,7 +366,10 @@ def process_event(event, assistant):
                         logging.info('SENDIR %s %s', dev[5:], act)
                         subprocess.call(["python", "/home/pi/Assistant/sendir.py", dev[5:], act],stdout=log, stderr=subprocess.STDOUT)
                         n+=1
-
+        if (len(returned) > 1 and ("".join(returned).lower() == 'changethecolorlight')):
+            assistant.stop_conversation()
+            subprocess.call(["python", "/home/pi/Assistant/sendir.py", 'colorlight', 'flash'], stdout=log, stderr=subprocess.STDOUT)
+            
 
 #Media CONTROL
         if (len(returned) > 0 and returned[0] == 'skip'):
