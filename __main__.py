@@ -445,7 +445,9 @@ def main():
         credentials = google.oauth2.credentials.Credentials(token=None,
                                                             **json.load(f))
 
-    with Assistant(credentials) as assistant:
+        global config
+        print(config)
+    with Assistant(credentials, config['device_id']) as assistant:
         for event in assistant.start():
             process_event(event, assistant)
 
