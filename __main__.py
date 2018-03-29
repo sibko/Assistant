@@ -190,7 +190,7 @@ def process_event(event, assistant):
                     #handle groups of devices
                     if (isinstance(device, list)):
                         for d in device:
-                        transmit433(d, action)
+                            transmit433(d, action)
                     #handle infrared stuff 
                     elif ('infra' in device):
                         if (action=="up" and 'tv' in object):
@@ -416,10 +416,11 @@ def sendIR(device, action):
     subprocess.call(["python", "/home/pi/Assistant/sendir.py", device, action], stdout=log, stderr=subprocess.STDOUT)
 
 def playMessage(afile):
-    if (afile[len(afile)-4:] == 'mp3'):
-        subprocess.call(["mp3123", afile]],stdout=log, stderr=subprocess.STDOUT)
-    elif (afile[len(afile)-4:] == 'ogg'):
-        subprocess.call(["ogg123", afile]],stdout=log, stderr=subprocess.STDOUT)
+    print(afile[len(afile)-4:])
+    if (afile[len(afile)-4:] == '.mp3'):
+        subprocess.call(["mp3123", afile],stdout=log, stderr=subprocess.STDOUT)
+    elif (afile[len(afile)-4:] == '.ogg'):
+        subprocess.call(["ogg123", afile],stdout=log, stderr=subprocess.STDOUT)
 
 def isInt(i):
     try:
