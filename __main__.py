@@ -38,6 +38,9 @@ mplayerexists=False
 conffile = open("/home/pi/settings.conf", "r")
 config = ast.literal_eval(conffile.read())
 print(config)
+devicesfile = open("/home/pi/Assistant/devices.conf", "r")
+devices = ast.literal_eval(devicesfile.read())
+print(devices)
 logging.basicConfig(filename='/home/pi/assLogs.log', level=logging.DEBUG, format='%(asctime)s %(levelname)-8s %(message)s')
 hasVideo=False
 if ('hasVideo' in config and config['hasVideo'] == True):
@@ -124,7 +127,7 @@ def process_event(event, assistant):
         global isplaying
         if (isplaying and isplaying.player.isalive()):
             isplaying.pause()
-        subprocess.call(["ogg123", config['greeting']],stdout=log, stderr=subprocess.STDOUT)
+        playMessage(config['greeting'])
 
     print(event)
 
@@ -133,99 +136,16 @@ def process_event(event, assistant):
         print()
         logging.info('Convo finished')
     if (event.type == EventType.ON_ALERT_STARTED):
-        print("CAUGHT IT")
         if (isplaying and isplaying.player.isalive()):
             isplaying.pause()
     if (event.type == EventType.ON_ALERT_FINISHED):
-        print("CAUGHT IT")
         if (isplaying and isplaying.player.isalive()):
             isplaying.resume()
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED):
         global isplaying
         if (isplaying and isplaying.isalive()):
             isplaying.resume()
-        devices = {
-                'thelights': ['energenieb_', 'energeniea_','energeniee_'],
-                'allthelights': ['energenieb_', 'energeniea_','energeniee_'],
-                'tv': 'infrabedroomTV',
-                'thetv': 'infrabedroomTV',
-                'everything': ['energenieall_','x10a_', 'x10b_', 'x10c_', 'x10d_', 'all_'],  
-                'thelamps': 'energenieb_',
-                'thelamp': 'energenieb_',
-                'thealarms': 'energenieb_',
-                'thealarm': 'energenieb_',
-                'alarm': 'energenieb_',
-                'alarm': 'energenieb_',
-                'myalarm': 'energenieb_',
-                'myalarms': 'energenieb_',
-                'thecontroller': 'energenied_',
-                'thecontrollers': 'energenied_',
-                'thecontrol':'energenied_',
-                'thecontrols':'energenied_',
-                'theconsoles': 'energeniec_',
-                'theconsole': 'energeniec_',
-                'theceiling': 'energeniea_',
-                'theturntablelight':'energeniee_',
-                'turntablelight': 'energeniee_',
-                'themusiclight': 'energeniee_',
-                'musiclight': 'energeniee_',
-                'bedroomlights': 'x10a_',
-                'thebedroomlights': 'x10a_',
-                'bedroomlight': 'x10a_',
-                'thebedroomlight': 'x10a_',
-                'bedlight': 'x10b_',
-                'thebedlight': 'x10b_',
-                'bedlights': 'x10b_',
-                'thebedlights': 'x10b_',
-                'thekitchenlights': 'a_',
-                'thekitchenlight': 'a_',
-                'kitchenlights': 'a_',
-                'theledstrip': 'a_',
-                'sittingroomlamp': 'b_',
-                'thesittingroomlamp': 'b_',
-                'sittingroomlamps': 'b_',
-                'thesittingroomlamps': 'b_',
-		'loungechristmastree': 'c_',
-		'theloungechristmastree': 'c_',
-		'theloungechristmaslights': 'c_',
-		'loungechristmaslights': 'c_',
-		'sittingroomchristmastree': 'd_',
-		'thesittingroomchristmastree': 'd_',
-		'sittingroomchristmaslights': 'd_',
-		'thesittingroomchristmaslights': 'd_',
-		'loungelights': 'energenief_',
-		'theloungelights': 'energenief_',
-                'outsidelights': 'energenieg_',
-                'theoutsidelights': 'energenieg_',
-                'halllights': 'x10c_',
-		'thehalllights': 'x10c_',
-		'thewaterfall': 'waterfall_',
-                'waterfall': 'waterfall_',
-                'soundbar': 'infrasoundbar',
-                'thesoundbar': 'infrasoundbar',
-                'aircon': 'infraaircon',
-                'theaircon': 'infraaircon',
-                'theicon': 'infraaircon',
-                'icon': 'infraaircon',
-                'theacon': 'infraaircon',
-                'acon': 'infraaircon',
-                'iPhone': 'infraaircon',
-                'theloungetv': 'infraloungeTV',
-                'loungetv': 'infraloungeTV',
-                'sittingroomtv': 'infrasittingRoomTV',
-                'thesittingroomtv': 'infrasittingRoomTV',
-                'theblurayplayer': 'infrabluray',
-                'theblu-rayplayer': 'infrabluray',
-                'blu-rayplayer': 'infrabluray',
-                'theblu-ray': 'infrabluray',
-                'blu-ray': 'infrabluray',
-                'blurayplayer': 'infrabluray',
-                'bedroomtv': 'infrabedroomTV',
-                'thebedroomtv': 'infrabedroomTV',
-                'thecolorlight': 'infracolorlight',
-                'colorlight': 'infracolorlight',
-                'color': 'infracolorlight'
-            }
+        global devices
         global config
         global log
         for depdevice in config['devices']:
@@ -243,6 +163,7 @@ def process_event(event, assistant):
         if (len(returned) > 1 and (returned[0].lower() == 'turn' or returned[0].lower() == 'dim' or returned[0].lower() == 'brighten' )):
             action = returned[1].lower()
             objects = ["".join(returned[2:]).lower()]
+            #x10 bright/dim doesnt specify device, just uses the last device the controller operated so turn it on first
             if (returned[0].lower() == 'dim' or returned[0].lower() == 'brighten'):
                 action = 'on'
                 objects = ["".join(returned[1:]).lower()]
@@ -251,43 +172,44 @@ def process_event(event, assistant):
             print(objects)
             logging.info(objects)
             print(returned[2:])
+            
+            #create array of devices if and (sometimes heard as on) exists
             for word in ['and', 'on'] :
                 if (word in returned[2:]) :
-                    print(word + ' is here')
                     wordindex = returned[2:].index(word) + 2
-                    print(wordindex)
                     objects = ["".join(returned[2:wordindex]).lower()]
-                    print(objects)
                     if (returned[0].lower() == 'dim' or returned[0].lower() == 'brighten'):
                         objects = ["".join(returned[1:wordindex]).lower()]
-                    print(objects)
                     objects.append("".join(returned[wordindex+1:]).lower())
                     print(objects)
             for object in objects:
                 if (object in devices and (action == "on" or action == "off" or action =="up" or action == "down")):
                     assistant.stop_conversation()
                     device = devices[object]                
-                    house = "1"
+
+                    #handle groups of devices
                     if (isinstance(device, list)):
                         for d in device:
-                            subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", d + action ],stdout=log, stderr=subprocess.STDOUT)
+                        transmit433(d, action)
+                    #handle infrared stuff 
                     elif ('infra' in device):
                         if (action=="up" and 'tv' in object):
                             action="volumeup"
                         if (action=="down" and 'tv' in object):
                             action="volumedown"
-                        subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action],stdout=log, stderr=subprocess.STDOUT)
+                        sendIR(device[5:], action)
+                    #everything else
                     else:
-                        subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", device + action ],stdout=log, stderr=subprocess.STDOUT)
-                    print(returned[0])
-                    print(device)
+                        transmit433(device, action)
+                    
+                    #handle x10 dimming now we've set the controller to use that device   
                     if (returned[0] == 'dim' and 'x10' in device):
                         print('dimming')
                         time.sleep(0.05)
-                        subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", 'x10dim' ],stdout=log, stderr=subprocess.STDOUT)
+                        transmit433('x10', 'dim')
                     if (returned[0] == 'brighten' and 'x10' in device):
                         time.sleep(0.05)
-                        subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", 'x10bright' ],stdout=log, stderr=subprocess.STDOUT)
+                        transmit433('x10', 'bright')
 
 
 #SYSTEM COMMANDS
@@ -299,19 +221,18 @@ def process_event(event, assistant):
             assistant.stop_conversation()
             logging.info('system shutdown')
             subprocess.call(["sudo", "shutdown", "-h", "now"])
-
+        
 
 #LED COMMANDS
         if (len(returned) > 1 and ("".join(returned[:2]).lower() == 'createa' or returned[0].lower() == 'create')):
             assistant.stop_conversation()
-            print(returned[2:])
             logging.info('create a %s', returned[2:])
             if ("".join(returned).lower() == "createacinema"):
                 print('creating a cinema')
                 logging.info('creating a cinema')
-                subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", devices['theceiling'] + 'on' ],stdout=log, stderr=subprocess.STDOUT)
+                transmit433(devices['theceiling'], 'on')
                 time.sleep(0.50)
-                subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", devices['thelights'] + 'off' ],stdout=log, stderr=subprocess.STDOUT)
+                transmit433(devices['thelights'], 'off')
                 time.sleep(4.00)
             try:
                 r = requests.post("http://192.168.0.176", data={'colour': "".join(returned[2:]).lower()})
@@ -330,7 +251,7 @@ def process_event(event, assistant):
             print(device)
             if (device in devices):
                 device = devices[device]
-                subprocess.call(["python", "/home/pi/Assistant/sendir.py", device[5:], action],stdout=log, stderr=subprocess.STDOUT)
+                sendIR( device[5:], action )
                 assistant.stop_conversation()
         actions = [ 'volume', 'source', 'hdmi', 'mute', 'exit', 'return', 'enter']
         if (len(returned) >3 and ( returned[0].lower() in actions or returned[0].lower() in [ 'press', 'push', 'mash', 'set', 'hit' ]) and 'on' in returned):
@@ -354,7 +275,16 @@ def process_event(event, assistant):
             if (returned[len(returned)-1] == 'times'):
                 if(isInt(returned[len(returned)-2])):
                     device="".join(returned[returned.index('on')+1:len(returned)-2]).lower()
-                    times=int(returned[len(returned)-2])
+                    if (returned[len(returned)-2].lower() == 'two'): 
+                        times=2
+                    elif (returned[len(returned)-2].lower() == 'three'):
+                        times=3
+                    elif (returned[len(returned)-2].lower() == 'four'):
+                        times=4
+                    elif (returned[len(returned)-2].lower() == 'five'):
+                        times=5
+                    else:
+                        times=int(returned[len(returned)-2])
             print(action)
             print(device)
             if (device in devices):
@@ -364,11 +294,11 @@ def process_event(event, assistant):
                     n=0
                     while(n < times):
                         logging.info('SENDIR %s %s', dev[5:], act)
-                        subprocess.call(["python", "/home/pi/Assistant/sendir.py", dev[5:], act],stdout=log, stderr=subprocess.STDOUT)
+                        sendIR(dev[5:], act)
                         n+=1
         if (len(returned) > 1 and ("".join(returned).lower() == 'changethecolorlight')):
             assistant.stop_conversation()
-            subprocess.call(["python", "/home/pi/Assistant/sendir.py", 'colorlight', 'flash'], stdout=log, stderr=subprocess.STDOUT)
+            sendIR('colorlight', 'flash')
             
 
 #Media CONTROL
@@ -478,6 +408,19 @@ def process_event(event, assistant):
             assistant.stop_conversation()
             logging.info('resume')
             isplaying.resume()
+
+def transmit433(device, action):
+    subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", device + action ],stdout=log, stderr=subprocess.STDOUT) 
+
+def sendIR(device, action):
+    subprocess.call(["python", "/home/pi/Assistant/sendir.py", device, action], stdout=log, stderr=subprocess.STDOUT)
+
+def playMessage(afile):
+    if (afile[len(afile)-4:] == 'mp3'):
+        subprocess.call(["mp3123", afile]],stdout=log, stderr=subprocess.STDOUT)
+    elif (afile[len(afile)-4:] == 'ogg'):
+        subprocess.call(["ogg123", afile]],stdout=log, stderr=subprocess.STDOUT)
+
 def isInt(i):
     try:
         int(i)
