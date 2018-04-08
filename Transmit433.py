@@ -3,6 +3,7 @@ import sys
 import RPi.GPIO as GPIO
 import subprocess
 import socket
+import ast
 
 a_on = '1000010111101111001100001'
 a_off = '1000010111101111001100011'
@@ -141,5 +142,17 @@ if __name__ == '__main__':
         if ('x10' in argument and socket.gethostname() == 'bedroompi'):
             print("sending to other pi")
             subprocess.call(['/home/pi/sendelsewhere.sh', argument])
-        exec('transmit_code(' + str(argument) + ', argument)')
+        try:
+            exec('transmit_code(' + str(argument) + ', argument)')
+        except:
+            print("not found")
+            devicesfile = open("/home/pi/Assistant/devices.conf", "r")
+            devices = ast.literal_eval(devicesfile.read())
+            print(devices)
+            dev=argument.split('_')[0]
+            print(dev)
+            if ( dev in devices ):
+                action=devices[dev] + argument.split("_")[1]
+                exec('transmit_code(' + str(action) + ', argument)')
+            
 
