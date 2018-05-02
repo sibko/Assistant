@@ -141,7 +141,8 @@ def transmit_code(code, argument):
 if __name__ == '__main__':
     
     for argument in sys.argv[1:]:
-        if ('x10' in argument and socket.gethostname() == 'bedroompi'):
+	print(socket.gethostname())
+        if ('x10' in argument and socket.gethostname() == 'bedroomAssistant'):
             print("sending to other pi")
             subprocess.call(['/home/pi/sendelsewhere.sh', argument])
         try:

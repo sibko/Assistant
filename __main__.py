@@ -233,6 +233,8 @@ def process_event(event, assistant):
                 transmit433(devices['theceiling'], 'on')
                 time.sleep(0.50)
                 transmit433(devices['thelights'], 'off')
+                transmit433(devices['thefridge'], 'off')
+                createTimer(devices['thefridge'], 'on', int(str(time.time()).split('.')[0]) + 7200)
                 time.sleep(4.00)
             try:
                 r = requests.post("http://192.168.0.176", data={'colour': "".join(returned[2:]).lower()})
@@ -412,6 +414,9 @@ def process_event(event, assistant):
 def transmit433(device, action):
     subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", device + action ],stdout=log, stderr=subprocess.STDOUT) 
 
+def createTimer(device, action, date):
+    subprocess.call(["/home/pi/Assistant/createTimer.sh", device + action, str(date) ], stdout=log, stderr=subprocess.STDOUT)
+
 def sendIR(device, action):
     subprocess.call(["python", "/home/pi/Assistant/sendir.py", device, action], stdout=log, stderr=subprocess.STDOUT)
 
@@ -442,9 +447,7 @@ def main():
                         help='Path to store and read OAuth2 credentials')
     args = parser.parse_args()
     with open(args.credentials, 'r') as f:
-        credentials = google.oauth2.credentials.Credentials(token=None,
-                                                            **json.load(f))
-
+        credentials = google.oauth2.credentials.Credentials(token=None,**json.load(f))
         global config
         print(config)
     with Assistant(credentials, config['device_id']) as assistant:
@@ -454,3 +457,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+#!/usr/bin/env python
+
+# Copyright (C) 2017 Google Inc.
