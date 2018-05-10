@@ -301,7 +301,11 @@ def process_event(event, assistant):
         if (len(returned) > 1 and ("".join(returned).lower() == 'changethecolorlight')):
             assistant.stop_conversation()
             sendIR('colorlight', 'flash')
-            
+#Cat Control 
+        print(returned)
+        if (len(returned) > 0 and (((returned[0].lower() == 'fetch' or returned[0].lower() == 'best') and returned[1].lower() == 'charlie') or (len(returned) == 1 and returned[0].lower() == 'charlie'))):
+            playMessage('/home/pi/Whistle.m4a')
+            assistant.stop_conversation()
 
 #Media CONTROL
         if (len(returned) > 0 and returned[0] == 'skip'):
@@ -426,6 +430,8 @@ def playMessage(afile):
         subprocess.call(["mp3123", afile],stdout=log, stderr=subprocess.STDOUT)
     elif (afile[len(afile)-4:] == '.ogg'):
         subprocess.call(["ogg123", afile],stdout=log, stderr=subprocess.STDOUT)
+    else:
+        subprocess.call(["mplayer", afile],stdout=log, stderr=subprocess.STDOUT)
 
 def isInt(i):
     try:
