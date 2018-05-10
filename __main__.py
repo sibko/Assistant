@@ -304,8 +304,8 @@ def process_event(event, assistant):
 #Cat Control 
         print(returned)
         if (len(returned) > 0 and (((returned[0].lower() == 'fetch' or returned[0].lower() == 'best') and returned[1].lower() == 'charlie') or (len(returned) == 1 and returned[0].lower() == 'charlie'))):
-            playMessage('/home/pi/Whistle.m4a')
             assistant.stop_conversation()
+            playMessage('/home/pi/Whistle.m4a')
 
 #Media CONTROL
         if (len(returned) > 0 and returned[0] == 'skip'):
