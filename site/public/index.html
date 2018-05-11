@@ -1,0 +1,108 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="deviceControl">
+
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Optimize mobile viewport -->
+
+    <title>Device Control</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- load bootstrap -->
+    <style>
+        html {
+            overflow-y: scroll;
+        }
+
+        body {
+            padding-top: 70px;
+            min-height: 75rem;
+        }
+
+        #device-list {
+            margin-bottom: 30px;
+        }
+
+        td {
+            width: 25%;
+        }
+    </style>
+
+    <!-- SPELLS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+    <!-- load angular -->
+    <script src="core.js"></script>
+    <script> window.addEventListener("hashchange", function () { scrollBy(0, -50) });</script>
+
+</head>
+<!-- SET THE CONTROLLER AND GET ALL TODOS -->
+
+<body ng-controller="mainController">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <a class="navbar-brand" href="#">Device List</a>
+        <ul class="nav navbar-nav">
+            <li ng-repeat="location in locations">
+                <a class="nav-link" href="#{{location}}">{{location}}</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+
+        <!-- HEADER AND TODO COUNT -->
+        <div class="jumbotron text-center">
+            <h1>Device List
+                <span class="label label-info">{{ devices.length }}</span>
+            </h1>
+        </div>
+        <div ng-repeat="location in locations" id="{{location}}" class="row">
+            <h2>{{location}}</h2>
+            <table class="table table-sm table-striped">
+                <tr ng-repeat="device in devices" ng-if="device.location == location || location == 'All'">
+                    <td>{{device.name}}</td>
+                    <td ng-repeat="function in device.functions.slice(0,2)">
+                        <button type="button" class="btn btn-success" ng-if="function.toLowerCase() == 'on'">{{function}}</button>
+                        <button type="button" class="btn btn-danger" ng-if="function.toLowerCase() == 'off'">{{function}}</button>
+                        <button type="button" class="btn btn-primary" ng-if="function.toLowerCase() != 'on' && function.toLowerCase() != 'off'">{{function}}</button>
+                    </td>
+                    <td>
+                        <button ng-if="device.functions.length > 2" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">More</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">More</button>
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+    
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Some text in the modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>
