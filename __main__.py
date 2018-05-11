@@ -303,7 +303,7 @@ def process_event(event, assistant):
             sendIR('colorlight', 'flash')
 #Cat Control 
         print(returned)
-        if (len(returned) > 0 and (((returned[0].lower() == 'fetch' or returned[0].lower() == 'best') and returned[1].lower() == 'charlie') or (len(returned) == 1 and returned[0].lower() == 'charlie'))):
+        if (len(returned) > 0 and (((returned[0].lower() == 'fetch' or returned[0].lower() == 'best' or returned[0].lower() == 'bring' or returned[0].lower() == 'batch' ) and returned[1].lower() == 'charlie') or (len(returned) == 1 and returned[0].lower() == 'charlie'))):
             assistant.stop_conversation()
             playMessage('/home/pi/Whistle.m4a')
 
