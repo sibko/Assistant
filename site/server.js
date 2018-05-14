@@ -48,3 +48,12 @@ app.route('/api/devices/:name').get((req, res) => {
 	const requesteddevice = req.params['name'];
 	res.send(getdevice(requesteddevice));
 });
+app.route('/api/device/:name/:action').get((req, res) => {
+	const devicename = req.params['name'];
+	const device = getdevice(devicename)
+	const action = req.params['action'];
+	device.ids.forEach(function(id) {
+		console.log(id, action)
+	})
+	res.send("Complete");
+});
