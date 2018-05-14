@@ -1,0 +1,919 @@
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+  File "/home/pi/Assistant/Transmit433.py", line 138
+    exec('transmit_code(' + str(argument) + ', argument)')
+       ^
+IndentationError: expected an indented block
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+Pseudo-terminal will not be allocated because stdin is not a terminal.
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+0.00032
+sending to other pi
+0.00032
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  88.9%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+0.00032
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+0.00032
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+0.00032
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+0.00032
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+0.00032
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+bedroomTVon
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  83.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+bedroomTVvolumeup
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+bedroomTVhdmi
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1286:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4259:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4738:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+soundbaron
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4528:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5007:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4528:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5007:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+bedroomTVoff
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4528:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5007:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.bcm2835.pcm.front.0:CARD=0'
+ALSA lib conf.c:4528:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5007:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM front
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+0.00032
+0.00032
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+  File "/home/pi/Assistant/Transmit433.py", line 144
+    print(socket.gethostname())
+                              ^
+TabError: inconsistent use of tabs and spaces in indentation
+  File "/home/pi/Assistant/Transmit433.py", line 144
+    print(socket.gethostname())
+                              ^
+TabError: inconsistent use of tabs and spaces in indentation
+  File "/home/pi/Assistant/Transmit433.py", line 144
+    print(socket.gethostname())
+                              ^
+TabError: inconsistent use of tabs and spaces in indentation
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+  File "/home/pi/Assistant/Transmit433.py", line 144
+    print(socket.gethostname())
+                              ^
+TabError: inconsistent use of tabs and spaces in indentation
+  File "/home/pi/Assistant/Transmit433.py", line 144
+    print(socket.gethostname())
+                              ^
+TabError: inconsistent use of tabs and spaces in indentation
+  File "/home/pi/Assistant/Transmit433.py", line 144
+    print(socket.gethostname())
+                              ^
+TabError: inconsistent use of tabs and spaces in indentation
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.

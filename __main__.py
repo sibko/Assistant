@@ -419,7 +419,7 @@ def transmit433(device, action):
     subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", device + action ],stdout=log, stderr=subprocess.STDOUT) 
 
 def createTimer(device, action, date):
-    subprocess.call(["/home/pi/Assistant/createTimer.sh", device + action, str(date) ], stdout=log, stderr=subprocess.STDOUT)
+    subprocess.call(["/home/pi/Assistant/createTimer.sh", device, action, str(date), "x10" ], stdout=log, stderr=subprocess.STDOUT)
 
 def sendIR(device, action):
     subprocess.call(["python", "/home/pi/Assistant/sendir.py", device, action], stdout=log, stderr=subprocess.STDOUT)

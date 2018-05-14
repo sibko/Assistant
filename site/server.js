@@ -4,6 +4,8 @@ const app = express();
 const fs = require('fs')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+const sys = require('sys')
+const exec = require('child_process').exec;
 
 app.use(morgan('dev'));   
 app.use(express.static(__dirname + '/public'));  
@@ -15,12 +17,32 @@ app.listen(1966, () => {
   console.log('Server started!');
 });
 
-var devices = fs.readFileSync('/test/Assistant/newdevices.conf', 'utf8')
+var devices = fs.readFileSync('/home/pi/Assistant/newdevices.conf', 'utf8')
 devices=JSON.parse(devices)
 console.log("loaded devices:")
 devices.forEach(function(device){
 	console.log(device.name)
 })
+
+sendir = function(id, action) {
+	exec("python /home/pi/Assistant/sendir.py " + id + " " + action.replace(" ", "").toLowerCase(), function(err, stdout, stderr) {
+                console.log(err, stdout, stderr)
+        })
+}
+
+transmit433 = function(id, action) {
+	exec("python /home/pi/Assistant/Transmit433.py " + id + action.toLowerCase(), function(err, stdout, stderr) {
+                console.log(err, stdout, stderr)
+        })
+}
+
+createTimer = function(id, action, minutes, type) {
+	var date = new Date()
+	var timestamp = (date.getTime() / 1000) + minutes * 60
+	exec("/home/pi/Assistant/createTimer.sh " + id + " " + action.toLowerCase() + " " + Math.floor(timestamp) + " " + type.toLowerCase(), function(err, stdout, stderr){
+		console.log(err, stdout, stderr)
+	})
+}
 
 getdevice = function(requested) {
 	var ret = ''
@@ -54,6 +76,29 @@ app.route('/api/device/:name/:action').get((req, res) => {
 	const action = req.params['action'];
 	device.ids.forEach(function(id) {
 		console.log(id, action)
+		switch(device.type) {
+			case "infrared":
+				sendir(id, action);
+				break;
+			case "energenie":
+			case "generic":
+			case "x10":
+				transmit433(id, action);
+				break;
+		}
 	})
 	res.send("Complete");
 });
+
+app.route('/api/device/:name/:action/:timer').get((req, res) => {
+	const devicename = req.params['name'];
+	const device = getdevice(devicename)
+	const action = req.params['action'];
+	const timer = req.params['timer'];
+	device.ids.forEach(function(id) {
+		console.log("timer", id, action, timer)
+		createTimer(id, action, timer, device.type);
+	})
+	res.send("Complete");
+});
+
