@@ -4,7 +4,7 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', func
 	$http.get('/api/devices')
 		.then(function (data) {
 			$scope.devices = data.data;
-			$scope.locations = ['All']
+			$scope.locations = ['All', 'Computers']
 			console.log($scope.devices)
 			$scope.devices.forEach(function (device) {
 				if (!$scope.locations.includes(device.location)) {

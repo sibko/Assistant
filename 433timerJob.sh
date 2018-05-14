@@ -10,7 +10,7 @@ for file in /home/pi/timers/*; do
 	echo $date $action
 	if [ $date -lt $(date +%s) ]; then
 		COUNTER=0
-         	while [  $COUNTER -lt 5 ]; do
+         	while [  $COUNTER -lt 2 ]; do
 			 	if [ "$type" == "infrared" ]; then
 					python /home/pi/Assistant/sendir.py $device $action
 					break
