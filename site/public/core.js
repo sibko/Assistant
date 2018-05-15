@@ -10,6 +10,14 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', func
 				if (!$scope.locations.includes(device.location)) {
 					$scope.locations.push(device.location)
 				}
+				if (device.groupFunctions) {
+					device.groupFunctions.forEach(function (gfunc) {
+						if (gfunc != "") {
+							var index = device.functions.indexOf(gfunc)
+							device.functions.splice(index, 1)
+						}
+					})
+				}
 			})
 			console.log("Received devices", data);
 		}, function (error) {
@@ -18,11 +26,11 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', func
 
 	$scope.performAction = function (device, action) {
 		$http.get('/api/device/' + device.name + '/' + action)
-		.then(function (data) {			
-			console.log("action complete", data);
-		}, function (error) {
-			console.log('Error: ' + error);
-		});
+			.then(function (data) {
+				console.log("action complete", data);
+			}, function (error) {
+				console.log('Error: ' + error);
+			});
 	}
 
 	$scope.openDeviceModal = function (device) {
@@ -46,7 +54,11 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', func
 deviceControl.controller("DeviceHandlerController", function ($scope, $http, $uibModal, $uibModalInstance, device) {
 	console.log("modal", device)
 	$scope.device = device
-
+	$scope.lines = []
+	console.log(Math.ceil(device.groupFunctions.length / 3))
+	for (var i=0;i < Math.ceil(device.groupFunctions.length / 3);i++) {
+		$scope.lines.push(i+1)
+	}
 	$scope.openTimerModal = function (device, func) {
 		$scope.modalInstance = $uibModal.open({
 			ariaLabelledBy: 'modal-title',
@@ -68,13 +80,13 @@ deviceControl.controller("DeviceHandlerController", function ($scope, $http, $ui
 
 	$scope.performAction = function (device, action) {
 		$http.get('/api/device/' + device.name + '/' + action)
-		.then(function (data) {			
-			console.log("action complete", data);
-		}, function (error) {
-			console.log('Error: ' + error);
-		});
+			.then(function (data) {
+				console.log("action complete", data);
+			}, function (error) {
+				console.log('Error: ' + error);
+			});
 	}
-	
+
 	$scope.closeModal = function () {
 		$uibModalInstance.close();
 	}
@@ -89,13 +101,13 @@ deviceControl.controller("TimerHandlerController", function ($scope, $http, $uib
 	$scope.minutes = 0;
 	$scope.createTimer = function (device, action) {
 		$http.get('/api/device/' + device.name + '/' + action + '/' + $scope.minutes)
-		.then(function (data) {			
-			console.log("action complete", data);
-		}, function (error) {
-			console.log('Error: ' + error);
-		});
+			.then(function (data) {
+				console.log("action complete", data);
+			}, function (error) {
+				console.log('Error: ' + error);
+			});
 	}
-	
+
 	$scope.closeModal = function () {
 		$uibModalInstance.close();
 	}

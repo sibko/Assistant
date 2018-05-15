@@ -64,6 +64,10 @@
             width: 100%;
             height: 100%;
         }
+        .table-borderless td {
+            text-align: center;
+            border: none !important;
+        }
     </style>
 
     <!-- load jquery -->
@@ -114,6 +118,9 @@
                         <button type="button" class="btn btn-success" ng-click="performAction(device, function)" ng-if="function.toLowerCase() == 'on'">{{function}}</button>
                         <button type="button" class="btn btn-danger" ng-click="performAction(device, function)" ng-if="function.toLowerCase() == 'off'">{{function}}</button>
                         <button type="button" class="btn btn-info" ng-click="performAction(device, function)" ng-if="function.toLowerCase() != 'on' && function.toLowerCase() != 'off'">{{function}}</button>
+                    </td>
+                    <td ng-if="device.functions.length < 2">
+
                     </td>
                     <td>
                         <button type="button" class="btn btn-primary" ng-click="openDeviceModal(device)">More</button>

@@ -2,22 +2,35 @@
     <h3 class="modal-title" id="modal-title">{{device.name}}</h3>
 </div>
 <div class="modal-body" id="modal-body">
-
-        <table class="table table-sm table-striped">
-                <tr ng-repeat="function in device.functions">
-                    <td>{{function}}</td>
-                    <td>
-                        <button type="button" class="btn btn-success" ng-click="performAction(device, function)" ng-if="function.toLowerCase() == 'on'">{{function}}</button>
-                        <button type="button" class="btn btn-danger" ng-click="performAction(device, function)" ng-if="function.toLowerCase() == 'off'">{{function}}</button>
-                        <button type="button" class="btn btn-primary" ng-click="performAction(device, function)" ng-if="function.toLowerCase() != 'on' && function.toLowerCase() != 'off'">{{function}}</button>
+    <table class="table table-sm table-striped">
+        <tr>
+                <td colspan="2" style="text-align: center;" >
+                        <table class="table table-borderless">                    
+                            <tr ng-repeat="line in lines"> 
+                                <td ng-repeat="gfunc in device.groupFunctions" ng-if="$index >= line * 3 - 3 && $index < line * 3">
+                                    <button ng-if="$index % 2 == 0 && gfunc != ''" type="button" class="btn btn-info ng-click="performAction(device, gfunc)>{{gfunc}}</button>
+                                    <button ng-if="$index % 2 == 1 && gfunc != ''" type="button" class="btn btn-warning ng-click="performAction(device, gfunc)>{{gfunc}}</button>
+                                </td>                        
+                            </tr>                    
+                        </table>
                     </td>
-                    <td>
-                        <button type="button" class="btn btn-secondary" ng-click="openTimerModal(device, function)" >Timer</button>
-                    </td>
-                </tr>
-            </table>
+        </tr>
+        <tr ng-repeat="function in device.functions">            
+            <td >
+                <button type=" button " class="btn btn-success " ng-click="performAction(device, function)
+                " ng-if="function.toLowerCase()=='on' ">{{function}}</button>
+                <button type="button " class="btn btn-danger " ng-click="performAction(device, function)
+                " ng-if="function.toLowerCase()=='off' ">{{function}}</button>
+                <button type="button " class="btn btn-primary " ng-click="performAction(device, function)
+                " ng-if="function.toLowerCase() !='on' && function.toLowerCase() !='off' ">{{function}}</button>
+            </td>
+            <td>
+                <button type="button " class="btn btn-secondary " ng-click="openTimerModal(device, function) ">Timer</button>
+            </td>
+        </tr>
+    </table>
 </div>
-<div class="modal-footer">
-    <button class="btn btn-warning" type="button" ng-click="closeModal()">Close</button>
+<div class="modal-footer ">
+    <button class="btn btn-warning " type="button " ng-click="closeModal() ">Close</button>
 
 </div>
