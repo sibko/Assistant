@@ -8,8 +8,8 @@
                         <table class="table table-borderless">                    
                             <tr ng-repeat="line in lines"> 
                                 <td ng-repeat="gfunc in device.groupFunctions" ng-if="$index >= line * 3 - 3 && $index < line * 3">
-                                    <button ng-if="$index % 2 == 0 && gfunc != ''" type="button" class="btn btn-info ng-click="performAction(device, gfunc)>{{gfunc}}</button>
-                                    <button ng-if="$index % 2 == 1 && gfunc != ''" type="button" class="btn btn-warning ng-click="performAction(device, gfunc)>{{gfunc}}</button>
+                                    <button ng-if="$index % 2 == 0 && gfunc != ''" type="button" class="btn btn-info" ng-click="performAction(device, gfunc)">{{gfunc}}</button>
+                                    <button ng-if="$index % 2 == 1 && gfunc != ''" type="button" class="btn btn-warning" ng-click="performAction(device, gfunc)">{{gfunc}}</button>
                                 </td>                        
                             </tr>                    
                         </table>
