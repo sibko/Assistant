@@ -55,9 +55,10 @@ deviceControl.controller("DeviceHandlerController", function ($scope, $http, $ui
 	console.log("modal", device)
 	$scope.device = device
 	$scope.lines = []
-	console.log(Math.ceil(device.groupFunctions.length / 3))
-	for (var i=0;i < Math.ceil(device.groupFunctions.length / 3);i++) {
-		$scope.lines.push(i+1)
+	if (device.groupFunctions) {
+		for (var i = 0; i < Math.ceil(device.groupFunctions.length / 3); i++) {
+			$scope.lines.push(i + 1)
+		}
 	}
 	$scope.openTimerModal = function (device, func) {
 		$scope.modalInstance = $uibModal.open({
