@@ -2,9 +2,20 @@
     <h3 class="modal-title" id="modal-title">{{func}} timer</h3>
 </div>
 <div class="modal-body" id="modal-body">
+    <table class="table table-sm table-striped">
+        <tr>
+            <td>
+                Minutes:
+            </td>
+            <td>
+                <input type="tel" id="minutes" ng-model="minutes" />
+            </td>
+            <td>
+                <button class="btn btn-success" type="button" ng-click="createTimer(device, func);closeModal()">Set</button>
+            </td>
+            </tr>
+            </table>
 
-        <input type="text" id="minutes" ng-model="minutes"/>
-        <button class="btn btn-success" type="button" ng-click="createTimer(device, func);closeModal()">Set</button>
 </div>
 <div class="modal-footer">
     <button class="btn btn-warning" type="button" ng-click="closeModal()">Close</button>
