@@ -171,6 +171,7 @@ deviceControl.controller("CatLaserController", function ($scope, $http, $uibModa
 	}
 
 	$scope.closeModal = function () {
+		clearInterval(movement);
 		$uibModalInstance.close();
 	}
 
