@@ -35,7 +35,7 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', func
 
 	$scope.openDeviceModal = function (device) {
 		console.log(device)
-		if(device.type=='CatLaser'){
+		if (device.type == 'CatLaser') {
 			return $scope.openCatLaserModal(device);
 		}
 		$scope.modalInstance = $uibModal.open({
@@ -140,7 +140,27 @@ deviceControl.controller("TimerHandlerController", function ($scope, $http, $uib
 deviceControl.controller("CatLaserController", function ($scope, $http, $uibModal, $uibModalInstance, device) {
 	console.log("modal", device)
 	$scope.device = device
-	
+	$scope.xaxis = 0;
+	$scope.yaxis = 0;
+	var prevxaxis = 0;
+	var prevyaxis = 0;
+	var inprogress = false;
+	var movement = setInterval(function () {
+		console.log("interval")
+		if ($scope.xaxis != prevxaxis && $scope.yaxis != prevyaxis && inprogress == false) {			
+			prevxaxis = $scope.xaxis;
+			prevyaxis = $scope.yaxis;
+			inprogress = true;
+			$http.get('http://' + device.ids[0] + '/?horz=' + $scope.xaxis + '&vert=' + $scope.yaxis)
+				.then(function (data) {
+					inprogress = false;
+					console.log("action complete", data);
+				}, function (error) {					
+					inprogress = false;
+					console.log('Error: ' + error);
+				});
+		}
+	}, 300)
 	$scope.setValue = function (key, value) {
 		$http.get('http://' + device.ids[0] + '/?' + key + '=' + value)
 			.then(function (data) {

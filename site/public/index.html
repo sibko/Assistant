@@ -27,6 +27,10 @@
             min-height: 75rem;
         }
 
+        body.modal-open {
+            overflow: hidden;
+        }
+
         #device-list {
             margin-bottom: 30px;
         }
@@ -72,15 +76,13 @@
 
         .scroll {
             white-space: nowrap;
-            overflow-x: scroll; 
+            overflow-x: scroll;
             -webkit-overflow-scrolling: touch;
         }
 
-        .navbar-nav 
-            li {
-                display: inline-block;
-            }
-        
+        .navbar-nav li {
+            display: inline-block;
+        }
     </style>
 
     <!-- load jquery -->
@@ -94,7 +96,10 @@
 
     <!-- load angular -->
     <script src="core.js"></script>
-    <script> window.addEventListener("hashchange", function () { scrollBy(0, -50) });</script>
+    <script> 
+        window.addEventListener("hashchange", function () { scrollBy(0, -50) });
+
+    </script>
 
 </head>
 <!-- SET THE CONTROLLER AND GET ALL TODOS -->

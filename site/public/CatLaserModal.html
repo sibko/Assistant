@@ -36,7 +36,35 @@
             </td>
         </tr>
     </table>
+    <div style="height:200px; width:200px; border-style:solid; border-color:black" class="border" id="moveArea"></div>
+    {{xaxis}} {{yaxis}}
+    <script>document.getElementById("moveArea").onmousemove = function (e) {
+            moveEvent(e)
+        }
+        document.getElementById("moveArea").ontouchmove = function (e) {
+            moveEvent(e)
+        }
+        var moveEvent = function (e) {
+            console.log("mouse move")
+            if (!e.offsetX || !e.offsetY) {
+                var rect = e.target.getBoundingClientRect();
+                console.log(e.targetTouches[0]);
+                e.offsetX = e.targetTouches[0].pageX - rect.left;
+                e.offsetY = e.targetTouches[0].clientY - rect.top;
 
+            }
+            var x = Math.floor(Math.max(0,Math.min(200, e.offsetX)));
+            var y = Math.floor(Math.max(0,Math.min(200, e.offsetY)));
+            console.log(x, y);
+            var scope = angular.element("#moveArea").scope();
+            console.log(scope);
+
+            scope.xaxis = Math.floor((x / 200) * 180);
+            scope.yaxis = Math.floor((y / 200) * 180);
+            console.log(scope.xaxis)
+            scope.$apply()
+        };
+    </script>
 </div>
 <div class="modal-footer">
     <button class="btn btn-warning" type="button" ng-click="closeModal()">Close</button>
