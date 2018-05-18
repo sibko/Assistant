@@ -13,6 +13,7 @@ var devices = config.ir.devices
 console.log(Object.keys(devices))
 var sendRequest = function (device, action) {
     var _d = q.defer();
+
     const postData = querystring.stringify({ 'simple': 1, 'plain': device[action]});
 
 	const options = {
@@ -61,6 +62,10 @@ var processActions = function(device, actions) {
         }
         if (!devices[device]) {
             console.log("DEVICE NOT FOUND", device)
+            return
+        }
+        if (!devices[device][action]) {
+            console.log("ACTION NOT FOUND")
             return
         }
         var promise = sendRequest(devices[device], action)
