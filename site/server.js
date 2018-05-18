@@ -144,6 +144,7 @@ app.route('/api/device/:name/:action').get((req, res) => {
 			case "energenie":
 			case "generic":
 			case "x10":
+			case "twelvevolt":
 				transmit433(id, action);
 				break;
 			case "rPI":
