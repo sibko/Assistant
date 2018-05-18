@@ -131,6 +131,10 @@ app.route('/api/device/:name/:action').get((req, res) => {
 	const devicename = req.params['name'];
 	const device = getdevice(devicename)
 	const action = req.params['action'];
+	if (device.functions.indexOf(action) < 0) {
+		console.log("ACTION NOT FOUND")
+		res.send("ACTION NOT FOUND");
+	}
 	device.ids.forEach(function (id) {
 		console.log(id, action)
 		switch (device.type) {
