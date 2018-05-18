@@ -18,8 +18,9 @@ app.listen(1966, () => {
 	console.log('Server started!');
 });
 
-var devices = fs.readFileSync('/home/pi/Assistant/newdevices.conf', 'utf8')
-devices = JSON.parse(devices)
+var config = fs.readFileSync('/home/pi/Assistant/config.json', 'utf8')
+config = JSON.parse(config)
+var devices = config.devices
 console.log("loaded devices:")
 devices.forEach(function (device) {
 	console.log(device.name)
