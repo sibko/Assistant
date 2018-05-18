@@ -3,7 +3,7 @@
         {
             "name": "Bedroom TV",
             "ids": [
-                "bedroomTV"
+                "bedroomtv"
             ],
             "type": "infrared",
             "location": "Bedroom",
@@ -571,10 +571,10 @@
     ],
     "ir": {
         "hosts": {
-            "bedroomHost": "http://192.168.0.193",
+            "bedroomHost": "192.168.0.193",
             "kitchenHost": "",
-            "loungeHost": "http://192.168.0.194",
-            "sittingRoomHost": "http://192.168.0.197"
+            "loungeHost": "192.168.0.194",
+            "sittingRoomHost": "192.168.0.197"
         },
         "devices": {
             "bedroomtv": {

@@ -5,7 +5,7 @@ const q = require("q");
 
 
 
-var config = fs.readFileSync('/test/Assistant/config.json', 'utf8')
+var config = fs.readFileSync('/home/pi/Assistant/config.json', 'utf8')
 config = JSON.parse(config)
 
 var hosts = config.ir.hosts
@@ -15,7 +15,7 @@ var sendRequest = function (device, action) {
     var _d = q.defer();
 
     const postData = querystring.stringify({ 'simple': 1, 'plain': device[action]});
-
+    console.log("ADAM ", hosts[device.host])
 	const options = {
 		hostname: hosts[device.host],
 		port: 80,
