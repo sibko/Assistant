@@ -27,7 +27,7 @@ devices.forEach(function (device) {
 })
 
 sendir = function (id, action) {
-	exec("python /home/pi/Assistant/sendir.py " + id + " " + action.replace(" ", "").toLowerCase(), function (err, stdout, stderr) {
+	exec("node /home/pi/Assistant/sendir.js " + id + " " + action.replace(" ", "").toLowerCase(), function (err, stdout, stderr) {
 		console.log(err, stdout, stderr)
 	})
 }
