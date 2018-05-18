@@ -151,7 +151,7 @@ deviceControl.controller("CatLaserController", function ($scope, $http, $uibModa
 			prevxaxis = $scope.xaxis;
 			prevyaxis = $scope.yaxis;
 			inprogress = true;
-			$http.get('http://' + device.ids[0] + '/?horz=' + $scope.xaxis + '&vert=' + $scope.yaxis)
+			$http.get('http://' + device.ids[0] + '/?horz=' + (180 - $scope.xaxis) + '&vert=' + (180 - $scope.yaxis))
 				.then(function (data) {
 					inprogress = false;
 					console.log("action complete", data);
