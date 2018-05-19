@@ -12,10 +12,10 @@ for file in /home/pi/timers/*; do
 		COUNTER=0
          	while [  $COUNTER -lt 2 ]; do
 			 	if [ "$type" == "infrared" ]; then
-					python /home/pi/Assistant/sendir.py $device $action
+					node /home/pi/Assistant/sendir.js $device $action
 					break
 				fi
-				if [ "$type" == "energenie" ] || [ "$type" == "x10" ] || [ "$type" == "generic" ]; then
+				if [ "$type" == "energenie" ] || [ "$type" == "x10" ] || [ "$type" == "generic" ] || [ "$type" == "twelvevolt" ]; then
          			python /home/pi/Assistant/Transmit433.py $device$action
 				fi
 			sleep 1

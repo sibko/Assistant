@@ -310,7 +310,7 @@
         {
             "name": "Lounge TV",
             "ids": [
-                "loungeTV"
+                "loungetv"
             ],
             "type": "infrared",
             "location": "Lounge",
@@ -353,7 +353,7 @@
         {
             "name": "Sitting Room TV",
             "ids": [
-                "sittingRoomTV"
+                "sittingroomtv"
             ],
             "type": "infrared",
             "location": "Sitting Room",
@@ -543,9 +543,9 @@
         {
             "name": "PC",
             "ids": [
-                "pc"
+                "192.168.0.202"
             ],
-            "type": "Windows",
+            "type": "ESP",
             "location": "Bedroom",
             "functions": [
                 "On"

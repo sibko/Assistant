@@ -52,7 +52,6 @@ var sendRequest = function (device, action) {
 var processActions = function(device, actions) {
     var promises = [];
     actions.forEach(function (action) {
-        var origAction = action;
         if (action == 'sauce') {
             action = 'source'
         }
@@ -78,7 +77,10 @@ var processActions = function(device, actions) {
 var device = process.argv[2];
 var actions = process.argv.slice(3);
 console.log("Received ", device, actions)
+
+var origAction = actions[0];
 processActions(device,actions).then( function () {
+    console.log(device, origAction)
     if ((device == 'color' || device == 'colorlight') && origAction == 'off'){
         sendRequest(devices[device], 'on')
         sendRequest(devices[device], 'flashoff')
