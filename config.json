@@ -139,9 +139,9 @@
         {
             "name": "Turntable Light",
             "ids": [
-                "energeniee_"
+                "x10d_"
             ],
-            "type": "energenie",
+            "type": "x10",
             "location": "Lounge",
             "functions": [
                 "On",
@@ -563,6 +563,19 @@
             "type": "CatLaser",
             "location": "Mobile",
             "functions": [],
+            "aliases": [
+                "CatLaser",
+                "theCatLaser"
+            ]
+        },
+        {
+            "name": "Cat Laser onoff",
+            "ids": [
+                "energeniee_"
+            ],
+            "type": "energenie",
+            "location": "Mobile",
+            "functions": ["On", "Off"],
             "aliases": [
                 "CatLaser",
                 "theCatLaser"
