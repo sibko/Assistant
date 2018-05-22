@@ -8,10 +8,11 @@ var config = fs.readFileSync('/home/pi/Assistant/config.json', 'utf8')
 config = JSON.parse(config)
 var devices = config.devices;
 
-var sendRequest = function (device, action) {
+var sendRequest = function (id, action) {
     var defer = q.defer()
+    console.log(id, action)
     http.get({
-        host: 'device',
+        host: id,
         path: '/' + action.toLowerCase()
     }, function (response) {
         console.log("received response ", response.statusCode)
@@ -23,11 +24,11 @@ var sendRequest = function (device, action) {
 var getdevice = function (requested) {
     var ret = ''
     devices.forEach(function (device) {
-            if (device.name == requested) {
+            if (device.name.toLowerCase() == requested.toLowerCase()) {
                 return ret = device;
             }
             device.aliases.forEach(function (alias) {
-                if (alias == requested) {
+                if (alias.toLowerCase() == requested.toLowerCase()) {
                     return ret = device
                 }
             })
@@ -53,8 +54,11 @@ var processActions = function (device, actions) {
                 console.log("DEVICE NOT FOUND", dev)
                 return
             }
-            if (dev.functions.indexOf(action) < 0) {
-                console.log("ACTION NOT FOUND", dev, action)
+            var functions = devices[device].funtions.map( function (item) {
+                return item.toLowerCase()
+            })
+            if (!functions.indexOf(action) > 0) {
+                console.log("ACTION NOT FOUND")
                 return
             }
             return sendRequest(dev.ids[0], action);

@@ -41,7 +41,7 @@ transmit433 = function (id, action) {
 createTimer = function (id, action, minutes, type) {
 	var date = new Date()
 	var timestamp = (date.getTime() / 1000) + minutes * 60
-	exec("/home/pi/Assistant/createTimer.sh " + id + " " + action.toLowerCase() + " " + Math.floor(timestamp) + " " + type.toLowerCase(), function (err, stdout, stderr) {
+	exec("/home/pi/Assistant/createTimer.sh '" + id + "' '" + action + "' " + Math.floor(timestamp) + " " + type.toLowerCase(), function (err, stdout, stderr) {
 		console.log(err, stdout, stderr)
 	})
 }
@@ -166,10 +166,8 @@ app.route('/api/device/:name/:action/:timer').get((req, res) => {
 	const device = getdevice(devicename)
 	const action = req.params['action'];
 	const timer = req.params['timer'];
-	device.ids.forEach(function (id) {
-		console.log("timer", id, action, timer)
-		createTimer(id, action, timer, device.type);
-	})
+	console.log("timer", device.name, action, timer)
+	createTimer(device.name, action, timer, device.type);
 	res.send("Complete");
 });
 
