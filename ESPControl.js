@@ -54,14 +54,7 @@ var processActions = function (device, actions) {
                 console.log("DEVICE NOT FOUND", dev)
                 return
             }
-            var functions = devices[device].funtions.map( function (item) {
-                return item.toLowerCase()
-            })
-            if (!functions.indexOf(action) > 0) {
-                console.log("ACTION NOT FOUND")
-                return
-            }
-            return sendRequest(dev.ids[0], action);
+            
         })
     })
 }
