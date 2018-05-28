@@ -119,10 +119,10 @@ var processActions = function (device, actions) {
                 promises.push(promise);
                 break
             case 'ESP':
-                var functions = devices[device].funtions.map(function (item) {
+                var functions = dev.functions.map(function (item) {
                     return item.replace(" ", "").toLowerCase()
                 })
-                if (functions.replace(" ", "").indexOf(action) < 0) {
+                if (functions.indexOf(action) < 0) {
                     console.log("ACTION NOT FOUND")
                     return
                 }
