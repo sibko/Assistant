@@ -917,3 +917,328 @@ Audio Device:   Advanced Linux Sound Architecture (ALSA) output
 Software: Lavf52.93.0
 Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
 Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+[ 'bedroomtv',
+  'colorlight',
+  'aircon',
+  'soundbar',
+  'bluray',
+  'loungetv',
+  'sittingroomtv' ]
+Received  x10a_ [ 'off' ]
+x10a_off
+DEVICE NOT FOUND x10a_
+
+/home/pi/Assistant/DoAction.js:33
+        throw 'device not found';
+        ^
+device not found
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+[ 'bedroomtv',
+  'colorlight',
+  'aircon',
+  'soundbar',
+  'bluray',
+  'loungetv',
+  'sittingroomtv' ]
+Received  x10a_ [ 'off' ]
+x10a_off
+DEVICE NOT FOUND x10a_
+
+/home/pi/Assistant/DoAction.js:33
+        throw 'device not found';
+        ^
+device not found
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+[ 'bedroomtv',
+  'colorlight',
+  'aircon',
+  'soundbar',
+  'bluray',
+  'loungetv',
+  'sittingroomtv' ]
+Received  Bedroom Lights [ 'on' ]
+Bedroom Lightson
+{ name: 'Bedroom Lights',
+  ids: [ 'x10a_' ],
+  type: 'x10',
+  location: 'Bedroom',
+  functions: [ 'On', 'Off', 'Dim', 'Bright' ],
+  aliases: 
+   [ 'bedroomlights',
+     'thebedroomlights',
+     'bedroomlight',
+     'thebedroomlight' ] }
+x10
+{ x10a_on: '2133111113113333311111111333333333',
+  x10a_off: '2133111113113333311311111331333333',
+  x10b_on: '2133111113113333311131111333133333',
+  x10b_off: '2133111113113333311331111331133333',
+  x10c_on: '2133111113113333311113111333313333',
+  x10c_off: '2133111113113333311313111331313333',
+  x10d_on: '2133111113113333311133111333113333',
+  x10d_off: '2133111113113333311333111331113333',
+  x10dim: '2133111113113333331133111133113333',
+  x10bright: '2133111113113333331113111133313333',
+  shortOnDelay: '0.00055',
+  shortOffDelay: '0.00055',
+  longOnDelay: '0.00170',
+  longOffDelay: '0.00170',
+  bigOn: '0.00950',
+  bigOff: '0.00500',
+  extendedDelay: '0.01915',
+  endDelay: '0.01745' }
+bedroomAssistant x10 true true
+python /home/pi/Assistant/newTransmit433.py 2133111113113333311111111333333333 10 0.00055 0.00055 0.00170 0.00170 0.00950 0.00500 0.01915 0.01745
+Bedroom Lights on
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+[ 'bedroomtv',
+  'colorlight',
+  'aircon',
+  'soundbar',
+  'bluray',
+  'loungetv',
+  'sittingroomtv' ]
+Received  Bedroom Lights [ 'off' ]
+Bedroom Lightsoff
+{ name: 'Bedroom Lights',
+  ids: [ 'x10a_' ],
+  type: 'x10',
+  location: 'Bedroom',
+  functions: [ 'On', 'Off', 'Dim', 'Bright' ],
+  aliases: 
+   [ 'bedroomlights',
+     'thebedroomlights',
+     'bedroomlight',
+     'thebedroomlight' ] }
+x10
+{ x10a_on: '2133111113113333311111111333333333',
+  x10a_off: '2133111113113333311311111331333333',
+  x10b_on: '2133111113113333311131111333133333',
+  x10b_off: '2133111113113333311331111331133333',
+  x10c_on: '2133111113113333311113111333313333',
+  x10c_off: '2133111113113333311313111331313333',
+  x10d_on: '2133111113113333311133111333113333',
+  x10d_off: '2133111113113333311333111331113333',
+  x10dim: '2133111113113333331133111133113333',
+  x10bright: '2133111113113333331113111133313333',
+  shortOnDelay: '0.00055',
+  shortOffDelay: '0.00055',
+  longOnDelay: '0.00170',
+  longOffDelay: '0.00170',
+  bigOn: '0.00950',
+  bigOff: '0.00500',
+  extendedDelay: '0.01915',
+  endDelay: '0.01745' }
+bedroomAssistant x10 true true
+python /home/pi/Assistant/newTransmit433.py 2133111113113333311311111331333333 10 0.00055 0.00055 0.00170 0.00170 0.00950 0.00500 0.01915 0.01745
+Bedroom Lights off
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+[ 'bedroomtv',
+  'colorlight',
+  'aircon',
+  'soundbar',
+  'bluray',
+  'loungetv',
+  'sittingroomtv' ]
+Received  Bedroom TV [ 'volumeup' ]
+Bedroom TVvolumeup
+{ name: 'Bedroom TV',
+  ids: [ 'bedroomtv' ],
+  type: 'infrared',
+  location: 'Bedroom',
+  functions: 
+   [ 'On',
+     'Off',
+     'Source',
+     'Mute',
+     'Volume UP',
+     'Volume Down',
+     'Tools',
+     'Up',
+     'Left',
+     'Right',
+     'Down',
+     'Enter',
+     'Back',
+     'Exit',
+     'HDMI' ],
+  groupFunctions: 
+   [ 'Tools',
+     'Up',
+     'Source',
+     'Left',
+     'Enter',
+     'Right',
+     'Back',
+     'Down',
+     'Exit' ],
+  aliases: [ 'thebedroomtv', 'bedroomtv' ] }
+infrared
+bedroomtv { host: 'bedroomHost',
+  on: '[{\'type\':\'samsung\',\'data\':\'E0E040BF\',\'length\':32,\'repeat\':1,\'rdelay\':800}]',
+  source: '[{\'type\':\'samsung\',\'data\':\'E0E0807F\',\'length\':32,\'repeat\':1,\'rdelay\':800}]',
+  mute: '[{\'type\':\'samsung\',\'data\':\'E0E0F00F\',\'length\':32,\'repeat\':1,\'rdelay\':800}]',
+  volumeup: '[{\'type\':\'samsung\',\'data\':\'E0E0E01F\',\'length\':32,\'repeat\':1,\'pulse\':6,\'rdelay\':800}]',
+  volumedown: '[{\'type\':\'samsung\',\'data\':\'E0E0D02F\',\'length\':32,\'repeat\':1,\'pulse\':6,\'rdelay\':800}]',
+  tools: '[{\'type\':\'samsung\',\'data\':\'E0E0D22D\',\'length\':32,\'repeat\':1,\'rdelay\':800}]',
+  up: '[{\'type\':\'samsung\',\'data\':\'E0E006F9\',\'length\':32,\'repeat\':1,\'rdelay\':800}]',
+  left: '[{\'type\':\'samsung\',\'data\':\'E0E0A659\',\'length\':32,\'repeat\':1,\'rdelay\':800}]',
+  right: '[{\'type\':\'samsung\',\'data\':\'E0E046B9\',\'length\':32,\'repeat\':1,\'rdelay\':800}]',
+  down: '[{\'type\':\'samsung\',\'data\':\'E0E08679\',\'length\':32,\'repeat\':1,\'rdelay\':800}]',
+  enter: '[{\'type\':\'samsung\',\'data\':\'E0E016E9\',\'length\':32,\'repeat\':1,\'rdelay\':800}]',
+  back: '[{\'type\':\'samsung\',\'data\':\'E0E01AE5\',\'length\':32,\'repeat\':1,\'rdelay\':800}]',
+  exit: '[{\'type\':\'samsung\',\'data\':\'E0E0B44B\',\'length\':32,\'repeat\':1,\'rdelay\':800}]',
+  hdmi: '[{\'data\':[4600,4550, 550,1750, 500,1800, 550,1800, 550,600, 550,600, 550,600, 550,600, 550,600, 500,1800, 500,1800, 550,1700, 600,600, 600,600, 550,600, 550,600, 550,600, 600,1750, 550,1750, 550,600, 550,1750, 500,650, 600,600, 550,600, 600,1750, 550,600, 500,700, 550,1700, 600,600, 550,1800, 550,1750, 550,1750, 500,700, 550], \'type\':\'raw\', \'khz\':38}]' }
+ADAM  bedroomHost [{'type':'samsung','data':'E0E0E01F','length':32,'repeat':1,'pulse':6,'rdelay':800}]
+BODY: Success, code sent
+No more data in response.
+Bedroom TV volumeup
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.
+[ 'bedroomtv',
+  'colorlight',
+  'aircon',
+  'soundbar',
+  'bluray',
+  'loungetv',
+  'sittingroomtv' ]
+Received  Bedroom Lights [ 'on' ]
+Bedroom Lightson
+{ name: 'Bedroom Lights',
+  ids: [ 'x10a_' ],
+  type: 'x10',
+  location: 'Bedroom',
+  functions: [ 'On', 'Off', 'Dim', 'Bright' ],
+  aliases: 
+   [ 'bedroomlights',
+     'thebedroomlights',
+     'bedroomlight',
+     'thebedroomlight' ] }
+x10
+{ x10a_on: '2133111113113333311111111333333333',
+  x10a_off: '2133111113113333311311111331333333',
+  x10b_on: '2133111113113333311131111333133333',
+  x10b_off: '2133111113113333311331111331133333',
+  x10c_on: '2133111113113333311113111333313333',
+  x10c_off: '2133111113113333311313111331313333',
+  x10d_on: '2133111113113333311133111333113333',
+  x10d_off: '2133111113113333311333111331113333',
+  x10dim: '2133111113113333331133111133113333',
+  x10bright: '2133111113113333331113111133313333',
+  shortOnDelay: '0.00055',
+  shortOffDelay: '0.00055',
+  longOnDelay: '0.00170',
+  longOffDelay: '0.00170',
+  bigOn: '0.00950',
+  bigOff: '0.00500',
+  extendedDelay: '0.01915',
+  endDelay: '0.01745' }
+bedroomAssistant x10 true true
+python /home/pi/Assistant/newTransmit433.py 2133111113113333311111111333333333 10 0.00055 0.00055 0.00170 0.00170 0.00950 0.00500 0.01915 0.01745
+Bedroom Lights on
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.

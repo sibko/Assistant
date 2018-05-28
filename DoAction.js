@@ -2,7 +2,9 @@ const fs = require('fs')
 const http = require('http');
 const querystring = require('querystring');
 const q = require("q");
+const os = require("os")
 
+const exec = require('child_process').exec;
 
 
 var config = fs.readFileSync('/home/pi/Assistant/config.json', 'utf8')
@@ -11,22 +13,23 @@ config = JSON.parse(config)
 var hosts = config.ir.hosts
 var devices = config.devices
 var irDevices = config.ir.devices
+var plugDevices = config.plugs
 console.log(Object.keys(irDevices))
 
 var getdevice = function (requested) {
     var ret = ''
     devices.forEach(function (device) {
-        if (device.name.toLowerCase() == requested.toLowerCase()) {
+        if (device.name.replace(" ", "").toLowerCase() == requested.replace(" ", "").toLowerCase()) {
             return ret = device;
         }
         device.aliases.forEach(function (alias) {
-            if (alias.toLowerCase() == requested.toLowerCase()) {
+            if (alias.replace(" ", "").toLowerCase() == requested.replace(" ", "").toLowerCase()) {
                 return ret = device
             }
         })
     })
     if (ret == '') {
-        console.log('DEVICE NOT FOUND', device)
+        console.log('DEVICE NOT FOUND', requested)
         throw 'device not found';
     } else {
         console.log(ret)
@@ -93,22 +96,21 @@ var processActions = function (device, actions) {
             action = 'source'
         }
         console.log(device + action);
-        if (action == 'off') {
-            action = 'on'
-        }
+        
         var dev = '';
         dev = getdevice(device, 'name');
 
-        if (dev.type != 'infrared') {
-            console.log("DEVICE NOT FOUND", dev)
-            return
-        }
+        
+        if (action == 'off' && dev.type == 'infrared') {
+            action = 'on'
+        } 
+        console.log(dev.type)
         switch (dev.type) {
             case 'infrared':
                 var functions = dev.functions.map(function (item) {
-                    return item.toLowerCase()
+                    return item.replace(" ", "").toLowerCase()
                 })
-                if (!functions.indexOf(action) > 0) {
+                if (functions.indexOf(action) < 0) {
                     console.log("ACTION NOT FOUND")
                     return
                 }
@@ -118,17 +120,47 @@ var processActions = function (device, actions) {
                 break
             case 'ESP':
                 var functions = devices[device].funtions.map(function (item) {
-                    return item.toLowerCase()
+                    return item.replace(" ", "").toLowerCase()
                 })
-                if (!functions.indexOf(action) > 0) {
+                if (functions.replace(" ", "").indexOf(action) < 0) {
                     console.log("ACTION NOT FOUND")
                     return
                 }
                 var promise = sendESPRequest(dev.ids[0], action);
                 promises.push(promise);
                 break
-            case '433':
-
+            case 'generic':
+            case 'energenie':
+            case 'x10':
+            case 'twelvevolt':
+                var plugDevice = plugDevices[dev.type]
+                console.log(plugDevice)
+                if (action != 'dim' && action != 'bright' && !plugDevice[dev.ids[0] + action]) {
+                    console.log("ACTION NOT FOUND")
+                    return
+                }
+                var code = plugDevice[dev.ids[0] + action]
+                var attempts = 10
+                if (action == 'bright' || action == 'dim') {
+                    attempts = 25
+                    code = plugDevice['x10' + action]
+                }
+                var shortOnDelay = plugDevice.shortOnDelay
+                var shortOffDelay = plugDevice.shortOffDelay
+                var longOnDelay = plugDevice.longOnDelay
+                var longOffDelay = plugDevice.longOffDelay
+                var bigOn = plugDevice.bigOn
+                var bigOff = plugDevice.bigOff
+                var extendedDelay = plugDevice.extendedDelay
+                var endDelay = plugDevice.endDelay
+                console.log(os.hostname(), dev.type,os.hostname() == 'bedroomAssistant', dev.type == 'x10')
+                console.log('python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay)
+                if (os.hostname() == 'bedroomAssistant' && dev.type == 'x10'){
+                    exec('echo "python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay + '"| ssh pi@192.168.0.187' )
+                
+                } else {
+                exec('python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay)
+                }
                 break;
         }
 

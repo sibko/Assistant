@@ -163,7 +163,9 @@
             "location": "Bedroom",
             "functions": [
                 "On",
-                "Off"
+                "Off",
+                "Dim",
+                "Bright"
             ],
             "aliases": [
                 "bedroomlights",
@@ -181,7 +183,9 @@
             "location": "Bedroom",
             "functions": [
                 "On",
-                "Off"
+                "Off",
+                "Dim",
+                "Bright"
             ],
             "aliases": [
                 "bedlight",
@@ -206,6 +210,24 @@
                 "thekitchenlight",
                 "kitchenlights",
                 "theledstrip"
+            ]
+        },
+        {
+            "name": "Lounge Lights",
+            "ids": [
+                "energenief_"
+            ],
+            "type": "energenie",
+            "location": "Lounge",
+            "functions": [
+                "On",
+                "Off"
+            ],
+            "aliases": [
+                "theloungelights",
+                "theloungelight",
+                "loungelights",
+                "loungelight"
             ]
         },
         {
@@ -575,7 +597,10 @@
             ],
             "type": "energenie",
             "location": "Mobile",
-            "functions": ["On", "Off"],
+            "functions": [
+                "On",
+                "Off"
+            ],
             "aliases": [
                 "CatLaser",
                 "theCatLaser"
@@ -769,6 +794,61 @@
         },
         "global": {
             "transmitPin": 24
+        }
+    },
+    "assistants": {
+        "bedroomAssistant": {
+            "device_id": "ass-pi-bedroom-bedroom-pi-fbe77x",
+            "devices": {
+                "allthelights": [
+                    "Bedroom Lights",
+                    "Bed Lights"
+                ],
+                "thelights": ["Bedroom Lights"],
+                "tv": ["Bedroom TV"],
+                "thetv": ["Bedroom TV"]
+            },
+            "greeting": "/home/pi/hail.ogg"
+        },
+        "loungeAssistant": {
+            "device_id": "ass-pi-lounge-pi-sakvam",
+            "devices": {
+                "allthelights": [
+                    "Ceiling Lights",
+                    "Turntable Light",
+                    "Lounge Lamps"
+                ],
+                "thelights": ["Lounge Lights"],
+                "thetv": ["Lounge TV"],
+                "tv": ["Lounge TV"]
+            },
+            "greeting": "/home/pi/r2d2.ogg"
+        },
+        "kitchenAssistant": {
+            "device_id": "ass-pi-kitchen-kitchen-pi-mfqvga",
+            "devices": {
+                "allthelights": [
+                    "Kitchen Lights"
+                ],
+                "thelights": [
+                    "Kitchen Lights"
+                ]
+            },
+            "greeting": "/home/pi/holly.ogg"
+        },
+        "sittingRoomAssistant": {
+            "device_id": "ass-pi-downstairs-sitting-room-pi-iookcz",
+            "devices": {
+                "allthelights": [
+                    "Sitting Room Lamps"
+                ],
+                "thelights": [
+                    "Sitting Room Lamps"
+                ],
+                "tv": "Sitting Room TV",
+                "thetv": "Sitting Room TV"
+            },
+            "greeting": "/home/pi/mother.ogg"
         }
     }
 }

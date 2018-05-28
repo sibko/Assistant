@@ -37,7 +37,7 @@ var getdevice = function (requested) {
 var sendRequest = function (device, action) {
     var _d = q.defer();
 
-    const postData = querystring.stringify({ 'simple': 1, 'plain': device[action] });
+    const postData = querystring.stringify({ 'simple': 1, 'plain': device[action.replace(" ", "")] });
     console.log("ADAM ", hosts[device.host], device, action)
     const options = {
         hostname: hosts[device.host],
@@ -75,7 +75,8 @@ var sendRequest = function (device, action) {
 var processActions = function (device, actions) {
     var promises = [];
     actions.forEach(function (action) {
-        action = action.replace(" ", "").toLowerCase()
+//        action = action.replace(" ", "").toLowerCase()
+	action=action.toLowerCase()
         if (action == 'sauce') {
             action = 'source'
         }
@@ -91,9 +92,10 @@ var processActions = function (device, actions) {
             return
         }
         var functions = dev.functions.map(function (item) {
-            return item.toLowerCase()
+            return item.replace(" ", "").toLowerCase()
         })
-        if (!functions.indexOf(action) > 0) {
+	console.log(action, functions)
+        if (functions.indexOf(action) < 0) {
             console.log("ACTION NOT FOUND")
             return
         }

@@ -27,8 +27,6 @@ import google.oauth2.credentials
 import ast
 import pexpect
 import logging
-import socket
-import string
 
 from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
@@ -37,21 +35,12 @@ from google.assistant.library.file_helpers import existing_file
 isplaying=False
 mplayerexists=False
 
-conffile = open("/home/pi/Assistant/config.json", "r")
+conffile = open("/home/pi/settings.conf", "r")
 config = ast.literal_eval(conffile.read())
-localConfig = config["assistants"][socket.gethostname()]
-devices = config["devices"]
-
-for localDevice in localConfig['devices']:
-            print(localDevice)
-            for localDeviceName in localConfig['devices'][localDevice]:
-                for dev in devices:
-                    print(dev['name'] + localDeviceName)
-                    if (dev['name'] == localDeviceName):
-                        dev['aliases'].append(localDevice)
+print(config)
+devicesfile = open("/home/pi/Assistant/devices.conf", "r")
+devices = ast.literal_eval(devicesfile.read())
 print(devices)
-
-
 logging.basicConfig(filename='/home/pi/assLogs.log', level=logging.DEBUG, format='%(asctime)s %(levelname)-8s %(message)s')
 hasVideo=False
 if ('hasVideo' in config and config['hasVideo'] == True):
@@ -123,22 +112,6 @@ class mplayer():
     def isalive(self):
         return self.player.isalive()
 
-def getDevice(dev):
-    print("finding " + dev)
-    for device in devices:
-        if (device['name'].replace(" ", "").lower() == dev.replace(" ", "").lower()):
-            return device
-        for alias in device['aliases']:
-            if (alias.replace(" ", "").lower() == dev.replace(" ", "").lower()):
-                return device
-    print('DEVICE NOT FOUND ' + dev)
-    return ""
-
-def doAction(device, action):
-    subprocess.call(["node", "/home/pi/Assistant/DoAction.js", device, action], stdout=log, stderr=subprocess.STDOUT)
-
-
-
 def process_event(event, assistant):
     """Pretty prints events.
 
@@ -154,7 +127,7 @@ def process_event(event, assistant):
         global isplaying
         if (isplaying and isplaying.player.isalive()):
             isplaying.pause()
-        playMessage(localConfig['greeting'])
+        playMessage(config['greeting'])
 
     print(event)
 
@@ -175,7 +148,8 @@ def process_event(event, assistant):
         global devices
         global config
         global log
-        
+        for depdevice in config['devices']:
+            devices[depdevice] = config['devices'][depdevice]
         print(event.args['text'])
         logging.info('Received %s', event.args['text'])
         returned = event.args['text'].split()
@@ -209,28 +183,33 @@ def process_event(event, assistant):
                     objects.append("".join(returned[wordindex+1:]).lower())
                     print(objects)
             for object in objects:
-                
-                device = getDevice(object)
-                if (device != "" and (action == "on" or action == "off" or action =="up" or action == "down")):
+                if (object in devices and (action == "on" or action == "off" or action =="up" or action == "down")):
                     assistant.stop_conversation()
-                    if (device['type'] == 'infrared'):
+                    device = devices[object]                
+
+                    #handle groups of devices
+                    if (isinstance(device, list)):
+                        for d in device:
+                            transmit433(d, action)
+                    #handle infrared stuff 
+                    elif ('infra' in device):
                         if (action=="up" and 'tv' in object):
                             action="volumeup"
                         if (action=="down" and 'tv' in object):
                             action="volumedown"
-                        doAction(device['name'], action)
+                        sendIR(device[5:], action)
                     #everything else
                     else:
-                        doAction(device['name'], action)
+                        transmit433(device, action)
                     
                     #handle x10 dimming now we've set the controller to use that device   
-                    if (returned[0] == 'dim' and device['type'] == 'x10'):
+                    if (returned[0] == 'dim' and 'x10' in device):
                         print('dimming')
                         time.sleep(0.05)
-                        doAction(device['name'], 'dim')
-                    if (returned[0] == 'brighten' and device['type'] == 'x10'):
+                        transmit433('x10', 'dim')
+                    if (returned[0] == 'brighten' and 'x10' in device):
                         time.sleep(0.05)
-                        doAction(device['name'], 'bright')
+                        transmit433('x10', 'bright')
 
 
 #SYSTEM COMMANDS
@@ -251,11 +230,11 @@ def process_event(event, assistant):
             if ("".join(returned).lower() == "createacinema"):
                 print('creating a cinema')
                 logging.info('creating a cinema')
-                doAction('theceiling', 'on')
+                transmit433(devices['theceiling'], 'on')
                 time.sleep(0.50)
-                doAction('thelights', 'off')
-                doAction('thefridge', 'off')
-                createTimer('thefridge', 'on', int(str(time.time()).split('.')[0]) + 7200)
+                transmit433(devices['thelights'], 'off')
+                transmit433(devices['thefridge'], 'off')
+                createTimer(devices['thefridge'], 'on', int(str(time.time()).split('.')[0]) + 7200)
                 time.sleep(4.00)
             try:
                 r = requests.post("http://192.168.0.176", data={'colour': "".join(returned[2:]).lower()})
@@ -272,9 +251,9 @@ def process_event(event, assistant):
             logging.info('infra red command to %s - %s', device, action)
             print(action)
             print(device)
-            device = getDevice(device)
-            if (device != ""):            
-                doAction(device['name'], action)
+            if (device in devices):
+                device = devices[device]
+                sendIR( device[5:], action )
                 assistant.stop_conversation()
         actions = [ 'volume', 'source', 'hdmi', 'mute', 'exit', 'return', 'enter']
         if (len(returned) >3 and ( returned[0].lower() in actions or returned[0].lower() in [ 'press', 'push', 'mash', 'set', 'hit' ]) and 'on' in returned):
@@ -310,18 +289,18 @@ def process_event(event, assistant):
                         times=int(returned[len(returned)-2])
             print(action)
             print(device)
-            device = getDevice(device)            
-            if (device != ""):
+            if (device in devices):
                 assistant.stop_conversation()
                 for act in action:
+                    dev=devices[device]
                     n=0
                     while(n < times):
-                        logging.info('SENDIR %s %s', device['name'], act)
-                        doAction(device['name'], act)
+                        logging.info('SENDIR %s %s', dev[5:], act)
+                        sendIR(dev[5:], act)
                         n+=1
         if (len(returned) > 1 and ("".join(returned).lower() == 'changethecolorlight')):
             assistant.stop_conversation()
-            doAction('colorlight', 'flash')
+            sendIR('colorlight', 'flash')
 #Cat Control 
         print(returned)
         if (len(returned) > 0 and (((returned[0].lower() == 'fetch' or returned[0].lower() == 'best' or returned[0].lower() == 'bring' or returned[0].lower() == 'batch' ) and returned[1].lower() == 'charlie') or (len(returned) == 1 and returned[0].lower() == 'charlie'))):
@@ -436,8 +415,14 @@ def process_event(event, assistant):
             logging.info('resume')
             isplaying.resume()
 
+def transmit433(device, action):
+    subprocess.call(["python", "/home/pi/Assistant/Transmit433.py", device + action ],stdout=log, stderr=subprocess.STDOUT) 
+
 def createTimer(device, action, date):
     subprocess.call(["/home/pi/Assistant/createTimer.sh", device, action, str(date), "x10" ], stdout=log, stderr=subprocess.STDOUT)
+
+def sendIR(device, action):
+    subprocess.call(["python", "/home/pi/Assistant/sendir.py", device, action], stdout=log, stderr=subprocess.STDOUT)
 
 def playMessage(afile):
     print(afile[len(afile)-4:])
@@ -470,7 +455,8 @@ def main():
     with open(args.credentials, 'r') as f:
         credentials = google.oauth2.credentials.Credentials(token=None,**json.load(f))
         global config
-    with Assistant(credentials, localConfig['device_id']) as assistant:
+        print(config)
+    with Assistant(credentials, config['device_id']) as assistant:
         for event in assistant.start():
             process_event(event, assistant)
 

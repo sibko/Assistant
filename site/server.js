@@ -26,18 +26,6 @@ devices.forEach(function (device) {
 	console.log(device.name)
 })
 
-sendir = function (id, action) {
-	exec("node /home/pi/Assistant/sendir.js " + id + " " + action.replace(" ", "").toLowerCase(), function (err, stdout, stderr) {
-		console.log(err, stdout, stderr)
-	})
-}
-
-transmit433 = function (id, action) {
-	exec("python /home/pi/Assistant/Transmit433.py " + id + action.toLowerCase(), function (err, stdout, stderr) {
-		console.log(err, stdout, stderr)
-	})
-}
-
 createTimer = function (id, action, minutes, type) {
 	var date = new Date()
 	var timestamp = (date.getTime() / 1000) + minutes * 60
@@ -59,45 +47,12 @@ piControl = function (pi, action) {
 
 }
 
-pcControl = function () {
-	http.get({
-		host: '192.168.0.202',
-		path: '/5/on'
-	}, function (response) {
-		console.log("pc wake up sent", response)
+doAction = function (name, action) {
+	var command = 'node /home/pi/Assistant/DoAction.js "' + name + '" "' + action +'"'
+	
+	exec(command, function (err, stdout, stderr) {
+		console.log(err, stdout, stderr)
 	})
-}
-espControl = function (device, action) {
-	const postData = querystring.stringify({ 'colour': action });
-
-	const options = {
-		hostname: device,
-		port: 80,
-		path: '/',
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			'Content-Length': Buffer.byteLength(postData)
-		}
-	};
-
-	const req = http.request(options, (res) => {
-		res.setEncoding('utf8');
-		res.on('data', (chunk) => {
-			console.log(`BODY: ${chunk}`);
-		});
-		res.on('end', () => {
-			console.log('No more data in response.');
-		});
-	});
-
-	req.on('error', (e) => {
-		console.error(`problem with request: ${e.message}`);
-	});
-
-	// write data to request body
-	req.write(postData);
-	req.end();
 
 }
 
@@ -139,22 +94,15 @@ app.route('/api/device/:name/:action').get((req, res) => {
 		console.log(id, action)
 		switch (device.type) {
 			case "infrared":
-				sendir(id, action);
-				break;
 			case "energenie":
 			case "generic":
 			case "x10":
-			case "twelvevolt":
-				transmit433(id, action);
+			case "twelvevolt":			
+			case "ESP":
+				doAction(device.name, action)
 				break;
 			case "rPI":
 				piControl(id, action);
-				break;
-			case "Windows":
-				pcControl();
-				break;
-			case "ESP":
-				espControl(id, action);
 				break;
 		}
 	})
