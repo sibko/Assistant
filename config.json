@@ -499,14 +499,17 @@
             "location": "Bedroom",
             "functions": [
                 "Restart",
-                "Off"
+                "Off",
+                "Update Music",
+                "Create Playlists"
             ],
             "aliases": [
                 "bedroompi",
                 "thebedroompi",
                 "bedroomassistant",
                 "thebedroomassistant"
-            ]
+            ],
+            "user": "pi"
         },
         {
             "name": "Kitchen Assistant",
@@ -517,14 +520,17 @@
             "location": "Kitchen",
             "functions": [
                 "Restart",
-                "Off"
+                "Off",
+                "Update Music",
+                "Create Playlists"
             ],
             "aliases": [
                 "kitchenpi",
                 "thekitchenpi",
                 "kitchenassistant",
                 "thekitchenassistant"
-            ]
+            ],
+            "user": "pi"
         },
         {
             "name": "Lounge Assistant",
@@ -535,14 +541,17 @@
             "location": "Lounge",
             "functions": [
                 "Restart",
-                "Off"
+                "Off",
+                "Update Music",
+                "Create Playlists"
             ],
             "aliases": [
                 "loungepi",
                 "theloungepi",
                 "loungeassistant",
                 "theloungeassistant"
-            ]
+            ],
+            "user": "pi"
         },
         {
             "name": "Sitting Room Assistant",
@@ -553,14 +562,49 @@
             "location": "Sitting Room",
             "functions": [
                 "Restart",
-                "Off"
+                "Off",
+                "Update Music",
+                "Create Playlists"
             ],
             "aliases": [
                 "sittingroompi",
                 "thesittingroompi",
                 "sittingroomassistant",
                 "thesittingroomassistant"
-            ]
+            ],
+            "user": "pi"
+        },
+        {
+            "name": "Porch Pi Cam",
+            "ids": [
+                "192.168.0.171"
+            ],
+            "type": "rPI",
+            "location": "Porch",
+            "functions": [
+                "Restart",
+                "Off"
+            ],
+            "aliases": [
+                "theporchpi"
+            ],
+            "user": "pi"
+        },
+        {
+            "name": "Microserver",
+            "ids": [
+                "microserver"
+            ],
+            "type": "rPI",
+            "location": "Bedroom",
+            "functions": [
+                "Restart",
+                "Off"
+            ],
+            "aliases": [
+                "themicroserver"                
+            ],
+            "user": "pi"
         },
         {
             "name": "PC",

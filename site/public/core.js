@@ -130,6 +130,16 @@ deviceControl.controller("DeviceHandlerController", function ($scope, $http, $ui
 				console.log('Error: ' + error);
 			});
 	}
+	
+	$scope.getAssLogs = function(device) {
+		$http.get('/api/device/' + device.name + '/Logs/')
+			.then(function (data) {
+				console.log(data)
+				$scope.logs = data.data.replace(/\\n/g, "</br>")
+			}, function (error) {
+				console.log('Error: ' + error);
+			});
+	}
 
 	$scope.closeModal = function () {
 		$uibModalInstance.close();

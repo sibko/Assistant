@@ -1242,3 +1242,11 @@ Audio Device:   Advanced Linux Sound Architecture (ALSA) output
 Software: Lavf52.93.0
 Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
 Done.
+
+Audio Device:   Advanced Linux Sound Architecture (ALSA) output
+
+Playing: /home/pi/hail.ogg
+Ogg Vorbis stream: 2 channel, 48000 Hz
+Software: Lavf52.93.0
+Time: 00:00.16 [00:01.07] of 00:01.22  (180.2 kbps)  Output Buffer 100.0%                                                                            Time: 00:00.47 [00:00.75] of 00:01.22  (143.8 kbps)  Output Buffer  77.8%                                                                            Time: 00:00.79 [00:00.44] of 00:01.22  (151.7 kbps)  Output Buffer  77.8%                                                                            Time: 00:01.10 [00:00.12] of 00:01.22  (141.2 kbps)  Output Buffer  39.4% (EOS)                                                                                Time: 00:01.22 [00:00.00] of 00:01.22  (145.4 kbps)  Output Buffer   0.0% (EOS)                                                                                
+Done.

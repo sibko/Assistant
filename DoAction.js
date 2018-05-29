@@ -88,6 +88,32 @@ var sendIRRequest = function (host, action) {
     return _d.promise
 }
 
+linuxControl = function (device, action) {
+    var _d = q.defer();
+    var command = ""
+    switch (action) {
+        case 'restart':
+        command = "echo sudo shutdown -r now | ssh " + device.user + "@" + device.ids[0]
+        break;
+        case 'off':
+        command = "echo sudo shutdown -h now | ssh " + device.user + "@" + device.ids[0]
+        break;
+        case 'updatemusic':
+        command = "echo sudo updatedb --netpaths='/music' | ssh " + device.user + "@" + device.ids[0]
+        break;
+        case 'createplaylists':
+        command = "cd /music && bash createplaylists.sh &"
+        break;
+    }
+    exec(command, function (err, stdout, stderr) {
+        console.log(err, stdout, stderr)
+        _d.resolve();
+    })
+    return _d.promise
+
+}
+
+
 var processActions = function (device, actions) {
     var promises = [];
     actions.forEach(function (action) {
@@ -96,14 +122,14 @@ var processActions = function (device, actions) {
             action = 'source'
         }
         console.log(device + action);
-        
+
         var dev = '';
         dev = getdevice(device, 'name');
 
-        
+
         if (action == 'off' && dev.type == 'infrared') {
             action = 'on'
-        } 
+        }
         console.log(dev.type)
         switch (dev.type) {
             case 'infrared':
@@ -153,15 +179,26 @@ var processActions = function (device, actions) {
                 var bigOff = plugDevice.bigOff
                 var extendedDelay = plugDevice.extendedDelay
                 var endDelay = plugDevice.endDelay
-                console.log(os.hostname(), dev.type,os.hostname() == 'bedroomAssistant', dev.type == 'x10')
+                console.log(os.hostname(), dev.type, os.hostname() == 'bedroomAssistant', dev.type == 'x10')
                 console.log('python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay)
-                if (os.hostname() == 'bedroomAssistant' && dev.type == 'x10'){
-                    exec('echo "python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay + '"| ssh pi@192.168.0.187' )
-                
+                if (os.hostname() == 'bedroomAssistant' && dev.type == 'x10') {
+                    exec('echo "python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay + '"| ssh pi@192.168.0.187')
+
                 } else {
-                exec('python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay)
+                    exec('python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay)
                 }
                 break;
+            case 'rPI':
+                var functions = dev.functions.map(function (item) {
+                    return item.replace(" ", "").toLowerCase()
+                })
+                if (functions.indexOf(action) < 0) {
+                    console.log("ACTION NOT FOUND")
+                    return
+                }
+                var promise = linuxControl(dev, action)
+                promises.push(promise);
+                break
         }
 
     })

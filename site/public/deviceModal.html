@@ -16,7 +16,7 @@
                     </td>
         </tr>
         <tr ng-repeat="function in device.functions">            
-            <td >
+            <td style="text-align: center;">
                 <button type=" button " class="btn btn-success " ng-click="performAction(device, function)
                 " ng-if="function.toLowerCase()=='on' ">{{function}}</button>
                 <button type="button " class="btn btn-danger " ng-click="performAction(device, function)
@@ -24,11 +24,17 @@
                 <button type="button " class="btn btn-primary " ng-click="performAction(device, function)
                 " ng-if="function.toLowerCase() !='on' && function.toLowerCase() !='off' ">{{function}}</button>
             </td>
-            <td>
+            <td style="text-align: center;">
                 <button type="button " class="btn btn-secondary " ng-click="openTimerModal(device, function) ">Timer</button>
             </td>
         </tr>
     </table>
+    <div ng-if="device.type == 'rPI'">
+        <div style="width: 100%;text-align: center;">
+            <button type=" button " style="margin: auto;" class="btn btn-warning " ng-click="getAssLogs(device)">Get Logs</button>
+        </div>
+        <pre>{{logs}}</pre>
+    </div>
 </div>
 <div class="modal-footer ">
     <button class="btn btn-warning " type="button " ng-click="closeModal() ">Close</button>

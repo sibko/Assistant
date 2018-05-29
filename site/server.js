@@ -8,6 +8,8 @@ const sys = require('sys')
 const exec = require('child_process').exec;
 const http = require('http');
 const querystring = require('querystring');
+const q = require("q");
+
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));
@@ -34,17 +36,31 @@ createTimer = function (id, action, minutes, type) {
 	})
 }
 
-piControl = function (pi, action) {
+linuxControl = function (device, action) {
 	var command = ""
 	if (action == 'Restart') {
-		command = "echo sudo shutdown -r now | ssh pi@" + pi
+		command = "echo sudo shutdown -r now | ssh " + device.user + "@" + device.ids[0]
 	} else if (action == 'Off') {
-		command = "echo sudo shutdown -h now | ssh pi@" + pi
+		command = "echo sudo shutdown -h now | ssh " + device.user + "@" + device.ids[0]
 	}
 	exec(command, function (err, stdout, stderr) {
 		console.log(err, stdout, stderr)
 	})
 
+}
+
+getLogs = function (device) {
+	var d = q.defer()
+	var command = 'echo "tail -n 500 /home/pi/assLogs.log | tac" | ssh -q ' + device.user + '@' + device.ids[0]
+	exec(command, function (err, stdout, stderr) {
+		console.log(err, stdout, stderr)
+		if (err) {
+			d.resolve(err + stderr)
+		} else {
+			d.resolve(stdout)
+		}
+	})
+	return d.promise
 }
 
 doAction = function (name, action) {
@@ -112,6 +128,13 @@ app.route('/api/devices/:name').get((req, res) => {
 	const requesteddevice = req.params['name'];
 	res.send(getdevice(requesteddevice));
 });
+app.route('/api/device/:name/Logs/').get((req, res) => {
+	const requesteddevice = req.params['name'];
+	getLogs(getdevice(requesteddevice)).then(function (log) {
+		console.log("ADAM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", log)
+		res.send(log);
+	})
+})
 app.route('/api/device/:name/:action').get((req, res) => {
 	const devicename = req.params['name'];
 	const device = getdevice(devicename)
@@ -132,7 +155,7 @@ app.route('/api/device/:name/:action').get((req, res) => {
 				doAction(device.name, action)
 				break;
 			case "rPI":
-				piControl(id, action);
+				linuxControl(device, action);
 				break;
 		}
 	})
