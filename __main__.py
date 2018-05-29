@@ -43,13 +43,10 @@ localConfig = config["assistants"][socket.gethostname()]
 devices = config["devices"]
 
 for localDevice in localConfig['devices']:
-            print(localDevice)
             for localDeviceName in localConfig['devices'][localDevice]:
                 for dev in devices:
-                    print(dev['name'] + localDeviceName)
                     if (dev['name'] == localDeviceName):
                         dev['aliases'].append(localDevice)
-print(devices)
 
 
 logging.basicConfig(filename='/home/pi/assLogs.log', level=logging.DEBUG, format='%(asctime)s %(levelname)-8s %(message)s')
