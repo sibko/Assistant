@@ -591,6 +591,22 @@
             "user": "pi"
         },
         {
+            "name": "Sitting Room Pi Cam",
+            "ids": [
+                "192.168.0.188"
+            ],
+            "type": "rPI",
+            "location": "Mobile",
+            "functions": [
+                "Restart",
+                "Off"
+            ],
+            "aliases": [
+                "thesittingroomcamerapi"
+            ],
+            "user": "pi"
+        },
+        {
             "name": "Microserver",
             "ids": [
                 "microserver"

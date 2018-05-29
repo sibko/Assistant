@@ -28,6 +28,14 @@
                 <button type="button " class="btn btn-secondary " ng-click="openTimerModal(device, function) ">Timer</button>
             </td>
         </tr>
+        <tr ng-if="device.type == 'rPI' || device.type == 'ESP'">
+            <td style="text-align: center;">
+                <button type=" button " style="margin: auto;" class="btn btn-warning " ng-click="pingDevice(device)">Ping Status</button>
+            </td>
+            <td style="text-align: center;">
+                <pre>{{status}}</pre>
+            </td>
+        </tr>
     </table>
     <div ng-if="device.type == 'rPI'">
         <div style="width: 100%;text-align: center;">

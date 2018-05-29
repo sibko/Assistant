@@ -135,7 +135,16 @@ deviceControl.controller("DeviceHandlerController", function ($scope, $http, $ui
 		$http.get('/api/device/' + device.name + '/Logs/')
 			.then(function (data) {
 				console.log(data)
-				$scope.logs = data.data.replace(/\\n/g, "</br>")
+				$scope.logs = data.data
+			}, function (error) {
+				console.log('Error: ' + error);
+			});
+	}
+	$scope.pingDevice = function(device) {
+		$http.get('/api/device/' + device.name + '/ping/')
+			.then(function (data) {
+				console.log(data)
+				$scope.status = data.data
 			}, function (error) {
 				console.log('Error: ' + error);
 			});

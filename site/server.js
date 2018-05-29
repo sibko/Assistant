@@ -63,6 +63,20 @@ getLogs = function (device) {
 	return d.promise
 }
 
+pingDevice = function (device) {
+	var d = q.defer()
+	var command = 'ping -c 2 ' + device.ids[0]
+	exec(command, function (err, stdout, stderr) {
+		console.log(err, stdout, stderr)
+		if (err) {
+			d.resolve(err + stderr + stdout)
+		} else {
+			d.resolve(stdout)
+		}
+	})
+	return d.promise
+}
+
 doAction = function (name, action) {
 	var command = 'node /home/pi/Assistant/DoAction.js "' + name + '" "' + action + '"'
 
@@ -131,8 +145,13 @@ app.route('/api/devices/:name').get((req, res) => {
 app.route('/api/device/:name/Logs/').get((req, res) => {
 	const requesteddevice = req.params['name'];
 	getLogs(getdevice(requesteddevice)).then(function (log) {
-		console.log("ADAM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", log)
 		res.send(log);
+	})
+})
+app.route('/api/device/:name/ping/').get((req, res) => {
+	const requesteddevice = req.params['name'];
+	pingDevice(getdevice(requesteddevice)).then(function (status) {
+		res.send(status);
 	})
 })
 app.route('/api/device/:name/:action').get((req, res) => {
