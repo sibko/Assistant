@@ -254,7 +254,7 @@
                 "c_"
             ],
             "type": "generic",
-            "location": "Hall",
+            "location": "Mobile",
             "functions": [
                 "On",
                 "Off"
@@ -580,7 +580,7 @@
                 "192.168.0.171"
             ],
             "type": "rPI",
-            "location": "Porch",
+            "location": "Mobile",
             "functions": [
                 "Restart",
                 "Off"

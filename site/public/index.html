@@ -120,7 +120,7 @@
     <div class="container">
 
 
-        <div ng-repeat="location in locations | orderBy" id="{{location}}" class="row">
+        <div ng-repeat="location in locations | orderBy" id="{{location}}" ng-if="location != 'Timers' || timers.length > 0" class="row">
             <h2>{{location}}</h2>
             <table class="table table-sm table-striped">
                 <tr ng-repeat="device in devices | orderBy : 'name'" ng-if="(location != 'Timers' && device.location == location && device.type != 'rPI') || (location =='Computers' && (device.type == 'rPI' || device.name == 'PC')) || location == 'All'">
