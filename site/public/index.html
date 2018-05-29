@@ -120,7 +120,7 @@
         <div ng-repeat="location in locations" id="{{location}}" class="row">
             <h2>{{location}}</h2>
             <table class="table table-sm table-striped">
-                <tr ng-repeat="device in devices" ng-if="(device.location == location && device.type != 'rPI' && device.type != 'Windows') || (location =='Computers' && (device.type == 'rPI' || device.type == 'Windows')) || location == 'All'">
+                <tr ng-repeat="device in devices" ng-if="(location != 'Timers' && device.location == location && device.type != 'rPI') || (location =='Computers' && (device.type == 'rPI' || device.name == 'PC')) || location == 'All'">
                     <td>{{device.name}}</td>
                     <td ng-repeat="function in device.functions.slice(0,2)">
                         <button type="button" class="btn btn-success" ng-click="performAction(device, function)" ng-if="function.toLowerCase() == 'on'">{{function}}</button>
@@ -133,6 +133,12 @@
                     <td>
                         <button type="button" class="btn btn-primary" ng-click="openDeviceModal(device)">More</button>
                     </td>
+                </tr>
+                <tr ng-repeat="timer in timers" ng-if="location == 'Timers'">
+                    <td>{{timer.date.toString()}}</td>
+                    <td>{{timer.device}}</td>
+                    <td>{{timer.action}}</td>
+                    <td><button type="button" class="btn btn-danger" ng-click="deleteTimer(timer)">Delete</button></td>
                 </tr>
             </table>
         </div>

@@ -48,8 +48,8 @@ piControl = function (pi, action) {
 }
 
 doAction = function (name, action) {
-	var command = 'node /home/pi/Assistant/DoAction.js "' + name + '" "' + action +'"'
-	
+	var command = 'node /home/pi/Assistant/DoAction.js "' + name + '" "' + action + '"'
+
 	exec(command, function (err, stdout, stderr) {
 		console.log(err, stdout, stderr)
 	})
@@ -71,10 +71,40 @@ getdevice = function (requested) {
 	}
 }
 
+getTimers = function () {
+	console.log("HERE")
+	var timers = fs.readdirSync("/home/pi/timers/")
+	var ret = [];
+	console.log(timers);
+	timers.forEach(function (timer) {
+		var item = fs.readFileSync("/home/pi/timers/" + timer, 'utf8')
+		var obj = {}
+		obj.id = timer
+		obj.date = new Date(timer * 1000).toString().split(" GMT")[0];
+		obj.device = item.split(":")[0]
+		obj.action = item.split(":")[1]
+		ret.push(obj)
+	})
+	console.log(ret);
+	return ret
+
+}
+
+deleteTimer = function (timer) {
+	console.log(timer)
+	fs.unlinkSync("/home/pi/timers/" + timer)
+}
+
 app.get('/', function (req, res) {
 	res.sendfile('./public/index.html');
 });
-
+app.route('/api/timers/').get((req, res) => {
+	res.send(getTimers());
+});
+app.route('/api/timers/:timer').get((req, res) => {
+	const requestedTimer = req.params['timer'];
+	res.send(deleteTimer(requestedTimer));
+});
 app.route('/api/devices/').get((req, res) => {
 	res.send(devices);
 });
@@ -97,7 +127,7 @@ app.route('/api/device/:name/:action').get((req, res) => {
 			case "energenie":
 			case "generic":
 			case "x10":
-			case "twelvevolt":			
+			case "twelvevolt":
 			case "ESP":
 				doAction(device.name, action)
 				break;

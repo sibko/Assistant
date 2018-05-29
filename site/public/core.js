@@ -19,6 +19,7 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', func
 					})
 				}
 			})
+			$scope.locations.push('Timers')
 			console.log("Received devices", data);
 		}, function (error) {
 			console.log('Error: ' + error);
@@ -50,6 +51,8 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', func
 					return device
 				}
 			}
+		}).closed.then(function () {
+			$scope.getTimers()
 		});
 
 	}
@@ -71,6 +74,24 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', func
 		});
 
 	}
+
+	$scope.getTimers = function () {
+		$http.get('/api/timers/')
+		.then(function(data) {
+			console.log("TIMERS", data);
+			$scope.timers = data.data
+		})
+	}
+
+	$scope.deleteTimer = function (timer) {
+		$http.get('/api/timers/' + timer.id)
+		.then(function(data) {
+			console.log(data)
+			$scope.getTimers()
+		})
+	}
+
+	$scope.getTimers()
 }])
 
 deviceControl.controller("DeviceHandlerController", function ($scope, $http, $uibModal, $uibModalInstance, device) {
@@ -98,7 +119,7 @@ deviceControl.controller("DeviceHandlerController", function ($scope, $http, $ui
 					return func
 				}
 			}
-		});
+		})
 	}
 
 	$scope.performAction = function (device, action) {
