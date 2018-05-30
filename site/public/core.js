@@ -4,7 +4,7 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', func
 	$http.get('/api/devices')
 		.then(function (data) {
 			$scope.devices = data.data;
-			$scope.locations = ['All', 'Computers']
+			$scope.locations = ['Top', 'All', 'Computers']
 			console.log($scope.devices)
 			$scope.devices.forEach(function (device) {
 				if (!$scope.locations.includes(device.location)) {
@@ -24,18 +24,37 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', func
 		}, function (error) {
 			console.log('Error: ' + error);
 		});
+	$scope.getPopList = function () {
+		$http.get('/api/poplist')
+			.then(function (data) {
+				$scope.poplist = []
+				var tmppoplist = []
+				for (var dev in data.data) {
+					tmppoplist.push([dev, data.data[dev]])
+				}
+				tmppoplist.sort(function (a, b) {
+					return b[1] - a[1]
+				})
 
+				tmppoplist.splice(7)
+				tmppoplist.forEach(function (a) {
+					$scope.poplist.push(a[0])
+				})
+			}, function (error) {
+				console.log('Error: ' + error);
+			});
+	}
 	$scope.performAction = function (device, action) {
 		$http.get('/api/device/' + device.name + '/' + action)
 			.then(function (data) {
 				console.log("action complete", data);
+				$scope.getPopList()
 			}, function (error) {
 				console.log('Error: ' + error);
 			});
 	}
 
 	$scope.openDeviceModal = function (device) {
-		console.log(device)
 		if (device.type == 'CatLaser') {
 			return $scope.openCatLaserModal(device);
 		}
@@ -58,7 +77,6 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', func
 	}
 
 	$scope.openCatLaserModal = function (device) {
-		console.log("catLaser")
 		$scope.modalInstance = $uibModal.open({
 			ariaLabelledBy: 'modal-title',
 			ariaDescribedBy: 'modal-body',
@@ -77,20 +95,26 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', func
 
 	$scope.getTimers = function () {
 		$http.get('/api/timers/')
-		.then(function(data) {
-			console.log("TIMERS", data);
-			$scope.timers = data.data
-		})
+			.then(function (data) {
+				console.log("TIMERS", data);
+				$scope.timers = data.data
+			})
 	}
 
 	$scope.deleteTimer = function (timer) {
 		$http.get('/api/timers/' + timer.id)
-		.then(function(data) {
-			console.log(data)
-			$scope.getTimers()
-		})
+			.then(function (data) {
+				console.log(data)
+				$scope.getTimers()
+			})
 	}
-
+	$scope.sortbylocation = function (item) {
+		if (item == 'Top') {
+			return -1;
+		}
+		return item;
+	}
+	$scope.getPopList()
 	$scope.getTimers()
 }])
 
@@ -130,8 +154,8 @@ deviceControl.controller("DeviceHandlerController", function ($scope, $http, $ui
 				console.log('Error: ' + error);
 			});
 	}
-	
-	$scope.getAssLogs = function(device) {
+
+	$scope.getAssLogs = function (device) {
 		$http.get('/api/device/' + device.name + '/Logs/')
 			.then(function (data) {
 				console.log(data)
@@ -140,7 +164,7 @@ deviceControl.controller("DeviceHandlerController", function ($scope, $http, $ui
 				console.log('Error: ' + error);
 			});
 	}
-	$scope.pingDevice = function(device) {
+	$scope.pingDevice = function (device) {
 		$http.get('/api/device/' + device.name + '/ping/')
 			.then(function (data) {
 				console.log(data)
@@ -187,7 +211,7 @@ deviceControl.controller("CatLaserController", function ($scope, $http, $uibModa
 	var inprogress = false;
 	var movement = setInterval(function () {
 		console.log("interval")
-		if ($scope.xaxis != prevxaxis && $scope.yaxis != prevyaxis && inprogress == false) {			
+		if ($scope.xaxis != prevxaxis && $scope.yaxis != prevyaxis && inprogress == false) {
 			prevxaxis = $scope.xaxis;
 			prevyaxis = $scope.yaxis;
 			inprogress = true;
@@ -195,7 +219,7 @@ deviceControl.controller("CatLaserController", function ($scope, $http, $uibModa
 				.then(function (data) {
 					inprogress = false;
 					console.log("action complete", data);
-				}, function (error) {					
+				}, function (error) {
 					inprogress = false;
 					console.log('Error: ' + error);
 				});

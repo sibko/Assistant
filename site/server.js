@@ -8,7 +8,7 @@ const exec = require('child_process').exec;
 const http = require('http');
 const querystring = require('querystring');
 const q = require("q");
-const dir = '/home/pi/'
+const dir = '/test/'
 
 log4js.configure({
 	appenders: {
@@ -22,7 +22,7 @@ log4js.configure({
 });
 var logger = log4js.getLogger()
 
-app.use(morgan({"format": "default", "stream": { write: function(str) { logger.debug(str);}}}));
+app.use(morgan({ "format": "default", "stream": { write: function (str) { logger.debug(str); } } }));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));
 app.use(bodyParser.json());
@@ -39,6 +39,8 @@ logger.info("loaded devices:")
 devices.forEach(function (device) {
 	logger.info(device.name)
 })
+var item = fs.readFileSync(dir + "Assistant/popular.json", 'utf8')
+var poplist = JSON.parse(item)
 
 createTimer = function (id, action, minutes, type) {
 	var date = new Date()
@@ -131,6 +133,15 @@ getTimers = function () {
 
 }
 
+logAction = function (device) {
+
+	if (!poplist[device]) {
+		poplist[device] = 0
+	}
+	poplist[device] += 1
+	fs.writeFileSync(dir + "Assistant/popular.json", JSON.stringify(poplist), 'utf8')
+}
+
 deleteTimer = function (timer) {
 	logger.info(timer)
 	fs.unlinkSync(dir + "timers/" + timer)
@@ -138,6 +149,9 @@ deleteTimer = function (timer) {
 
 app.get('/', function (req, res) {
 	res.sendfile('./public/index.html');
+});
+app.route('/api/poplist/').get((req, res) => {
+	res.send(poplist);
 });
 app.route('/api/timers/').get((req, res) => {
 	res.send(getTimers());
@@ -169,6 +183,7 @@ app.route('/api/device/:name/:action').get((req, res) => {
 	const devicename = req.params['name'];
 	const device = getdevice(devicename)
 	const action = req.params['action'];
+	logAction(devicename)
 	if (device.functions.indexOf(action) < 0) {
 		logger.error("ACTION NOT FOUND", action)
 		res.send("ACTION NOT FOUND");
