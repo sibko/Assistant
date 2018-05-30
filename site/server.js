@@ -52,11 +52,24 @@ createTimer = function (id, action, minutes, type) {
 
 linuxControl = function (device, action) {
 	var command = ""
-	if (action == 'Restart') {
-		command = "echo sudo shutdown -r now | ssh " + device.user + "@" + device.ids[0]
-	} else if (action == 'Off') {
-		command = "echo sudo shutdown -h now | ssh " + device.user + "@" + device.ids[0]
+	switch (action) {
+		case 'Restart':
+			command = "echo sudo shutdown -r now | ssh " + device.user + "@" + device.ids[0]
+			break;
+		case 'Off':
+			command = "echo sudo shutdown -h now | ssh " + device.user + "@" + device.ids[0]
+			break;
+		case 'Update Music':
+			command = "updatedb --netpaths='/music'"
+			break;
+		case 'Create Playlists':
+			command = "bash " + dir + "Assistant/createplaylists.sh; updatedb --netpaths='/music'"
+			break;
+		case 'Custom Playlists Converter':
+			command = "bash " + dir + "Assistant/customPlaylistConverter.sh; updatedb --netpaths='/music' "
+			break;
 	}
+
 	exec(command, function (err, stdout, stderr) {
 		logger.info("linux control: ", err, stdout, stderr)
 	})

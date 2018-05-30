@@ -501,7 +501,8 @@
                 "Restart",
                 "Off",
                 "Update Music",
-                "Create Playlists"
+                "Create Playlists",
+                "Custom Playlists Converter"
             ],
             "aliases": [
                 "bedroompi",
