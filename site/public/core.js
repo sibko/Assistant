@@ -1,5 +1,5 @@
 var deviceControl = angular.module('deviceControl', ['ngTouch', 'ngAnimate', 'ui.bootstrap']);
-deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', function ($scope, $http, $uibModal) {
+deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$rootScope', function ($scope, $http, $uibModal, $rootScope) {
 	$scope.formData = {};
 	$http.get('/api/devices')
 		.then(function (data) {
@@ -44,7 +44,7 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', func
 				console.log('Error: ' + error);
 			});
 	}
-	$scope.performAction = function (device, action) {
+	$rootScope.performAction = function (device, action) {
 		$http.get('/api/device/' + device.name + '/' + action)
 			.then(function (data) {
 				console.log("action complete", data);
@@ -118,8 +118,9 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', func
 	$scope.getTimers()
 }])
 
-deviceControl.controller("DeviceHandlerController", function ($scope, $http, $uibModal, $uibModalInstance, device) {
+deviceControl.controller("DeviceHandlerController", function ($scope, $http, $uibModal, $uibModalInstance, device, $rootScope) {
 	console.log("modal", device)
+	console.log($rootScope)
 	$scope.device = device
 	$scope.lines = []
 	if (device.groupFunctions) {
@@ -144,15 +145,6 @@ deviceControl.controller("DeviceHandlerController", function ($scope, $http, $ui
 				}
 			}
 		})
-	}
-
-	$scope.performAction = function (device, action) {
-		$http.get('/api/device/' + device.name + '/' + action)
-			.then(function (data) {
-				console.log("action complete", data);
-			}, function (error) {
-				console.log('Error: ' + error);
-			});
 	}
 
 	$scope.getAssLogs = function (device) {

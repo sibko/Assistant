@@ -8,7 +8,7 @@ const exec = require('child_process').exec;
 const http = require('http');
 const querystring = require('querystring');
 const q = require("q");
-const dir = '/test/'
+const dir = '/home/pi/'
 
 log4js.configure({
 	appenders: {
