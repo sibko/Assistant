@@ -1,38 +1,50 @@
 const express = require('express');
-
+const log4js = require('log4js')
 const app = express();
 const fs = require('fs')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
-const sys = require('sys')
 const exec = require('child_process').exec;
 const http = require('http');
 const querystring = require('querystring');
 const q = require("q");
+const dir = '/home/pi/'
 
-app.use(morgan('dev'));
+log4js.configure({
+	appenders: {
+		cons: { type: 'console' },
+		server: { type: 'file', filename: dir + 'logs/server.log' }
+	},
+	categories: {
+		default: { appenders: ['cons', 'server'], level: 'debug' }
+	}
+
+});
+var logger = log4js.getLogger()
+
+app.use(morgan({"format": "default", "stream": { write: function(str) { logger.debug(str);}}}));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));
 app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 app.listen(1966, () => {
-	console.log('Server started!');
+	logger.info('Server started!');
 });
 
-var config = fs.readFileSync('/home/pi/Assistant/config.json', 'utf8')
+var config = fs.readFileSync(dir + 'Assistant/config.json', 'utf8')
 config = JSON.parse(config)
 var devices = config.devices
-console.log("loaded devices:")
+logger.info("loaded devices:")
 devices.forEach(function (device) {
-	console.log(device.name)
+	logger.info(device.name)
 })
 
 createTimer = function (id, action, minutes, type) {
 	var date = new Date()
 	var timestamp = (date.getTime() / 1000) + minutes * 60
-	exec("/home/pi/Assistant/createTimer.sh '" + id + "' '" + action + "' " + Math.floor(timestamp) + " " + type.toLowerCase(), function (err, stdout, stderr) {
-		console.log(err, stdout, stderr)
+	exec(dir + "Assistant/createTimer.sh '" + id + "' '" + action + "' " + Math.floor(timestamp) + " " + type.toLowerCase(), function (err, stdout, stderr) {
+		logger.info("createTimer: ", err, stdout, stderr)
 	})
 }
 
@@ -44,16 +56,16 @@ linuxControl = function (device, action) {
 		command = "echo sudo shutdown -h now | ssh " + device.user + "@" + device.ids[0]
 	}
 	exec(command, function (err, stdout, stderr) {
-		console.log(err, stdout, stderr)
+		logger.info("linux control: ", err, stdout, stderr)
 	})
 
 }
 
 getLogs = function (device) {
 	var d = q.defer()
-	var command = 'echo "tail -n 500 /home/pi/assLogs.log | tac" | ssh -q ' + device.user + '@' + device.ids[0]
+	var command = 'echo "tail -n 500 ' + dir + 'assLogs.log | tac" | ssh -q ' + device.user + '@' + device.ids[0]
 	exec(command, function (err, stdout, stderr) {
-		console.log(err, stdout, stderr)
+		logger.info("get logs: ", err, stdout, stderr)
 		if (err) {
 			d.resolve(err + stderr)
 		} else {
@@ -67,7 +79,7 @@ pingDevice = function (device) {
 	var d = q.defer()
 	var command = 'ping -c 2 ' + device.ids[0]
 	exec(command, function (err, stdout, stderr) {
-		console.log(err, stdout, stderr)
+		logger.info("ping device: ", err, stdout, stderr)
 		if (err) {
 			d.resolve(err + stderr + stdout)
 		} else {
@@ -78,10 +90,10 @@ pingDevice = function (device) {
 }
 
 doAction = function (name, action) {
-	var command = 'node /home/pi/Assistant/DoAction.js "' + name + '" "' + action + '"'
+	var command = 'node ' + dir + 'Assistant/DoAction.js "' + name + '" "' + action + '"'
 
 	exec(command, function (err, stdout, stderr) {
-		console.log(err, stdout, stderr)
+		logger.info("DoAction: ", err, stdout, stderr)
 	})
 
 }
@@ -96,18 +108,17 @@ getdevice = function (requested) {
 	if (ret == '') {
 		throw 'device not found';
 	} else {
-		console.log(ret)
+		logger.info(ret)
 		return ret
 	}
 }
 
 getTimers = function () {
-	console.log("HERE")
-	var timers = fs.readdirSync("/home/pi/timers/")
+	var timers = fs.readdirSync(dir + "timers/")
 	var ret = [];
-	console.log(timers);
+	logger.info(timers);
 	timers.forEach(function (timer) {
-		var item = fs.readFileSync("/home/pi/timers/" + timer, 'utf8')
+		var item = fs.readFileSync(dir + "timers/" + timer, 'utf8')
 		var obj = {}
 		obj.id = timer
 		obj.date = new Date(timer * 1000).toString().split(" GMT")[0];
@@ -115,14 +126,14 @@ getTimers = function () {
 		obj.action = item.split(":")[1]
 		ret.push(obj)
 	})
-	console.log(ret);
+	logger.info(ret);
 	return ret
 
 }
 
 deleteTimer = function (timer) {
-	console.log(timer)
-	fs.unlinkSync("/home/pi/timers/" + timer)
+	logger.info(timer)
+	fs.unlinkSync(dir + "timers/" + timer)
 }
 
 app.get('/', function (req, res) {
@@ -159,11 +170,11 @@ app.route('/api/device/:name/:action').get((req, res) => {
 	const device = getdevice(devicename)
 	const action = req.params['action'];
 	if (device.functions.indexOf(action) < 0) {
-		console.log("ACTION NOT FOUND")
+		logger.error("ACTION NOT FOUND", action)
 		res.send("ACTION NOT FOUND");
 	}
 	device.ids.forEach(function (id) {
-		console.log(id, action)
+		logger.info(id, action)
 		switch (device.type) {
 			case "infrared":
 			case "energenie":
@@ -186,7 +197,7 @@ app.route('/api/device/:name/:action/:timer').get((req, res) => {
 	const device = getdevice(devicename)
 	const action = req.params['action'];
 	const timer = req.params['timer'];
-	console.log("timer", device.name, action, timer)
+	logger.info("timer", device.name, action, timer)
 	createTimer(device.name, action, timer, device.type);
 	res.send("Complete");
 });
