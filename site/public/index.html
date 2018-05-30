@@ -111,7 +111,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <ul class="nav navbar-nav scroll">
-                <li ng-repeat="location in locations | orderBy:sortbylocation">
+                <li ng-repeat="location in locations | orderBy:sortbylocation" ng-if="location != 'Timers' || timers.length > 0">
                     <a class="nav-link" href="#{{location}}">{{location}}</a>
                 </li>
             </ul>
