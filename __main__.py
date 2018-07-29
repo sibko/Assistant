@@ -53,7 +53,7 @@ logging.basicConfig(filename='/home/pi/assLogs.log', level=logging.DEBUG, format
 hasVideo=False
 if ('hasVideo' in config and config['hasVideo'] == True):
     hasVideo=True
-log=open("assLogs.log", "a")
+log=open("/home/pi/assLogs.log", "a")
 
 class mplayer():
     def __init__(self, mfile, playlist, shuffle, video):

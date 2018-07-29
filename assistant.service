@@ -1,0 +1,17 @@
+[Unit]
+Description=Assistant 
+After=network.target
+
+[Service] 
+Type=simple 
+User=root
+Environment=VIRTUAL_ENV="/home/pi/env/bin/activate" 
+StandardOutput=inherit
+StandardError=inherit
+SyslogIdentifier=assistant
+WorkingDirectory=/home/pi/Assistant
+ExecStart=/home/pi/Assistant/__main__.py
+Restart=always
+
+[Install] 
+WantedBy=multi-user.target
