@@ -53,6 +53,9 @@ createTimer = function (id, action, minutes, type) {
 linuxControl = function (device, action) {
 	var command = ""
 	switch (action) {
+		case 'Restart Assistant':
+	        command = "echo sudo systemctl restart assistant | ssh " + device.user + "@" + device.ids[0]
+        	break;
 		case 'Restart':
 			command = "echo sudo shutdown -r now | ssh " + device.user + "@" + device.ids[0]
 			break;

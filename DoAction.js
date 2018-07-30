@@ -92,7 +92,10 @@ linuxControl = function (device, action) {
     var _d = q.defer();
     var command = ""
     switch (action) {
-        case 'restart':
+        case 'restartassistant':
+        command = "echo sudo systemctl restart assistant | ssh " + device.user + "@" + device.ids[0]
+	break;
+	case 'restart':
         command = "echo sudo shutdown -r now | ssh " + device.user + "@" + device.ids[0]
         break;
         case 'off':

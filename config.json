@@ -500,6 +500,7 @@
             "functions": [
                 "Restart",
                 "Off",
+		"Restart Assistant",
                 "Update Music",
                 "Create Playlists",
                 "Custom Playlists Converter"
