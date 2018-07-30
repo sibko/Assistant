@@ -93,20 +93,23 @@ linuxControl = function (device, action) {
     var command = ""
     switch (action) {
         case 'restartassistant':
-        command = "echo sudo systemctl restart assistant | ssh " + device.user + "@" + device.ids[0]
-	break;
-	case 'restart':
-        command = "echo sudo shutdown -r now | ssh " + device.user + "@" + device.ids[0]
-        break;
+            command = "echo sudo systemctl restart assistant | ssh " + device.user + "@" + device.ids[0]
+	        break;
+	    case 'restart':
+            command = "echo sudo shutdown -r now | ssh " + device.user + "@" + device.ids[0]
+            break;
         case 'off':
-        command = "echo sudo shutdown -h now | ssh " + device.user + "@" + device.ids[0]
-        break;
+            command = "echo sudo shutdown -h now | ssh " + device.user + "@" + device.ids[0]
+            break;
         case 'updatemusic':
-        command = "echo sudo updatedb --netpaths='/music' | ssh " + device.user + "@" + device.ids[0]
-        break;
+            command = "echo sudo updatedb --netpaths='/music' | ssh " + device.user + "@" + device.ids[0]
+            break;
         case 'createplaylists':
-        command = "cd /music && bash createplaylists.sh &"
-        break;
+            command = "cd /music && bash createplaylists.sh &"
+            break;
+        case 'customplaylistsconverter':
+			command = "bash " + dir + "Assistant/customPlaylistConverter.sh; updatedb --netpaths='/music' "
+			break;
     }
     exec(command, function (err, stdout, stderr) {
         console.log(err, stdout, stderr)

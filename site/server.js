@@ -50,35 +50,6 @@ createTimer = function (id, action, minutes, type) {
 	})
 }
 
-linuxControl = function (device, action) {
-	var command = ""
-	switch (action) {
-		case 'Restart Assistant':
-	        command = "echo sudo systemctl restart assistant | ssh " + device.user + "@" + device.ids[0]
-        	break;
-		case 'Restart':
-			command = "echo sudo shutdown -r now | ssh " + device.user + "@" + device.ids[0]
-			break;
-		case 'Off':
-			command = "echo sudo shutdown -h now | ssh " + device.user + "@" + device.ids[0]
-			break;
-		case 'Update Music':
-			command = "updatedb --netpaths='/music'"
-			break;
-		case 'Create Playlists':
-			command = "bash " + dir + "Assistant/createplaylists.sh; updatedb --netpaths='/music'"
-			break;
-		case 'Custom Playlists Converter':
-			command = "bash " + dir + "Assistant/customPlaylistConverter.sh; updatedb --netpaths='/music' "
-			break;
-	}
-
-	exec(command, function (err, stdout, stderr) {
-		logger.info("linux control: ", err, stdout, stderr)
-	})
-
-}
-
 getLogs = function (device) {
 	var d = q.defer()
 	var command = 'echo "tail -n 500 ' + dir + 'assLogs.log | tac" | ssh -q ' + device.user + '@' + device.ids[0]
@@ -213,10 +184,8 @@ app.route('/api/device/:name/:action').get((req, res) => {
 			case "x10":
 			case "twelvevolt":
 			case "ESP":
-				doAction(device.name, action)
-				break;
 			case "rPI":
-				linuxControl(device, action);
+				doAction(device.name, action)
 				break;
 		}
 	})
