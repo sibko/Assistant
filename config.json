@@ -547,7 +547,7 @@
         {
             "name": "Dining Room Assistant",
             "ids": [
-                "bedroomassistant"
+                "diningassistant"
             ],
             "type": "rPI",
             "location": "Dining Room",
@@ -966,7 +966,7 @@
             },
             "greeting": "/home/pi/mother.ogg"
         },
-        "diningRoomAssistant": {
+        "diningAssistant": {
             "device_id": "ass-pi-downstairs-dining-room-pi-iookcz",
             "devices": {
                 "allthelights": [
@@ -982,7 +982,7 @@
                     "Dining Room Lamps"
                 ]
             },
-            "greeting": "/home/pi/mother.ogg"
+            "greeting": "/home/pi/hail.ogg"
         }
     }
 }
