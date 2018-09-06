@@ -924,7 +924,7 @@
                 "tv": ["Bedroom TV"],
                 "thetv": ["Bedroom TV"]
             },
-            "greeting": "/home/pi/hail.ogg"
+            "greeting": "/home/pi/Assistant/hail.ogg"
         },
         "loungeAssistant": {
             "device_id": "ass-pi-lounge-pi-sakvam",
@@ -938,7 +938,7 @@
                 "thetv": ["Lounge TV"],
                 "tv": ["Lounge TV"]
             },
-            "greeting": "/home/pi/r2d2.ogg"
+            "greeting": "/home/pi/Assistant/r2d2.ogg"
         },
         "kitchenAssistant": {
             "device_id": "ass-pi-kitchen-kitchen-pi-mfqvga",
@@ -950,7 +950,7 @@
                     "Kitchen Lights"
                 ]
             },
-            "greeting": "/home/pi/holly.ogg"
+            "greeting": "/home/pi/Assistant/holly.ogg"
         },
         "sittingRoomAssistant": {
             "device_id": "ass-pi-downstairs-sitting-room-pi-iookcz",
@@ -964,7 +964,7 @@
                 "tv": "Sitting Room TV",
                 "thetv": "Sitting Room TV"
             },
-            "greeting": "/home/pi/mother.ogg"
+            "greeting": "/home/pi/Assistant/mother.ogg"
         },
         "diningAssistant": {
             "device_id": "ass-pi-downstairs-dining-room-pi-iookcz",
@@ -982,7 +982,7 @@
                     "Dining Room Lamps"
                 ]
             },
-            "greeting": "/home/pi/hail.ogg"
+            "greeting": "/home/pi/Assistant/handlink.ogg"
         }
     }
 }
