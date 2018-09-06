@@ -231,6 +231,37 @@
             ]
         },
         {
+            "name": "Dining Room Lamps",
+            "ids": [
+                "energenieg_"
+            ],
+            "type": "energenie",
+            "location": "Dining Room",
+            "functions": [
+                "On",
+                "Off"
+            ],
+            "aliases": [
+                "thediningroomlights",
+                "thediningroomlight",
+                "diningroomlights",
+                "diningroomlight",
+                "dininglights",
+                "dininglight",
+                "thedininglights",
+                "thedininglight",
+                "dininglamp",
+                "dininglamps",
+                "thedininglamps",
+                "thedininglamp",
+                "thediningroomlamp",
+                "thediningroomlamps",
+                "diningroomlamps",
+                "diningroomlamp"
+
+            ]
+        },
+        {
             "name": "Sitting Room Lamps",
             "ids": [
                 "b_"
@@ -510,6 +541,29 @@
                 "thebedroompi",
                 "bedroomassistant",
                 "thebedroomassistant"
+            ],
+            "user": "pi"
+        },
+        {
+            "name": "Dining Room Assistant",
+            "ids": [
+                "bedroomassistant"
+            ],
+            "type": "rPI",
+            "location": "Dining Room",
+            "functions": [
+                "Restart",
+                "Off",
+		        "Restart Assistant",
+                "Update Music",
+                "Create Playlists",
+                "Custom Playlists Converter"
+            ],
+            "aliases": [
+                "diningpi",
+                "thediningpi",
+                "diningroomassistant",
+                "thediningroomassistant"
             ],
             "user": "pi"
         },
@@ -909,6 +963,24 @@
                 ],
                 "tv": "Sitting Room TV",
                 "thetv": "Sitting Room TV"
+            },
+            "greeting": "/home/pi/mother.ogg"
+        },
+        "diningRoomAssistant": {
+            "device_id": "ass-pi-downstairs-dining-room-pi-iookcz",
+            "devices": {
+                "allthelights": [
+                    "Dining Room Lamps"
+                ],
+                "thelights": [
+                    "Dining Room Lamps"
+                ],
+                "allthelamps": [
+                    "Dining Room Lamps"
+                ],
+                "thelamps": [
+                    "Dining Room Lamps"
+                ]
             },
             "greeting": "/home/pi/mother.ogg"
         }
