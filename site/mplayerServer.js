@@ -30,22 +30,23 @@ app.listen(1967, () => {
 	logger.info('Server started!');
 });
 
-var config = fs.readFileSync('config.json', 'utf8')
-config = JSON.parse(config)
 
 app.route('/api/:action/').get((req, res) => {
 	logger.debug('action' + req.params['action'])
 	mplayerAction(req.params['action'])
+	res.send('end')
 });
 app.route('/api/play/:file').get((req, res) => {
 	logger.debug('file' + req.params['file'])
 	stopMplayer()
 	startMplayer('file', req.params['file'])
+	res.send('end')
 });
 app.route('/api/playlist/:file').get((req, res) => {
 	logger.debug('playlist' + req.params['file'])
 	stopMplayer()
 	startMplayer('playlist', req.params['file'])
+	res.send('end')
 });
 
 var mplayerContainer
@@ -91,17 +92,21 @@ var mplayerAction = function(action){
 var startMplayer = function(type, file, additionalParams){
 	var cp = require('child_process');
 	var mplayerArgs = [];
-	if (type == 'playlist') {
-	        mplayerArgs.push('-playlist')
-	}
 	if (additionalParams){
 		mplayerArgs.push(additionalParams)
 	}
+	mplayerArgs.push('-quiet')
+	mplayerArgs.push('-really-quiet')
+
+	if (type == 'playlist') {
+                mplayerArgs.push('-playlist')
+        }
 	mplayerArgs.push(file)
 	mplayerContainer = cp.spawn('mplayer', mplayerArgs);
 	
 	mplayerContainer.stdout.setEncoding('utf8')
 	mplayerContainer.on('exit', console.log.bind(console,('FIN')))
+	mplayerContainer.on('err', console.log.bind(console,('err')))
 }
 
 var stopMplayer = function(){
