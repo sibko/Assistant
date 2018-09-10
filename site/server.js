@@ -9,6 +9,7 @@ const http = require('http');
 const querystring = require('querystring');
 const q = require("q");
 const dir = '/home/pi/'
+const path = require('path')
 
 log4js.configure({
 	appenders: {
@@ -133,6 +134,20 @@ deleteTimer = function (timer) {
 	logger.info(timer)
 	fs.unlinkSync(dir + "timers/" + timer)
 }
+var info = []
+getDirTree = function(filename) {
+	var stats = fs.lstatSync(filename)
+	        
+    if (stats.isDirectory()) {
+        fs.readdirSync(filename).map(function(child) {
+			getDirTree(filename + '/' + child)			
+        });
+    } else {
+        // Assuming it's a file. In real life it could be a symlink or
+		// something else!
+		info.push(filename);
+    }
+}
 
 app.get('/', function (req, res) {
 	res.sendfile('./public/index.html');
@@ -201,4 +216,12 @@ app.route('/api/device/:name/:action/:timer').get((req, res) => {
 	createTimer(device.name, action, timer, device.type);
 	res.send("Complete");
 });
+
+app.route('/api/getMusic/').get((req,res) => {
+	if (info.length == 0) {
+		getDirTree('/Users/adambrown/Documents/test/Assistant/')
+		setTimeout(function(){info = []}, 10*60*1000)
+	}	
+	res.send(info)
+})
 

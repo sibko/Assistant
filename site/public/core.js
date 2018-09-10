@@ -216,25 +216,44 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
 	console.log("mediamodal", device, func)
 	$scope.device = device
 	$scope.func = func
-	$scope.actions = ['Volume Up','Pause/Resume','Volume Down','Skip','Set Volume','Stop',]
+	$scope.actions = ['Volume Up','Pause','Volume Down','Skip','Set Volume','Stop',]
 	console.log(device, func)
 	$scope.lines = [1,2]
 	$scope.closeModal = function () {
 		$uibModalInstance.close();
 	}
 	var volumeTimeout = ''
+	$scope.setVolume = 50
 	$scope.mediaAction = function (action, parameter) {
 		console.log(action, parameter, device)
-		if (action == 'Set Value' && parameter){
-			console.log('SET VALUE')
+		if (action == 'Set Volume' && parameter){			
 			clearTimeout(volumeTimeout)
 			volumeTimeout = setTimeout(function(){
-				$http.get('http://127.0.0.1:1967/api/setvolume/' + parameter).then(function(response){
+				$http.get('http://' + device.ids[0] + ':1967/api/setvolume/' + parameter).then(function(response){
 					console.log(response)
 				})
 			},1500)
 			
+		} else {
+			$http.get('http://' + device.ids[0] + ':1967/api/'+ action.replace(' ', '').toLowerCase() + '/').then(function(response){
+					console.log(response)
+				})
 		}
+	}
+		if (!$scope.musicDir || $scope.musicDir.length == 0) {
+			$http.get('/api/getMusic/').then(function (data) {
+				console.log(data)
+				$scope.musicDir = data.data
+			}, function (error) {
+				console.log('Error: ' + error);
+			});	
+		}
+	$scope.playMusic = function(file) {
+		$http.post('http://' + device.ids[0] + ':1967/api/play/', {'file':file}).then(function(data) {
+			console.log(data)
+		}, function (error) {
+			console.log('Error: ' + error);
+		})
 	}
 
 });
