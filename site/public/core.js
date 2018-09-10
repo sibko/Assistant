@@ -147,6 +147,25 @@ deviceControl.controller("DeviceHandlerController", function ($scope, $http, $ui
 		})
 	}
 
+	$scope.openMediaModal = function (device, func) {
+		$scope.modalInstance = $uibModal.open({
+			ariaLabelledBy: 'modal-title',
+			ariaDescribedBy: 'modal-body',
+			templateUrl: 'mediaModal.html',
+			controller: 'MediaHandlerController',
+			controllerAs: '$ctrl',
+			size: 'lg',
+			resolve: {
+				device: function () {
+					return device
+				},
+				func: function () {
+					return func
+				}
+			}
+		})
+	}
+
 	$scope.getAssLogs = function (device) {
 		$http.get('/api/device/' + device.name + '/Logs/')
 			.then(function (data) {
@@ -189,6 +208,33 @@ deviceControl.controller("TimerHandlerController", function ($scope, $http, $uib
 
 	$scope.closeModal = function () {
 		$uibModalInstance.close();
+	}
+
+});
+
+deviceControl.controller("MediaHandlerController", function ($scope, $http, $uibModalInstance, device, func) {
+	console.log("mediamodal", device, func)
+	$scope.device = device
+	$scope.func = func
+	$scope.actions = ['Volume Up','Pause/Resume','Volume Down','Skip','Set Volume','Stop',]
+	console.log(device, func)
+	$scope.lines = [1,2]
+	$scope.closeModal = function () {
+		$uibModalInstance.close();
+	}
+	var volumeTimeout = ''
+	$scope.mediaAction = function (action, parameter) {
+		console.log(action, parameter, device)
+		if (action == 'Set Value' && parameter){
+			console.log('SET VALUE')
+			clearTimeout(volumeTimeout)
+			volumeTimeout = setTimeout(function(){
+				$http.get('http://127.0.0.1:1967/api/setvolume/' + parameter).then(function(response){
+					console.log(response)
+				})
+			},1500)
+			
+		}
 	}
 
 });

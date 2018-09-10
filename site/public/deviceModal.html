@@ -22,7 +22,9 @@
                 <button type="button " class="btn btn-danger " ng-click="performAction(device, function)
                 " ng-if="function.toLowerCase()=='off' ">{{function}}</button>
                 <button type="button " class="btn btn-primary " ng-click="performAction(device, function)
-                " ng-if="function.toLowerCase() !='on' && function.toLowerCase() !='off' ">{{function}}</button>
+                " ng-if="function.toLowerCase() !='on' && function.toLowerCase() !='off' && function.toLowerCase() != 'music manager'">{{function}}</button>
+                <button type="button " class="btn btn-primary " ng-click="openMediaModal(device, function)
+                " ng-if="function.toLowerCase() == 'music manager'">{{function}}</button>
             </td>
             <td style="text-align: center;">
                 <button type="button " class="btn btn-secondary " ng-click="openTimerModal(device, function) ">Timer</button>
