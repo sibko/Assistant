@@ -8,8 +8,8 @@
                     <table class="table table-borderless">                    
                         <tr ng-repeat="line in lines"> 
                             <td ng-repeat="action in actions" ng-if="$index >= line * 3 - 3 && $index < line * 3">
-                                <button ng-if="$index % 2 == 0 && action != '' && action != 'Set Volume'" type="button" class="btn btn-info" ng-click="mediaAction(action)">{{action}}</button>
-                                <button ng-if="$index % 2 == 1 && action != '' && action != 'Set Volume'" type="button" class="btn btn-warning" ng-click="mediaAction(action)">{{action}}</button>
+                                <button ng-if="$index % 2 == 0 && action != '' && action != 'Set Volume'" type="button" class="btn btn-info" ng-click="mediaAction(action)">{{action.replace('Volume', 'Vol')}}</button>
+                                <button ng-if="$index % 2 == 1 && action != '' && action != 'Set Volume'" type="button" class="btn btn-warning" ng-click="mediaAction(action)">{{action.replace('Volume', 'Vol')}}</button>
                                 <input id="volumeSlider" style="-webkit-appearance: slider-vertical" ng-change="mediaAction('Set Volume', setVolume)" ng-model="setVolume" ng-if="action=='Set Volume'" class="input-range" orient="vertical" type="range" step="1" min="0" max="100">
                             </td>                        
                         </tr>                    
@@ -18,7 +18,7 @@
         </tr>
         <tr>
             <td>
-                    <div class="col-form-label">Music:</div>
+                    <div class="col-form-label">Music: {{musicDir.length}}</div>
             </td>
             <td>
                 <input id="musicFilter" ng-model="mfilter">

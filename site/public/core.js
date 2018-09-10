@@ -229,13 +229,13 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
 		if (action == 'Set Volume' && parameter){			
 			clearTimeout(volumeTimeout)
 			volumeTimeout = setTimeout(function(){
-				$http.get('http://' + device.ids[0] + ':1967/api/setvolume/' + parameter).then(function(response){
+				$http.get('http://' + device.ip + ':1967/api/setvolume/' + parameter).then(function(response){
 					console.log(response)
 				})
-			},1500)
+			},500)
 			
 		} else {
-			$http.get('http://' + device.ids[0] + ':1967/api/'+ action.replace(' ', '').toLowerCase() + '/').then(function(response){
+			$http.get('http://' + device.ip + ':1967/api/'+ action.replace(' ', '').toLowerCase() + '/').then(function(response){
 					console.log(response)
 				})
 		}
@@ -249,7 +249,7 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
 			});	
 		}
 	$scope.playMusic = function(file) {
-		$http.post('http://' + device.ids[0] + ':1967/api/play/', {'file':file}).then(function(data) {
+		$http.post('http://' + device.ip + ':1967/api/play/', {'file':file}).then(function(data) {
 			console.log(data)
 		}, function (error) {
 			console.log('Error: ' + error);

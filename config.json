@@ -522,6 +522,7 @@
             "ids": [
                 "bedroomassistant"
             ],
+	    "ip": "192.168.0.189",
             "type": "rPI",
             "location": "Bedroom",
             "functions": [
@@ -546,6 +547,7 @@
             "ids": [
                 "diningassistant"
             ],
+            "ip": "192.168.0.217",
             "type": "rPI",
             "location": "Dining Room",
             "functions": [
@@ -570,6 +572,7 @@
             "ids": [
                 "kitchenassistant"
             ],
+            "ip": "192.168.0.23",
             "type": "rPI",
             "location": "Kitchen",
             "functions": [
@@ -592,6 +595,7 @@
             "ids": [
                 "loungeassistant"
             ],
+            "ip": "192.168.0.187",
             "type": "rPI",
             "location": "Lounge",
             "functions": [
@@ -615,6 +619,7 @@
             "ids": [
                 "sittingroomassistant"
             ],
+            "ip": "192.168.0.190",
             "type": "rPI",
             "location": "Sitting Room",
             "functions": [

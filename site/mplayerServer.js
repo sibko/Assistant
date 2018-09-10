@@ -8,7 +8,7 @@ const exec = require('child_process').exec;
 const http = require('http');
 const querystring = require('querystring');
 const q = require("q");
-
+var cp = require('child_process');
 log4js.configure({
 	appenders: {
 		cons: { type: 'console' },
@@ -102,7 +102,6 @@ var mplayerAction = function(action, additionalparam){
 
 
 var startMplayer = function(type, file, additionalParams){
-	var cp = require('child_process');
 	var mplayerArgs = [];
 	if (additionalParams){
 		mplayerArgs.push(additionalParams)
@@ -123,7 +122,6 @@ var startMplayer = function(type, file, additionalParams){
 
 var mplayerExit = function(){
 	logger.info("mplayer exited")
-	mplayerContainer = ''
 }
 var mplayerError = function(err){
 	logger.info("mplayer error", err)
@@ -131,9 +129,9 @@ var mplayerError = function(err){
 }
 
 var stopMplayer = function(){
+console.log(mplayerContainer)
 	if (mplayerContainer){
 		mplayerContainer.kill()
-		mplayerContainer = ''
-	}	
+	}
 }
 

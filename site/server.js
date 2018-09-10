@@ -145,7 +145,11 @@ getDirTree = function(filename) {
     } else {
         // Assuming it's a file. In real life it could be a symlink or
 		// something else!
-		info.push(filename);
+		var extension = filename.substring(filename.length -4)
+		var validFormats = ['.mp3', 'flac', '.wma', '.m4a', '.m3u', '.pls', '.asx']
+		if (validFormats.indexOf(extension) >= 0) {
+			info.push(filename);
+		}
     }
 }
 
@@ -216,12 +220,13 @@ app.route('/api/device/:name/:action/:timer').get((req, res) => {
 	createTimer(device.name, action, timer, device.type);
 	res.send("Complete");
 });
-
+var waiting = false
 app.route('/api/getMusic/').get((req,res) => {
 	if (info.length == 0) {
-		getDirTree('/Users/adambrown/Documents/test/Assistant/')
-		setTimeout(function(){info = []}, 10*60*1000)
+		waiting = true
+		getDirTree('/music/')
+		waiting = false
+		setTimeout(function(){info = []}, 12*60*60*1000)
 	}	
 	res.send(info)
 })
-
