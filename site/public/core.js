@@ -1,4 +1,22 @@
 var deviceControl = angular.module('deviceControl', ['ngTouch', 'ngAnimate', 'ui.bootstrap']);
+deviceControl.filter('musicFilter', function(){
+	return function(input, mfilter){
+		var out = [];
+		var words = mfilter.split(" ")
+		angular.forEach(input, function(name){
+			var ret = true
+			angular.forEach(words, function(word){
+				if(name.toLowerCase().indexOf(word.toLowerCase()) < 0){
+					ret = false
+				}
+			})
+			if (ret == true) {
+				out.push(name)
+			}
+		})
+		return out;
+	}
+})
 deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$rootScope', function ($scope, $http, $uibModal, $rootScope) {
 	$scope.formData = {};
 	$http.get('/api/devices')

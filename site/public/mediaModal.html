@@ -26,9 +26,9 @@
         </tr>
     </table>
     <table ng-if="mfilter.length > 3" class="table table-sm table-striped" ng-if="musicDir">
-        <tr ng-repeat="item in musicDir| filter : mfilter">
+        <tr ng-repeat="item in musicDir| musicFilter : mfilter">
             <td>
-                <span ng-click="playMusic(item)">{{item}}</span>
+                <span ng-click="playMusic(item)">{{item.substring(7)}}</span>
             </td>
         </tr>
     </table>
