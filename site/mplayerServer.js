@@ -24,7 +24,6 @@ var logger = log4js.getLogger()
 app.use(morgan({ "format": "default", "stream": { write: function (str) { logger.debug(str); } } }));
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));
 app.use(bodyParser.json());
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 app.listen(1967, () => {
 	logger.info('Server started!');
@@ -36,42 +35,50 @@ app.route('/api/:action/').get((req, res) => {
 	mplayerAction(req.params['action'])
 	res.send('end')
 });
-app.route('/api/play/:file').get((req, res) => {
-	logger.debug('file' + req.params['file'])
-	stopMplayer()
-	startMplayer('file', req.params['file'])
-	res.send('end')
+
+app.route('/api/setvolume/:volume').get((req, res) => {
+        logger.debug('setVolume' + req.params['volume'])
+        mplayerAction('setvolume', req.params['volume'])
+        res.send('end')
 });
-app.route('/api/playlist/:file').get((req, res) => {
-	logger.debug('playlist' + req.params['file'])
-	stopMplayer()
-	startMplayer('playlist', req.params['file'])
-	res.send('end')
-});
+
+app.post('/api/play/', function(req,res){
+	logger.debug('file post' + JSON.stringify(req.body))
+        if (req.body && req.body.file){
+                stopMplayer()
+		if (req.body.file.substring(req.body.file.length - 3) == 'm3u'){
+	                startMplayer('playlist', req.body.file)
+		} else {
+	                startMplayer('file', req.body.file)
+		}
+        }
+        res.send('end')
+})
 
 var mplayerContainer
 
-var mplayerAction = function(action){
+var mplayerAction = function(action, additionalparam){
 	if (!mplayerContainer){ 
 		return
 	}
 	var actions = {
 		'volumeup': '0',
 		'volumedown': '9',
-		'setvolume': function(volume){
-			while (i<15){
+		'setvolume': function(){
+			var i = 0
+			while ( i<60) {
+				setTimeout(mplayerAction,i*5,'volumedown')
 				i+=1
-				mplayerContainer.stdin.write('9999')
 			}
 			i=0
 			var ret = '';
-			while (i < volume) {
-				i+=3
-				mplayerContainer.stdin.write('0')
-			}			
+			while (i < additionalparam / 3) {
+				setTimeout(mplayerAction,300+i*5, 'volumeup')
+				i+=1
+			}
 		},
 		'skip': '\n',
-		'stop': function(){stopMplayer()},
+		'stop': stopMplayer,
 		'pause': 'p',
 		'resume': 'p'
 	}
@@ -81,11 +88,12 @@ var mplayerAction = function(action){
 	}
 	if (typeof actions[action] == 'function'){
 		logger.info('performing function')
-		actions[action]
+		actions[action]()
 		return
 	}
 	logger.info('writing' + actions[action])
 	mplayerContainer.stdin.write(actions[action])
+	return 'finished'
 }
 
 
@@ -105,13 +113,23 @@ var startMplayer = function(type, file, additionalParams){
 	mplayerContainer = cp.spawn('mplayer', mplayerArgs);
 	
 	mplayerContainer.stdout.setEncoding('utf8')
-	mplayerContainer.on('exit', console.log.bind(console,('FIN')))
-	mplayerContainer.on('err', console.log.bind(console,('err')))
+	mplayerContainer.on('exit', mplayerExit)
+	mplayerContainer.on('err', mplayerError)
+}
+
+var mplayerExit = function(){
+	logger.info("mplayer exited")
+	mplayerContainer = ''
+}
+var mplayerError = function(err){
+	logger.info("mplayer error", err)
+	mplayerContainer = ''
 }
 
 var stopMplayer = function(){
 	if (mplayerContainer){
 		mplayerContainer.kill()
+		mplayerContainer = ''
 	}	
 }
 
