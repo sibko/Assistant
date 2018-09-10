@@ -1,0 +1,14 @@
+[Unit]
+Description=Device List Web Server
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/node server.js
+WorkingDirectory=/home/pi/Assistant/site/
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
