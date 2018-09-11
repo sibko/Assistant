@@ -43,8 +43,8 @@ app.route('/api/queue/').get((req, res) => {
 	res.send(queue)
 })
 app.route('/api/volume/').get((req, res) => {
-	logger.debug('get volume')
-	res.send(globalVolume)
+	logger.debug('get volume', globalVolume)
+	res.send(globalVolume.toString())
 })
 app.route('/api/:action/').get((req, res) => {
 	logger.debug('action' + req.params['action'])
