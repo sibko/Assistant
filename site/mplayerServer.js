@@ -9,6 +9,10 @@ const http = require('http');
 const querystring = require('querystring');
 const q = require("q");
 var cp = require('child_process');
+var volumefile = '/Users/adambrown/Documents/test/mplayervolume'
+
+var globalVolume
+globalVolume = fs.readFileSync(volumefile, 'utf8').replace('\n', '')
 log4js.configure({
 	appenders: {
 		cons: { type: 'console' },
@@ -80,11 +84,20 @@ var mplayerAction = function(action, additionalparam){
 				setTimeout(mplayerAction,300+i*5, 'volumeup')
 				i+=1
 			}
+			globalVolume = additionalparam
 		},
 		'skip': '\n',
 		'stop': stopMplayer,
 		'pause': 'p',
 		'resume': 'p'
+	}
+	if (action == 'volumeup') {
+		globalVolume +=3
+	} else if (action == 'volumedown') {
+		globalVolume -=3
+		if(globalVolume < 0) {
+			globalVolume = 0
+		}
 	}
 	if (!actions[action]) {
 		logger.info(action + ' not supported');
@@ -108,11 +121,15 @@ var startMplayer = function(type, file, additionalParams){
 	}
 	mplayerArgs.push('-quiet')
 	mplayerArgs.push('-really-quiet')
+	mplayerArgs.push('-volume')
+	mplayerArgs.push(globalVolume)
+
 
 	if (type == 'playlist') {
                 mplayerArgs.push('-playlist')
         }
 	mplayerArgs.push(file)
+	console.log(mplayerArgs)
 	mplayerContainer = cp.spawn('mplayer', mplayerArgs);
 	
 	mplayerContainer.stdout.setEncoding('utf8')
@@ -122,6 +139,7 @@ var startMplayer = function(type, file, additionalParams){
 
 var mplayerExit = function(){
 	logger.info("mplayer exited")
+	fs.writeFileSync(volumefile, globalVolume, 'utf8')
 }
 var mplayerError = function(err){
 	logger.info("mplayer error", err)
@@ -129,7 +147,6 @@ var mplayerError = function(err){
 }
 
 var stopMplayer = function(){
-console.log(mplayerContainer)
 	if (mplayerContainer){
 		mplayerContainer.kill()
 	}
