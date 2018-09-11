@@ -10,7 +10,7 @@ const querystring = require('querystring');
 const q = require("q");
 var cp = require('child_process');
 
-var volumefile = '/Users/adambrown/Documents/test/mplayervolume'
+var volumefile = '/home/pi/mplayervolume'
 var globalVolume = fs.readFileSync(volumefile, 'utf8').replace('\n', '')
 var queue = []
 
