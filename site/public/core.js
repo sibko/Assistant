@@ -234,7 +234,7 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
 	console.log("mediamodal", device, func)
 	$scope.device = device
 	$scope.func = func
-	$scope.actions = ['Volume Up','Pause','Volume Down','Skip','Set Volume','Stop','Get Music']
+	$scope.actions = ['Volume Up','Pause','Volume Down','Skip','Set Volume','Stop','Get Music', '', 'Clear Queue']
 	console.log(device, func)
 	$scope.lines = [1,2,3]
 	$scope.closeModal = function () {
@@ -242,6 +242,14 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
 	}
 	var volumeTimeout = ''
 	$scope.setVolume = 50
+	$scope.queue = []
+	$scope.getQueue = function() {
+		$http.get('http://' + device.ip + ':1967/api/queue').then(function (data) {
+			console.log('got queue', data.data)
+			$scope.queue = data.data
+		})
+	}
+
 	$scope.mediaAction = function (action, parameter) {
 		console.log(action, parameter, device)
 		if (action == 'Set Volume' && parameter){			
@@ -269,6 +277,7 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
 					console.log(response)
 				})
 		}
+		$scope.getQueue()
 	}
 	if (!$scope.musicDir || $scope.musicDir.length == 0) {
 		$scope.mediaAction('Get Music')
@@ -280,7 +289,28 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
 			console.log('Error: ' + error);
 		})
 	}
-
+	$scope.queueMusic = function(file) {
+		$http.post('http://' + device.ip + ':1967/api/queue/', {'file':file}).then(function(data) {
+			console.log(data)
+			$scope.queue.push(file)
+		}, function (error) {
+			console.log('Error: ' + error);
+		})
+	}
+	$scope.getVolume = function() {
+		$http.get('http://' + device.ip + ':1967/api/volume').then(function (data) {
+			console.log('got volume "' + data.data +'"')
+			$scope.setVolume = parseInt(data.data)
+		})
+	}
+	$scope.getQueue = function() {
+		$http.get('http://' + device.ip + ':1967/api/queue').then(function (data) {
+			console.log('got queue', data.data)
+			$scope.queue = data.data
+		})
+	}
+	$scope.getVolume()
+	$scope.getQueue()
 });
 
 deviceControl.controller("CatLaserController", function ($scope, $http, $uibModal, $uibModalInstance, device) {

@@ -9,10 +9,11 @@ const http = require('http');
 const querystring = require('querystring');
 const q = require("q");
 var cp = require('child_process');
-var volumefile = '/Users/adambrown/Documents/test/mplayervolume'
 
-var globalVolume
-globalVolume = fs.readFileSync(volumefile, 'utf8').replace('\n', '')
+var volumefile = '/Users/adambrown/Documents/test/mplayervolume'
+var globalVolume = fs.readFileSync(volumefile, 'utf8').replace('\n', '')
+var queue = []
+
 log4js.configure({
 	appenders: {
 		cons: { type: 'console' },
@@ -37,7 +38,14 @@ app.listen(1967, () => {
 	logger.info('Server started!');
 });
 
-
+app.route('/api/queue/').get((req, res) => {
+	logger.debug('get queue')
+	res.send(queue)
+})
+app.route('/api/volume/').get((req, res) => {
+	logger.debug('get volume')
+	res.send(globalVolume)
+})
 app.route('/api/:action/').get((req, res) => {
 	logger.debug('action' + req.params['action'])
 	mplayerAction(req.params['action'])
@@ -53,15 +61,19 @@ app.route('/api/setvolume/:volume').get((req, res) => {
 app.post('/api/play/', function(req,res){
 	logger.debug('file post' + JSON.stringify(req.body))
         if (req.body && req.body.file){
-                stopMplayer()
-		if (req.body.file.substring(req.body.file.length - 3) == 'm3u'){
-	                startMplayer('playlist', req.body.file)
-		} else {
-	                startMplayer('file', req.body.file)
-		}
+            stopMplayer()
+	        startMplayer(req.body.file)		
         }
         res.send('end')
 })
+app.post('/api/queue/', function(req,res){
+	logger.debug('queue post' + JSON.stringify(req.body))
+        if (req.body && req.body.file){
+            queue.push(req.body.file)		
+        }
+        res.send('end')
+})
+
 
 var mplayerContainer
 
@@ -89,7 +101,11 @@ var mplayerAction = function(action, additionalparam){
 		'skip': '\n',
 		'stop': stopMplayer,
 		'pause': 'p',
-		'resume': 'p'
+		'resume': 'p',
+		'clearqueue': function(){
+			queue = []
+		}
+		
 	}
 	if (action == 'volumeup') {
 		globalVolume +=3
@@ -114,7 +130,7 @@ var mplayerAction = function(action, additionalparam){
 }
 
 
-var startMplayer = function(type, file, additionalParams){
+var startMplayer = function(file, additionalParams){
 	var mplayerArgs = [];
 	if (additionalParams){
 		mplayerArgs.push(additionalParams)
@@ -125,9 +141,9 @@ var startMplayer = function(type, file, additionalParams){
 	mplayerArgs.push(globalVolume)
 
 
-	if (type == 'playlist') {
-                mplayerArgs.push('-playlist')
-        }
+	if (file.substring(file.length - 3) == 'm3u') {
+        mplayerArgs.push('-playlist')
+    }
 	mplayerArgs.push(file)
 	console.log(mplayerArgs)
 	mplayerContainer = cp.spawn('mplayer', mplayerArgs);
@@ -140,6 +156,10 @@ var startMplayer = function(type, file, additionalParams){
 var mplayerExit = function(){
 	logger.info("mplayer exited")
 	fs.writeFileSync(volumefile, globalVolume, 'utf8')
+	if ( queue.length > 0) {
+		startMplayer(queue[0])
+		queue.splice(0,1)
+	}
 }
 var mplayerError = function(err){
 	logger.info("mplayer error", err)

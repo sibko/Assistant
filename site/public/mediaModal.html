@@ -16,11 +16,21 @@
                     </table>
                 </td>
         </tr>
+        </table>
+        <h4 ng-if="queue && queue.length > 0">Queue:</h4>
+        <table ng-if="queue && queue.length > 0" class="table table-sm table-striped">
+            <tr  ng-repeat="qitem in queue track by $index">
+                <td>
+                    <span>{{qitem.substring(7)}}</span>
+                </td>
+            </tr>
+        </table>
+        <table class="table table-sm table-striped">
         <tr>
-            <td>
+            <td colspan="2">
                     <div class="col-form-label">Music: {{musicDir.length}}</div>
             </td>
-            <td>
+            <td >
                 <input id="musicFilter" ng-model="mfilter">
             </td>
         </tr>
@@ -31,6 +41,7 @@
 		<span ng-if="item.substring(item.length - 3) == 'm3u'" ng-click="playMusic(item)" style="color:blue">{{item.substring(7)}}</span>
                 <span ng-click="playMusic(item)" ng-if="item.substring(item.length - 3) != 'm3u'">{{item.substring(7)}}</span>
             </td>
+            <td><button type=" button " class="btn btn-success " ng-click="queueMusic(item)"><span class=" glyphicon glyphicon-list"></span></button></td>
         </tr>
     </table>
 </div>
