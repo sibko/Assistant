@@ -223,10 +223,13 @@ app.route('/api/device/:name/:action/:timer').get((req, res) => {
 var waiting = false
 app.route('/api/getMusic/').get((req,res) => {
 	if (info.length == 0) {
-		waiting = true
 		getDirTree('/music/')
-		waiting = false
-		setTimeout(function(){info = []}, 12*60*60*1000)
 	}	
 	res.send(info)
 })
+app.route('/api/forceGetMusic/').get((req,res) => {
+        info = []
+	getDirTree('/music/')
+        res.send(info)
+})
+getDirTree('/music/')

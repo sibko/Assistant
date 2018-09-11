@@ -234,9 +234,9 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
 	console.log("mediamodal", device, func)
 	$scope.device = device
 	$scope.func = func
-	$scope.actions = ['Volume Up','Pause','Volume Down','Skip','Set Volume','Stop',]
+	$scope.actions = ['Volume Up','Pause','Volume Down','Skip','Set Volume','Stop','Get Music']
 	console.log(device, func)
-	$scope.lines = [1,2]
+	$scope.lines = [1,2,3]
 	$scope.closeModal = function () {
 		$uibModalInstance.close();
 	}
@@ -252,20 +252,27 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
 				})
 			},500)
 			
+		} else if (action=='Get Music') {
+			var url = '/api/getMusic/'
+			if (parameter == 'force'){
+				console.log('force')
+                                url = '/api/forceGetMusic'
+                        }
+			$http.get(url).then(function (data) {
+				console.log('got Music')
+                                $scope.musicDir = data.data
+                        }, function (error) {
+                                console.log('Error: ' + error);
+                        });
 		} else {
 			$http.get('http://' + device.ip + ':1967/api/'+ action.replace(' ', '').toLowerCase() + '/').then(function(response){
 					console.log(response)
 				})
 		}
 	}
-		if (!$scope.musicDir || $scope.musicDir.length == 0) {
-			$http.get('/api/getMusic/').then(function (data) {
-				console.log(data)
-				$scope.musicDir = data.data
-			}, function (error) {
-				console.log('Error: ' + error);
-			});	
-		}
+	if (!$scope.musicDir || $scope.musicDir.length == 0) {
+		$scope.mediaAction('Get Music')
+	}
 	$scope.playMusic = function(file) {
 		$http.post('http://' + device.ip + ':1967/api/play/', {'file':file}).then(function(data) {
 			console.log(data)
