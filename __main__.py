@@ -34,6 +34,12 @@ from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
 from google.assistant.library.file_helpers import existing_file
 
+import zerorpc
+
+c = zerorpc.Client()
+c.connect("tcp://127.0.0.1:4242")
+print("start")
+
 isplaying=False
 mplayerexists=False
 
@@ -56,69 +62,25 @@ if ('hasVideo' in config and config['hasVideo'] == True):
 log=open("/home/pi/assLogs.log", "a")
 
 class mplayer():
-    def __init__(self, mfile, playlist, shuffle, video):
-        global mplayerexists
-        if (mplayerexists and mplayerexists.isalive()):
-             mplayerexists.terminate()
-        command='mplayer -quiet -really-quiet '
-        if video: command += '-fs '
-        if playlist : command +='-playlist '
-        command += '"' + mfile + '"'
-        if (shuffle and playlist) : command +=' -shuffle'        
-        logging.info(command)
-        print(command)
-        self.player=pexpect.spawn(command, timeout=None, maxread=None)
-        self.playing=True
-        mplayerexists = self.player
-
+    def play(self, mfile):
+        print(c.play(mfile))
     def setVolume(self, volume):
-        if (not self.player.isalive()):
-            return
-        volume=int(volume)
-        print('Setting volume to ' + str(volume))        
-        logging.info('setting volume to %s', str(volume))
-        i=0
-        while i<15:
-            i+=1
-            self.player.send("9999")
-        i=0
-        while i < volume:
-            i+=3
-            self.player.send("0")
-
+        print(c.setvolume(volume))
     def moveVolume(self, direction):
-        if (not self.player.isalive()):
-            return
-        print('moving volume ' + direction)
-        logging.info('moving volume %s', direction)
-        i=0
-        while i < 10:
-            if (direction == "up"):
-                self.player.send('0')
-            else:
-                self.player.send('9')
-            i+=1
+        print(c.volume(direction))
     def skip(self):
-        if (not self.player.isalive()):
-            return
-        self.player.sendline('\n')
-
+        print(c.skip())
     def stop(self):
-        if (not self.player.isalive()):
-            return
-        self.player.terminate()
-    def pause(self):
-        if (not self.player.isalive() or not self.playing):
-            return
-        self.playing=False
-        self.player.send('p')
-    def resume(self):
-        if (not self.player.isalive() or self.playing):
-            return
-        self.playing=True
-        self.player.send('p')
+        print(c.stop())
+    def pause(self, assistant):
+        print(c.pause(assistant))
+    def resume(self, assistant):
+        print(c.pause(assistant))
     def isalive(self):
-        return self.player.isalive()
+        alive = c.isalive()
+        print("alive: ")
+        print(alive)
+        return alive
 
 def getDevice(dev):
     print("finding " + dev)
@@ -149,8 +111,8 @@ def process_event(event, assistant):
         print()
         logging.info('Convo started')
         global isplaying
-        if (isplaying and isplaying.player.isalive()):
-            isplaying.pause()
+        if (isplaying and isplaying.isalive()):
+            isplaying.pause(True)
         playMessage(localConfig['greeting'])
 
     print(event)
@@ -160,15 +122,15 @@ def process_event(event, assistant):
         print()
         logging.info('Convo finished')
     if (event.type == EventType.ON_ALERT_STARTED):
-        if (isplaying and isplaying.player.isalive()):
-            isplaying.pause()
+        if (isplaying and isplaying.isalive()):
+            isplaying.pause(True)
     if (event.type == EventType.ON_ALERT_FINISHED):
-        if (isplaying and isplaying.player.isalive()):
-            isplaying.resume()
+        if (isplaying and isplaying.isalive()):
+            isplaying.resume(True)
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED):
         global isplaying
         if (isplaying and isplaying.isalive()):
-            isplaying.resume()
+            isplaying.resume(True)
         global devices
         global config
         global log
@@ -329,7 +291,7 @@ def process_event(event, assistant):
         if (len(returned) > 0 and returned[0] == 'skip'):
             assistant.stop_conversation()
             isplaying.skip()
-        if (len(returned) > 2 and ("".join(returned[:2]).lower() == 'startplaylist' or "".join(returned[:2]).lower() == 'stopplaylist' or "".join(returned[:3]).lower() == 'startplaylist')):
+        if (len(returned) > 2 and ("".join(returned[:2]).lower() == 'startplaylist' or "".join(returned[:2]).lower() == 'stopplaylist' or "".join(returned[:3]).lower() == 'startplaylist' or "".join(returned[:2]).lower() == 'startthrillist' or "".join(returned[:2]).lower() == 'stopthrillist' or "".join(returned[:1]).lower() == 'setlist'  or "".join(returned[:3]).lower() == 'startthelist' or "".join(returned[:3]).lower() == 'stopthelist')):
             assistant.stop_conversation()
             locatecommand=[]
             locatecommand.append("locate")
@@ -361,9 +323,11 @@ def process_event(event, assistant):
                         break
                 if (gotamatch and ('m3u' == mfile[len(mfile)-3:] or 'pls' == mfile[len(mfile)-3:] or 'asx' == mfile[len(mfile)-3:])): 
                     if (shuffle == True):
-                        isplaying=mplayer(mfile, True, True, False)
+                        isplaying=mplayer()
+                        isplaying.play(mfile)
                     else:
-                        isplaying=mplayer(mfile, True, False, False)
+                        isplaying=mplayer()
+                        isplaying.play(mfile)
                     break
 
         if (len(returned) > 1 and returned[0].lower() == 'play'):
@@ -401,10 +365,12 @@ def process_event(event, assistant):
                 if (gotamatch):
                     if ('flac' == mfile[len(mfile)-4:] or 'mp3' == mfile[len(mfile)-3:] or 'wma' == mfile[len(mfile)-3:] or 'm4a' == mfile[len(mfile)-3:]):
 
-                        isplaying=mplayer(mfile, False, False, False)
+                        isplaying=mplayer()
+                        isplaying.play(mfile)
                         break
                     if ('wmv' == mfile[len(mfile)-3:] or 'avi' == mfile[len(mfile)-3:] or 'mkv' == mfile[len(mfile)-3:] or 'mp4' == mfile[len(mfile)-3:]):
-                        isplaying=mplayer(mfile, False, False, True)
+                        isplaying=mplayer()
+                        isplaying.play(mfile)
                         break
 
         if (len(returned) > 0 and (returned[0].lower() == 'end' or "".join(returned[:2]).lower() == 'stopmusic' or "".join(returned[:3]).lower() == 'stopthemusic')):
@@ -427,11 +393,11 @@ def process_event(event, assistant):
         if (len(returned) > 0 and returned[0].lower() == 'pause'):
             assistant.stop_conversation()
             logging.info('pause')
-            isplaying.pause()
+            isplaying.pause(False)
         if (len(returned) > 0 and returned[0].lower() == 'resume'):
             assistant.stop_conversation()
             logging.info('resume')
-            isplaying.resume()
+            isplaying.resume(False)
 
 def createTimer(device, action, date):
     subprocess.call(["/home/pi/Assistant/createTimer.sh", device, action, str(date), "x10" ], stdout=log, stderr=subprocess.STDOUT)

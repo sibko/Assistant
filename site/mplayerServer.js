@@ -9,6 +9,44 @@ const http = require('http');
 const querystring = require('querystring');
 const q = require("q");
 var cp = require('child_process');
+var zerorpc = require("zerorpc");
+var playing = false;
+var zserver = new zerorpc.Server({
+    volume: function(direction, reply) {
+		mplayerAction('volume' + direction.toString())
+		reply(null,'zvolume' + direction)
+	},
+	setvolume: function(volume, reply) {
+		mplayerAction('setvolume', volume.toString())
+		reply(null,'zsetvolume ' + volume.toString())
+	},
+	skip: function(reply) {
+		mplayerAction('skip')
+		reply(null,'zskip')
+	},
+	pause: function(assistant, reply) {
+		mplayerAction('pause', assistant)
+		reply(null,"zpause")
+	},
+	resume: function(assistant, reply) {
+		mplayerAction('pause', assistant)
+		reply(null,"zresume")
+	},
+	stop: function(reply) {
+		mplayerAction('stop')
+		reply(null,"zstop")
+	},
+	play: function(mfile, reply) {
+		stopMplayer()
+		startMplayer(mfile.toString())
+		reply(null, "zplay")
+	},
+	isalive: function(reply) {
+		reply(null, playing)
+	}
+});
+
+zserver.bind("tcp://0.0.0.0:4242");
 
 var volumefile = '/home/pi/mplayervolume'
 var globalVolume = fs.readFileSync(volumefile, 'utf8').replace('\n', '')
@@ -124,6 +162,12 @@ var mplayerAction = function(action, additionalparam){
 		actions[action]()
 		return
 	}
+	console.log(additionalparam)
+	if(actions[action] == 'p' && additionalparam == false) {
+		console.log('before ', playing)
+		playing = !playing
+		console.log('after ', playing)
+	}
 	logger.info('writing' + actions[action])
 	mplayerContainer.stdin.write(actions[action])
 	return 'finished'
@@ -151,9 +195,11 @@ var startMplayer = function(file, additionalParams){
 	mplayerContainer.stdout.setEncoding('utf8')
 	mplayerContainer.on('exit', mplayerExit)
 	mplayerContainer.on('err', mplayerError)
+	playing = true;
 }
 
 var mplayerExit = function(){
+	playing = false
 	logger.info("mplayer exited")
 	fs.writeFileSync(volumefile, globalVolume, 'utf8')
 	if ( queue.length > 0) {
@@ -162,6 +208,7 @@ var mplayerExit = function(){
 	}
 }
 var mplayerError = function(err){
+	playing = false
 	logger.info("mplayer error", err)
 	mplayerContainer = ''
 }
