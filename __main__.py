@@ -56,27 +56,69 @@ if ('hasVideo' in config and config['hasVideo'] == True):
 log=open("/home/pi/assLogs.log", "a")
 
 class mplayer():
-    def play(mfile):
-        print('Playing ' + mfile)
-        logging.info('Playing %s', mfile)
-        r = requests.post("http://127.0.0.1:1967", data={'file': mfile})
-    def setVolume(volume):
+    def __init__(self, mfile, playlist, shuffle, video):
+        global mplayerexists
+        if (mplayerexists and mplayerexists.isalive()):
+             mplayerexists.terminate()
+        command='mplayer -quiet -really-quiet '
+        if video: command += '-fs '
+        if playlist : command +='-playlist '
+        command += '"' + mfile + '"'
+        if (shuffle and playlist) : command +=' -shuffle'        
+        logging.info(command)
+        print(command)
+        self.player=pexpect.spawn(command, timeout=None, maxread=None)
+        self.playing=True
+        mplayerexists = self.player
+
+    def setVolume(self, volume):
+        if (not self.player.isalive()):
+            return
         volume=int(volume)
         print('Setting volume to ' + str(volume))        
         logging.info('setting volume to %s', str(volume))
-        r = requests.get("http://127.0.0.1:1967/api/setvolume/" + str(volume))
-    def moveVolume(direction):        
+        i=0
+        while i<15:
+            i+=1
+            self.player.send("9999")
+        i=0
+        while i < volume:
+            i+=3
+            self.player.send("0")
+
+    def moveVolume(self, direction):
+        if (not self.player.isalive()):
+            return
         print('moving volume ' + direction)
         logging.info('moving volume %s', direction)
-        r = requests.get("http://127.0.0.1:1967/api/volume" + direction)
+        i=0
+        while i < 10:
+            if (direction == "up"):
+                self.player.send('0')
+            else:
+                self.player.send('9')
+            i+=1
     def skip(self):
-        r = requests.get("http://127.0.0.1:1967/api/skip/")
+        if (not self.player.isalive()):
+            return
+        self.player.sendline('\n')
+
     def stop(self):
-        r = requests.get("http://127.0.0.1:1967/api/stop/")
+        if (not self.player.isalive()):
+            return
+        self.player.terminate()
     def pause(self):
-        r = requests.get("http://127.0.0.1:1967/api/pause/")
+        if (not self.player.isalive() or not self.playing):
+            return
+        self.playing=False
+        self.player.send('p')
     def resume(self):
-        r = requests.get("http://127.0.0.1:1967/api/pause/")
+        if (not self.player.isalive() or self.playing):
+            return
+        self.playing=True
+        self.player.send('p')
+    def isalive(self):
+        return self.player.isalive()
 
 def getDevice(dev):
     print("finding " + dev)
@@ -107,7 +149,7 @@ def process_event(event, assistant):
         print()
         logging.info('Convo started')
         global isplaying
-        if (isplaying):
+        if (isplaying and isplaying.player.isalive()):
             isplaying.pause()
         playMessage(localConfig['greeting'])
 
@@ -118,14 +160,14 @@ def process_event(event, assistant):
         print()
         logging.info('Convo finished')
     if (event.type == EventType.ON_ALERT_STARTED):
-        if (isplaying):
+        if (isplaying and isplaying.player.isalive()):
             isplaying.pause()
     if (event.type == EventType.ON_ALERT_FINISHED):
-        if (isplaying):
+        if (isplaying and isplaying.player.isalive()):
             isplaying.resume()
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED):
         global isplaying
-        if (isplaying):
+        if (isplaying and isplaying.isalive()):
             isplaying.resume()
         global devices
         global config
@@ -319,9 +361,9 @@ def process_event(event, assistant):
                         break
                 if (gotamatch and ('m3u' == mfile[len(mfile)-3:] or 'pls' == mfile[len(mfile)-3:] or 'asx' == mfile[len(mfile)-3:])): 
                     if (shuffle == True):
-                        isplaying=mplayer.play(mfile)
+                        isplaying=mplayer(mfile, True, True, False)
                     else:
-                        isplaying=mplayer.play(mfile)
+                        isplaying=mplayer(mfile, True, False, False)
                     break
 
         if (len(returned) > 1 and returned[0].lower() == 'play'):
@@ -359,10 +401,10 @@ def process_event(event, assistant):
                 if (gotamatch):
                     if ('flac' == mfile[len(mfile)-4:] or 'mp3' == mfile[len(mfile)-3:] or 'wma' == mfile[len(mfile)-3:] or 'm4a' == mfile[len(mfile)-3:]):
 
-                        isplaying=mplayer.play(mfile)
+                        isplaying=mplayer(mfile, False, False, False)
                         break
                     if ('wmv' == mfile[len(mfile)-3:] or 'avi' == mfile[len(mfile)-3:] or 'mkv' == mfile[len(mfile)-3:] or 'mp4' == mfile[len(mfile)-3:]):
-                        isplaying=mplayer.play(mfile)
+                        isplaying=mplayer(mfile, False, False, True)
                         break
 
         if (len(returned) > 0 and (returned[0].lower() == 'end' or "".join(returned[:2]).lower() == 'stopmusic' or "".join(returned[:3]).lower() == 'stopthemusic')):
