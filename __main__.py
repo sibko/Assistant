@@ -405,7 +405,7 @@ def createTimer(device, action, date):
 def playMessage(afile):
     print(afile[len(afile)-4:])
     if (afile[len(afile)-4:] == '.mp3'):
-        subprocess.call(["mp3123", afile],stdout=log, stderr=subprocess.STDOUT)
+        subprocess.call(["mplayer", '-quiet', '-really-quiet', afile],stdout=log, stderr=subprocess.STDOUT)
     elif (afile[len(afile)-4:] == '.ogg'):
         subprocess.call(["ogg123", afile],stdout=log, stderr=subprocess.STDOUT)
     else:
