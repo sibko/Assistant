@@ -201,6 +201,9 @@ var startMplayer = function(file, additionalParams){
 var mplayerExit = function(){
 	playing = false
 	logger.info("mplayer exited")
+	if (globalVolume > 100 ) { 
+		globalVolume = 100 
+	}
 	fs.writeFileSync(volumefile, globalVolume, 'utf8')
 	if ( queue.length > 0) {
 		startMplayer(queue[0])
