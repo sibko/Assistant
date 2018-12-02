@@ -3,7 +3,7 @@ const http = require('http');
 const querystring = require('querystring');
 const q = require("q");
 const os = require("os")
-
+const request = require("request");
 const exec = require('child_process').exec;
 
 
@@ -14,6 +14,7 @@ var hosts = config.ir.hosts
 var devices = config.devices
 var irDevices = config.ir.devices
 var plugDevices = config.plugs
+var espPlugs = config.ESPplugs
 console.log(Object.keys(irDevices))
 
 var getdevice = function (requested) {
@@ -48,6 +49,23 @@ var sendESPRequest = function (id, action) {
         defer.resolve();
     })
     return defer.promise
+}
+
+var sendESP433 = function (host, code, length, attempts, binary) {
+	var _d = q.defer()
+	var getquery = { "code": code, "length": length, "attempts": attempts }
+	var query = querystring.stringify(getquery); 
+	console.log("sending " + host + '/Transmit433?code=' + code + '&length=' + length + '&attempts=' + attempts)
+	request('http://' + host + '/Transmit433?' + query, function(err, res, body) {  
+		console.log("Received: " + body)
+		if (err) {
+			_d.reject(err)
+		} else {
+			console.log(body);
+			_d.resolve();
+		}		
+	});
+	return _d.promise
 }
 
 var sendIRRequest = function (host, action) {
@@ -138,7 +156,25 @@ var processActions = function (device, actions) {
         }
         console.log(dev.type)
         switch (dev.type) {
-            case 'infrared':
+           case 'esp433Floureon':
+            	var plugDevice = plugDevices[dev.type]
+                console.log(plugDevice)
+                if (action != 'dim' && action != 'bright' && !plugDevice[dev.ids[0] + action]) {
+                    console.log("ACTION NOT FOUND")
+                    return
+                }
+                var code = plugDevice[dev.ids[0] + action]
+                var attempts = plugDevice.attempts;
+		var length = plugDevice.length;
+		var host = plugDevices.hosts[dev.host]
+                if (action == 'bright' || action == 'dim') {
+                    attempts = 25
+                    code = plugDevice['x10' + action]
+                }
+                var promise = sendESP433(host, code, length, attempts);
+		promises.push(promise)
+		break;		
+	    case 'infrared':
                 var functions = dev.functions.map(function (item) {
                     return item.replace(" ", "").toLowerCase()
                 })

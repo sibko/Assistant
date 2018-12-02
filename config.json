@@ -59,6 +59,76 @@
             ]
         },
         {
+            "name": "Lounge Christmas Tree",
+            "ids": [
+                "a_"
+            ],
+            "type": "esp433Floureon",
+            "host": "upstairs",
+            "location": "Lounge",
+            "functions": [
+                "on",
+                "off"
+            ],
+            "aliases": [
+                "loungeChristmasTree"
+            ]
+        },
+        {
+            "name": "Dining Christmas Tree",
+            "ids": [
+                "b_"
+            ],
+            "type": "esp433Floureon",
+            "host": "Downstairs",
+            "location": "Dining Room",
+            "functions": [
+                "on",
+                "off"
+            ],
+            "aliases": [
+                "diningChristmasTree"
+            ]
+        },
+        {
+            "name": "Outside Christmas Lights",
+            "ids": [
+                "c_"
+            ],
+            "type": "esp433Floureon",
+            "host": "Downstairs",
+            "location": "Garden",
+            "functions": [
+                "on",
+                "off"
+            ],
+            "aliases": [
+                "outsidelights",
+                "outsidechristmaslights",
+                "theoutsidelights",
+                "theoutsidechristmaslights"
+            ]
+        },
+        {
+            "name": "Hall Christmas Lights",
+            "ids": [
+                "d_"
+            ],
+            "type": "esp433Floureon",
+            "host": "Downstairs",
+            "location": "Hall",
+            "functions": [
+                "on",
+                "off"
+            ],
+            "aliases": [
+                "halllights",
+                "hallchristmaslights",
+                "thehalllights",
+                "thehallchristmaslights"
+            ]
+        },
+        {
             "name": "Controllers",
             "ids": [
                 "energenied_"
@@ -254,7 +324,6 @@
                 "thediningroomlamps",
                 "diningroomlamps",
                 "diningroomlamp"
-
             ]
         },
         {
@@ -522,13 +591,13 @@
             "ids": [
                 "bedroomassistant"
             ],
-	    "ip": "192.168.0.189",
+            "ip": "192.168.0.189",
             "type": "rPI",
             "location": "Bedroom",
             "functions": [
                 "Restart",
                 "Off",
-		"Restart Assistant",
+                "Restart Assistant",
                 "Update Music",
                 "Create Playlists",
                 "Custom Playlists Converter",
@@ -553,7 +622,7 @@
             "functions": [
                 "Restart",
                 "Off",
-		        "Restart Assistant",
+                "Restart Assistant",
                 "Update Music",
                 "Create Playlists",
                 "Custom Playlists Converter",
@@ -681,7 +750,7 @@
                 "Off"
             ],
             "aliases": [
-                "themicroserver"                
+                "themicroserver"
             ],
             "user": "pi"
         },
@@ -835,6 +904,24 @@
         }
     },
     "plugs": {
+        "hosts": {
+            "downstairs": "192.168.0.214",
+            "upstairs": "192.168.0.194"
+        },
+        "esp433Floureon": {
+            "a_on": "10069996",
+            "a_off": "10069988",
+            "b_on": "10069994",
+            "b_off": "10069986",
+            "c_on": "10069993",
+            "c_off": "10069985",
+            "d_on": "10069997",
+            "d_off": "10069989",
+            "e_on": "10069995",
+            "e_off": "10069987",
+            "attempts": 3,
+            "length": 24
+        },
         "generic": {
             "a_on": "3444434333343333443344443",
             "a_off": "3444434333343333443344433",
@@ -927,9 +1014,15 @@
                     "Bedroom Lights",
                     "Bed Lights"
                 ],
-                "thelights": ["Bedroom Lights"],
-                "tv": ["Bedroom TV"],
-                "thetv": ["Bedroom TV"]
+                "thelights": [
+                    "Bedroom Lights"
+                ],
+                "tv": [
+                    "Bedroom TV"
+                ],
+                "thetv": [
+                    "Bedroom TV"
+                ]
             },
             "greeting": "/home/pi/Assistant/media/hail.ogg"
         },
@@ -941,18 +1034,45 @@
                     "Turntable Light",
                     "Lounge Lamps"
                 ],
-                "thelights": ["Lounge Lights"],
-                "thetv": ["Lounge TV"],
-                "tv": ["Lounge TV"],
-                "thelamps": ["Lounge Lamps"],
-                "alarms": ["Lounge Lamps"],
-                "alarm": ["Lounge Lamps"],
-                "thealarm": ["Lounge Lamps"],
-                "myalarms": ["Lounge Lamps"],
-                "myalarm": ["Lounge Lamps"],
-                "lamps": ["Lounge Lamps"],
-                "thelamp": ["Lounge Lamps"],
-                "lamp": ["Lounge Lamps"]
+                "thelights": [
+                    "Lounge Lights"
+                ],
+                "thetv": [
+                    "Lounge TV"
+                ],
+                "tv": [
+                    "Lounge TV"
+                ],
+                "thelamps": [
+                    "Lounge Lamps"
+                ],
+                "alarms": [
+                    "Lounge Lamps"
+                ],
+                "alarm": [
+                    "Lounge Lamps"
+                ],
+                "thealarm": [
+                    "Lounge Lamps"
+                ],
+                "myalarms": [
+                    "Lounge Lamps"
+                ],
+                "myalarm": [
+                    "Lounge Lamps"
+                ],
+                "lamps": [
+                    "Lounge Lamps"
+                ],
+                "thelamp": [
+                    "Lounge Lamps"
+                ],
+                "lamp": [
+                    "Lounge Lamps"
+                ],
+                "christmastree": [
+                    "Lounge Christmas Tree"
+                ]
             },
             "greeting": "/home/pi/Assistant/media/r2d2.ogg"
         },
