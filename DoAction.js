@@ -6,8 +6,11 @@ const os = require("os")
 const request = require("request");
 const exec = require('child_process').exec;
 
-
-var config = fs.readFileSync('/home/pi/Assistant/config.json', 'utf8')
+var confdir = '/home/pi/Assistant/config.json'
+if (os.hostname() == 'Microserver') {
+	confdir ='/home/sibko/Assistant/config.json'
+}
+var config = fs.readFileSync(confdir, 'utf8')
 config = JSON.parse(config)
 
 var hosts = config.ir.hosts
@@ -225,7 +228,8 @@ var processActions = function (device, actions) {
                 console.log('python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay)
                 if (os.hostname() == 'bedroomAssistant' && dev.type == 'x10') {
                     exec('echo "python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay + '"| ssh pi@192.168.0.187')
-
+		} else if ( os.hostname() == 'Microserver' ) {
+                        exec('echo "python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay + '"| ssh pi@192.168.0.187')
                 } else {
                     exec('python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay)
                 }

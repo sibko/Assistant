@@ -8,8 +8,13 @@ const exec = require('child_process').exec;
 const http = require('http');
 const querystring = require('querystring');
 const q = require("q");
-const dir = '/home/pi/'
+const os = require("os");
+var dir = '/home/pi/'
 const path = require('path')
+
+if (os.hostname() == 'Microserver') {
+	dir = '/home/sibko/'
+}
 
 log4js.configure({
 	appenders: {
@@ -204,6 +209,7 @@ app.route('/api/device/:name/:action').get((req, res) => {
 			case "twelvevolt":
 			case "ESP":
 			case "rPI":
+			case "esp433Floureon":
 				doAction(device.name, action)
 				break;
 		}

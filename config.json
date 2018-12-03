@@ -80,7 +80,7 @@
                 "b_"
             ],
             "type": "esp433Floureon",
-            "host": "Downstairs",
+            "host": "downstairs",
             "location": "Dining Room",
             "functions": [
                 "on",
@@ -96,7 +96,7 @@
                 "c_"
             ],
             "type": "esp433Floureon",
-            "host": "Downstairs",
+            "host": "downstairs",
             "location": "Garden",
             "functions": [
                 "on",
@@ -115,7 +115,7 @@
                 "d_"
             ],
             "type": "esp433Floureon",
-            "host": "Downstairs",
+            "host": "downstairs",
             "location": "Hall",
             "functions": [
                 "on",

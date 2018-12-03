@@ -1,8 +1,12 @@
 #!/bin/bash
-if [ ! -d "/home/pi/timers" ]; then
-	mkdir /home/pi/timers
+dir='/home/pi'
+if [ "$(hostname)" == "Microserver" ]; then
+	dir='/home/sibko'
 fi
-for file in /home/pi/timers/*; do
+if [ ! -d "$dir/timers" ]; then
+	mkdir $dir/timers
+fi
+for file in $dir/timers/*; do
 	date=$(echo $file | cut -d '/' -f 5)
 	device=$(cat $file | cut -d ':' -f 1)
 	action=$(cat $file | cut -d ':' -f 2)
@@ -13,7 +17,7 @@ for file in /home/pi/timers/*; do
 		repeat=1
 		[ "$type" == "energenie" ] || [ "$type" == "x10" ] || [ "$type" == "generic" ] || [ "$type" == "twelvevolt" ] && repeat=5
          	while [  $COUNTER -lt $repeat ]; do
-			 	node /home/pi/Assistant/DoAction.js "$device" "$action"
+			 	node $dir/Assistant/DoAction.js "$device" "$action"
 			sleep 1
 			let COUNTER=COUNTER+1
 		done
