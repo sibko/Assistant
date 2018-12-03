@@ -134,6 +134,25 @@
             ]
         },
         {
+            "name": "3D Printer",
+            "ids": [
+                "e_"
+            ],
+            "type": "esp433Floureon",
+            "host": "downstairs",
+            "location": "Breakfast Room",
+            "functions": [
+                "on",
+                "off"
+            ],
+            "aliases": [
+                "3dprinter",
+                "the3dprinter",
+                "printer",
+                "theprinter"
+            ]
+        },
+        {
             "name": "Controllers",
             "ids": [
                 "energenied_"
