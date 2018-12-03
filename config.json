@@ -71,7 +71,8 @@
                 "off"
             ],
             "aliases": [
-                "loungeChristmasTree"
+                "loungeChristmasTree",
+		"theloungeChristmasTree"
             ]
         },
         {
@@ -1072,7 +1073,10 @@
                 ],
                 "christmastree": [
                     "Lounge Christmas Tree"
-                ]
+                ],
+		"thechristmastree": [
+		    "Lounge Christmas Tree"
+		]
             },
             "greeting": "/home/pi/Assistant/media/r2d2.ogg"
         },
