@@ -57,7 +57,7 @@ var sendESPRequest = function (id, action) {
 var sendESP433 = function (host, code, length, attempts, binary) {
 	var _d = q.defer()
 	var getquery = { "code": code, "length": length, "attempts": attempts }
-	var query = querystring.stringify(getquery); 
+    var query = querystring.stringify(getquery); 
 	console.log("sending " + host + '/Transmit433?code=' + code + '&length=' + length + '&attempts=' + attempts)
 	request('http://' + host + '/Transmit433?' + query, function(err, res, body) {  
 		console.log("Received: " + body)
@@ -168,8 +168,28 @@ var processActions = function (device, actions) {
                 }
                 var code = plugDevice[dev.ids[0] + action]
                 var attempts = plugDevice.attempts;
-		var length = plugDevice.length;
-		var host = plugDevices.hosts[dev.host]
+        var length = plugDevice.length;
+        var hostname = dev.host
+        if (hostname == undefined) {
+            switch (dev.location) {
+                case 'Lounge':
+                case 'Bedroom':
+                case 'Mobile':
+                case 'Front Bedroom':
+                    hostname = 'upstairs'
+                    break;
+                case 'Kitchen':
+                case 'Sitting Room':
+                case 'Dining Room':
+                case 'Breakfast Room':
+                case 'Hall':
+                case 'Garden':
+                    hostname = 'downstairs'
+                    break;
+
+            }
+        }
+		var host = plugDevices.hosts[hostname]
                 if (action == 'bright' || action == 'dim') {
                     attempts = 25
                     code = plugDevice['x10' + action]

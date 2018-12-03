@@ -107,7 +107,11 @@
                 "outsidelights",
                 "outsidechristmaslights",
                 "theoutsidelights",
-                "theoutsidechristmaslights"
+                "theoutsidechristmaslights",
+                "gardenlights",
+                "thegardenlights",
+                "outsidelight",
+                "theoutsidelight"
             ]
         },
         {
@@ -921,7 +925,65 @@
             "e_on": "10069995",
             "e_off": "10069987",
             "attempts": 3,
-            "length": 24
+            "length": 24,
+            "instructions": "press and hold button till flashing, press button to be assigned, had to do this near to transmitter. to reset: press and hold button while plugging in, flashes quickly then off"
+
+        },
+        "esp433Generic": {
+            "a_on": "",
+            "a_off": "",
+            "b_on": "",
+            "b_off": "",
+            "c_on": "",
+            "c_off": "",
+            "d_on": "",
+            "d_off": "",
+            "e_on": "",
+            "e_off": "",
+            "all_on": "",
+            "all_off": "",
+            "attempts":3,
+            "length":24
+        },
+        "esp433Energenie": {
+            "energeniea_on": "",
+            "energeniea_off": "",
+            "energenieb_on": "",
+            "energenieb_off": "",
+            "energeniec_on": "",
+            "energeniec_off": "",
+            "energenied_on": "",
+            "energenied_off": "",
+            "energeniee_on": "",
+            "energeniee_off": "",
+            "energenief_on": "",
+            "energenief_off": "",
+            "energenieg_on": "",
+            "energenieg_off": "",
+            "energenieall_on": "",
+            "energenieall_off": "",
+            "attempts":3,
+            "length":24
+        },
+        "esp433X10": {
+            "x10a_on": "",
+            "x10a_off": "",
+            "x10b_on": "",
+            "x10b_off": "",
+            "x10c_on": "",
+            "x10c_off": "",
+            "x10d_on": "",
+            "x10d_off": "",
+            "x10dim": "",
+            "x10bright": "",
+            "attempts":3,
+            "length":24
+        },
+        "esp433twelvevolt": {
+            "waterfall_on": "",
+            "waterfall_off": "",
+            "attempts":3,
+            "length":24
         },
         "generic": {
             "a_on": "3444434333343333443344443",
@@ -1120,6 +1182,18 @@
                 ],
                 "thelamps": [
                     "Dining Room Lamps"
+                ],
+                "thechristmastree": [
+                    "Dining Christmas Tree"
+                ],
+                "christmastree": [
+                    "Dining Christmas Tree"
+                ],
+                "christmaslights": [
+                    "Dining Christmas Tree"
+                ],
+                "thechristmaslights": [
+                    "Dining Christmas Tree"
                 ]
             },
             "greeting": "/home/pi/Assistant/media/tos_shipannouncement.ogg"
