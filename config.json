@@ -57,32 +57,15 @@
                 "theloungealarms",
                 "loungealarms"
             ]
-        },
+        },        
         {
-            "name": "Lounge Christmas Tree",
-            "ids": [
-                "a_"
-            ],
-            "type": "esp433Floureon",
-            "host": "upstairs",
-            "location": "Lounge",
-            "functions": [
-                "on",
-                "off"
-            ],
-            "aliases": [
-                "loungeChristmasTree",
-		"theloungeChristmasTree"
-            ]
-        },
-        {
-            "name": "Dining Christmas Tree",
+            "name": "Test",
             "ids": [
                 "b_"
             ],
             "type": "esp433Floureon",
             "host": "downstairs",
-            "location": "Dining Room",
+            "location": "Test",
             "functions": [
                 "on",
                 "off"
@@ -90,49 +73,7 @@
             "aliases": [
                 "diningChristmasTree"
             ]
-        },
-        {
-            "name": "Outside Christmas Lights",
-            "ids": [
-                "c_"
-            ],
-            "type": "esp433Floureon",
-            "host": "downstairs",
-            "location": "Garden",
-            "functions": [
-                "on",
-                "off"
-            ],
-            "aliases": [
-                "outsidelights",
-                "outsidechristmaslights",
-                "theoutsidelights",
-                "theoutsidechristmaslights",
-                "gardenlights",
-                "thegardenlights",
-                "outsidelight",
-                "theoutsidelight"
-            ]
-        },
-        {
-            "name": "Hall Christmas Lights",
-            "ids": [
-                "d_"
-            ],
-            "type": "esp433Floureon",
-            "host": "downstairs",
-            "location": "Hall",
-            "functions": [
-                "on",
-                "off"
-            ],
-            "aliases": [
-                "halllights",
-                "hallchristmaslights",
-                "thehalllights",
-                "thehallchristmaslights"
-            ]
-        },
+        },      
         {
             "name": "3D Printer",
             "ids": [
@@ -140,7 +81,7 @@
             ],
             "type": "esp433Floureon",
             "host": "downstairs",
-            "location": "Breakfast Room",
+            "location": "Garage",
             "functions": [
                 "on",
                 "off"
@@ -1151,13 +1092,7 @@
                 ],
                 "lamp": [
                     "Lounge Lamps"
-                ],
-                "christmastree": [
-                    "Lounge Christmas Tree"
-                ],
-		"thechristmastree": [
-		    "Lounge Christmas Tree"
-		]
+                ]                
             },
             "greeting": "/home/pi/Assistant/media/r2d2.ogg"
         },
@@ -1201,18 +1136,6 @@
                 ],
                 "thelamps": [
                     "Dining Room Lamps"
-                ],
-                "thechristmastree": [
-                    "Dining Christmas Tree"
-                ],
-                "christmastree": [
-                    "Dining Christmas Tree"
-                ],
-                "christmaslights": [
-                    "Dining Christmas Tree"
-                ],
-                "thechristmaslights": [
-                    "Dining Christmas Tree"
                 ]
             },
             "greeting": "/home/pi/Assistant/media/tos_shipannouncement.ogg"
