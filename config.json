@@ -87,10 +87,10 @@
         {
             "name": "Test",
             "ids": [
-                "b_"
+                "x10a_"
             ],
-            "type": "esp433Floureon",
-            "host": "downstairs",
+            "type": "esp433X10",
+            "host": "upstairs",
             "location": "Test",
             "functions": [
                 "on",
@@ -99,7 +99,7 @@
             "aliases": [
                 "diningChristmasTree"
             ]
-        },      
+        },     
         {
             "name": "3D Printer",
             "ids": [
@@ -936,7 +936,8 @@
             "bigOff": "0",
             "extendedDelay": "0.0096",
             "endDelay": "0.0087",
-            "manual": true
+            "manual": true,
+	    "attempts": 3
         },
         "esp433Energenie": {
             "energeniea_on": "62",
@@ -977,7 +978,8 @@
             "bigOff": "0.00500",
             "extendedDelay": "0.01915",
             "endDelay": "0.01745",
-            "manual": true
+            "manual": true,
+            "attempts": 3
         },
         "esp433twelvevolt": {
             "waterfall_on": "",

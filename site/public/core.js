@@ -79,7 +79,7 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 			});
 	}
 	$rootScope.performGroupAction = function (group) {
-		$http.get('/api/group/' + group.name)
+		$http.get('/api/groups/' + group.name)
 			.then(function (data) {
 				console.log("action complete", data);
 				$scope.getPopList()

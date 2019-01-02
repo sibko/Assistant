@@ -10,4 +10,7 @@ device=$1
 action=$2
 date=$3
 type=$4
+while [ -f "$dir/timers/$date" ]; do
+	date=$((date + 1))
+done
 echo "$device:$action:$type" > $dir/timers/$date

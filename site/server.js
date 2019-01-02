@@ -5,6 +5,7 @@ const fs = require('fs')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const exec = require('child_process').exec;
+const execSync = require('child_process').execSync;
 const http = require('http');
 const querystring = require('querystring');
 const q = require("q");
@@ -50,11 +51,12 @@ var item = fs.readFileSync(dir + "Assistant/popular.json", 'utf8')
 var poplist = JSON.parse(item)
 
 createTimer = function (id, action, minutes, type) {
+	logger.info(id, action, minutes, type)
 	var date = new Date()
 	var timestamp = (date.getTime() / 1000) + minutes * 60
-	exec(dir + "Assistant/createTimer.sh '" + id + "' '" + action + "' " + Math.floor(timestamp) + " " + type.toLowerCase(), function (err, stdout, stderr) {
-		logger.info("createTimer: ", err, stdout, stderr)
-	})
+	logger.info("TIMESTAMP", timestamp)
+	execSync(dir + "Assistant/createTimer.sh '" + id + "' '" + action + "' " + Math.floor(timestamp) + " " + type.toLowerCase())
+
 }
 
 getLogs = function (device) {
@@ -190,8 +192,10 @@ app.route('/api/groups/').get((req, res) => {
 	res.send(groups);
 });
 app.route('/api/groups/:name').get((req, res) => {
+	logger.info("got here")
 	const groupname = req.params['name'];
-	const group = getgroup(groupname)	
+	const group = getgroup(groupname)
+	logger.info("group", group, groupname)	
 	switch (group.type){
 		case 'timer':
 			group.ids.forEach(function (id, index){
