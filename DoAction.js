@@ -8,7 +8,7 @@ const exec = require('child_process').exec;
 
 var confdir = '/home/pi/Assistant/config.json'
 if (os.hostname() == 'Microserver') {
-	confdir ='/home/sibko/Assistant/config.json'
+    confdir = '/home/sibko/Assistant/config.json'
 }
 var config = fs.readFileSync(confdir, 'utf8')
 config = JSON.parse(config)
@@ -55,20 +55,36 @@ var sendESPRequest = function (id, action) {
 }
 
 var sendESP433 = function (host, code, length, attempts, binary) {
-	var _d = q.defer()
-	var getquery = { "code": code, "length": length, "attempts": attempts }
-    var query = querystring.stringify(getquery); 
-	console.log("sending " + host + '/Transmit433?code=' + code + '&length=' + length + '&attempts=' + attempts)
-	request('http://' + host + '/Transmit433?' + query, function(err, res, body) {  
-		console.log("Received: " + body)
-		if (err) {
-			_d.reject(err)
-		} else {
-			console.log(body);
-			_d.resolve();
-		}		
-	});
-	return _d.promise
+    var _d = q.defer()
+    var getquery = { "code": code, "length": length, "attempts": attempts }
+    var query = querystring.stringify(getquery);
+    console.log("sending " + host + '/Transmit433?code=' + code + '&length=' + length + '&attempts=' + attempts)
+    request('http://' + host + '/Transmit433?' + query, function (err, res, body) {
+        console.log("Received: " + body)
+        if (err) {
+            _d.reject(err)
+        } else {
+            console.log(body);
+            _d.resolve();
+        }
+    });
+    return _d.promise
+}
+var sendESP433Manual = function (host, code, longOnDelay, longOffDelay, shortOnDelay, shortOffDelay, bigOn, bigOff, endDelay, attempts) {
+    var _d = q.defer()
+    var getquery = { "code": code, "longon": longOnDelay, "longoff": longOffDelay, "shorton": shortOnDelay, "shortoff": shortOffDelay, "bigon":bigOn, "bigoff": bigOff, "enddelay":endDelay, "attempts": attempts }
+    var query = querystring.stringify(getquery);
+    console.log("sending " + host + '/Transmit433?' + querystring.stringify(getquery))
+    request('http://' + host + '/Transmit433?' + query, function (err, res, body) {
+        console.log("Received: " + body)
+        if (err) {
+            _d.reject(err)
+        } else {
+            console.log(body);
+            _d.resolve();
+        }
+    });
+    return _d.promise
 }
 
 var sendIRRequest = function (host, action) {
@@ -115,8 +131,8 @@ linuxControl = function (device, action) {
     switch (action) {
         case 'restartassistant':
             command = "echo sudo systemctl restart assistant | ssh " + device.user + "@" + device.ids[0]
-	        break;
-	    case 'restart':
+            break;
+        case 'restart':
             command = "echo sudo shutdown -r now | ssh " + device.user + "@" + device.ids[0]
             break;
         case 'off':
@@ -129,8 +145,8 @@ linuxControl = function (device, action) {
             command = "cd /music && bash createplaylists.sh &"
             break;
         case 'customplaylistsconverter':
-			command = "bash " + dir + "Assistant/customPlaylistConverter.sh; updatedb --netpaths='/music' "
-			break;
+            command = "bash " + dir + "Assistant/customPlaylistConverter.sh; updatedb --netpaths='/music' "
+            break;
     }
     exec(command, function (err, stdout, stderr) {
         console.log(err, stdout, stderr)
@@ -159,8 +175,11 @@ var processActions = function (device, actions) {
         }
         console.log(dev.type)
         switch (dev.type) {
-           case 'esp433Floureon':
-            	var plugDevice = plugDevices[dev.type]
+            case 'esp433Floureon':
+            case 'esp433X10':
+            case 'esp433Generic':
+            case 'esp433Energenie':
+                var plugDevice = plugDevices[dev.type]
                 console.log(plugDevice)
                 if (action != 'dim' && action != 'bright' && !plugDevice[dev.ids[0] + action]) {
                     console.log("ACTION NOT FOUND")
@@ -168,36 +187,49 @@ var processActions = function (device, actions) {
                 }
                 var code = plugDevice[dev.ids[0] + action]
                 var attempts = plugDevice.attempts;
-        var length = plugDevice.length;
-        var hostname = dev.host
-        if (hostname == undefined) {
-            switch (dev.location) {
-                case 'Lounge':
-                case 'Bedroom':
-                case 'Mobile':
-                case 'Front Bedroom':
-                    hostname = 'upstairs'
-                    break;
-                case 'Kitchen':
-                case 'Sitting Room':
-                case 'Dining Room':
-                case 'Breakfast Room':
-                case 'Hall':
-                case 'Garden':
-                    hostname = 'downstairs'
-                    break;
+                var length = plugDevice.length;
+                var hostname = dev.host
+                if (hostname == undefined) {
+                    switch (dev.location) {
+                        case 'Lounge':
+                        case 'Bedroom':
+                        case 'Mobile':
+                        case 'Front Bedroom':
+                            hostname = 'upstairs'
+                            break;
+                        case 'Kitchen':
+                        case 'Sitting Room':
+                        case 'Dining Room':
+                        case 'Breakfast Room':
+                        case 'Hall':
+                        case 'Garden':
+                        case 'Garage':
+                            hostname = 'downstairs'
+                            break;
 
-            }
-        }
-		var host = plugDevices.hosts[hostname]
+                    }
+                }
+                var host = plugDevices.hosts[hostname]
                 if (action == 'bright' || action == 'dim') {
                     attempts = 25
                     code = plugDevice['x10' + action]
                 }
-                var promise = sendESP433(host, code, length, attempts);
-		promises.push(promise)
-		break;		
-	    case 'infrared':
+                if (plugDevice.manual) {                    
+                    var longOnDelay = plugDevice.longOnDelay * 1000000
+                    var longOffDelay = plugDevice.longOffDelay * 1000000
+                    var shortOnDelay = plugDevice.shortOnDelay * 1000000
+                    var shortOffDelay = plugDevice.shortOffDelay * 1000000
+                    var bigOn = plugDevice.bigOn * 1000000
+                    var bigOff = plugDevice.bigOff * 1000000
+                    var extendedDelay = plugDevice.extendedDelay * 1000000
+                    var endDelay = plugDevice.endDelay * 1000000
+                    var promise = sendESP433Manual(host, code, longOnDelay, longOffDelay, shortOnDelay, shortOffDelay, bigOn, bigOff, endDelay, attempts)
+                } else {
+                    var promise = sendESP433(host, code, length, attempts);
+                }
+                promises.push(promise)
+                break;
+            case 'infrared':
                 var functions = dev.functions.map(function (item) {
                     return item.replace(" ", "").toLowerCase()
                 })
@@ -248,8 +280,8 @@ var processActions = function (device, actions) {
                 console.log('python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay)
                 if (os.hostname() == 'bedroomAssistant' && dev.type == 'x10') {
                     exec('echo "python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay + '"| ssh pi@192.168.0.187')
-		} else if ( os.hostname() == 'Microserver' ) {
-                        exec('echo "python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay + '"| ssh pi@192.168.0.187')
+                } else if (os.hostname() == 'Microserver') {
+                    exec('echo "python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay + '"| ssh pi@192.168.0.187')
                 } else {
                     exec('python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay)
                 }
