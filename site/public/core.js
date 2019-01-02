@@ -143,7 +143,7 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 			})
 	}
 	$scope.sortbylocation = function (item) {
-		if (item == 'Top') {
+		if (item == 'Top' || item == 'Groups') {
 			return -1;
 		}
 		return item;
