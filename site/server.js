@@ -40,6 +40,7 @@ app.listen(1966, () => {
 
 var config = fs.readFileSync(dir + 'Assistant/config.json', 'utf8')
 config = JSON.parse(config)
+var groups = config.groups
 var devices = config.devices
 logger.info("loaded devices:")
 devices.forEach(function (device) {
@@ -91,6 +92,20 @@ doAction = function (name, action) {
 		logger.info("DoAction: ", err, stdout, stderr)
 	})
 
+}
+getgroup = function (requested) {
+	var ret = ''
+	groups.forEach(function (group) {
+		if (group.name == requested) {
+			return ret = group;
+		}
+	})
+	if (ret == '') {
+		throw 'group not found';
+	} else {
+		logger.info(ret)
+		return ret
+	}
 }
 
 getdevice = function (requested) {
@@ -170,6 +185,27 @@ app.route('/api/timers/').get((req, res) => {
 app.route('/api/timers/:timer').get((req, res) => {
 	const requestedTimer = req.params['timer'];
 	res.send(deleteTimer(requestedTimer));
+});
+app.route('/api/groups/').get((req, res) => {
+	res.send(groups);
+});
+app.route('/api/groups/:name').get((req, res) => {
+	const groupname = req.params['name'];
+	const group = getgroup(groupname)	
+	switch (group.type){
+		case 'timer':
+			group.ids.forEach(function (id, index){
+				logger.info("timer", id, group.actions[index], group.minutes)
+				createTimer(id, group.actions[index], group.minutes, group.types[index]);
+			})
+			break;
+		case 'simple':
+			group.ids.forEach(function (id, index){
+				doAction(id, group.actions[index])
+			})
+			break;
+	}	
+	res.send("Complete");
 });
 app.route('/api/devices/').get((req, res) => {
 	res.send(devices);

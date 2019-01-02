@@ -143,6 +143,10 @@
                     <td>{{timer.action}}</td>
                     <td><button type="button" class="btn btn-danger" ng-click="deleteTimer(timer)">Delete</button></td>
                 </tr>
+                <tr ng-repeat="group in groups" ng-if="location == 'Groups'">
+                    <td>{{group.name}}</td>
+                    <td><button type="button" class="btn btn-success" ng-click="performGroupAction(group)">Use</button></td>                    
+                </tr>
             </table>
         </div>
     </div>

@@ -1,4 +1,30 @@
 {
+    "groups":[
+        {
+            "name": "TV and Soundbar on",
+            "type": "simple",
+            "ids": ["Bedroom TV", "Soundbar"],
+            "actions": ["On", "On"],
+            "minutes": 90,
+            "types": ["infrared", "infrared"]
+        },
+        {
+            "name": "TV and PC 60 min timer",
+            "type": "timer",
+            "ids": ["Bedroom TV", "PC"],
+            "actions": ["Off", "Off"],
+            "minutes": 60,
+            "types": ["infrared", "ESP"]
+        },
+        {
+            "name": "TV and PC 90 min timer",
+            "type": "timer",
+            "ids": ["Bedroom TV", "PC"],
+            "actions": ["Off", "Off"],
+            "minutes": 90,
+            "types": ["infrared", "ESP"]
+        }
+    ],
     "devices": [
         {
             "name": "Bedroom TV",

@@ -22,7 +22,7 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 	$http.get('/api/devices')
 		.then(function (data) {
 			$scope.devices = data.data;
-			$scope.locations = ['Top', 'All', 'Computers']
+			$scope.locations = ['Top', 'All', 'Computers', 'Groups']
 			console.log($scope.devices)
 			$scope.devices.forEach(function (device) {
 				if (!$scope.locations.includes(device.location)) {
@@ -39,6 +39,13 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 			})
 			$scope.locations.push('Timers')
 			console.log("Received devices", data);
+		}, function (error) {
+			console.log('Error: ' + error);
+		});
+		$http.get('/api/groups')
+		.then(function (data) {
+			$scope.groups = data.data;			
+			console.log('Received Groups', $scope.groups)					
 		}, function (error) {
 			console.log('Error: ' + error);
 		});
@@ -64,6 +71,15 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 	}
 	$rootScope.performAction = function (device, action) {
 		$http.get('/api/device/' + device.name + '/' + action)
+			.then(function (data) {
+				console.log("action complete", data);
+				$scope.getPopList()
+			}, function (error) {
+				console.log('Error: ' + error);
+			});
+	}
+	$rootScope.performGroupAction = function (group) {
+		$http.get('/api/group/' + group.name)
 			.then(function (data) {
 				console.log("action complete", data);
 				$scope.getPopList()
