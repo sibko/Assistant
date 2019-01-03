@@ -198,7 +198,8 @@
             "ids": [
                 "x10d_"
             ],
-            "type": "x10",
+            "type": "esp433X10",
+            "host":"upstairs",
             "location": "Lounge",
             "functions": [
                 "On",
@@ -216,7 +217,8 @@
             "ids": [
                 "x10a_"
             ],
-            "type": "x10",
+            "type": "esp433X10",
+            "host":"upstairs",
             "location": "Bedroom",
             "functions": [
                 "On",
@@ -236,7 +238,8 @@
             "ids": [
                 "x10b_"
             ],
-            "type": "x10",
+            "type": "esp433X10",
+            "host":"upstairs",
             "location": "Bedroom",
             "functions": [
                 "On",
@@ -256,8 +259,9 @@
             "ids": [
                 "a_"
             ],
-            "type": "generic",
+            "type": "esp433Generic",
             "location": "Kitchen",
+            "host": "downstairs",
             "functions": [
                 "On",
                 "Off"
@@ -322,8 +326,9 @@
             "ids": [
                 "b_"
             ],
-            "type": "generic",
+            "type": "esp433Generic",
             "location": "Sitting Room",
+            "host": "downstairs",
             "functions": [
                 "On",
                 "Off"
@@ -340,7 +345,8 @@
             "ids": [
                 "c_"
             ],
-            "type": "generic",
+            "type": "esp433Generic",
+            "host": "upstairs",
             "location": "Mobile",
             "functions": [
                 "On",
@@ -360,8 +366,9 @@
             "ids": [
                 "waterfall_"
             ],
-            "type": "twelvevolt",
+            "type": "esp433twelvevolt",
             "location": "Garden",
+            "host": "downstairs",
             "functions": [
                 "On",
                 "Off"
@@ -566,7 +573,8 @@
             "ids": [
                 "e_"
             ],
-            "type": "generic",
+            "type": "esp433Generic",
+            "host": "upstairs",
             "location": "Lounge",
             "functions": [
                 "On",
@@ -937,7 +945,8 @@
             "extendedDelay": "0.0096",
             "endDelay": "0.0087",
             "manual": true,
-	    "attempts": 3
+            "instructions": "status plugs",
+	        "attempts": 3
         },
         "esp433Energenie": {
             "energeniea_on": "62",
