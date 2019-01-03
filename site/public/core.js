@@ -83,6 +83,7 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 			.then(function (data) {
 				console.log("action complete", data);
 				$scope.getPopList()
+				$scope.getTimers()
 			}, function (error) {
 				console.log('Error: ' + error);
 			});
