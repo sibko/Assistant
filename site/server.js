@@ -250,6 +250,9 @@ app.route('/api/device/:name/:action').get((req, res) => {
 			case "ESP":
 			case "rPI":
 			case "esp433Floureon":
+			case "esp433X10":
+			case "esp433Energenie":
+			case "esp433Generic":
 				doAction(device.name, action)
 				break;
 		}
