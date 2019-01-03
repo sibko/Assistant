@@ -991,10 +991,18 @@
             "attempts": 3
         },
         "esp433twelvevolt": {
-            "waterfall_on": "",
-            "waterfall_off": "",
-            "attempts":3,
-            "length":24
+            "waterfall_on": "3434343434443433443333333",
+            "waterfall_off": "3434343434443433334433333",
+            "shortOnDelay": "0.00035",
+            "shortOffDelay": "0.00035",
+            "longOnDelay": "0.00115",
+            "longOffDelay": "0.00115",
+            "bigOn": "0",
+            "bigOff": "0",
+            "extendedDelay": "0.01171",
+            "endDelay": "0.01056",
+            "manual": true,
+            "attempts":3
         },
         "generic": {
             "a_on": "3444434333343333443344443",
