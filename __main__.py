@@ -44,7 +44,7 @@ isplaying=False
 mplayerexists=False
 
 conffile = open("/home/pi/Assistant/config.json", "r")
-config = ast.literal_eval(conffile.read())
+config = json.load(conffile)
 localConfig = config["assistants"][socket.gethostname()]
 devices = config["devices"]
 
