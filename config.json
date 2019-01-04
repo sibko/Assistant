@@ -12,7 +12,7 @@
             "name": "TV and PC 60 min timer",
             "type": "timer",
             "ids": ["Bedroom TV", "PC"],
-            "actions": ["Off", "Off"],
+            "actions": ["Off", "On"],
             "minutes": 60,
             "types": ["infrared", "ESP"]
         },
@@ -20,7 +20,7 @@
             "name": "TV and PC 90 min timer",
             "type": "timer",
             "ids": ["Bedroom TV", "PC"],
-            "actions": ["Off", "Off"],
+            "actions": ["Off", "On"],
             "minutes": 90,
             "types": ["infrared", "ESP"]
         }
