@@ -179,6 +179,7 @@ var processActions = function (device, actions) {
             case 'esp433X10':
             case 'esp433Generic':
             case 'esp433Energenie':
+	    case 'esp433EnergenieOld':
                 var plugDevice = plugDevices[dev.type]
                 console.log(plugDevice)
                 if (action != 'dim' && action != 'bright' && !plugDevice[dev.ids[0] + action]) {

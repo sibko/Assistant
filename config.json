@@ -71,7 +71,7 @@
             "ids": [
                 "energenieb_"
             ],
-            "type": "energenie",
+            "type": "esp433Energenie",
             "location": "Lounge",
             "functions": [
                 "On",
@@ -124,7 +124,7 @@
             "ids": [
                 "energenied_"
             ],
-            "type": "energenie",
+            "type": "esp433Energenie",
             "location": "Lounge",
             "functions": [
                 "On",
@@ -142,7 +142,7 @@
             "ids": [
                 "energeniec_"
             ],
-            "type": "energenie",
+            "type": "esp433Energenie",
             "location": "Lounge",
             "functions": [
                 "On",
@@ -158,7 +158,7 @@
             "ids": [
                 "energeniea_"
             ],
-            "type": "energenie",
+            "type": "esp433Energenie",
             "location": "Lounge",
             "functions": [
                 "On",
@@ -278,7 +278,7 @@
             "ids": [
                 "energenief_"
             ],
-            "type": "energenie",
+            "type": "esp433EnergenieOld",
             "location": "Lounge",
             "functions": [
                 "On",
@@ -296,7 +296,7 @@
             "ids": [
                 "energenieg_"
             ],
-            "type": "energenie",
+            "type": "esp433Energenie",
             "location": "Dining Room",
             "functions": [
                 "On",
@@ -786,7 +786,7 @@
             "ids": [
                 "energeniee_"
             ],
-            "type": "energenie",
+            "type": "esp433Energenie",
             "location": "Mobile",
             "functions": [
                 "On",
@@ -948,23 +948,37 @@
             "instructions": "status plugs",
 	        "attempts": 3
         },
+	"esp433EnergenieOld": {
+            "energenief_on": "1111111111111111110000001",
+            "energenief_off": "1111111111111111101000011",
+            "shortOnDelay": "0.00024",
+            "shortOffDelay": "0.00055",
+            "longOnDelay": "0.00072",
+            "longOffDelay": "0.00012",
+            "bigOn": "0",
+            "bigOff": "0",
+            "extendedDelay": "0.00642",
+            "endDelay": "0.00587",
+            "manual": true,
+            "attempts": 3
+	},
         "esp433Energenie": {
-            "energeniea_on": "62",
-            "energeniea_off": "60",
-            "energenieb_on": "46",
-            "energenieb_off": "44",
-            "energeniec_on": "54",
-            "energeniec_off": "52",
-            "energenied_on": "38",
-            "energenied_off": "36",
-            "energeniee_on": "102",
-            "energeniee_off": "100",
-            "energenief_on": "126",
-            "energenief_off": "124",
-            "energenieg_on": "4194342",
-            "energenieg_off": "4194340",
-            "energenieall_on": "58",
-            "energenieall_off": "56",
+            "energeniea_on": "2952079",
+            "energeniea_off": "2952078",
+            "energenieb_on": "2952061",
+            "energenieb_off": "2952060",
+            "energeniec_on": "2952075",
+            "energeniec_off": "2952074",
+            "energenied_on": "2952073",
+            "energenied_off": "2952072",
+            "energeniee_on": "2952069",
+            "energeniee_off": "2952068",
+            "energenief_on": "2952065",
+            "energenief_off": "2952064",
+            "energenieg_on": "2952063",
+            "energenieg_off": "2952062",
+            "energenieall_on": "2952077",
+            "energenieall_off": "2952076",
             "attempts":3,
             "length":24
         },

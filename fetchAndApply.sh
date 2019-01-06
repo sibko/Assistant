@@ -11,4 +11,3 @@ echo "reloaded"
 service assistant restart
 service mplayerServer restart
 echo "restarted"
-[ "$(hostname)" == "bedroomAssistant" ] && service DeviceList restart
