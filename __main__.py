@@ -17,6 +17,8 @@
 
 from __future__ import print_function
 import sys
+sys.path.append('/home/pi/env/lib/python3.5/site-packages')
+sys.path.append('/home/pi/.local/lib/python2.7/site-packages/')
 import argparse
 import os.path
 import json
