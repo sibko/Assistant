@@ -4,7 +4,7 @@ After=network.target
 
 [Service] 
 Type=simple 
-User=root
+User=pi
 Environment=VIRTUAL_ENV="/home/pi/env/bin/activate" 
 Environment=PYTHONIOENCODING="UTF-8"
 StandardOutput=inherit
