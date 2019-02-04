@@ -61,7 +61,7 @@ createTimer = function (id, action, minutes, type) {
 
 getLogs = function (device) {
 	var d = q.defer()
-	var command = 'echo "tail -n 500 ' + dir + 'assLogs.log | tac" | ssh -q ' + device.user + '@' + device.ids[0]
+	var command = 'echo "tail -n 500 /home/pi/assLogs.log | tac" | ssh -q ' + device.user + '@' + device.ids[0]
 	exec(command, function (err, stdout, stderr) {
 		logger.info("get logs: ", err, stdout, stderr)
 		if (err) {
