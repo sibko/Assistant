@@ -65,6 +65,21 @@
                 "thebedroomtv",
                 "bedroomtv"
             ]
+        },{
+            "name": "Hoover Cam",
+            "ids": [
+                "Hoover"
+            ],
+            "type": "espcamera",
+            "location": "Hall",
+            "functions": [
+                "On",
+                "Off"
+            ],
+            "aliases": [
+                "thehoovercamera",
+                "hoovercamera"
+            ]
         },
         {
             "name": "Lounge Lamps",
@@ -106,17 +121,85 @@
                 "e_"
             ],
             "type": "esp433Floureon",
-            "host": "downstairs",
+            "host": "upstairs",
             "location": "Garage",
             "functions": [
-                "on",
-                "off"
+                "On",
+                "Off"
             ],
             "aliases": [
                 "3dprinter",
                 "the3dprinter",
                 "printer",
                 "theprinter"
+            ]
+        },
+	{
+            "name": "Christmas Tree",
+            "ids": [
+                "a_"
+            ],
+            "type": "esp433Floureon",
+            "host": "upstairs",
+            "location": "Lounge",
+            "functions": [
+                "On",
+                "Off"
+            ],
+            "aliases": [
+                "christmastree",
+                "thechristmastree"
+            ]
+        },
+	{
+            "name": "Outside Lights",
+            "ids": [
+                "b_"
+            ],
+            "type": "esp433Floureon",
+            "host": "downstairs",
+            "location": "Garden",
+            "functions": [
+                "On",
+                "Off"
+            ],
+            "aliases": [
+                "outsidelights",
+                "theoutsidelights"
+            ]
+        },
+	{
+            "name": "Christmas Tree",
+            "ids": [
+                "c_"
+            ],
+            "type": "esp433Floureon",
+            "host": "downstairs",
+            "location": "Dining Room",
+            "functions": [
+                "On",
+                "Off"
+            ],
+            "aliases": [
+                "diningroomchristmastree",
+                "thediningroomchristmastree"
+            ]
+        },
+	{
+            "name": "Christmas Lights",
+            "ids": [
+                "d_"
+            ],
+            "type": "esp433Floureon",
+            "host": "downstairs",
+            "location": "Hall",
+            "functions": [
+                "On",
+                "Off"
+            ],
+            "aliases": [
+                "hallchristmaslights",
+                "thehallchristmaslights"
             ]
         },
         {
@@ -297,6 +380,7 @@
                 "energenieg_"
             ],
             "type": "esp433Energenie",
+	    "host": "downstairs",
             "location": "Dining Room",
             "functions": [
                 "On",

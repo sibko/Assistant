@@ -256,6 +256,15 @@ app.route('/api/device/:name/:action').get((req, res) => {
 			case "esp433Generic":
 				doAction(device.name, action)
 				break;
+			case "espcamera":
+				logger.info("CAMERA", action)
+				if (action == 'On') {
+					fs.writeFileSync(dir + "wakecamera", 'true', 'utf8')
+				} 
+				if (action =='Off') {
+					fs.writeFileSync(dir + "wakecamera", 'false', 'utf8')
+				}
+				break;
 		}
 	})
 	res.send("Complete");
@@ -281,5 +290,9 @@ app.route('/api/forceGetMusic/').get((req,res) => {
         info = []
 	getDirTree('/music/')
         res.send(info)
+})
+app.route('/api/camera/').get((req,res) => {
+        var item = fs.readFileSync(dir + "wakecamera", 'utf8')
+	res.send(item)
 })
 getDirTree('/music/')
