@@ -425,20 +425,20 @@
             ]
         },
         {
-            "name": "Cat Toy",
+            "name": "Christmas Lights",
             "ids": [
                 "c_"
             ],
             "type": "esp433Generic",
             "host": "upstairs",
-            "location": "Mobile",
+            "location": "Lounge",
             "functions": [
                 "On",
                 "Off"
             ],
             "aliases": [
-                "thecattoy",
-                "cattoy",
+                "thechristmaslights",
+                "christmaslights",
                 "thecouchtoy",
                 "couchtoy",
                 "thetoy",
