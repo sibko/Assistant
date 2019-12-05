@@ -135,23 +135,6 @@
             ]
         },
 	{
-            "name": "Christmas Tree",
-            "ids": [
-                "a_"
-            ],
-            "type": "esp433Floureon",
-            "host": "upstairs",
-            "location": "Lounge",
-            "functions": [
-                "On",
-                "Off"
-            ],
-            "aliases": [
-                "christmastree",
-                "thechristmastree"
-            ]
-        },
-	{
             "name": "Outside Lights",
             "ids": [
                 "b_"
@@ -169,7 +152,7 @@
             ]
         },
 	{
-            "name": "Christmas Tree",
+            "name": "Dining Christmas Tree",
             "ids": [
                 "c_"
             ],
@@ -422,6 +405,23 @@
                 "thesittingroomlamp",
                 "sittingroomlamps",
                 "thesittingroomlamps"
+            ]
+        },
+	{
+            "name": "Christmas Tree",
+            "ids": [
+                "b_"
+            ],
+            "type": "esp433Generic",
+            "location": "Lounge",
+            "host": "upstairs",
+            "functions": [
+                "On",
+                "Off"
+            ],
+            "aliases": [
+                "christmastree",
+                "thechristmastree"
             ]
         },
         {
