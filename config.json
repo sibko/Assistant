@@ -1293,6 +1293,12 @@
                 ],
                 "thelamps": [
                     "Dining Room Lamps"
+                ],
+		"thechristmastree": [
+                    "Dining Christmas Tree"
+                ],
+                "christmastree": [
+                    "Dining Christmas Tree"
                 ]
             },
             "greeting": "/home/pi/Assistant/media/tos_shipannouncement.ogg"
