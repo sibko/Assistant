@@ -128,6 +128,13 @@ app.post('/api/queue/', function(req,res){
 
 var mplayerContainer
 
+var saveVolume = function() {
+	if (globalVolume > 100 ) {
+                globalVolume = 100
+        }
+        fs.writeFileSync(volumefile, globalVolume, 'utf8')
+}
+
 var mplayerAction = function(action, additionalparam){
 	if (!mplayerContainer){ 
 		return
@@ -166,6 +173,7 @@ var mplayerAction = function(action, additionalparam){
 			globalVolume = 0
 		}
 	}
+	saveVolume()
 	if (!actions[action]) {
 		logger.info(action + ' not supported');
 		return
@@ -217,10 +225,7 @@ var startMplayerShuffle = function(file){
 var mplayerExit = function(){
 	playing = false
 	logger.info("mplayer exited")
-	if (globalVolume > 100 ) { 
-		globalVolume = 100 
-	}
-	fs.writeFileSync(volumefile, globalVolume, 'utf8')
+	saveVolume()
 	if ( queue.length > 0) {
 		startMplayer(queue[0])
 		queue.splice(0,1)
