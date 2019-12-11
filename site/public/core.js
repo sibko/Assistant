@@ -306,6 +306,13 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
 			console.log('Error: ' + error);
 		})
 	}
+	$scope.shuffleMusic = function(file) {
+                $http.post('http://' + device.ip + ':1967/api/shuffle/', {'file':file}).then(function(data) {
+                        console.log(data)
+                }, function (error) {
+                        console.log('Error: ' + error);
+                })
+        }
 	$scope.queueMusic = function(file) {
 		$http.post('http://' + device.ip + ':1967/api/queue/', {'file':file}).then(function(data) {
 			console.log(data)

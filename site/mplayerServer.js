@@ -41,6 +41,11 @@ var zserver = new zerorpc.Server({
 		startMplayer(mfile.toString())
 		reply(null, "zplay")
 	},
+	shuffle: function(mfile, reply) {
+		stopMplayer()
+		startMplayerShuffle(mfile.toString())
+		reply(null, "zplay")
+	},
 	isalive: function(reply) {
 		reply(null, playing)
 	}
@@ -101,6 +106,14 @@ app.post('/api/play/', function(req,res){
         if (req.body && req.body.file){
             stopMplayer()
 	        startMplayer(req.body.file)		
+        }
+        res.send('end')
+})
+app.post('/api/shuffle/', function(req,res){
+        logger.debug('file post' + JSON.stringify(req.body))
+        if (req.body && req.body.file){
+            stopMplayer()
+                startMplayerShuffle(req.body.file)
         }
         res.send('end')
 })
@@ -196,6 +209,9 @@ var startMplayer = function(file, additionalParams){
 	mplayerContainer.on('exit', mplayerExit)
 	mplayerContainer.on('err', mplayerError)
 	playing = true;
+}
+var startMplayerShuffle = function(file){
+	return startMplayer(file, '-shuffle')
 }
 
 var mplayerExit = function(){

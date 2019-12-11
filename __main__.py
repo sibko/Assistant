@@ -78,6 +78,8 @@ class mplayer():
         print(c.pause(assistant))
     def resume(self, assistant):
         print(c.pause(assistant))
+    def shuffle(self, mfile):
+        print(c.shuffle(mfile))
     def isalive(self):
         alive = c.isalive()
         print("alive: ")
@@ -326,7 +328,7 @@ def process_event(event, assistant):
                 if (gotamatch and ('m3u' == mfile[len(mfile)-3:] or 'pls' == mfile[len(mfile)-3:] or 'asx' == mfile[len(mfile)-3:])): 
                     if (shuffle == True):
                         isplaying=mplayer()
-                        isplaying.play(mfile)
+                        isplaying.shuffle(mfile)
                     else:
                         isplaying=mplayer()
                         isplaying.play(mfile)
