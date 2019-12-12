@@ -35,16 +35,16 @@
             </td>
         </tr>
     </table>
-    <table ng-if="mfilter.length > 3" class="table table-sm table-striped" ng-if="musicDir">
+    <table ng-if="mfilter.length > 3" class="table table-responsive-sm table-striped" ng-if="musicDir">
         <tr ng-repeat="item in musicDir| musicFilter : mfilter">
-            <td>
-		<span ng-if="item.substring(item.length - 3) == 'm3u'" ng-click="playMusic(item)" style="color:blue">{{item.substring(7)}}</span>
+	    <td><button style="min-width: 50px" type=" button " class="btn btn-success " ng-click="queueMusic(item)"><span class=" glyphicon glyphicon-list"></span></button></td>
+	    <td>
+                <span ng-if="item.substring(item.length - 3) == 'm3u'" ng-click="playMusic(item)" style="color:blue">{{item.substring(7)}}</span>
                 <span ng-click="playMusic(item)" ng-if="item.substring(item.length - 3) != 'm3u'">{{item.substring(7)}}</span>
             </td>
-	    <td ng-if="item.substring(item.length - 3) == 'm3u'">
-		    <button type="button" class="btn btn-warning" ng-click="shuffleMusic(item)"><span class="glyphicon glyphicon-random"></span></button>
-	    </td>
-            <td><button type=" button " class="btn btn-success " ng-click="queueMusic(item)"><span class=" glyphicon glyphicon-list"></span></button></td>
+                    <td>
+                    <button style="min-width:50px" ng-if="item.substring(item.length - 3) == 'm3u'" type="button" class="btn btn-warning" ng-click="shuffleMusic(item)"><span class="glyphicon glyphicon-random"></span></button>
+            </td>
         </tr>
     </table>
 </div>
