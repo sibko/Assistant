@@ -120,7 +120,7 @@
         <div ng-repeat="location in locations | orderBy:sortbylocation" id="{{location}}" ng-if="location != 'Timers' || timers.length > 0" class="row">
             <h2>{{location}}</h2>
             <table class="table table-sm table-striped">
-                <tr ng-repeat="device in devices | orderBy : 'name'" ng-if="(location != 'Timers' && device.location == location ) || (location =='Computers' && (device.type == 'rPI' || device.name == 'PC')) || location == 'All' || (location == 'Top' && poplist.indexOf(device.name) >= 0) ">
+                <tr ng-repeat="device in devices | orderBy : 'name'" ng-if="!device.hidden && ((location != 'Timers' && device.location == location ) || (location =='Computers' && (device.type == 'rPI' || device.name == 'PC')) || location == 'All' || (location == 'Top' && poplist.indexOf(device.name) >= 0) )">
                     <td>{{device.name}}</td>
                     <td ng-repeat="function in device.functions.slice(0,2)">
                         <button type="button" class="btn btn-success" ng-click="performAction(device, function)" ng-if="function.toLowerCase() == 'on'">{{function}}</button>

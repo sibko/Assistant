@@ -166,12 +166,13 @@
             "aliases": [
                 "diningroomchristmastree",
                 "thediningroomchristmastree"
-            ]
+            ],
+	    "hidden":true
         },
 	{
             "name": "Hall Christmas Lights",
             "ids": [
-                "d_"
+                "a_"
             ],
             "type": "esp433Floureon",
             "host": "downstairs",
@@ -183,7 +184,8 @@
             "aliases": [
                 "hallchristmaslights",
                 "thehallchristmaslights"
-            ]
+            ],
+	    "hidden": true
         },
         {
             "name": "Controllers",
@@ -422,7 +424,9 @@
             "aliases": [
                 "christmastree",
                 "thechristmastree"
-            ]
+            ],
+            "hidden": true
+
         },
         {
             "name": "Christmas Lights",
@@ -438,12 +442,10 @@
             ],
             "aliases": [
                 "thechristmaslights",
-                "christmaslights",
-                "thecouchtoy",
-                "couchtoy",
-                "thetoy",
-                "toy"
-            ]
+                "christmaslights"
+            ],
+            "hidden": true
+
         },
         {
             "name": "Waterfall",
