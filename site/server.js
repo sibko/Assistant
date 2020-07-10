@@ -38,15 +38,16 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.listen(1966, () => {
 	logger.info('Server started!');
 });
-
-var config = fs.readFileSync(dir + 'Assistant/config.json', 'utf8')
-config = JSON.parse(config)
-var groups = config.groups
-var devices = config.devices
-logger.info("loaded devices:")
-devices.forEach(function (device) {
-	logger.info(device.name)
-})
+var config = {}
+var groups
+var devices
+var loadConfig = function () {
+	config = fs.readFileSync(dir + 'Assistant/config.json', 'utf8')
+	config = JSON.parse(config)
+	groups = config.groups
+	devices = config.devices
+}
+loadConfig()
 var item = fs.readFileSync(dir + "Assistant/popular.json", 'utf8')
 var poplist = JSON.parse(item)
 
@@ -61,7 +62,7 @@ createTimer = function (id, action, minutes, type) {
 
 getLogs = function (device) {
 	var d = q.defer()
-	var command = 'echo "tail -n 500 /home/pi/assLogs.log | tac" | ssh -q ' + device.user + '@' + device.ids[0]
+	var command = 'echo "tail -n 500 /home/pi/assLogs.log | tac" | ssh -q ' + device.user + '@' + device.ip
 	exec(command, function (err, stdout, stderr) {
 		logger.info("get logs: ", err, stdout, stderr)
 		if (err) {
@@ -75,7 +76,7 @@ getLogs = function (device) {
 
 pingDevice = function (device) {
 	var d = q.defer()
-	var command = 'ping -c 2 ' + device.ids[0]
+	var command = 'ping -c 2 ' + device.ip
 	exec(command, function (err, stdout, stderr) {
 		logger.info("ping device: ", err, stdout, stderr)
 		if (err) {
@@ -167,8 +168,8 @@ getDirTree = function(filename) {
     } else {
         // Assuming it's a file. In real life it could be a symlink or
 		// something else!
-		var extension = filename.substring(filename.length -4)
-		var validFormats = ['.mp3', 'flac', '.wma', '.m4a', '.m3u', '.pls', '.asx']
+		var extension = filename.substring(filename.length -4).toLowerCase()
+		var validFormats = ['.mp3', 'flac', '.wma', '.m4a', '.m3u', '.pls', '.asx', '.wav']
 		if (validFormats.indexOf(extension) >= 0) {
 			info.push(filename);
 		}
@@ -286,6 +287,9 @@ app.route('/api/getMusic/').get((req,res) => {
 	}	
 	res.send(info)
 })
+app.route('/api/getConfig/').get((req,res) => {
+        res.send(config)
+})
 app.route('/api/forceGetMusic/').get((req,res) => {
         info = []
 	getDirTree('/music/')
@@ -294,5 +298,11 @@ app.route('/api/forceGetMusic/').get((req,res) => {
 app.route('/api/camera/').get((req,res) => {
         var item = fs.readFileSync(dir + "wakecamera", 'utf8')
 	res.send(item)
+})
+app.route('/api/updateConfig/').post((req,res) => {
+	logger.info("New config", req.body)
+	fs.writeFileSync(dir + 'Assistant/config.json', JSON.stringify(req.body,null,2))
+	loadConfig()
+	res.send("thank you")
 })
 getDirTree('/music/')

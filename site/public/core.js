@@ -1,4 +1,4 @@
-var deviceControl = angular.module('deviceControl', ['ngTouch', 'ngAnimate', 'ui.bootstrap']);
+var deviceControl = angular.module('deviceControl', ['ngTouch', 'ngAnimate', 'ui.bootstrap', 'ngPrettyJson']);
 deviceControl.filter('musicFilter', function(){
 	return function(input, mfilter){
 		var out = [];
@@ -38,6 +38,7 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 				}
 			})
 			$scope.locations.push('Timers')
+			$scope.locations.push('Admin')
 			console.log("Received devices", data);
 		}, function (error) {
 			console.log('Error: ' + error);
@@ -110,7 +111,20 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 		});
 
 	}
-
+	$scope.openConfigModal = function () {
+		$scope.modalInstance = $uibModal.open({
+			ariaLabelledBy: 'modal-title',
+                        ariaDescribedBy: 'modal-body',
+                        templateUrl: 'configModal.html',
+                        controller: 'ConfigHandlerController',
+                        controllerAs: '$ctrl',
+                        size: 'lg',
+                        resolve: {
+                        }
+                }).closed.then(function () {
+                        $scope.getTimers()
+                });
+	}
 	$scope.openCatLaserModal = function (device) {
 		$scope.modalInstance = $uibModal.open({
 			ariaLabelledBy: 'modal-title',
@@ -152,6 +166,21 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 	$scope.getPopList()
 	$scope.getTimers()
 }])
+
+deviceControl.controller("ConfigHandlerController", function ($scope, $http, $uibModal, $uibModalInstance, $rootScope) {
+	var url = '/api/getConfig/'
+        $http.get(url).then(function (data) {
+        	console.log('got config', data.data)
+        	$scope.config = data.data
+        }, function (error) {
+                console.log('Error: ' + error);
+        });
+	$scope.saveConfig = function(newconfig) {
+		$http.post('/api/updateConfig/', JSON.stringify(newconfig)).then(function(data) {
+			console.log("RECEIVED RESPONSE:", data)
+		})
+	}
+})
 
 deviceControl.controller("DeviceHandlerController", function ($scope, $http, $uibModal, $uibModalInstance, device, $rootScope) {
 	console.log("modal", device)
