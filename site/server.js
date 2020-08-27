@@ -255,6 +255,7 @@ app.route('/api/device/:name/:action').get((req, res) => {
 			case "esp433Energenie":
 			case "esp433EnergenieOld":
 			case "esp433Generic":
+			case "espLightSwitch":
 				doAction(device.name, action)
 				break;
 			case "espcamera":

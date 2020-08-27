@@ -311,9 +311,9 @@
     {
       "name": "Bedroom Lights",
       "ids": [
-        "x10a_"
+        "a_"
       ],
-      "type": "esp433X10",
+      "type": "espLightSwitch",
       "host": "upstairs",
       "location": "Bedroom",
       "functions": [
@@ -372,13 +372,16 @@
     {
       "name": "Lounge Lights",
       "ids": [
-        "energenief_"
+        "b_"
       ],
-      "type": "esp433EnergenieOld",
+      "type": "espLightSwitch",
       "location": "Lounge",
+      "host": "upstairs",
       "functions": [
         "On",
-        "Off"
+        "Off",
+        "Bright",
+        "Dim"
       ],
       "aliases": [
         "theloungelights",
@@ -1036,6 +1039,19 @@
     "hosts": {
       "downstairs": "192.168.0.214",
       "upstairs": "192.168.0.194"
+    },
+    "espLightSwitch": {
+      "a_on": "15985185",
+      "a_off": "15985185",
+      "a_dim": "15985192",
+      "a_bright": "15985188",
+      "b_on": "14312289",
+      "b_off": "14312289",
+      "b_dim": "14312296",
+      "b_bright": "14312292",
+      "attempts": 1,
+      "length": 24,
+      "instructions": "press and hold center button, 1 flash - program on/off, 2 - dim, 3 - bright, 4 - clear"
     },
     "esp433Floureon": {
       "a_on": "10069996",

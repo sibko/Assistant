@@ -180,6 +180,7 @@ var processActions = function (device, actions) {
             case 'esp433Generic':
             case 'esp433Energenie':
 	    case 'esp433EnergenieOld':
+	    case 'espLightSwitch':
                 var plugDevice = plugDevices[dev.type]
                 console.log(plugDevice)
                 if (action != 'dim' && action != 'bright' && !plugDevice[dev.ids[0] + action]) {
@@ -211,10 +212,10 @@ var processActions = function (device, actions) {
                     }
                 }
                 var host = plugDevices.hosts[hostname]
-                if (action == 'bright' || action == 'dim') {
-                    attempts = 25
-                    code = plugDevice['x10' + action]
-                }
+//                if (action == 'bright' || action == 'dim') {
+  //                  attempts = 25
+    //                code = plugDevice['x10' + action]
+      //          }
                 if (plugDevice.manual) {                    
                     var longOnDelay = plugDevice.longOnDelay * 1000000
                     var longOffDelay = plugDevice.longOffDelay * 1000000
