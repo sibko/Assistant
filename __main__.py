@@ -49,7 +49,6 @@ conffile = open("/home/pi/Assistant/config.json", "r")
 config = json.load(conffile)
 localConfig = config["assistants"][socket.gethostname()]
 devices = config["devices"]
-
 for localDevice in localConfig['devices']:
             for localDeviceName in localConfig['devices'][localDevice]:
                 for dev in devices:
@@ -62,7 +61,7 @@ hasVideo=False
 if ('hasVideo' in config and config['hasVideo'] == True):
     hasVideo=True
 log=open("/home/pi/assLogs.log", "a")
-
+logging.info(devices)
 class mplayer():
     def play(self, mfile):
         print(c.play(mfile))
@@ -87,6 +86,7 @@ class mplayer():
         return alive
 
 def getDevice(dev):
+    logging.info(dev)
     print("finding " + dev)
     for device in devices:
         if (device['name'].replace(" ", "").lower() == dev.replace(" ", "").lower()):
@@ -98,6 +98,10 @@ def getDevice(dev):
     return ""
 
 def doAction(device, action):
+    logging.info('DOACTION')
+    logging.info(device)
+    logging.info(action)
+    print('device: ' + device + ' ACTION: ' + action)
     subprocess.call(["node", "/home/pi/Assistant/DoAction.js", device, action], stdout=log, stderr=subprocess.STDOUT)
 
 
@@ -154,8 +158,10 @@ def process_event(event, assistant):
             objects = ["".join(returned[2:]).lower()]
             #x10 bright/dim doesnt specify device, just uses the last device the controller operated so turn it on first
             if (returned[0].lower() == 'dim' or returned[0].lower() == 'brighten'):
-                action = 'on'
-                objects = ["".join(returned[1:]).lower()]
+                 action = returned[0].lower()
+                 objects = ["".join(returned[1:]).lower()]
+            if (action=='brighten'):
+                 action = 'bright'
             print(action)
             logging.info(action)
             print(objects)
@@ -172,9 +178,8 @@ def process_event(event, assistant):
                     objects.append("".join(returned[wordindex+1:]).lower())
                     print(objects)
             for object in objects:
-                
                 device = getDevice(object)
-                if (device != "" and (action == "on" or action == "off" or action =="up" or action == "down")):
+                if (device != "" and (action == "on" or action == "off" or action =="up" or action == "down" or action == "dim" or action == "bright")):
                     assistant.stop_conversation()
                     if (device['type'] == 'infrared'):
                         if (action=="up" and 'tv' in object):
@@ -187,13 +192,13 @@ def process_event(event, assistant):
                         doAction(device['name'], action)
                     
                     #handle x10 dimming now we've set the controller to use that device   
-                    if (returned[0] == 'dim' and device['type'] == 'x10'):
-                        print('dimming')
-                        time.sleep(0.05)
-                        doAction(device['name'], 'dim')
-                    if (returned[0] == 'brighten' and device['type'] == 'x10'):
-                        time.sleep(0.05)
-                        doAction(device['name'], 'bright')
+                    #if (returned[0] == 'dim' and device['type'] == 'x10'):
+                    #    print('dimming')
+                    #    time.sleep(0.05)
+                    #    doAction(device['name'], 'dim')
+                    #if (returned[0] == 'brighten' and device['type'] == 'x10'):
+                    #    time.sleep(0.05)
+                    #    doAction(device['name'], 'bright')
 
 
 #SYSTEM COMMANDS
