@@ -221,7 +221,7 @@ def process_event(event, assistant):
                 logging.info('creating a cinema')
                 doAction('theceiling', 'on')
                 time.sleep(0.50)
-                doAction('thelights', 'off')
+                doAction('theloungelights', 'off')
                 doAction('thefridge', 'off')
                 createTimer('thefridge', 'on', int(str(time.time()).split('.')[0]) + 7200)
                 time.sleep(4.00)
