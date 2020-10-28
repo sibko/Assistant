@@ -60,6 +60,11 @@ createTimer = function (id, action, minutes, type) {
 
 }
 
+restartServer = function () {
+	var command = 'service DeviceList restart'
+        exec(command, function (err, stdout, stderr) {logger.info(err, stdout)})
+}
+
 getLogs = function (device) {
 	var d = q.defer()
 	var command = 'echo "tail -n 500 /home/pi/assLogs.log | tac" | ssh -q ' + device.user + '@' + device.ip
@@ -306,4 +311,19 @@ app.route('/api/updateConfig/').post((req,res) => {
 	loadConfig()
 	res.send("thank you")
 })
+app.route('/api/restartServer/').get((req,res) => {
+	res.send("TAH")
+	process.exit(1)
+})
+app.route('/api/updatePis/').get((req,res) => {
+        res.send("TAH")
+	var command = 'bash /home/sibko/Assistant/updateAll.sh'
+
+        exec(command, function (err, stdout, stderr) {
+                logger.info("updatepis: ", err, stdout, stderr)
+        })
+	
+})
+
+
 getDirTree('/music/')

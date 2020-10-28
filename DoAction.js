@@ -102,7 +102,7 @@ var sendIRRequest = function (host, action) {
             'Content-Length': Buffer.byteLength(postData)
         }
     };
-
+    console.log(options, postData)
     const req = http.request(options, (res) => {
         res.setEncoding('utf8');
         res.on('data', (chunk) => {
@@ -130,16 +130,16 @@ linuxControl = function (device, action) {
     var command = ""
     switch (action) {
         case 'restartassistant':
-            command = "echo sudo systemctl restart assistant | ssh " + device.user + "@" + device.ids[0]
+            command = "echo sudo systemctl restart assistant | ssh " + device.user + "@" + device.ip
             break;
         case 'restart':
-            command = "echo sudo shutdown -r now | ssh " + device.user + "@" + device.ids[0]
+            command = "echo sudo shutdown -r now | ssh " + device.user + "@" + device.ip
             break;
         case 'off':
-            command = "echo sudo shutdown -h now | ssh " + device.user + "@" + device.ids[0]
+            command = "echo sudo shutdown -h now | ssh " + device.user + "@" + device.ip
             break;
         case 'updatemusic':
-            command = "echo sudo updatedb --netpaths='/music' | ssh " + device.user + "@" + device.ids[0]
+            command = "echo sudo updatedb --netpaths='/music' | ssh " + device.user + "@" + device.ip
             break;
         case 'createplaylists':
             command = "cd /music && bash createplaylists.sh &"
