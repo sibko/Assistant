@@ -54,11 +54,11 @@ var sendESPRequest = function (id, action) {
     return defer.promise
 }
 
-var sendESP433 = function (host, code, length, attempts, binary) {
+var sendESP433 = function (host, code, length, attempts, protocol) {
     var _d = q.defer()
-    var getquery = { "code": code, "length": length, "attempts": attempts }
+    var getquery = { "code": code, "length": length, "attempts": attempts, "protocol": protocol }
     var query = querystring.stringify(getquery);
-    console.log("sending " + host + '/Transmit433?code=' + code + '&length=' + length + '&attempts=' + attempts)
+    console.log("sending " + host + '/Transmit433?code=' + code + '&length=' + length + '&attempts=' + attempts + '&protocol=' + protocol)
     request('http://' + host + '/Transmit433?' + query, function (err, res, body) {
         console.log("Received: " + body)
         if (err) {
@@ -180,6 +180,7 @@ var processActions = function (device, actions) {
             case 'esp433Generic':
             case 'esp433Energenie':
 	    case 'esp433EnergenieOld':
+	    case 'esp433Silvercrest':
 	    case 'espLightSwitch':
                 var plugDevice = plugDevices[dev.type]
                 console.log(plugDevice)
@@ -190,6 +191,8 @@ var processActions = function (device, actions) {
                 var code = plugDevice[dev.ids[0] + action]
                 var attempts = plugDevice.attempts;
                 var length = plugDevice.length;
+		var protocol = plugDevice.protocol
+                if (!protocol || protocol == "") protocol = 1;
                 var hostname = dev.host
                 if (hostname == undefined) {
                     switch (dev.location) {
@@ -227,7 +230,7 @@ var processActions = function (device, actions) {
                     var endDelay = plugDevice.endDelay * 1000000
                     var promise = sendESP433Manual(host, code, longOnDelay, longOffDelay, shortOnDelay, shortOffDelay, bigOn, bigOff, endDelay, attempts)
                 } else {
-                    var promise = sendESP433(host, code, length, attempts);
+                    var promise = sendESP433(host, code, length, attempts, protocol);
                 }
                 promises.push(promise)
                 break;
@@ -278,8 +281,10 @@ var processActions = function (device, actions) {
                 var bigOff = plugDevice.bigOff
                 var extendedDelay = plugDevice.extendedDelay
                 var endDelay = plugDevice.endDelay
+		var protocol = plugDevice.protocol
+		if (!protocol || protocol == "") protocol = 1;
                 console.log(os.hostname(), dev.type, os.hostname() == 'bedroomAssistant', dev.type == 'x10')
-                console.log('python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay)
+                console.log('python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay + ' ' + protocol)
                 if (os.hostname() == 'bedroomAssistant' && dev.type == 'x10') {
                     exec('echo "python /home/pi/Assistant/Transmit433.py ' + code + ' ' + attempts + ' ' + shortOnDelay + ' ' + shortOffDelay + ' ' + longOnDelay + ' ' + longOffDelay + ' ' + bigOn + ' ' + bigOff + ' ' + extendedDelay + ' ' + endDelay + '"| ssh pi@192.168.0.187')
                 } else if (os.hostname() == 'Microserver') {

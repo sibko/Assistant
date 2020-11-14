@@ -130,9 +130,9 @@
     {
       "name": "Test",
       "ids": [
-        "x10a_"
+        "a_"
       ],
-      "type": "esp433X10",
+      "type": "esp433Silvercrest",
       "host": "upstairs",
       "location": "Test",
       "functions": [
@@ -1067,6 +1067,22 @@
       "attempts": 3,
       "length": 24,
       "instructions": "press and hold button till flashing, press button to be assigned, had to do this near to transmitter. to reset: press and hold button while plugging in, flashes quickly then off"
+    },
+    "esp433Silvercrest": {
+      "a_on": "13753456",
+      "a_off": "14550672",
+      "b_on": "13753460",
+      "b_off": "14550676",
+      "c_on": "14445132",
+      "c_off": "14550684",
+      "d_on": "14198562",
+      "d_off": "14059698",
+      "all_on": "14198570",
+      "all_off": "14059706",
+      "attempts": 1,
+      "length": 24,
+      "protocol": 4,
+      "instructions": "plug in, press on while flashing to assign a button, press off to delete (first attempt seemed to need to use the all off to delete it)"
     },
     "esp433Generic": {
       "a_on": "3444434333343333443344443",
