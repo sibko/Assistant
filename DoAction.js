@@ -175,65 +175,68 @@ var processActions = function (device, actions) {
         }
         console.log(dev.type)
         switch (dev.type) {
-            case 'esp433Floureon':
-            case 'esp433X10':
-            case 'esp433Generic':
-            case 'esp433Energenie':
-	    case 'esp433EnergenieOld':
-	    case 'esp433Silvercrest':
-	    case 'espLightSwitch':
-                var plugDevice = plugDevices[dev.type]
-                console.log(plugDevice)
-                if (action != 'dim' && action != 'bright' && !plugDevice[dev.ids[0] + action]) {
-                    console.log("ACTION NOT FOUND")
-                    return
-                }
-                var code = plugDevice[dev.ids[0] + action]
-                var attempts = plugDevice.attempts;
-                var length = plugDevice.length;
-		var protocol = plugDevice.protocol
-                if (!protocol || protocol == "") protocol = 1;
-                var hostname = dev.host
-                if (hostname == undefined) {
-                    switch (dev.location) {
-                        case 'Lounge':
-                        case 'Bedroom':
-                        case 'Mobile':
-                        case 'Front Bedroom':
-                            hostname = 'upstairs'
-                            break;
-                        case 'Kitchen':
-                        case 'Sitting Room':
-                        case 'Dining Room':
-                        case 'Breakfast Room':
-                        case 'Hall':
-                        case 'Garden':
-                        case 'Garage':
-                            hostname = 'downstairs'
-                            break;
-
-                    }
-                }
-                var host = plugDevices.hosts[hostname]
-//                if (action == 'bright' || action == 'dim') {
-  //                  attempts = 25
-    //                code = plugDevice['x10' + action]
-      //          }
-                if (plugDevice.manual) {                    
-                    var longOnDelay = plugDevice.longOnDelay * 1000000
-                    var longOffDelay = plugDevice.longOffDelay * 1000000
-                    var shortOnDelay = plugDevice.shortOnDelay * 1000000
-                    var shortOffDelay = plugDevice.shortOffDelay * 1000000
-                    var bigOn = plugDevice.bigOn * 1000000
-                    var bigOff = plugDevice.bigOff * 1000000
-                    var extendedDelay = plugDevice.extendedDelay * 1000000
-                    var endDelay = plugDevice.endDelay * 1000000
-                    var promise = sendESP433Manual(host, code, longOnDelay, longOffDelay, shortOnDelay, shortOffDelay, bigOn, bigOff, endDelay, attempts)
-                } else {
-                    var promise = sendESP433(host, code, length, attempts, protocol);
-                }
-                promises.push(promise)
-                break;
+            case '433':
+		dev.ids.forEach(function(id){
+	                var plugDevice = {}
+			Object.keys(plugDevices).forEach(function(type){
+				if (plugDevices[type][id + action]) {
+					plugDevice = plugDevices[type]
+					return;
+				}
+			})
+	                console.log(plugDevice)
+	                if (action != 'dim' && action != 'bright' && !plugDevice[id + action]) {
+	                    console.log("ACTION NOT FOUND")
+	                    return
+	                }
+	                var code = plugDevice[id + action]
+	                var attempts = plugDevice.attempts;
+	                var length = plugDevice.length;
+			var protocol = plugDevice.protocol
+	                if (!protocol || protocol == "") protocol = 1;
+	                var hostname = dev.host
+	                if (hostname == undefined) {
+	                    switch (dev.location) {
+	                        case 'Lounge':
+	                        case 'Bedroom':
+	                        case 'Mobile':
+	                        case 'Front Bedroom':
+	                            hostname = 'upstairs'
+	                            break;
+	                        case 'Kitchen':
+	                        case 'Sitting Room':
+	                        case 'Dining Room':
+	                        case 'Breakfast Room':
+	                        case 'Hall':
+	                        case 'Garden':
+	                        case 'Garage':
+	                            hostname = 'downstairs'
+	                            break;
+	
+	                    }
+	                }
+	                var host = plugDevices.hosts[hostname]
+	//                if (action == 'bright' || action == 'dim') {
+	  //                  attempts = 25
+	    //                code = plugDevice['x10' + action]
+	      //          }
+	                if (plugDevice.manual) {                    
+	                    var longOnDelay = plugDevice.longOnDelay * 1000000
+	                    var longOffDelay = plugDevice.longOffDelay * 1000000
+	                    var shortOnDelay = plugDevice.shortOnDelay * 1000000
+	                    var shortOffDelay = plugDevice.shortOffDelay * 1000000
+	                    var bigOn = plugDevice.bigOn * 1000000
+	                    var bigOff = plugDevice.bigOff * 1000000
+	                    var extendedDelay = plugDevice.extendedDelay * 1000000
+	                    var endDelay = plugDevice.endDelay * 1000000
+	                    var promise = sendESP433Manual(host, code, longOnDelay, longOffDelay, shortOnDelay, shortOffDelay, bigOn, bigOff, endDelay, attempts)
+	                } else {
+	                    var promise = sendESP433(host, code, length, attempts, protocol);
+	                }
+	                promises.push(promise)
+	                
+		})
+			break;
             case 'infrared':
                 var functions = dev.functions.map(function (item) {
                     return item.replace(" ", "").toLowerCase()
@@ -257,10 +260,7 @@ var processActions = function (device, actions) {
                 var promise = sendESPRequest(dev.ids[0], action);
                 promises.push(promise);
                 break
-            case 'generic':
-            case 'energenie':
-            case 'x10':
-            case 'twelvevolt':
+            case 'legacy433':
                 var plugDevice = plugDevices[dev.type]
                 console.log(plugDevice)
                 if (action != 'dim' && action != 'bright' && !plugDevice[dev.ids[0] + action]) {

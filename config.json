@@ -112,9 +112,9 @@
     {
       "name": "Lounge Lamps",
       "ids": [
-        "energenieb_"
+        "Energenieb_"
       ],
-      "type": "esp433Energenie",
+      "type": "433",
       "location": "Lounge",
       "functions": [
         "On",
@@ -130,9 +130,9 @@
     {
       "name": "Test",
       "ids": [
-        "a_"
+        "Silvercresta_"
       ],
-      "type": "esp433Silvercrest",
+      "type": "433",
       "host": "upstairs",
       "location": "Test",
       "functions": [
@@ -146,9 +146,9 @@
     {
       "name": "3D Printer",
       "ids": [
-        "e_"
+        "Floureone_"
       ],
-      "type": "esp433Floureon",
+      "type": "433",
       "host": "downstairs",
       "location": "Garage",
       "functions": [
@@ -165,9 +165,9 @@
     {
       "name": "Outside Lights",
       "ids": [
-        "b_"
+        "Floureonb_"
       ],
-      "type": "esp433Floureon",
+      "type": "433",
       "host": "downstairs",
       "location": "Garden",
       "functions": [
@@ -182,9 +182,9 @@
     {
       "name": "Dining Christmas Tree",
       "ids": [
-        "c_"
+        "Floureonc_"
       ],
-      "type": "esp433Floureon",
+      "type": "433",
       "host": "downstairs",
       "location": "Dining Room",
       "functions": [
@@ -200,9 +200,9 @@
     {
       "name": "Hall Christmas Lights",
       "ids": [
-        "a_"
+        "Floureona_"
       ],
-      "type": "esp433Floureon",
+      "type": "433",
       "host": "downstairs",
       "location": "Hall",
       "functions": [
@@ -218,9 +218,9 @@
     {
       "name": "Controllers",
       "ids": [
-        "energenied_"
+        "Energenied_"
       ],
-      "type": "esp433Energenie",
+      "type": "433",
       "location": "Lounge",
       "functions": [
         "On",
@@ -236,9 +236,9 @@
     {
       "name": "Consoles",
       "ids": [
-        "energeniec_"
+        "Energeniec_"
       ],
-      "type": "esp433Energenie",
+      "type": "433",
       "location": "Lounge",
       "functions": [
         "On",
@@ -252,9 +252,9 @@
     {
       "name": "Ceiling Lights",
       "ids": [
-        "energeniea_"
+        "Energeniea_"
       ],
-      "type": "esp433Energenie",
+      "type": "433",
       "location": "Lounge",
       "functions": [
         "On",
@@ -294,7 +294,7 @@
       "ids": [
         "x10d_"
       ],
-      "type": "esp433X10",
+      "type": "433",
       "host": "upstairs",
       "location": "Lounge",
       "functions": [
@@ -311,9 +311,9 @@
     {
       "name": "Bedroom Lights",
       "ids": [
-        "a_"
+        "LightSwitcha_"
       ],
-      "type": "espLightSwitch",
+      "type": "433",
       "host": "upstairs",
       "location": "Bedroom",
       "functions": [
@@ -334,7 +334,7 @@
       "ids": [
         "x10b_"
       ],
-      "type": "esp433X10",
+      "type": "433",
       "host": "upstairs",
       "location": "Bedroom",
       "functions": [
@@ -353,9 +353,9 @@
     {
       "name": "Kitchen Lights",
       "ids": [
-        "a_"
+        "Generica_"
       ],
-      "type": "esp433Generic",
+      "type": "433",
       "location": "Kitchen",
       "host": "downstairs",
       "functions": [
@@ -372,9 +372,9 @@
     {
       "name": "Lounge Lights",
       "ids": [
-        "b_"
+        "LightSwitchb_"
       ],
-      "type": "espLightSwitch",
+      "type": "433",
       "location": "Lounge",
       "host": "upstairs",
       "functions": [
@@ -393,9 +393,9 @@
     {
       "name": "Dining Room Lamps",
       "ids": [
-        "energenieg_"
+        "Energenieg_"
       ],
-      "type": "esp433Energenie",
+      "type": "433",
       "host": "downstairs",
       "location": "Dining Room",
       "functions": [
@@ -424,9 +424,9 @@
     {
       "name": "Breakfast Room Lamp",
       "ids": [
-        "d_"
+        "Floureond_"
       ],
-      "type": "esp433Floureon",
+      "type": "433",
       "location": "Breakfast Room",
       "host": "downstairs",
       "functions": [
@@ -443,9 +443,9 @@
     {
       "name": "Sitting Room Lamps",
       "ids": [
-        "b_"
+        "Genericb_"
       ],
-      "type": "esp433Generic",
+      "type": "433",
       "location": "Sitting Room",
       "host": "downstairs",
       "functions": [
@@ -462,9 +462,9 @@
     {
       "name": "Christmas Tree",
       "ids": [
-        "b_"
+        "Genericb_"
       ],
-      "type": "esp433Generic",
+      "type": "433",
       "location": "Lounge",
       "host": "upstairs",
       "functions": [
@@ -480,9 +480,9 @@
     {
       "name": "Christmas Lights",
       "ids": [
-        "c_"
+        "Genericc_"
       ],
-      "type": "esp433Generic",
+      "type": "433",
       "host": "upstairs",
       "location": "Lounge",
       "functions": [
@@ -498,9 +498,9 @@
     {
       "name": "Waterfall",
       "ids": [
-        "waterfall_"
+        "twelvevolt_"
       ],
-      "type": "esp433twelvevolt",
+      "type": "433",
       "location": "Garden",
       "host": "downstairs",
       "functions": [
@@ -704,9 +704,9 @@
     {
       "name": "Fridge",
       "ids": [
-        "e_"
+        "Generice_"
       ],
-      "type": "esp433Generic",
+      "type": "433",
       "host": "upstairs",
       "location": "Lounge",
       "functions": [
@@ -876,7 +876,7 @@
         "microserver"
       ],
       "type": "rPI",
-      "location": "Bedroom",
+      "location": "Garage",
       "functions": [
         "Restart",
         "Off"
@@ -917,9 +917,9 @@
     {
       "name": "Cat Laser onoff",
       "ids": [
-        "energeniee_"
+        "Energeniee_"
       ],
-      "type": "esp433Energenie",
+      "type": "433",
       "location": "Mobile",
       "functions": [
         "On",
@@ -1041,62 +1041,62 @@
       "upstairs": "192.168.0.194"
     },
     "espLightSwitch": {
-      "a_on": "15985185",
-      "a_off": "15985185",
-      "a_dim": "15985192",
-      "a_bright": "15985188",
-      "b_on": "14312289",
-      "b_off": "14312289",
-      "b_dim": "14312296",
-      "b_bright": "14312292",
+      "LightSwitcha_on": "15985185",
+      "LightSwitcha_off": "15985185",
+      "LightSwitcha_dim": "15985192",
+      "LightSwitcha_bright": "15985188",
+      "LightSwitchb_on": "14312289",
+      "LightSwitchb_off": "14312289",
+      "LightSwitchb_dim": "14312296",
+      "LightSwitchb_bright": "14312292",
       "attempts": 1,
       "length": 24,
       "instructions": "press and hold center button, 1 flash - program on/off, 2 - dim, 3 - bright, 4 - clear"
     },
     "esp433Floureon": {
-      "a_on": "10069996",
-      "a_off": "10069988",
-      "b_on": "10069994",
-      "b_off": "10069986",
-      "c_on": "10069993",
-      "c_off": "10069985",
-      "d_on": "10069997",
-      "d_off": "10069989",
-      "e_on": "10069995",
-      "e_off": "10069987",
+      "Floureona_on": "10069996",
+      "Floureona_off": "10069988",
+      "Floureonb_on": "10069994",
+      "Floureonb_off": "10069986",
+      "Floureonc_on": "10069993",
+      "Floureonc_off": "10069985",
+      "Floureond_on": "10069997",
+      "Floureond_off": "10069989",
+      "Floureone_on": "10069995",
+      "Floureone_off": "10069987",
       "attempts": 3,
       "length": 24,
       "instructions": "press and hold button till flashing, press button to be assigned, had to do this near to transmitter. to reset: press and hold button while plugging in, flashes quickly then off"
     },
     "esp433Silvercrest": {
-      "a_on": "13753456",
-      "a_off": "14550672",
-      "b_on": "13753460",
-      "b_off": "14550676",
-      "c_on": "14445132",
-      "c_off": "14550684",
-      "d_on": "14198562",
-      "d_off": "14059698",
-      "all_on": "14198570",
-      "all_off": "14059706",
+      "Silvercresta_on": "13753456",
+      "Silvercresta_off": "14550672",
+      "Silvercrestb_on": "13753460",
+      "Silvercrestb_off": "14550676",
+      "Silvercrestc_on": "14445132",
+      "Silvercrestc_off": "14550684",
+      "Silvercrestd_on": "14198562",
+      "Silvercrestd_off": "14059698",
+      "Silvercrestall_on": "14198570",
+      "Silvercrestall_off": "14059706",
       "attempts": 1,
       "length": 24,
       "protocol": 4,
       "instructions": "plug in, press on while flashing to assign a button, press off to delete (first attempt seemed to need to use the all off to delete it)"
     },
     "esp433Generic": {
-      "a_on": "3444434333343333443344443",
-      "a_off": "3444434333343333443344433",
-      "b_on": "3444434333343333443344343",
-      "b_off": "3444434333343333443344333",
-      "c_on": "3444434333343333443343443",
-      "c_off": "3444434333343333443343433",
-      "d_on": "3444434333343333443334443",
-      "d_off": "3444434333343333443334433",
-      "e_on": "3444434333343343443334443",
-      "e_off": "3444434333343343443334433",
-      "all_on": "3444434333343333443333433",
-      "all_off": "3444434333343333443333343",
+      "Generica_on": "3444434333343333443344443",
+      "Generica_off": "3444434333343333443344433",
+      "Genericb_on": "3444434333343333443344343",
+      "Genericb_off": "3444434333343333443344333",
+      "Genericc_on": "3444434333343333443343443",
+      "Genericc_off": "3444434333343333443343433",
+      "Genericd_on": "3444434333343333443334443",
+      "Genericd_off": "3444434333343333443334433",
+      "Generice_on": "3444434333343343443334443",
+      "Generice_off": "3444434333343343443334433",
+      "Genericall_on": "3444434333343333443333433",
+      "Genericall_off": "3444434333343333443333343",
       "shortOnDelay": "0.00032",
       "shortOffDelay": "0.00032",
       "longOnDelay": "0.00090",
@@ -1110,8 +1110,8 @@
       "attempts": 3
     },
     "esp433EnergenieOld": {
-      "energenief_on": "1111111111111111110000001",
-      "energenief_off": "1111111111111111101000011",
+      "EnergenieOldf_on": "1111111111111111110000001",
+      "EnergenieOld_off": "1111111111111111101000011",
       "shortOnDelay": "0.00024",
       "shortOffDelay": "0.00055",
       "longOnDelay": "0.00072",
@@ -1124,22 +1124,22 @@
       "attempts": 3
     },
     "esp433Energenie": {
-      "energeniea_on": "2952079",
-      "energeniea_off": "2952078",
-      "energenieb_on": "2952061",
-      "energenieb_off": "2952060",
-      "energeniec_on": "2952075",
-      "energeniec_off": "2952074",
-      "energenied_on": "2952073",
-      "energenied_off": "2952072",
-      "energeniee_on": "2952069",
-      "energeniee_off": "2952068",
-      "energenief_on": "2952065",
-      "energenief_off": "2952064",
-      "energenieg_on": "2952063",
-      "energenieg_off": "2952062",
-      "energenieall_on": "2952077",
-      "energenieall_off": "2952076",
+      "Energeniea_on": "2952079",
+      "Energeniea_off": "2952078",
+      "Energenieb_on": "2952061",
+      "Energenieb_off": "2952060",
+      "Energeniec_on": "2952075",
+      "Energeniec_off": "2952074",
+      "Energenied_on": "2952073",
+      "Energenied_off": "2952072",
+      "Energeniee_on": "2952069",
+      "Energeniee_off": "2952068",
+      "Energenief_on": "2952065",
+      "Energenief_off": "2952064",
+      "Energenieg_on": "2952063",
+      "Energenieg_off": "2952062",
+      "Energenieall_on": "2952077",
+      "Energenieall_off": "2952076",
       "attempts": 3,
       "length": 24
     },
@@ -1166,8 +1166,8 @@
       "attempts": 3
     },
     "esp433twelvevolt": {
-      "waterfall_on": "3434343434443433443333333",
-      "waterfall_off": "3434343434443433334433333",
+      "twelvevolt_on": "3434343434443433443333333",
+      "twelvevolt_off": "3434343434443433334433333",
       "shortOnDelay": "0.00035",
       "shortOffDelay": "0.00035",
       "longOnDelay": "0.00115",
@@ -1180,18 +1180,18 @@
       "attempts": 3
     },
     "generic": {
-      "a_on": "3444434333343333443344443",
-      "a_off": "3444434333343333443344433",
-      "b_on": "3444434333343333443344343",
-      "b_off": "3444434333343333443344333",
-      "c_on": "3444434333343333443343443",
-      "c_off": "3444434333343333443343433",
-      "d_on": "3444434333343333443334443",
-      "d_off": "3444434333343333443334433",
-      "e_on": "3444434333343343443334443",
-      "e_off": "3444434333343343443334433",
-      "all_on": "3444434333343333443333433",
-      "all_off": "3444434333343333443333343",
+      "Legacygenerica_on": "3444434333343333443344443",
+      "Legacygenerica_off": "3444434333343333443344433",
+      "Legacygenericb_on": "3444434333343333443344343",
+      "Legacygenericb_off": "3444434333343333443344333",
+      "Legacygenericc_on": "3444434333343333443343443",
+      "Legacygenericc_off": "3444434333343333443343433",
+      "Legacygenericd_on": "3444434333343333443334443",
+      "Legacygenericd_off": "3444434333343333443334433",
+      "Legacygenerice_on": "3444434333343343443334443",
+      "Legacygenerice_off": "3444434333343343443334433",
+      "Legacygenericall_on": "3444434333343333443333433",
+      "Legacygenericall_off": "3444434333343333443333343",
       "shortOnDelay": "0.00032",
       "shortOffDelay": "0.00032",
       "longOnDelay": "0.00090",
@@ -1202,22 +1202,22 @@
       "endDelay": "0.0087"
     },
     "energenie": {
-      "energeniea_on": "1111111111111111111000001",
-      "energeniea_off": "1111111111111111111000011",
-      "energenieb_on": "1111111111111111111010001",
-      "energenieb_off": "1111111111111111111010011",
-      "energeniec_on": "1111111111111111111001001",
-      "energeniec_off": "1111111111111111111001011",
-      "energenied_on": "1111111111111111111011001",
-      "energenied_off": "1111111111111111111011011",
-      "energeniee_on": "1111111111111111110011001",
-      "energeniee_off": "1111111111111111101011011",
-      "energenief_on": "1111111111111111110000001",
-      "energenief_off": "1111111111111111101000011",
-      "energenieg_on": "1101111111111111111011001",
-      "energenieg_off": "1101111111111111111011011",
-      "energenieall_on": "1111111111111111111000101",
-      "energenieall_off": "1111111111111111111000111",
+      "Legacyenergeniea_on": "1111111111111111111000001",
+      "Legacyenergeniea_off": "1111111111111111111000011",
+      "Legacyenergenieb_on": "1111111111111111111010001",
+      "Legacyenergenieb_off": "1111111111111111111010011",
+      "Legacyenergeniec_on": "1111111111111111111001001",
+      "Legacyenergeniec_off": "1111111111111111111001011",
+      "Legacyenergenied_on": "1111111111111111111011001",
+      "Legacyenergenied_off": "1111111111111111111011011",
+      "Legacyenergeniee_on": "1111111111111111110011001",
+      "Legacyenergeniee_off": "1111111111111111101011011",
+      "Legacyenergenief_on": "1111111111111111110000001",
+      "Legacyenergenief_off": "1111111111111111101000011",
+      "Legacyenergenieg_on": "1101111111111111111011001",
+      "Legacyenergenieg_off": "1101111111111111111011011",
+      "Legacyenergenieall_on": "1111111111111111111000101",
+      "Legacyenergenieall_off": "1111111111111111111000111",
       "shortOnDelay": "0.00024",
       "shortOffDelay": "0.00055",
       "longOnDelay": "0.00072",
@@ -1228,16 +1228,16 @@
       "endDelay": "0.00587"
     },
     "x10": {
-      "x10a_on": "2133111113113333311111111333333333",
-      "x10a_off": "2133111113113333311311111331333333",
-      "x10b_on": "2133111113113333311131111333133333",
-      "x10b_off": "2133111113113333311331111331133333",
-      "x10c_on": "2133111113113333311113111333313333",
-      "x10c_off": "2133111113113333311313111331313333",
-      "x10d_on": "2133111113113333311133111333113333",
-      "x10d_off": "2133111113113333311333111331113333",
-      "x10dim": "2133111113113333331133111133113333",
-      "x10bright": "2133111113113333331113111133313333",
+      "Legacyx10a_on": "2133111113113333311111111333333333",
+      "Legacyx10a_off": "2133111113113333311311111331333333",
+      "Legacyx10b_on": "2133111113113333311131111333133333",
+      "Legacyx10b_off": "2133111113113333311331111331133333",
+      "Legacyx10c_on": "2133111113113333311113111333313333",
+      "Legacyx10c_off": "2133111113113333311313111331313333",
+      "Legacyx10d_on": "2133111113113333311133111333113333",
+      "Legacyx10d_off": "2133111113113333311333111331113333",
+      "Legacyx10dim": "2133111113113333331133111133113333",
+      "Legacyx10bright": "2133111113113333331113111133313333",
       "shortOnDelay": "0.00055",
       "shortOffDelay": "0.00055",
       "longOnDelay": "0.00170",
@@ -1248,8 +1248,8 @@
       "endDelay": "0.01745"
     },
     "twelvevolt": {
-      "waterfall_on": "3434343434443433443333333",
-      "waterfall_off": "3434343434443433334433333",
+      "Legacywaterfall_on": "3434343434443433443333333",
+      "Legacywaterfall_off": "3434343434443433334433333",
       "shortOnDelay": "0.00035",
       "shortOffDelay": "0.00035",
       "longOnDelay": "0.00115",

@@ -249,18 +249,9 @@ app.route('/api/device/:name/:action').get((req, res) => {
 		logger.info(id, action)
 		switch (device.type) {
 			case "infrared":
-			case "energenie":
-			case "generic":
-			case "x10":
-			case "twelvevolt":
 			case "ESP":
 			case "rPI":
-			case "esp433Floureon":
-			case "esp433X10":
-			case "esp433Energenie":
-			case "esp433EnergenieOld":
-			case "esp433Generic":
-			case "espLightSwitch":
+			case "433":
 				doAction(device.name, action)
 				break;
 			case "espcamera":
