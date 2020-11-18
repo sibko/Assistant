@@ -4,7 +4,6 @@
 #include <IRsend.h>
 
 #include <IRutils.h>
-#include <ESP8266WiFi.h>                                    // https://github.com/tzapu/WiFiManager WiFi Configuration Magic
 #include <ESP8266mDNS.h>                                      // Useful to access to ESP by hostname.local
 
 #include <ArduinoJson.h>
@@ -108,11 +107,12 @@ const int Tpin = 0;
 
 RCSwitch mySwitch = RCSwitch();
 
-void send433int(int code, int len, int attempts) {
+void send433int(int code, int len, int attempts, int protocol) {
   for ( int i = 0; i < attempts; i++) {
-    Serial.println("CODE: " + String(code) + " attempts: " + String(attempts));
+    Serial.println("CODE: " + String(code) + " attempts: " + String(attempts) + " protocol: " + String(protocol));
+    mySwitch.setProtocol(protocol);
     mySwitch.send(code, len);
-    delay(100);
+    delay(100);  
   }
 }
 
@@ -166,6 +166,7 @@ void setup() {
   pinMode(Tpin, OUTPUT);
   mySwitch.enableTransmit(0);
   WiFi.begin(ssid, password);
+  WiFi.mode(WIFI_STA);
 
 
   // Wait for connection
@@ -199,7 +200,8 @@ void setup() {
       int code = server.arg("code").toInt();
       int len = server.arg("length").toInt();
       int attempts = server.arg("attempts").toInt();
-      send433int(code, len, attempts);
+      int protocol = server.arg("protocol").toInt();
+      send433int(code, len, attempts, protocol);
       server.send(200, "text/html", "Success, code sent");
     } else if (server.hasArg("code") && server.hasArg("longon") && server.hasArg("longoff") && server.hasArg("shorton") && server.hasArg("shortoff") && server.hasArg("bigon") && server.hasArg("bigoff") && server.hasArg("enddelay") && server.hasArg("attempts")) {
       Serial.println("MANUAL");
