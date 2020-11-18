@@ -837,7 +837,8 @@
         "sittingroomassistant",
         "thesittingroomassistant"
       ],
-      "user": "pi"
+      "user": "pi",
+      "hidden": true
     },
     {
       "name": "Porch Pi Cam",
