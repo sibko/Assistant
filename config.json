@@ -393,7 +393,8 @@
     {
       "name": "Dining Room Lamps",
       "ids": [
-        "Energenieg_"
+        "Energenieg_",
+        "Genericd_"
       ],
       "type": "433",
       "host": "downstairs",
