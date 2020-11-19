@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Config</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <div >
+        <button ng-if="!showHidden" class="btn btn-success" type="button" ng-click="includeHidden()">Include Hidden</button>
+	<button ng-if="showHidden" class="btn btn-danger" type="button" ng-click="includeHidden()">Hide Hidden</button>
+	<pre pretty-json=freePlugs></pre>
+    </div>
+</div>
+<div class="modal-footer ">
+    <button class="btn btn-warning " type="button " ng-click="closeModal() ">Close</button>
+
+</div>

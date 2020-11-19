@@ -151,6 +151,10 @@
                     <td>Update PIs</td>
                     <td><button type="button" class="btn btn-danger" ng-click="updatePis()">Update</button></td>
                 </tr>
+		<tr ng-if="location == 'Admin'">
+                    <td>Show Free Plugs</td>
+                    <td><button type="button" class="btn btn-danger" ng-click="openFreePlugsModal()">Show</button></td>
+                </tr>
                 <tr ng-repeat="timer in timers" ng-if="location == 'Timers'">
                     <td>{{timer.date}}</td>
                     <td>{{timer.device}}</td>

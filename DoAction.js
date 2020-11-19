@@ -179,17 +179,17 @@ var processActions = function (device, actions) {
 		dev.ids.forEach(function(id){
 	                var plugDevice = {}
 			Object.keys(plugDevices).forEach(function(type){
-				if (plugDevices[type][id + action]) {
+				if (plugDevices[type].actions && plugDevices[type].actions[id + action]) {
 					plugDevice = plugDevices[type]
 					return;
 				}
 			})
 	                console.log(plugDevice)
-	                if (action != 'dim' && action != 'bright' && !plugDevice[id + action]) {
+	                if (action != 'dim' && action != 'bright' && !(plugDevice.actions || plugDevice.actions[id + action])) {
 	                    console.log("ACTION NOT FOUND")
 	                    return
 	                }
-	                var code = plugDevice[id + action]
+	                var code = plugDevice.actions[id + action]
 	                var attempts = plugDevice.attempts;
 	                var length = plugDevice.length;
 			var protocol = plugDevice.protocol

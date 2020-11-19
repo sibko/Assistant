@@ -47,6 +47,30 @@ var loadConfig = function () {
 	groups = config.groups
 	devices = config.devices
 }
+
+var getFreePlugs = function(config, includeHidden) {
+	var freeIDs = {}
+	Object.keys(config.plugs).forEach(function(plug){
+		if (config.plugs[plug].actions) {
+			freeIDs[plug] = config.plugs[plug].actions
+		}
+	})
+	config.devices.forEach(function (dev){
+		if (dev.type && dev.type == "433" && (!dev.hidden || (dev.hidden && includeHidden))){
+			dev.ids.forEach(function (id) {
+				Object.keys(freeIDs).forEach(function (type){
+					Object.keys(freeIDs[type]).forEach(function (action){
+						if (action.includes(id)) {
+							delete freeIDs[type][action]
+						}
+					})
+				})
+			})
+		}
+	})
+	return freeIDs
+}
+
 loadConfig()
 var item = fs.readFileSync(dir + "Assistant/popular.json", 'utf8')
 var poplist = JSON.parse(item)
@@ -286,6 +310,15 @@ app.route('/api/getMusic/').get((req,res) => {
 })
 app.route('/api/getConfig/').get((req,res) => {
         res.send(config)
+})
+app.route('/api/getFreePlugs/:hidden').get((req,res) => {
+	var freePlugs
+	if (req.params['hidden'] && req.params['hidden'] == "true") {
+		freePlugs = getFreePlugs(JSON.parse(JSON.stringify(config)), true)
+	} else {
+		freePlugs = getFreePlugs(JSON.parse(JSON.stringify(config)))
+	}
+	res.send(freePlugs)
 })
 app.route('/api/forceGetMusic/').get((req,res) => {
         info = []

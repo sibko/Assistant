@@ -147,6 +147,21 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
                         $scope.getTimers()
                 });
 	}
+	$scope.openFreePlugsModal = function () {
+                $scope.modalInstance = $uibModal.open({
+                        ariaLabelledBy: 'modal-title',
+                        ariaDescribedBy: 'modal-body',
+                        templateUrl: 'freePlugsModal.html',
+                        controller: 'freePlugsHandlerController',
+                        controllerAs: '$ctrl',
+                        size: 'lg',
+                        resolve: {
+                        }
+                }).closed.then(function () {
+                        $scope.getTimers()
+                });
+        }
+
 	$scope.openCatLaserModal = function (device) {
 		$scope.modalInstance = $uibModal.open({
 			ariaLabelledBy: 'modal-title',
@@ -188,6 +203,27 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 	$scope.getPopList()
 	$scope.getTimers()
 }])
+
+deviceControl.controller("freePlugsHandlerController", function ($scope, $http, $uibModal, $uibModalInstance, $rootScope) {
+        var url = '/api/getFreePlugs/false'
+        $http.get(url).then(function (data) {
+                console.log('got free plugs', data.data)
+                $scope.freePlugs = data.data
+        }, function (error) {
+                console.log('Error: ' + error);
+        });
+	$scope.showHidden = false;
+	$scope.includeHidden = function () {
+		$scope.showHidden = !$scope.showHidden
+		url = '/api/getFreePlugs/' + $scope.showHidden
+		$http.get(url).then(function (data) {
+                	console.log('got free plugs', data.data)
+        	        $scope.freePlugs = data.data
+	        }, function (error) {
+                	console.log('Error: ' + error);
+        	});
+	}
+})
 
 deviceControl.controller("ConfigHandlerController", function ($scope, $http, $uibModal, $uibModalInstance, $rootScope) {
 	var url = '/api/getConfig/'
