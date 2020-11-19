@@ -876,6 +876,7 @@
       "ids": [
         "microserver"
       ],
+      "ip": "192.168.0.180",
       "type": "rPI",
       "location": "Garage",
       "functions": [
@@ -1042,22 +1043,22 @@
       "upstairs": "192.168.0.194"
     },
     "espLightSwitch": {
-      "actions":{
+      "actions": {
         "LightSwitcha_on": "15985185",
         "LightSwitcha_off": "15985185",
         "LightSwitcha_dim": "15985192",
         "LightSwitcha_bright": "15985188",
         "LightSwitchb_on": "14312289",
         "LightSwitchb_off": "14312289",
-	"LightSwitchb_dim": "14312296",
-      	"LightSwitchb_bright": "14312292"
+        "LightSwitchb_dim": "14312296",
+        "LightSwitchb_bright": "14312292"
       },
       "attempts": 1,
       "length": 24,
       "instructions": "press and hold center button, 1 flash - program on/off, 2 - dim, 3 - bright, 4 - clear"
     },
     "esp433Floureon": {
-      "actions":{
+      "actions": {
         "Floureona_on": "10069996",
         "Floureona_off": "10069988",
         "Floureonb_on": "10069994",
@@ -1074,7 +1075,7 @@
       "instructions": "press and hold button till flashing, press button to be assigned, had to do this near to transmitter. to reset: press and hold button while plugging in, flashes quickly then off"
     },
     "esp433Silvercrest": {
-      "actions":{
+      "actions": {
         "Silvercresta_on": "13753456",
         "Silvercresta_off": "14550672",
         "Silvercrestb_on": "13753460",
@@ -1092,7 +1093,7 @@
       "instructions": "plug in, press on while flashing to assign a button, press off to delete (first attempt seemed to need to use the all off to delete it)"
     },
     "esp433Generic": {
-      "actions":{
+      "actions": {
         "Generica_on": "3444434333343333443344443",
         "Generica_off": "3444434333343333443344433",
         "Genericb_on": "3444434333343333443344343",
@@ -1119,7 +1120,7 @@
       "attempts": 10
     },
     "esp433Energenie": {
-      "actions":{
+      "actions": {
         "Energeniea_on": "2952079",
         "Energeniea_off": "2952078",
         "Energenieb_on": "2952061",
@@ -1141,7 +1142,7 @@
       "length": 24
     },
     "esp433X10": {
-      "actions":{
+      "actions": {
         "x10a_on": "2133111113113333311111111333333333",
         "x10a_off": "2133111113113333311311111331333333",
         "x10b_on": "2133111113113333311131111333133333",
@@ -1165,7 +1166,7 @@
       "attempts": 3
     },
     "esp433twelvevolt": {
-      "actions":{
+      "actions": {
         "twelvevolt_on": "3434343434443433443333333",
         "twelvevolt_off": "3434343434443433334433333"
       },

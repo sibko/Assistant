@@ -92,6 +92,9 @@ restartServer = function () {
 getLogs = function (device) {
 	var d = q.defer()
 	var command = 'echo "tail -n 500 /home/pi/assLogs.log | tac" | ssh -q ' + device.user + '@' + device.ip
+	if (device.name && device.name == 'Microserver') {
+		command = "tail -n 500 /home/sibko/logs/server.log | tac"
+	}
 	exec(command, function (err, stdout, stderr) {
 		logger.info("get logs: ", err, stdout, stderr)
 		if (err) {
