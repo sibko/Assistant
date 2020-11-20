@@ -203,9 +203,8 @@ var startMplayer = function(file, additionalParams){
 	mplayerArgs.push('-quiet')
 	mplayerArgs.push('-really-quiet')
 	mplayerArgs.push('-volume')
-	mplayerArgs.push('-novideo')
 	mplayerArgs.push(globalVolume)
-
+	mplayerArgs.push('-novideo')
 
 	if (file.substring(file.length - 3) == 'm3u') {
         mplayerArgs.push('-playlist')
