@@ -203,6 +203,7 @@ var startMplayer = function(file, additionalParams){
 	mplayerArgs.push('-quiet')
 	mplayerArgs.push('-really-quiet')
 	mplayerArgs.push('-volume')
+	mplayerArgs.push('-novideo')
 	mplayerArgs.push(globalVolume)
 
 
