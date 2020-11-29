@@ -146,9 +146,6 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
                 }).closed.then(function () {
                         $scope.getTimers()
                 });
-		$scope.closeModal = function () {
-	        	$uibModalInstance.close();
-        	}
 
 	}
 	$scope.openFreePlugsModal = function () {
@@ -164,9 +161,6 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
                 }).closed.then(function () {
                         $scope.getTimers()
                 });
-		$scope.closeModal = function () {
-                        $uibModalInstance.close();
-                }
         }
 
 	$scope.openCatLaserModal = function (device) {
@@ -230,6 +224,9 @@ deviceControl.controller("freePlugsHandlerController", function ($scope, $http, 
                 	console.log('Error: ' + error);
         	});
 	}
+	$scope.closeModal = function () {
+                $uibModalInstance.close();
+        }
 })
 
 deviceControl.controller("ConfigHandlerController", function ($scope, $http, $uibModal, $uibModalInstance, $rootScope) {
@@ -245,6 +242,9 @@ deviceControl.controller("ConfigHandlerController", function ($scope, $http, $ui
 			console.log("RECEIVED RESPONSE:", data)
 		})
 	}
+	$scope.closeModal = function () {
+                $uibModalInstance.close();
+        }
 })
 
 deviceControl.controller("DeviceHandlerController", function ($scope, $http, $uibModal, $uibModalInstance, device, $rootScope) {
