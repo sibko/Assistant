@@ -146,6 +146,10 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
                 }).closed.then(function () {
                         $scope.getTimers()
                 });
+		$scope.closeModal = function () {
+	        	$uibModalInstance.close();
+        	}
+
 	}
 	$scope.openFreePlugsModal = function () {
                 $scope.modalInstance = $uibModal.open({
@@ -160,6 +164,9 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
                 }).closed.then(function () {
                         $scope.getTimers()
                 });
+		$scope.closeModal = function () {
+                        $uibModalInstance.close();
+                }
         }
 
 	$scope.openCatLaserModal = function (device) {

@@ -165,7 +165,8 @@
     {
       "name": "Outside Lights",
       "ids": [
-        "Floureonb_"
+        "Floureonb_",
+        "Silvercrestd_"
       ],
       "type": "433",
       "host": "downstairs",
@@ -194,13 +195,12 @@
       "aliases": [
         "diningroomchristmastree",
         "thediningroomchristmastree"
-      ],
-      "hidden": true
+      ]
     },
     {
       "name": "Hall Christmas Lights",
       "ids": [
-        "Floureona_"
+        "Silvercrestb_"
       ],
       "type": "433",
       "host": "downstairs",
@@ -212,8 +212,7 @@
       "aliases": [
         "hallchristmaslights",
         "thehallchristmaslights"
-      ],
-      "hidden": true
+      ]
     },
     {
       "name": "Controllers",
@@ -480,7 +479,7 @@
     {
       "name": "Christmas Lights",
       "ids": [
-        "Genericc_"
+        "Silvercrestc_"
       ],
       "type": "433",
       "host": "upstairs",
@@ -492,8 +491,7 @@
       "aliases": [
         "thechristmaslights",
         "christmaslights"
-      ],
-      "hidden": true
+      ]
     },
     {
       "name": "Waterfall",
