@@ -479,7 +479,8 @@
     {
       "name": "Christmas Lights",
       "ids": [
-        "Silvercrestc_"
+        "Silvercrestc_",
+        "Energenieb_"
       ],
       "type": "433",
       "host": "upstairs",
