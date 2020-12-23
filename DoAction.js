@@ -18,7 +18,6 @@ var devices = config.devices
 var irDevices = config.ir.devices
 var plugDevices = config.plugs
 var espPlugs = config.ESPplugs
-console.log(Object.keys(irDevices))
 
 var getdevice = function (requested) {
     var ret = ''

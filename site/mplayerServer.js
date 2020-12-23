@@ -54,7 +54,7 @@ var zserver = new zerorpc.Server({
 zserver.bind("tcp://0.0.0.0:4242");
 
 var volumefile = '/home/pi/mplayervolume'
-var globalVolume = fs.readFileSync(volumefile, 'utf8').replace('\n', '')
+var globalVolume = parseInt(fs.readFileSync(volumefile, 'utf8').replace('\n', '')) || 50
 var queue = []
 
 log4js.configure({

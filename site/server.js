@@ -201,7 +201,7 @@ getDirTree = function(filename) {
         // Assuming it's a file. In real life it could be a symlink or
 		// something else!
 		var extension = filename.substring(filename.length -4).toLowerCase()
-		var validFormats = ['.mp3', 'flac', '.wma', '.m4a', '.m3u', '.pls', '.asx', '.wav']
+		var validFormats = ['.mp3', 'flac', '.wma', '.m4a', '.m3u', '.pls', '.asx', '.wav','.ogg']
 		if (validFormats.indexOf(extension) >= 0) {
 			info.push(filename);
 		}
