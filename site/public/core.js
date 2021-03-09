@@ -334,7 +334,13 @@ deviceControl.controller("TimerHandlerController", function ($scope, $http, $uib
 				console.log('Error: ' + error);
 			});
 	}
-
+	$scope.createDailyTimer = function (device, action, days, time) {
+		$http.post('/api/dailyTimer/', JSON.stringify({device: device, action: action, days: days, time: time})).then(function(data) {
+                        console.log(data)
+                }, function (error) {
+                        console.log('Error: ' + error);
+                })
+        }
 	$scope.closeModal = function () {
 		$uibModalInstance.close();
 	}
@@ -354,6 +360,7 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
 	var volumeTimeout = ''
 	$scope.setVolume = 50
 	$scope.queue = []
+	$scope.queueInterval = setInterval(function() {$scope.getQueue()}, 5000)
 	$scope.getQueue = function() {
 		$http.get('http://' + device.ip + ':1967/api/queue').then(function (data) {
 			console.log('got queue', data.data)

@@ -10,7 +10,9 @@ device=$1
 action=$2
 date=$3
 type=$4
-while [ -f "$dir/timers/$date" ]; do
+days=$5
+time=$6
+while [ -f "$dir/timers/$time$date" ]; do
 	date=$((date + 1))
 done
-echo "$device:$action:$type" > $dir/timers/$date
+echo "$device:$action:$type:$days:7" > $dir/timers/$time$date

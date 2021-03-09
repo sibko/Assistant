@@ -178,7 +178,8 @@
       "aliases": [
         "outsidelights",
         "theoutsidelights"
-      ]
+      ],
+      "hidden": true
     },
     {
       "name": "Dining Christmas Tree",
@@ -195,7 +196,8 @@
       "aliases": [
         "diningroomchristmastree",
         "thediningroomchristmastree"
-      ]
+      ],
+      "hidden": true
     },
     {
       "name": "Hall Christmas Lights",
@@ -212,6 +214,24 @@
       "aliases": [
         "hallchristmaslights",
         "thehallchristmaslights"
+      ],
+      "hidden": true
+    },
+    {
+      "name": "Hall Lights",
+      "ids": [
+        "Silvercrestb_"
+      ],
+      "type": "433",
+      "host": "downstairs",
+      "location": "Hall",
+      "functions": [
+        "On",
+        "Off"
+      ],
+      "aliases": [
+        "halllights",
+        "thehalllights"
       ]
     },
     {
@@ -492,7 +512,8 @@
       "aliases": [
         "thechristmaslights",
         "christmaslights"
-      ]
+      ],
+      "hidden": true
     },
     {
       "name": "Waterfall",

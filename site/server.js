@@ -166,7 +166,12 @@ getTimers = function () {
 		var item = fs.readFileSync(dir + "timers/" + timer, 'utf8')
 		var obj = {}
 		obj.id = timer
-		obj.date = new Date(timer * 1000).toString().split(" GMT")[0];
+		if (isNaN(timer)) {
+			obj.time = timer.split("1")[0]
+			obj.days = item.split(":")[3]
+		} else {
+			obj.date = new Date(timer * 1000).toString().split(" GMT")[0];
+		}
 		obj.device = item.split(":")[0]
 		obj.action = item.split(":")[1]
 		ret.push(obj)
@@ -331,6 +336,14 @@ app.route('/api/forceGetMusic/').get((req,res) => {
 app.route('/api/camera/').get((req,res) => {
         var item = fs.readFileSync(dir + "wakecamera", 'utf8')
 	res.send(item)
+})
+app.route('/api/dailyTimer/').post((req,res) => {
+	var timer = req.body
+	logger.info("new Daily Timer", timer)
+	var date = new Date()
+        var timestamp = (date.getTime() / 1000)
+        execSync(dir + "Assistant/createTimer.sh '" + timer.device.ids[0] + "' '" + timer.action + "' " + Math.floor(timestamp) + " " + timer.device.type.toLowerCase() + " " + timer.days + " " + timer.time )
+        res.send("thank you")
 })
 app.route('/api/updateConfig/').post((req,res) => {
 	logger.info("New config", req.body)
