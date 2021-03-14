@@ -95,7 +95,7 @@ getLogs = function (device) {
 	if (device.name && device.name == 'Microserver') {
 		command = "tail -n 500 /home/sibko/logs/server.log | tac"
 	}
-	exec(command, function (err, stdout, stderr) {
+	exec(command,{maxBuffer: 1024 * 1000}, function (err, stdout, stderr) {
 		logger.info("get logs: ", err, stdout, stderr)
 		if (err) {
 			d.resolve(err + stderr)
@@ -337,13 +337,46 @@ app.route('/api/camera/').get((req,res) => {
         var item = fs.readFileSync(dir + "wakecamera", 'utf8')
 	res.send(item)
 })
-app.route('/api/dailyTimer/').post((req,res) => {
+app.route('/api/createTimer/').post((req,res) => {
+        logger.info("new Timer", req.body)
 	var timer = req.body
-	logger.info("new Daily Timer", timer)
-	var date = new Date()
-        var timestamp = (date.getTime() / 1000)
-        execSync(dir + "Assistant/createTimer.sh '" + timer.device.ids[0] + "' '" + timer.action + "' " + Math.floor(timestamp) + " " + timer.device.type.toLowerCase() + " " + timer.days + " " + timer.time )
-        res.send("thank you")
+	if (timer.minutes && timer.minutes > 0) {
+        	createTimer(timer.device.name, timer.action, timer.minutes, timer.device.type);
+	} else {
+		var days = ""
+		if (timer.days.monday) {
+			days += "1,"
+		}
+		if (timer.days.tuesday) {
+                        days += "2,"
+                }
+		if (timer.days.wednesday) {
+                        days += "3,"
+                }
+		if (timer.days.thursday) {
+                        days += "4,"
+                }
+		if (timer.days.friday) {
+                        days += "5,"
+                }
+		if (timer.days.saturday) {
+                        days += "6,"
+                }
+		if (timer.days.sunday) {
+                        days += "7"
+                }
+		var time = 0
+		if (timer.time.preset == "none" && timer.time.hours) {
+			time = timer.time.hours * 60
+			time = Number(time) + Number(timer.time.minutes|| 0)
+			time = time * 60
+		}
+		var date = new Date()
+		var timestamp = (date.getTime() / 1000)
+		logger.info(dir + "Assistant/createTimer.sh '" + timer.device.name + "' '" + timer.action + "' " + Math.floor(timestamp) + " " + timer.device.type.toLowerCase() + " " + timer.days.preset + " " + timer.time.preset + " " + days + " " + time)
+		execSync(dir + "Assistant/createTimer.sh '" + timer.device.name + "' '" + timer.action + "' " + Math.floor(timestamp) + " " + timer.device.type.toLowerCase() + " " + timer.days.preset + " " + timer.time.preset + " " + days + " " + time )
+
+	}
 })
 app.route('/api/updateConfig/').post((req,res) => {
 	logger.info("New config", req.body)

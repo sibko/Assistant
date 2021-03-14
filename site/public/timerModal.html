@@ -8,39 +8,100 @@
                     <div class="col-form-label">Minutes:</div>
             </td>
             <td>
-                <input class="form-control" type="tel" id="minutes" ng-model="minutes" />
+                <input class="form-control" maxlength=4 size=4 type="tel" id="minutes" ng-model="minutes" />
             </td>
-            <td>
-                <button class="btn btn-success" type="button" ng-click="createTimer(device, func);closeModal()">Set</button>
-            </td>
+	    <td>
+	    </td>
+	    <td>
+	    </td>
         </tr>
 	<tr>
+
 		<td>
-			<div class="col-form-label">Sunrise</div>
+			<input class="form-check-input" type="radio" name="time" value="sunrise" ng-model="time.preset" id="sunrise">
+			<label class="form-check-label" for="sunrise">
+    				Sunrise
+			</label>
 		</td>
 		<td>
-			<button class="btn btn-primary" type="button" ng-click="createDailyTimer(device, func, 'all', 'sunrise');closeModal()">Every Day</button>
+			<input class="form-check-input" type="radio" name="time" ng-model="time.preset" value="sunset" id="sunset">
+                        <label class="form-check-label" for="sunset">
+                                Sunset
+                        </label>
 		</td>
 		<td>
-                        <button class="btn btn-warning" type="button" ng-click="createDailyTimer(device, func, 'weekend', 'sunrise');closeModal()">Weekends</button>
+			<input class="form-check-input" type="radio" name="time" ng-model="time.preset" value="none" id="none">
+                        <label class="form-check-label" for="none">
+                               	Custom
+                        </label>
+                </td>
+		<td>
+			<input maxlength=2 size=2 type="textbox" id="hours" ng-model="time.hours">
+                        :
+                        <input maxlength=2 size=2 type="textbox" id="minutes" ng-model="time.minutes">
                 </td>
 	</tr>
 	<tr>
-                <td>
-                        <div class="col-form-label">Sunset</div>
+		<td>
+                        <input class="form-check-input" type="radio" name="days" ng-model="days.preset" value="daily" id="daily">
+                        <label class="form-check-label" for="daily">
+                                Daily
+                        </label>
                 </td>
                 <td>
-                        <button class="btn btn-primary" type="button" ng-click="createDailyTimer(device, func, 'all', 'sunset');closeModal()">Every Day</button>
+                        <input class="form-check-input" type="radio" name="days" ng-model="days.preset" value="weekend" id="weekend">
+                        <label class="form-check-label" for="weekend">
+                                Weekend
+                        </label>
                 </td>
-                <td>
-                        <button class="btn btn-warning" type="button" ng-click="createDailyTimer(device, func, 'weekend', 'sunset');closeModal()">Weekends</button>
+		<td>
+                        <input class="form-check-input" type="radio" name="days" ng-model="days.preset" value="custom" id="custom">
+                        <label class="form-check-label" for="custom">
+                                Custom
+                        </label>
                 </td>
+		<td>
+		</td>
+
         </tr>
-		
+</table>
+<table>
+	<tr>
+		<td style="padding-right:20px">
+			Monday: 
+			<input type="checkbox" id="monday" ng-model="days.monday">
+		</td>
+		<td style="padding-right:20px">
+                        Tuesday:
+                        <input type="checkbox" id="tuesday" ng-model="days.tuesday">
+                </td>
+		<td style="padding-right:20px">
+                        Wednesday:
+                        <input type="checkbox" id="wednesday" ng-model="days.wednesday">
+                </td>
+		<td style="padding-right:20px">
+                        Thursday:
+                        <input type="checkbox" id="thursday" ng-model="days.thursday">
+                </td>
+		<td style="padding-right:20px">
+                        Friday:
+                        <input type="checkbox" id="friday" ng-model="days.friday">
+                </td>
+		<td style="padding-right:20px">
+                        Saturday:
+                        <input type="checkbox" id="saturday" ng-model="days.saturday">
+                </td>
+		<td style="padding-right:20px">
+                        Sunday:
+                        <input type="checkbox" id="sunday" ng-model="days.sunday">
+                </td>
+	</tr>
             </table>
 
 </div>
 <div class="modal-footer">
+	<button class="btn btn-success" type="button" ng-click="submitTimer(device,func); closeModal()">Set</button>
+
     <button class="btn btn-warning" type="button" ng-click="closeModal()">Close</button>
 
 </div>

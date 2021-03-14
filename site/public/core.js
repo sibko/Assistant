@@ -326,6 +326,8 @@ deviceControl.controller("TimerHandlerController", function ($scope, $http, $uib
 	$scope.func = func
 	console.log(device, func)
 	$scope.minutes = 0;
+	$scope.time = {preset:"none"}
+	$scope.days = {preset:"custom"}
 	$scope.createTimer = function (device, action) {
 		$http.get('/api/device/' + device.name + '/' + action + '/' + $scope.minutes)
 			.then(function (data) {
@@ -344,6 +346,15 @@ deviceControl.controller("TimerHandlerController", function ($scope, $http, $uib
 	$scope.closeModal = function () {
 		$uibModalInstance.close();
 	}
+	$scope.submitTimer = function (device, action) {
+                console.log($scope.time, $scope.days, device, action)
+		
+		$http.post('/api/createTimer/', JSON.stringify({device: device, action: action, days: $scope.days, time:$scope.time, minutes: $scope.minutes})).then(function(data) {
+                        console.log(data)
+                }, function (error) {
+                        console.log('Error: ' + error);
+                })
+        }
 
 });
 
