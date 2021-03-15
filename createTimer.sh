@@ -15,7 +15,7 @@ timepreset=$6
 days=$7
 time=$8
 
-while [ -f "$dir/timers/$timepreset$date" ]; do
+while [ -f "$dir/timers/$timepreset-$date" ]; do
 	date=$((date + 1))
 done
-echo "$device:$action:$type:$dayspreset:8:$days:$time" > $dir/timers/$timepreset$date
+echo "$device:$action:$type:$dayspreset:8:$days:$time" > $dir/timers/$timepreset-$date

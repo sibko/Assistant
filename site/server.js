@@ -167,8 +167,29 @@ getTimers = function () {
 		var obj = {}
 		obj.id = timer
 		if (isNaN(timer)) {
-			obj.time = timer.split("1")[0]
-			obj.days = item.split(":")[3]
+			obj.timepreset = timer.split("-")[0]
+			obj.dayspreset = item.split(":")[3]
+			var days = item.split(":")[5]
+			obj.days=""
+			days.split(",").forEach(function(day){
+				if (day == 1) obj.days += "Mon/"
+				if (day == 2) obj.days += "Tue/"
+				if (day == 3) obj.days += "Wed/"
+				if (day == 4) obj.days += "Thu/"
+				if (day == 5) obj.days += "Fri/"
+				if (day == 6) obj.days += "Sat/"
+				if (day == 7) obj.days += "Sun/"
+			})
+			
+			var time = item.split(":")[6]
+			if (time && time > 0) {
+				var today= new Date()
+				today.setMinutes(0)
+				today.setHours(0)
+				today.setSeconds(0)
+				var todaystime = new Date(today.getTime() + time * 1000)
+				obj.time= todaystime.getHours() + ":" + todaystime.getMinutes()
+			}
 		} else {
 			obj.date = new Date(timer * 1000).toString().split(" GMT")[0];
 		}
@@ -373,8 +394,8 @@ app.route('/api/createTimer/').post((req,res) => {
 		}
 		var date = new Date()
 		var timestamp = (date.getTime() / 1000)
-		logger.info(dir + "Assistant/createTimer.sh '" + timer.device.name + "' '" + timer.action + "' " + Math.floor(timestamp) + " " + timer.device.type.toLowerCase() + " " + timer.days.preset + " " + timer.time.preset + " " + days + " " + time)
-		execSync(dir + "Assistant/createTimer.sh '" + timer.device.name + "' '" + timer.action + "' " + Math.floor(timestamp) + " " + timer.device.type.toLowerCase() + " " + timer.days.preset + " " + timer.time.preset + " " + days + " " + time )
+		logger.info(dir + "Assistant/createTimer.sh '" + timer.device.name + "' '" + timer.action + "' '" + Math.floor(timestamp) + "' '" + timer.device.type.toLowerCase() + "' '" + timer.days.preset + "' '" + timer.time.preset + "' '" + days + "' '" + time + "'")
+		execSync(dir + "Assistant/createTimer.sh '" + timer.device.name + "' '" + timer.action + "' '" + Math.floor(timestamp) + "' '" + timer.device.type.toLowerCase() + "' '" + timer.days.preset + "' '" + timer.time.preset + "' '" + days + "' '" + time + "'")
 
 	}
 })
