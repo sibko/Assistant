@@ -47,7 +47,18 @@ var loadConfig = function () {
 	groups = config.groups
 	devices = config.devices
 }
-
+var updateConfig = function (newConfig, writeMotion) {
+	Object.keys(config).forEach(function(key) {
+		if (writeMotion || key != "motionDetect") {
+			config[key] = newConfig[key]
+		}
+	})
+	fs.writeFileSync(dir + 'Assistant/config.json', JSON.stringify(config,null,2))
+}
+fs.watchFile(dir + 'Assistant/config.json', function (curr, prev) {
+	logger.info("change to config")
+	loadConfig()
+})
 var getFreePlugs = function(config, includeHidden) {
 	var freeIDs = {}
 	Object.keys(config.plugs).forEach(function(plug){
@@ -75,13 +86,18 @@ loadConfig()
 var item = fs.readFileSync(dir + "Assistant/popular.json", 'utf8')
 var poplist = JSON.parse(item)
 
-createTimer = function (id, action, minutes, type) {
-	logger.info(id, action, minutes, type)
-	var date = new Date()
-	var timestamp = (date.getTime() / 1000) + minutes * 60
-	logger.info("TIMESTAMP", timestamp)
-	execSync(dir + "Assistant/createTimer.sh '" + id + "' '" + action + "' " + Math.floor(timestamp) + " " + type.toLowerCase())
-
+createSimpleTimer = function (timer) {
+	var timestamp = timer.minutes * 60 * 1000
+        var now = new Date()
+        timestamp += now.getTime()
+        config.timers.push({
+	        deviceName: timer.device.name,
+                action: timer.action,
+                triggerAt: timestamp,
+                id: now.getTime()
+        })
+        updateConfig(config, true)
+	logger.info(timer)
 }
 
 restartServer = function () {
@@ -159,7 +175,7 @@ getdevice = function (requested) {
 }
 
 getTimers = function () {
-	var timers = fs.readdirSync(dir + "timers/")
+	var timers = config.timers
 	var ret = [];
 	logger.info(timers);
 	timers.forEach(function (timer) {
@@ -213,7 +229,13 @@ logAction = function (device) {
 
 deleteTimer = function (timer) {
 	logger.info(timer)
-	fs.unlinkSync(dir + "timers/" + timer)
+	config.timers.forEach(function(conftimer, index){
+		if (conftimer.id == timer) {
+			config.timers.splice(index,1);
+			updateConfig(config,true)
+			return
+		}
+	})
 }
 var info = []
 getDirTree = function(filename) {
@@ -241,7 +263,7 @@ app.route('/api/poplist/').get((req, res) => {
 	res.send(poplist);
 });
 app.route('/api/timers/').get((req, res) => {
-	res.send(getTimers());
+	res.send(config.timers);
 });
 app.route('/api/timers/:timer').get((req, res) => {
 	const requestedTimer = req.params['timer'];
@@ -259,7 +281,7 @@ app.route('/api/groups/:name').get((req, res) => {
 		case 'timer':
 			group.ids.forEach(function (id, index){
 				logger.info("timer", id, group.actions[index], group.minutes)
-				createTimer(id, group.actions[index], group.minutes, group.types[index]);
+				createSimpleTimer({device: {name: id}, action: group.actions[index], minutes:group.minutes});
 			})
 			break;
 		case 'simple':
@@ -283,6 +305,15 @@ app.route('/api/device/:name/Logs/').get((req, res) => {
 		res.send(log);
 	})
 })
+app.route('/api/motion/:id').get((req, res) => {
+        var id = req.params['id'];
+        var time = new Date()
+	config.motionDetection = config.motionDetection || {}
+	config.motionDetection[id] = config.motionDetection[id] || {}
+	config.motionDetection[id].lastDetection = Math.round(time.getTime() / 1000)
+	updateConfig(config, true)
+        res.send("logged " + id + " " + time );
+});
 app.route('/api/device/:name/ping/').get((req, res) => {
 	const requesteddevice = req.params['name'];
 	pingDevice(getdevice(requesteddevice)).then(function (status) {
@@ -321,15 +352,6 @@ app.route('/api/device/:name/:action').get((req, res) => {
 	res.send("Complete");
 });
 
-app.route('/api/device/:name/:action/:timer').get((req, res) => {
-	const devicename = req.params['name'];
-	const device = getdevice(devicename)
-	const action = req.params['action'];
-	const timer = req.params['timer'];
-	logger.info("timer", device.name, action, timer)
-	createTimer(device.name, action, timer, device.type);
-	res.send("Complete");
-});
 var waiting = false
 app.route('/api/getMusic/').get((req,res) => {
 	if (info.length == 0) {
@@ -361,8 +383,9 @@ app.route('/api/camera/').get((req,res) => {
 app.route('/api/createTimer/').post((req,res) => {
         logger.info("new Timer", req.body)
 	var timer = req.body
+	config.timers = config.timers || []
 	if (timer.minutes && timer.minutes > 0) {
-        	createTimer(timer.device.name, timer.action, timer.minutes, timer.device.type);
+		createSimpleTimer(timer)
 	} else {
 		var days = ""
 		if (timer.days.monday) {
@@ -393,14 +416,28 @@ app.route('/api/createTimer/').post((req,res) => {
 			time = time * 60
 		}
 		var date = new Date()
-		var timestamp = (date.getTime() / 1000)
-		logger.info(dir + "Assistant/createTimer.sh '" + timer.device.name + "' '" + timer.action + "' '" + Math.floor(timestamp) + "' '" + timer.device.type.toLowerCase() + "' '" + timer.days.preset + "' '" + timer.time.preset + "' '" + days + "' '" + time + "'")
-		execSync(dir + "Assistant/createTimer.sh '" + timer.device.name + "' '" + timer.action + "' '" + Math.floor(timestamp) + "' '" + timer.device.type.toLowerCase() + "' '" + timer.days.preset + "' '" + timer.time.preset + "' '" + days + "' '" + time + "'")
-
+		var timestamp = date.getTime()
+		config.timers = config.timers || []
+		config.timers.push(
+			{
+				deviceName: timer.device.name,
+				action: timer.action,
+				timestamp: Math.floor(timestamp),
+				type: timer.device.type.toLowerCase(),
+				daysPreset: timer.days.preset,
+				timePreset: timer.time.preset,
+				days: days,
+				time: time,
+				id: date.getTime(),
+				currentDay: 8
+			}
+		)
+		updateConfig(config)
 	}
 })
 app.route('/api/updateConfig/').post((req,res) => {
 	logger.info("New config", req.body)
+	updateConfig(req.body)
 	fs.writeFileSync(dir + 'Assistant/config.json', JSON.stringify(req.body,null,2))
 	loadConfig()
 	res.send("thank you")

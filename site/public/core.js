@@ -185,6 +185,30 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 			.then(function (data) {
 				console.log("TIMERS", data);
 				$scope.timers = data.data
+				$scope.timers.forEach(function(timer){
+					if(timer.triggerAt) timer.date = new Date(timer.triggerAt)
+					if (timer.days && timer.days != ""){
+						timer.niceDays = ""
+						timer.days.split(",").forEach(function(day){
+                        				if (day == 1) timer.niceDays += "Mon/"
+			                                if (day == 2) timer.niceDays += "Tue/"
+			                                if (day == 3) timer.niceDays += "Wed/"
+			                                if (day == 4) timer.niceDays += "Thu/"
+			                                if (day == 5) timer.niceDays += "Fri/"
+			                                if (day == 6) timer.niceDays += "Sat/"
+			                                if (day == 7) timer.niceDays += "Sun/"
+                        			})
+					}
+					if (timer.timePreset && timer.timePreset == "none") {
+						var today= new Date()
+		                                today.setMinutes(0)
+		                                today.setHours(0)
+		                                today.setSeconds(0)
+		                                var todaystime = new Date(today.getTime() + timer.time * 1000)
+		                                timer.niceTime= todaystime.getHours() + ":" + todaystime.getMinutes()
+					}
+				})
+
 			})
 	}
 

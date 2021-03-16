@@ -156,8 +156,8 @@
                     <td><button type="button" class="btn btn-danger" ng-click="openFreePlugsModal()">Show</button></td>
                 </tr>
                 <tr ng-repeat="timer in timers" ng-if="location == 'Timers'">
-                    <td>{{timer.date || timer.dayspreset + ' ' +  timer.timepreset + ' ' + timer.days + ' ' + timer.time}}</td>
-                    <td>{{timer.device}}</td>
+                    <td>{{timer.date || timer.daysPreset + ' ' +  timer.timePreset + ' ' + timer.niceDays + ' ' + timer.niceTime}}</td>
+                    <td>{{timer.deviceName}}</td>
                     <td>{{timer.action}}</td>
                     <td><button type="button" class="btn btn-danger" ng-click="deleteTimer(timer)">Delete</button></td>
                 </tr>

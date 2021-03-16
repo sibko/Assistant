@@ -14,12 +14,18 @@ req('https://www.visitnorthwest.com/sunrise-sunset-times/sunderland/', function 
 				var sunset = row.split('<td>')[3].split('</td>')[0];
 				var sunsetDate = new Date(new Date(new Date(rdate).setHours(parseInt(sunset.split(':')[0]) + 12)).setMinutes(sunset.split(':')[1].split(' ')[0]))
 				console.log("DATE: ", rdate, " - sunrise: ", sunriseDate, " - sunset: ", sunsetDate, sunrise, sunset)
-				var seconds = "z" + (rdate.getTime() / 1000).toString().split('.')[0]
+				var seconds = rdate.toLocaleDateString()
 				data[seconds] = {}
-				data[seconds].sunrise = (sunriseDate.getTime() / 1000).toString().split('.')[0]
-				data[seconds].sunset = (sunsetDate.getTime() / 1000).toString().split('.')[0]
+				data[seconds].sunrise = sunriseDate.getTime()
+				data[seconds].sunset = sunsetDate.getTime()
 			}
 		})		
-		fs.writeFileSync('./sunriseSunset', JSON.stringify(data))
+		console.log(data)
+		var config = {}
+		var confFile = '/home/sibko/Assistant/config.json'
+		config = fs.readFileSync(confFile, 'utf8')
+		config = JSON.parse(config)
+		config.daylightTimes = data
+		fs.writeFileSync(confFile, JSON.stringify(config,null,2))
 	}
 })
