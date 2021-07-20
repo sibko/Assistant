@@ -102,7 +102,9 @@
         window.addEventListener("hashchange", function () { scrollBy(0, -50) });
 
     </script>
-
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
 </head>
 <!-- SET THE CONTROLLER AND GET ALL TODOS -->
 
@@ -164,6 +166,10 @@
                 <tr ng-repeat="group in groups" ng-if="location == 'Groups'">
                     <td>{{group.name}}</td>
                     <td><button type="button" class="btn btn-success" ng-click="performGroupAction(group)">Use</button></td>                    
+                </tr>
+		<tr ng-repeat="(id, motion) in motions" ng-if="location == 'Motions'">
+                    <td>{{motion.friendlyName || id}}</td>
+                    <td><button type="button" class="btn btn-success" ng-click="openMotionModal(id, motion)">Settings</button></td>
                 </tr>
             </table>
         </div>

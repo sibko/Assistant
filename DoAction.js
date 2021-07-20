@@ -53,36 +53,71 @@ var sendESPRequest = function (id, action) {
     return defer.promise
 }
 
-var sendESP433 = function (host, code, length, attempts, protocol) {
+var sendESP433 = function (hostname, code, length, attempts, protocol) {
     var _d = q.defer()
     var getquery = { "code": code, "length": length, "attempts": attempts, "protocol": protocol }
     var query = querystring.stringify(getquery);
-    console.log("sending " + host + '/Transmit433?code=' + code + '&length=' + length + '&attempts=' + attempts + '&protocol=' + protocol)
-    request('http://' + host + '/Transmit433?' + query, function (err, res, body) {
-        console.log("Received: " + body)
-        if (err) {
-            _d.reject(err)
-        } else {
-            console.log(body);
-            _d.resolve();
-        }
-    });
+    console.log("sending " + hostname + '/Transmit433?code=' + code + '&length=' + length + '&attempts=' + attempts + '&protocol=' + protocol)
+	if (hostname == 'all') {
+		Object.keys(plugDevices.hosts).forEach(function(host, i) {
+			console.log(plugDevices.hosts[host])
+				setTimeout(function() {
+					request('http://' + plugDevices.hosts[host] + '/Transmit433?' + query, function (err, res, body) {
+			        console.log("Received: " + body)
+			        if (err) {
+			            _d.reject(err)
+			        } else {
+			            console.log(body);
+			            _d.resolve();
+			        }
+			});
+				}, i * 1000)
+		})
+	} else {
+
+		request('http://' + plugDevices.hosts[hostname] + '/Transmit433?' + query, function (err, res, body) {
+		        console.log("Received: " + body)
+        		if (err) {
+		            _d.reject(err)
+	        	} else {
+		            console.log(body);
+		            _d.resolve();
+		        }
+		});
+	}
     return _d.promise
 }
-var sendESP433Manual = function (host, code, longOnDelay, longOffDelay, shortOnDelay, shortOffDelay, bigOn, bigOff, endDelay, attempts) {
+var sendESP433Manual = function (hostname, code, longOnDelay, longOffDelay, shortOnDelay, shortOffDelay, bigOn, bigOff, endDelay, attempts) {
     var _d = q.defer()
     var getquery = { "code": code, "longon": longOnDelay, "longoff": longOffDelay, "shorton": shortOnDelay, "shortoff": shortOffDelay, "bigon":bigOn, "bigoff": bigOff, "enddelay":endDelay, "attempts": attempts }
     var query = querystring.stringify(getquery);
-    console.log("sending " + host + '/Transmit433?' + querystring.stringify(getquery))
-    request('http://' + host + '/Transmit433?' + query, function (err, res, body) {
-        console.log("Received: " + body)
-        if (err) {
-            _d.reject(err)
-        } else {
-            console.log(body);
-            _d.resolve();
-        }
-    });
+    console.log("sending " + hostname + '/Transmit433?' + querystring.stringify(getquery))
+
+	if (hostname == 'all') {
+                Object.keys(plugDevices.hosts).forEach(function(host, i) {
+			setTimeout(function(){
+				request('http://' + plugDevices.hosts[host] + '/Transmit433?' + query, function (err, res, body) {
+			        console.log("Received: " + body)
+		        	if (err) {
+			            _d.reject(err)
+			        } else {
+			            console.log(body);
+			            _d.resolve();
+			        }
+		        });
+			}, i*1000)
+		})
+	} else {
+		request('http://' + plugDevices.hosts[hostname] + '/Transmit433?' + query, function (err, res, body) {
+                                console.log("Received: " + body)
+                                if (err) {
+                                    _d.reject(err)
+                                } else {
+                                    console.log(body);
+                                    _d.resolve();
+                                }
+                        });
+	}
     return _d.promise
 }
 
@@ -214,7 +249,6 @@ var processActions = function (device, actions) {
 	
 	                    }
 	                }
-	                var host = plugDevices.hosts[hostname]
 	//                if (action == 'bright' || action == 'dim') {
 	  //                  attempts = 25
 	    //                code = plugDevice['x10' + action]
@@ -228,9 +262,9 @@ var processActions = function (device, actions) {
 	                    var bigOff = plugDevice.bigOff * 1000000
 	                    var extendedDelay = plugDevice.extendedDelay * 1000000
 	                    var endDelay = plugDevice.endDelay * 1000000
-	                    var promise = sendESP433Manual(host, code, longOnDelay, longOffDelay, shortOnDelay, shortOffDelay, bigOn, bigOff, endDelay, attempts)
+	                    var promise = sendESP433Manual(hostname, code, longOnDelay, longOffDelay, shortOnDelay, shortOffDelay, bigOn, bigOff, endDelay, attempts)
 	                } else {
-	                    var promise = sendESP433(host, code, length, attempts, protocol);
+	                    var promise = sendESP433(hostname, code, length, attempts, protocol);
 	                }
 	                promises.push(promise)
 	                

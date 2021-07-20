@@ -1,0 +1,206 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">{{func}} timer</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <table class="table table-sm table-striped">
+	<tr>
+            <td>
+                    <div class="col-form-label">ID:</div>
+            </td>
+            <td>
+                <input class="form-control" type="textbox" id="motionId" ng-model="id" ng-disabled=true />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                    <div class="col-form-label">Name:</div>
+            </td>
+            <td>
+                <input class="form-control" type="textbox" id="friendlyName" ng-model="motion.friendlyName" />
+            </td>
+        </tr>
+	<tr>
+            <td>
+                    <div class="col-form-label">Last Detection:</div>
+            </td>
+            <td>
+		    <input class="form-control" type="textbox" id="lastDetection" ng-model="motion.lastDetection" />
+            </td>
+	</tr>
+	<tr>
+            <td>
+                    <div class="col-form-label">Actions On First Trigger:</div>
+            </td>
+	    <td>
+		    <table>
+			    <tr ng-repeat="action in motion.actionsOnFirstTrigger">
+            			<td>
+			            	<select name="firstTriggerDev" ng-model="action.device">
+						<option ng-repeat="(name,functions) in devices" value="{{name}}">{{name}}</option>
+					</select>
+					-
+					<select name="firstTriggerAct" ng-model="action.action">
+						<option ng-repeat="action in devices[action.device]" value="{{action.toLowerCase()}}">{{action}}</option>
+                			</select>
+				    </td>
+				    <td>
+					    <button class="btn btn-sm btn-danger" type="button" ng-click="deleteFirstTriggerAction(action.device)">Delete Action</button>
+				    </td>
+
+			    </tr>
+			    <tr>
+				    <td>
+					    <button class="btn btn-sm btn-success" type="button" ng-click="addFirstTriggerAction()">Add Action</button>
+				    </td>
+			    </tr>
+		    </table>
+        </tr>
+	<tr>
+            <td>
+                    <div class="col-form-label">Actions On Timeout:</div>
+            </td>
+            <td>
+                    <table>
+                            <tr ng-repeat="action in motion.actionsOnTimeout">
+                                <td>
+                                        <select name="timeoutTriggerDev" ng-model="action.device">
+                                                <option ng-repeat="(name,functions) in devices" value="{{name}}">{{name}}</option>
+                                        </select>
+                                        -
+                                        <select name="timeoutTriggerAct" ng-model="action.action">
+                                                <option ng-repeat="action in devices[action.device]" value="{{action.toLowerCase()}}">{{action}}</option>
+                                        </select>
+                                    </td>
+				    <td>
+                                            <button class="btn btn-sm btn-danger" type="button" ng-click="deleteTimeoutAction(action.device)">Delete Action</button>
+                                    </td>
+                            </tr>
+                            <tr>
+                                    <td>
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="addTimeoutAction()">Add Action</button>
+                                    </td>
+                            </tr>
+                    </table>
+        </tr>
+	<tr>
+            <td>
+                    <div class="col-form-label">Timeout (mins):</div>
+            </td>
+            <td>
+                <input class="form-control" type="textbox" id="timeout" ng-model="motion.timeout" />
+            </td>
+        </tr>
+
+	<tr>
+            <td>
+                    <div class="col-form-label">Actions On Each Trigger:</div>
+            </td>
+            <td>
+                    <table>
+                            <tr ng-repeat="action in motion.actionsOnEachTrigger">
+                                <td>
+                                        <select name="eachTriggerDev" ng-model="action.device">
+                                                <option ng-repeat="(name,functions) in devices" value="{{name}}">{{name}}</option>
+                                        </select>
+                                        -
+                                        <select name="eachTriggerDev" ng-model="action.action">
+                                                <option ng-repeat="action in devices[action.device]" value="{{action.toLowerCase()}}">{{action}}</option>
+                                        </select>
+                                    </td>
+				    <td>
+                                            <button class="btn btn-sm btn-danger" type="button" ng-click="deleteEachTriggerAction(action.device)">Delete Action</button>
+                                    </td>
+                            </tr>
+                            <tr>
+                                    <td>
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="addEachTriggerAction()">Add Action</button>
+                                    </td>
+                            </tr>
+                    </table>
+        </tr>
+	<tr>
+		<td>
+                    <div class="col-form-label">Active From: </div>
+        	</td>
+		<td>
+                        <input class="form-check-input" type="radio" name="fromtime" value="custom" ng-model="motion.fromPreset" id="fromCustom">
+                        <label class="form-check-label" for="fromCustom">
+                                Custom
+                        </label>
+			<input maxlength=2 size=2 type="textbox" id="fromHours" ng-model="motion.fromHours">
+                        :
+                        <input maxlength=2 size=2 type="textbox" id="fromMinutes" ng-model="motion.fromMinutes">
+                </td>
+		 <td>
+                        <input class="form-check-input" type="radio" name="fromtime" value="sunrise" ng-model="motion.fromPreset" id="sunrise">
+                        <label class="form-check-label" for="sunrise">
+                                Sunrise
+                        </label>
+                </td>
+                <td>
+                        <input class="form-check-input" type="radio" name="fromtime" ng-model="motion.fromPreset" value="sunset" id="sunset">
+                        <label class="form-check-label" for="sunset">
+                                Sunset
+                        </label>
+                </td>
+	</tr>
+	<tr>
+                <td>
+                    <div class="col-form-label">Active To: </div>
+                </td>
+                <td>
+			<input class="form-check-input" type="radio" name="totime" value="custom" ng-model="motion.toPreset" id="toCustom">
+                        <label class="form-check-label" for="toCustom">
+                                Custom
+                        </label>
+                        <input maxlength=2 size=2 type="textbox" id="toHours" ng-model="motion.toHours">
+                        :
+                        <input maxlength=2 size=2 type="textbox" id="toMinutes" ng-model="motion.toMinutes">
+                </td>
+		<td>
+                        <input class="form-check-input" type="radio" name="totime" value="sunrise" ng-model="motion.toPreset" id="tosunrise">
+                        <label class="form-check-label" for="tosunrise">
+                                Sunrise
+                        </label>
+                </td>
+                <td>
+                        <input class="form-check-input" type="radio" name="totime" ng-model="motion.toPreset" value="sunset" id="tosunset">
+                        <label class="form-check-label" for="tosunset">
+                                Sunset
+                        </label>
+                </td>
+        </tr>
+	<tr>
+                <td>
+                    <div class="col-form-label">Disabled: </div>
+                </td>
+                <td>
+                        <input type="checkbox" id="repeat" ng-model="motion.disabled">
+                </td>
+        </tr>
+	<tr>
+                <td>
+                    <div class="col-form-label">Repeat: </div>
+                </td>
+                <td>
+                        <input maxlength=2 size=2 type="textbox" id="repeat" ng-model="motion.repeat">
+                </td>
+        </tr>
+	 <tr>
+
+            <td>
+                    <div class="col-form-label">Processed: </div>
+            </td>
+            <td>
+		    {{motion.processed}}
+	    </td>
+        </tr>
+</table>
+
+</div>
+<div class="modal-footer">
+	<button class="btn btn-success" type="button" ng-click="submitMotion(); closeModal()">Set</button>
+
+    <button class="btn btn-warning" type="button" ng-click="closeModal()">Close</button>
+
+</div>

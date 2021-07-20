@@ -37,6 +37,7 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 					})
 				}
 			})
+			$scope.locations.push('Motions')
 			$scope.locations.push('Timers')
 			$scope.locations.push('Admin')
 			console.log("Received devices", data);
@@ -111,6 +112,31 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 		});
 
 	}
+	$scope.openMotionModal = function (id, motion) {
+                $scope.modalInstance = $uibModal.open({
+                        ariaLabelledBy: 'modal-title',
+                        ariaDescribedBy: 'modal-body',
+                        templateUrl: 'motionModal.html',
+                        controller: 'MotionHandlerController',
+                        controllerAs: '$ctrl',
+                        size: 'lg',
+                        resolve: {
+                                id: function () {
+                                        return id
+                                },
+				motion: function() {
+					return motion
+				},
+				devices: function() {
+					return $scope.devices
+				}
+                        }
+                }).closed.then(function () {
+                        $scope.getTimers()
+			$scope.getMotions()
+                });
+
+        }
 	$scope.restartServer = function () {
 		 $http.get('/api/restartServer')
                         .then(function (data) {
@@ -211,6 +237,14 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 
 			})
 	}
+	$scope.motions = {}
+	$scope.getMotions = function () {
+                $http.get('/api/motion/')
+                        .then(function (data) {
+                                console.log("motions", data);
+				$scope.motions = data.data;
+			})
+	}
 
 	$scope.deleteTimer = function (timer) {
 		$http.get('/api/timers/' + timer.id)
@@ -223,10 +257,12 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 		if (item == 'Top' || item == 'Groups') {
 			return -1;
 		}
+		if (item == 'Motions') return +100
 		return item;
 	}
 	$scope.getPopList()
 	$scope.getTimers()
+	$scope.getMotions()
 }])
 
 deviceControl.controller("freePlugsHandlerController", function ($scope, $http, $uibModal, $uibModalInstance, $rootScope) {
@@ -269,6 +305,69 @@ deviceControl.controller("ConfigHandlerController", function ($scope, $http, $ui
 	$scope.closeModal = function () {
                 $uibModalInstance.close();
         }
+})
+
+deviceControl.controller("MotionHandlerController", function ($scope, $http, $uibModal, $uibModalInstance, id, motion,devices, $rootScope) {
+        console.log("modal", id, motion, devices)
+        console.log($rootScope)
+        $scope.id = id
+	var origLastDetection = motion.lastDetection
+	$scope.motion = motion
+	$scope.motion.actionsOnFirstTrigger = $scope.motion.actionsOnFirstTrigger  || []
+	$scope.motion.actionsOnEachTrigger = $scope.motion.actionsOnEachTrigger  || []
+	$scope.motion.timeout = $scope.motion.timeout || 0
+	$scope.motion.processed = $scope.motion.processed || false
+	$scope.motion.actionsOnTimeout = $scope.motion.actionsOnTimeout || []
+	$scope.motion.lastDetection = new Date($scope.motion.lastDetection)
+	$scope.motion.repeat = $scope.motion.repeat || 3
+	$scope.motion.fromPreset = $scope.motion.fromPreset || "custom"
+	$scope.motion.toPreset = $scope.motion.toPreset || "custom"
+	$scope.devices = {}
+	devices.forEach(function(device){
+		if (device.name && device.functions){
+			$scope.devices[device.name] = device.functions
+		}
+	})
+	console.log("NEW DEVICES", $scope.devices)
+	$scope.addFirstTriggerAction = function() {
+		$scope.motion.actionsOnFirstTrigger.push({})
+		console.log($scope.motion)
+	}
+	$scope.addTimeoutAction = function() {
+                $scope.motion.actionsOnTimeout.push({})
+                console.log($scope.motion)
+        }
+	$scope.addEachTriggerAction = function() {
+                $scope.motion.actionsOnEachTrigger.push({})
+                console.log($scope.motion)
+        }
+	$scope.deleteEachTriggerAction = function(name) {
+		$scope.motion.actionsOnEachTrigger.forEach(function(action, index){
+			if (action.device == name) $scope.motion.actionsOnEachTrigger.splice(index,1)
+		})
+        }
+	$scope.deleteTimeoutAction = function(name) {
+                $scope.motion.actionsOnTimeout.forEach(function(action, index){
+                        if (action.device == name) $scope.motion.actionsOnTimeout.splice(index,1)
+                })
+        }
+	$scope.deleteFirstTriggerAction = function(name) {
+                $scope.motion.actionsOnFirstTrigger.forEach(function(action, index){
+                        if (action.device == name) $scope.motion.actionsOnFirstTrigger.splice(index,1)
+                })
+        }
+	$scope.submitMotion = function() {
+		$scope.motion.lastDetection = origLastDetection
+		$http.post('/api/updateMotion/', {id: $scope.id, obj: $scope.motion}).then(function(data) {
+                        console.log(data)
+                }, function (error) {
+                        console.log('Error: ' + error);
+                })
+	}
+	$scope.closeModal = function () {
+                $uibModalInstance.close();
+        }
+
 })
 
 deviceControl.controller("DeviceHandlerController", function ($scope, $http, $uibModal, $uibModalInstance, device, $rootScope) {

@@ -130,10 +130,10 @@
     {
       "name": "Test",
       "ids": [
-        "Floureonb_"
+        "silvercrestall_"
       ],
       "type": "433",
-      "host": "upstairs",
+      "host": "downstairs",
       "location": "Test",
       "functions": [
         "on",
@@ -223,7 +223,7 @@
         "Silvercrestb_"
       ],
       "type": "433",
-      "host": "downstairs",
+      "host": "all",
       "location": "Hall",
       "functions": [
         "On",
@@ -372,11 +372,11 @@
     {
       "name": "Kitchen Lights",
       "ids": [
-        "Generica_"
+        "Floureona_"
       ],
       "type": "433",
       "location": "Kitchen",
-      "host": "downstairs",
+      "host": "all",
       "functions": [
         "On",
         "Off"
@@ -412,10 +412,11 @@
     {
       "name": "Dining Room Lamps",
       "ids": [
-        "Genericd_"
+        "Genericd_",
+        "Silvercresta_"
       ],
       "type": "433",
-      "host": "downstairs",
+      "host": "all",
       "location": "Dining Room",
       "functions": [
         "On",
@@ -1330,60 +1331,98 @@
     }
   },
   "motionDetection": {
-    "wemos1": {
-      "lastDetection": 1615909586
+    "we1": {
+      "actionsOnTimeout": [
+        {
+          "device": "Hall Lights",
+          "action": "off"
+        },
+        {
+          "device": "Breakfast Room Lamp",
+          "action": "off"
+        }
+      ],
+      "actionsOnFirstTrigger": [
+        {
+          "device": "Hall Lights",
+          "action": "on"
+        },
+        {
+          "device": "Breakfast Room Lamp",
+          "action": "on"
+        }
+      ],
+      "timeout": "10",
+      "actionsOnEachTrigger": [],
+      "lastDetection": 1626731718959,
+      "processed": true,
+      "friendlyName": "Hall",
+      "fromHours": "17",
+      "fromMinutes": "30",
+      "toHours": "25",
+      "toMinutes": "30",
+      "repeat": "1",
+      "fromPreset": "sunset",
+      "toPreset": "custom"
+    },
+    "we3": {
+      "lastDetection": "2021-03-31T22:01:45.457Z",
+      "processed": true,
+      "actionsOnFirstTrigger": [
+        {
+          "device": "Lounge Lights",
+          "action": "on"
+        }
+      ],
+      "actionsOnEachTrigger": [],
+      "timeout": "10",
+      "actionsOnTimeout": [],
+      "friendlyName": "Lounge",
+      "repeat": "1",
+      "fromPreset": "sunrise",
+      "toPreset": "sunset",
+      "disabled": true
+    },
+    "we2": {
+      "lastDetection": 1626731724926,
+      "processed": true,
+      "actionsOnFirstTrigger": [
+        {
+          "device": "Kitchen Lights",
+          "action": "on"
+        }
+      ],
+      "actionsOnEachTrigger": [],
+      "timeout": "10",
+      "actionsOnTimeout": [
+        {
+          "device": "Kitchen Lights",
+          "action": "off"
+        }
+      ],
+      "friendlyName": "Kitchen",
+      "fromHours": "17",
+      "fromMinutes": "30",
+      "toHours": "25",
+      "toMinutes": "0",
+      "repeat": 3,
+      "fromPreset": "sunset",
+      "toPreset": "custom"
+    },
+    "we4": {
+      "lastDetection": 1616760596471,
+      "processed": false,
+      "actionsOnFirstTrigger": [],
+      "actionsOnEachTrigger": [],
+      "timeout": 0,
+      "actionsOnTimeout": [],
+      "repeat": 3,
+      "fromPreset": "custom",
+      "toPreset": "custom",
+      "disabled": true
     }
   },
-  "timers": [
-    {
-      "deviceName": "Breakfast Room Lamp",
-      "action": "On",
-      "timestamp": 1615922681142,
-      "type": "433",
-      "daysPreset": "daily",
-      "timePreset": "sunset",
-      "days": "",
-      "time": 0,
-      "id": 1615922681142,
-      "currentDay": 2
-    },
-    {
-      "deviceName": "Breakfast Room Lamp",
-      "action": "Off",
-      "timestamp": 1615922694608,
-      "type": "433",
-      "daysPreset": "daily",
-      "timePreset": "none",
-      "days": "",
-      "time": 83100,
-      "id": 1615922694608,
-      "currentDay": 2
-    },
-    {
-      "deviceName": "Hall Lights",
-      "action": "On",
-      "timestamp": 1615922719023,
-      "type": "433",
-      "daysPreset": "daily",
-      "timePreset": "sunset",
-      "days": "",
-      "time": 0,
-      "id": 1615922719023,
-      "currentDay": 2
-    },
-    {
-      "deviceName": "Hall Lights",
-      "action": "Off",
-      "timestamp": 1615922725108,
-      "type": "433",
-      "daysPreset": "daily",
-      "timePreset": "none",
-      "days": "",
-      "time": 83100,
-      "id": 1615922725108,
-      "currentDay": 2
-    }
-  ],
+  "timers": [],
   "daylightTimes": {
     "16/03/2021": {
       "sunrise": 1615875360000,

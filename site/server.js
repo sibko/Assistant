@@ -174,49 +174,6 @@ getdevice = function (requested) {
 	}
 }
 
-getTimers = function () {
-	var timers = config.timers
-	var ret = [];
-	logger.info(timers);
-	timers.forEach(function (timer) {
-		var item = fs.readFileSync(dir + "timers/" + timer, 'utf8')
-		var obj = {}
-		obj.id = timer
-		if (isNaN(timer)) {
-			obj.timepreset = timer.split("-")[0]
-			obj.dayspreset = item.split(":")[3]
-			var days = item.split(":")[5]
-			obj.days=""
-			days.split(",").forEach(function(day){
-				if (day == 1) obj.days += "Mon/"
-				if (day == 2) obj.days += "Tue/"
-				if (day == 3) obj.days += "Wed/"
-				if (day == 4) obj.days += "Thu/"
-				if (day == 5) obj.days += "Fri/"
-				if (day == 6) obj.days += "Sat/"
-				if (day == 7) obj.days += "Sun/"
-			})
-			
-			var time = item.split(":")[6]
-			if (time && time > 0) {
-				var today= new Date()
-				today.setMinutes(0)
-				today.setHours(0)
-				today.setSeconds(0)
-				var todaystime = new Date(today.getTime() + time * 1000)
-				obj.time= todaystime.getHours() + ":" + todaystime.getMinutes()
-			}
-		} else {
-			obj.date = new Date(timer * 1000).toString().split(" GMT")[0];
-		}
-		obj.device = item.split(":")[0]
-		obj.action = item.split(":")[1]
-		ret.push(obj)
-	})
-	logger.info(ret);
-	return ret
-
-}
 
 logAction = function (device) {
 
@@ -265,6 +222,9 @@ app.route('/api/poplist/').get((req, res) => {
 app.route('/api/timers/').get((req, res) => {
 	res.send(config.timers);
 });
+app.route('/api/motion/').get((req,res) => {
+	res.send(config.motionDetection)
+})
 app.route('/api/timers/:timer').get((req, res) => {
 	const requestedTimer = req.params['timer'];
 	res.send(deleteTimer(requestedTimer));
@@ -305,13 +265,72 @@ app.route('/api/device/:name/Logs/').get((req, res) => {
 		res.send(log);
 	})
 })
+
+var getTime = function(preset) {
+	var daylightTimes = config.daylightTimes
+	var today = new Date()
+	return daylightTimes[today.toLocaleDateString()][preset]
+}
+
 app.route('/api/motion/:id').get((req, res) => {
+
+	console.log("MOTION DETECTED")
         var id = req.params['id'];
+	console.log(id)
         var time = new Date()
+	logger.info(time.getHours())
 	config.motionDetection = config.motionDetection || {}
 	config.motionDetection[id] = config.motionDetection[id] || {}
-	config.motionDetection[id].lastDetection = Math.round(time.getTime() / 1000)
-	updateConfig(config, true)
+	var motion = config.motionDetection[id]
+	console.log(motion.lastDetection + (60000 * motion.timeout), time.getTime())
+	console.log(motion)
+	var fromTimestamp = 0
+	var toTimestamp = 0
+	var today = new Date()
+        if (motion.fromPreset && motion.fromPreset != "custom") {
+		fromTimestamp = getTime(motion.fromPreset)
+	} else if (motion.fromHours && motion.fromHours != "") {
+		var fromTime = motion.fromHours * 60
+                fromTime = Number(fromTime) + Number(motion.fromMinutes|| 0)
+                fromTime = fromTime * 60000
+		fromTimestamp = new Date(today.toDateString())
+                fromTimestamp = fromTimestamp.getTime() + fromTime
+        }
+	if (motion.toPreset && motion.toPreset != "custom") {
+		toTimestamp = getTime(motion.toPreset)
+	} else if (motion.toHours && motion.toHours != "") {
+		 var toTime = motion.toHours * 60
+                toTime = Number(toTime) + Number(motion.toMinutes || 0)
+                toTime = toTime * 60000
+		toTimestamp = new Date(today.toDateString())
+                toTimestamp = toTimestamp.getTime() + toTime
+	}
+	console.log(fromTimestamp, toTimestamp, today.getTime())
+	var withinTimeframe = false
+	if (!motion.disabled && (fromTimestamp == 0  || fromTimestamp < today.getTime()) && (toTimestamp == 0 || toTimestamp > today.getTime()) ) {
+		withinTimeframe = true;
+		if ( motion.actionsOnFirstTrigger && motion.actionsOnFirstTrigger.length > 0 && motion.timeout && motion.lastDetection + (60000 * motion.timeout) < time.getTime()) {
+			for (var i=0;i < motion.repeat; i++) {
+				motion.actionsOnFirstTrigger.forEach(function(action){
+					console.log("DOING ACTION", action.device, action.action)
+					doAction(action.device, action.action);
+				})
+			}
+		}
+		if (motion.actionsOnEachTrigger && motion.actionsOnEachTrigger.length > 0) {
+			for (var i=0;i < motion.repeat; i++) {
+				motion.actionsOnEachTrigger.forEach(function(action) {
+					console.log("DOING ACTION", action.device, action.action)
+		                        doAction(action.device, action.action);
+	        	        })
+			}
+		}
+	}
+	if(withinTimeframe){
+		motion.lastDetection = time.getTime()
+		motion.processed = false
+		updateConfig(config, true)
+	}
         res.send("logged " + id + " " + time );
 });
 app.route('/api/device/:name/ping/').get((req, res) => {
@@ -380,6 +399,13 @@ app.route('/api/camera/').get((req,res) => {
         var item = fs.readFileSync(dir + "wakecamera", 'utf8')
 	res.send(item)
 })
+app.route('/api/updateMotion/').post((req,res) => {
+        logger.info("update Motion", req.body)
+        var id = req.body.id
+	var obj = req.body.obj
+	config.motionDetection[id] = obj
+	updateConfig(config)
+})
 app.route('/api/createTimer/').post((req,res) => {
         logger.info("new Timer", req.body)
 	var timer = req.body
@@ -413,7 +439,7 @@ app.route('/api/createTimer/').post((req,res) => {
 		if (timer.time.preset == "none" && timer.time.hours) {
 			time = timer.time.hours * 60
 			time = Number(time) + Number(timer.time.minutes|| 0)
-			time = time * 60
+			time = time * 60000
 		}
 		var date = new Date()
 		var timestamp = date.getTime()
