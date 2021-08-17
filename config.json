@@ -1354,7 +1354,7 @@
       ],
       "timeout": "10",
       "actionsOnEachTrigger": [],
-      "lastDetection": 1626731718959,
+      "lastDetection": 1629152316511,
       "processed": true,
       "friendlyName": "Hall",
       "fromHours": "17",
@@ -1384,7 +1384,7 @@
       "disabled": true
     },
     "we2": {
-      "lastDetection": 1626731724926,
+      "lastDetection": 1629152319108,
       "processed": true,
       "actionsOnFirstTrigger": [
         {
@@ -1422,7 +1422,14 @@
       "disabled": true
     }
   },
-  "timers": [],
+  "timers": [
+    {
+      "deviceName": "http://192.168.0.189:1967/api/stop/",
+      "action": "URL",
+      "triggerAt": 1629224236735,
+      "id": 1629224176735
+    }
+  ],
   "daylightTimes": {
     "16/03/2021": {
       "sunrise": 1615875360000,

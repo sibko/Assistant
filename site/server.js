@@ -406,6 +406,16 @@ app.route('/api/updateMotion/').post((req,res) => {
 	config.motionDetection[id] = obj
 	updateConfig(config)
 })
+app.route('/api/stopIn2Hours/').post((req, res) => {
+    logger.info("stop in 2 hours", req.body)
+    var url = req.body.url
+    var timer = {
+        minutes: 120,
+        device: { name: url },
+        action: "URL"
+    }
+    createSimpleTimer(timer)
+})
 app.route('/api/createTimer/').post((req,res) => {
         logger.info("new Timer", req.body)
 	var timer = req.body

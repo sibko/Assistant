@@ -45,14 +45,21 @@ timers.forEach(function(timer, timerIndex) {
 			}
 		}
 	} else if (timer.triggerAt && timer.triggerAt < today.getTime()) {
-		var command = 'node ' + doActionFile + ' "' + timer.deviceName + '" "' + timer.action + '"'
+		if (timer.action == 'URL') {
+			var command = 'curl ' + timer.deviceName 
+			var res = execSync(command)
+	        console.log("URL Timer", res.toString())
+			updated = true
+		} else {
+			var command = 'node ' + doActionFile + ' "' + timer.deviceName + '" "' + timer.action + '"'
 
-                                for (var i=0;i < 3; i++) {
-					var res = execSync(command)
-	                                console.log("DoAction", res.toString())
-					updated = true
-				}
-				toDelete.push(timer.id)
+                        for (var i=0;i < 3; i++) {
+				var res = execSync(command)
+	                        console.log("DoAction", res.toString())
+				updated = true
+			}
+		}
+		toDelete.push(timer.id)
 	}
 })
 var motionDetection = config.motionDetection || {}

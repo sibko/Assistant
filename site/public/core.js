@@ -485,7 +485,7 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
 	console.log("mediamodal", device, func)
 	$scope.device = device
 	$scope.func = func
-	$scope.actions = ['Volume Up','Pause','Volume Down','Skip','Set Volume','Stop','Get Music', '', 'Clear Queue']
+	$scope.actions = ['Volume Up','Pause','Volume Down','Skip','Set Volume','Stop','Get Music', '2 Hours', 'Clear Queue']
 	console.log(device, func)
 	$scope.lines = [1,2,3]
 	$scope.closeModal = function () {
@@ -524,7 +524,13 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
                         }, function (error) {
                                 console.log('Error: ' + error);
                         });
-		} else {
+		} else if (action == '2 Hours') {
+			var url = '/api/stopIn2Hours/'
+
+	        	$http.post('/api/stopIn2Hours/', { url: 'http://' + device.ip + ':1967/api/stop/' }).then(function(data) {
+				console.log("RECEIVED RESPONSE:", data)
+		        })
+		}  else {
 			$http.get('http://' + device.ip + ':1967/api/'+ action.replace(' ', '').toLowerCase() + '/').then(function(response){
 					console.log(response)
 				})
