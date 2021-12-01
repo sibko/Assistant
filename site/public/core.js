@@ -63,7 +63,7 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 					return b[1] - a[1]
 				})
 
-				tmppoplist.splice(7)
+				tmppoplist.splice(9)
 				tmppoplist.forEach(function (a) {
 					$scope.poplist.push(a[0])
 				})
@@ -230,7 +230,7 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 		                                today.setMinutes(0)
 		                                today.setHours(0)
 		                                today.setSeconds(0)
-		                                var todaystime = new Date(today.getTime() + timer.time * 1000)
+		                                var todaystime = new Date(today.getTime() + timer.time)
 		                                timer.niceTime= todaystime.getHours() + ":" + todaystime.getMinutes()
 					}
 				})

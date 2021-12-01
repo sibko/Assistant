@@ -166,7 +166,7 @@
       "name": "Outside Lights",
       "ids": [
         "Floureonb_",
-        "Silvercrestd_"
+        "Silvercrestc_"
       ],
       "type": "433",
       "host": "downstairs",
@@ -178,16 +178,15 @@
       "aliases": [
         "outsidelights",
         "theoutsidelights"
-      ],
-      "hidden": true
+      ]
     },
     {
       "name": "Dining Christmas Tree",
       "ids": [
-        "Floureonc_"
+        "Generica_"
       ],
       "type": "433",
-      "host": "downstairs",
+      "host": "upstairs",
       "location": "Dining Room",
       "functions": [
         "On",
@@ -196,13 +195,12 @@
       "aliases": [
         "diningroomchristmastree",
         "thediningroomchristmastree"
-      ],
-      "hidden": true
+      ]
     },
     {
       "name": "Hall Christmas Lights",
       "ids": [
-        "Silvercrestb_"
+        "Silvercrestall_"
       ],
       "type": "433",
       "host": "downstairs",
@@ -214,13 +212,13 @@
       "aliases": [
         "hallchristmaslights",
         "thehallchristmaslights"
-      ],
-      "hidden": true
+      ]
     },
     {
       "name": "Hall Lights",
       "ids": [
-        "Silvercrestb_"
+        "Silvercrestb_",
+        "Energenief_"
       ],
       "type": "433",
       "host": "all",
@@ -1069,8 +1067,8 @@
         "LightSwitcha_off": "15985185",
         "LightSwitcha_dim": "15985192",
         "LightSwitcha_bright": "15985188",
-        "LightSwitchb_on": "14312289",
-        "LightSwitchb_off": "14312289",
+        "LightSwitchb_on": "15985190",
+        "LightSwitchb_off": "15985190",
         "LightSwitchb_dim": "14312296",
         "LightSwitchb_bright": "14312292"
       },
@@ -1354,7 +1352,7 @@
       ],
       "timeout": "10",
       "actionsOnEachTrigger": [],
-      "lastDetection": 1629152316511,
+      "lastDetection": 1638380256562,
       "processed": true,
       "friendlyName": "Hall",
       "fromHours": "17",
@@ -1384,7 +1382,7 @@
       "disabled": true
     },
     "we2": {
-      "lastDetection": 1629152319108,
+      "lastDetection": 1638380235032,
       "processed": true,
       "actionsOnFirstTrigger": [
         {
@@ -1424,10 +1422,16 @@
   },
   "timers": [
     {
-      "deviceName": "http://192.168.0.189:1967/api/stop/",
-      "action": "URL",
-      "triggerAt": 1629224236735,
-      "id": 1629224176735
+      "deviceName": "Outside Lights",
+      "action": "Off",
+      "timestamp": 1638314846230,
+      "type": "433",
+      "daysPreset": "daily",
+      "timePreset": "none",
+      "days": "",
+      "time": 84600000,
+      "id": 1638314846230,
+      "currentDay": 2
     }
   ],
   "daylightTimes": {
