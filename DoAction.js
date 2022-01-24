@@ -5,7 +5,7 @@ const q = require("q");
 const os = require("os")
 const request = require("request");
 const exec = require('child_process').exec;
-
+const execSync = require('child_process').execSync;
 var confdir = '/home/pi/Assistant/config.json'
 if (os.hostname() == 'Microserver') {
     confdir = '/home/sibko/Assistant/config.json'
@@ -17,19 +17,18 @@ config = JSON.parse(config)
 var endpoint = "app.api.surehub.io"
 var loginURL = "/api/auth/login"
 var sessionToken = ""
-const email = ""
-const password = ""
 const device_id = "9123499999"
 const https = require('https')
 
-var tokendir = '/home/pi/surepetToken'
+var credentialsdir = '/home/pi/Assistant/credentials.json'
 if (os.hostname() == 'Microserver') {
-    tokendir = '/home/sibko/surepetToken'
+    credentialsdir = '/home/sibko/Assistant/credentials.json'
 }
-var token = fs.readFileSync(tokendir, 'utf8')
-if (token != "") sessionToken = token
-var household = config.surepet.houseID
-var pets = config.surepet.pets
+var credentials = fs.readFileSync(credentialsdir, 'utf8')
+credentials = JSON.parse(credentials)
+if (credentials && credentials.surepet && credentials.surepet.sessionToken != "") sessionToken = credentials.surepet.sessionToken
+var household = credentials.surepet.houseID
+var pets = credentials.surepet.pets
 
 var sendPostRequest = function (url, data) {
     return new Promise(function (resolve, reject) {
@@ -86,7 +85,8 @@ var sendGetRequest = function (url) {
             console.log(`statusCode: ${res.statusCode}`)
             if (res.statusCode == 401) {                
                 sessionToken = ""
-                fs.writeFileSync(tokendir, "")
+		    credentials.surepet.sessionToken = ""
+                fs.writeFileSync(credentialsdir, JSON.stringify(credentials))
                 login().then(function(res){
                     console.log("well", res)
                     sendGetRequest(url).then(function(){
@@ -117,28 +117,19 @@ var login = function () {
     return new Promise(function (resolve, reject) {
         if (sessionToken != "") resolve("already got")
         var data = {
-            email_address: email,
-            password: password,
+            email_address: credentials.surepet.email,
+            password: credentials.surepet.password,
             device_id: device_id
         }
         sendPostRequest(loginURL, data).then(function (res) {
             sessionToken = res.data.token            
-            fs.writeFileSync(tokendir, res.data.token)
+		credentials.surepet.sessionToken = res.data.token
+            fs.writeFileSync(credentialsdir, JSON.stringify(credentials))
             resolve("got new one")
         }).catch(function () {
             reject()
         })
     })
-}
-var getPetLocations = function () {
-    pets.forEach(function(pet){        
-        var getPetLocationURL = "/api/pet/"+ pet.id + "/position"
-        sendGetRequest(getPetLocationURL).then(function (res) {
-            var location = "outside"
-            if (res.data.where == "1") location = "inside"
-            exec('mplayer /music/assistant' + pet.name + location +'.mp3')
-        })
-    })    
 }
 
 var getPetLocation = function (name) {
@@ -150,7 +141,7 @@ var getPetLocation = function (name) {
                     var location = "outside"
                     if (res.data.where == "1") location = "inside"
 			console.log('mplayer /music/music/assistant' + pet.name + location +'.mp3')
-                    exec('mplayer /music/assistant' + pet.name + location +'.mp3')
+                    execSync('mplayer /music/assistant' + pet.name + location +'.mp3')
                     resolve()
                 })
             }               
@@ -341,7 +332,7 @@ linuxControl = function (device, action) {
 var processActions = function (device, actions) {
     if (device == "catflap") {
         if (actions[0] == "all") {
-            return login().then(getPetLocations())
+            return login().then(getPetLocation("henry")).then(getPetLocation("eddie")).then(getPetLocation("elwood"))
         } else {
             return login().then(getPetLocation(actions[0]))
         }

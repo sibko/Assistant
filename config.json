@@ -1352,8 +1352,8 @@
       ],
       "timeout": "10",
       "actionsOnEachTrigger": [],
-      "lastDetection": 1642978577969,
-      "processed": true,
+      "lastDetection": 1643042730493,
+      "processed": false,
       "friendlyName": "Hall",
       "fromHours": "17",
       "fromMinutes": "30",
@@ -2890,22 +2890,5 @@
       "sunrise": 1647497640000,
       "sunset": 1647540720000
     }
-  },
-  "surepet": {
-    "pets": [
-      {
-        "name": "elwood",
-        "id": 300325
-      },
-      {
-        "name": "eddie",
-        "id": 300327
-      },
-      {
-        "name": "henry",
-        "id": 300328
-      }
-    ],
-    "houseID": 150079
   }
 }
