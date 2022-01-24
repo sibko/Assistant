@@ -111,7 +111,7 @@ getLogs = function (device) {
 	if (device.name && device.name == 'Microserver') {
 		command = "tail -n 500 /home/sibko/logs/server.log | tac"
 	}
-	exec(command,{maxBuffer: 1024 * 1000}, function (err, stdout, stderr) {
+	exec(command,{maxBuffer: 1024 * 10000}, function (err, stdout, stderr) {
 		logger.info("get logs: ", err, stdout, stderr)
 		if (err) {
 			d.resolve(err + stderr)

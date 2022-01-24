@@ -231,6 +231,20 @@ def process_event(event, assistant):
                 print(e)
 
 
+#CAT COMMANDS
+        if (len(returned) > 1 and returned[0] == 'where'):
+            assistant.stop_conversation()
+            if ("".join(returned[:2]).lower() == 'whereis'):
+                cat = returned[len(returned) -1].lower()     
+                try:
+                    subprocess.call(["node", "/home/pi/Assistant/DoAction.js", "catflap", cat],stdout=log, stderr=subprocess.STDOUT)
+                except subprocess.CalledProcessError as e:
+                    logging.info("error with catflap process")    
+            elif ("".join(returned[:4]).lower() == 'wherearethecats'):
+                try:
+                    subprocess.call(["node", "/home/pi/Assistant/DoAction.js", "catflap", "all"],stdout=log, stderr=subprocess.STDOUT)
+                except subprocess.CalledProcessError as e:
+                    logging.info("error with catflap process")
 
 #INFRARED COMMANDS
         if (len(returned) > 1 and ("".join(returned[:2]).lower() == 'makethe' or returned[0].lower() == 'make')):

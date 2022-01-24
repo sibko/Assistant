@@ -1352,7 +1352,7 @@
       ],
       "timeout": "10",
       "actionsOnEachTrigger": [],
-      "lastDetection": 1638380256562,
+      "lastDetection": 1642978577969,
       "processed": true,
       "friendlyName": "Hall",
       "fromHours": "17",
@@ -1382,7 +1382,7 @@
       "disabled": true
     },
     "we2": {
-      "lastDetection": 1638380235032,
+      "lastDetection": 1642978068613,
       "processed": true,
       "actionsOnFirstTrigger": [
         {
@@ -1420,20 +1420,7 @@
       "disabled": true
     }
   },
-  "timers": [
-    {
-      "deviceName": "Outside Lights",
-      "action": "Off",
-      "timestamp": 1638314846230,
-      "type": "433",
-      "daysPreset": "daily",
-      "timePreset": "none",
-      "days": "",
-      "time": 84600000,
-      "id": 1638314846230,
-      "currentDay": 2
-    }
-  ],
+  "timers": [],
   "daylightTimes": {
     "16/03/2021": {
       "sunrise": 1615875360000,
@@ -2903,5 +2890,22 @@
       "sunrise": 1647497640000,
       "sunset": 1647540720000
     }
+  },
+  "surepet": {
+    "pets": [
+      {
+        "name": "elwood",
+        "id": 300325
+      },
+      {
+        "name": "eddie",
+        "id": 300327
+      },
+      {
+        "name": "henry",
+        "id": 300328
+      }
+    ],
+    "houseID": 150079
   }
 }
