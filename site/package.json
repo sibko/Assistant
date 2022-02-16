@@ -7,7 +7,7 @@
   "dependencies": {
     "body-parser": "~1.5.2",
     "express": "^4.7.4",
-    "log4js": "^2.7.0",
+    "log4js": "^6.4.0",
     "method-override": "~2.1.2",
     "morgan": "~1.2.2",
     "zerorpc": "^0.9.8"
