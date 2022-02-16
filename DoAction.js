@@ -27,7 +27,6 @@ if (os.hostname() == 'Microserver') {
 var credentials = fs.readFileSync(credentialsdir, 'utf8')
 credentials = JSON.parse(credentials)
 if (credentials && credentials.surepet && credentials.surepet.sessionToken != "") sessionToken = credentials.surepet.sessionToken
-var household = credentials.surepet.houseID
 var pets = credentials.surepet.pets
 
 var sendPostRequest = function (url, data) {
@@ -82,13 +81,11 @@ var sendGetRequest = function (url) {
         }
         console.log("headers", options.headers)
         var req = https.request(options, res => {
-            console.log(`statusCode: ${res.statusCode}`)
             if (res.statusCode == 401) {                
                 sessionToken = ""
 		    credentials.surepet.sessionToken = ""
                 fs.writeFileSync(credentialsdir, JSON.stringify(credentials))
                 login().then(function(res){
-                    console.log("well", res)
                     sendGetRequest(url).then(function(){
                         resolve()
                     })
