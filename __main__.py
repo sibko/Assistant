@@ -118,6 +118,7 @@ def process_event(event, assistant):
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         print()
         logging.info('Convo started')
+        global isplaying
         if (isplaying and isplaying.isalive()):
             isplaying.pause(True)
         playMessage(localConfig['greeting'])
