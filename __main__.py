@@ -41,7 +41,7 @@ import zerorpc
 c = zerorpc.Client()
 c.connect("tcp://127.0.0.1:4242")
 print("start")
-
+global isplaying
 isplaying=False
 mplayerexists=False
 
@@ -118,7 +118,6 @@ def process_event(event, assistant):
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         print()
         logging.info('Convo started')
-        global isplaying
         if (isplaying and isplaying.isalive()):
             isplaying.pause(True)
         playMessage(localConfig['greeting'])
@@ -136,7 +135,6 @@ def process_event(event, assistant):
         if (isplaying and isplaying.isalive()):
             isplaying.resume(True)
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED):
-        global isplaying
         if (isplaying and isplaying.isalive()):
             isplaying.resume(True)
         global devices
