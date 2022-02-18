@@ -22,6 +22,7 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 	$http.get('/api/devices')
 		.then(function (data) {
 			$scope.devices = data.data;
+			$scope.catLocations = {"henry": "Unknown", "eddie": "Unknown", "elwood": "Unknown"}
 			$scope.locations = ['Top', 'Groups', 'All', 'Computers']
 			console.log($scope.devices)
 			$scope.devices.forEach(function (device) {
@@ -41,6 +42,13 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 			$scope.locations.push('Timers')
 			$scope.locations.push('Admin')
 			console.log("Received devices", data);
+			$http.get('/api/catLocations')
+		.then(function (data) {
+			$scope.catLocations = data.data			
+			console.log('Received Cats', $scope.catLocations)					
+		}, function (error) {
+			console.log('Error: ' + error);
+		});
 		}, function (error) {
 			console.log('Error: ' + error);
 		});

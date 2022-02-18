@@ -316,6 +316,12 @@ linuxControl = function (device, action) {
         case 'customplaylistsconverter':
             command = "bash " + dir + "Assistant/customPlaylistConverter.sh; updatedb --netpaths='/music' "
             break;
+	case 'volumeup':
+	    command = "echo 'sudo amixer set -M Headphone 10%+' | ssh " + device.user + "@" + device.ip
+	    break;
+	case 'volumedown':
+	    command = "echo 'sudo amixer set -M Headphone 10%-' | ssh " + device.user + "@" + device.ip
+	    break;
     }
     exec(command, function (err, stdout, stderr) {
         console.log(err, stdout, stderr)

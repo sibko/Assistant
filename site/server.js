@@ -216,6 +216,9 @@ getDirTree = function(filename) {
 app.get('/', function (req, res) {
 	res.sendfile('./public/index.html');
 });
+app.get('/api/catLocations', function(req,res){
+	getCatLocations().then(function(locations) { res.send(locations)})
+})
 app.route('/api/poplist/').get((req, res) => {
 	res.send(poplist);
 });
@@ -494,3 +497,144 @@ app.route('/api/updatePis/').get((req,res) => {
 
 
 getDirTree('/music/')
+
+//#region CATFLAP
+var endpoint = "app.api.surehub.io"
+var loginURL = "/api/auth/login"
+var sessionToken = ""
+const device_id = "9123499999"
+const https = require('https')
+
+var credentialsdir = '/home/pi/Assistant/credentials.json'
+if (os.hostname() == 'Microserver') {
+    credentialsdir = '/home/sibko/Assistant/credentials.json'
+}
+var credentials = fs.readFileSync(credentialsdir, 'utf8')
+credentials = JSON.parse(credentials)
+if (credentials && credentials.surepet && credentials.surepet.sessionToken != "") sessionToken = credentials.surepet.sessionToken
+var pets = credentials.surepet.pets
+
+var sendPostRequest = function (url, data) {
+    return new Promise(function (resolve, reject) {
+        console.log("sending request for", url, data)
+        var strData = JSON.stringify(data)
+        var options = {
+            hostname: endpoint,
+            port: 443,
+            path: url,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': strData.length
+            }
+        }
+        if (sessionToken != "") options.headers.Authorization = "Bearer " + sessionToken
+
+        var req = https.request(options, res => {
+            console.log(`statusCode: ${res.statusCode}`)
+            var resdata = ""
+            res.on('data', d => {
+                resdata += d
+            })
+            res.on('end', () => {
+                console.log("Response:", resdata)
+                var obj = JSON.parse(resdata)
+                resolve(obj)
+            })
+        })
+
+        req.on('error', error => {
+            console.error(error)
+            reject(error)
+        })
+        console.log("STRDATA", strData)
+        req.write(strData)
+        req.end()
+    })
+}
+var sendGetRequest = function (url) {
+    return new Promise(function (resolve, reject) {
+        console.log("sending request for", url, sessionToken)
+        var options = {
+            hostname: endpoint,
+            port: 443,
+            path: url,
+            method: 'GET',
+            headers: {
+                Authorization: "Bearer " + sessionToken.toString()
+            }
+        }
+        console.log("headers", options.headers)
+        var req = https.request(options, res => {
+            if (res.statusCode == 401) {                
+                sessionToken = ""
+		    credentials.surepet.sessionToken = ""
+                fs.writeFileSync(credentialsdir, JSON.stringify(credentials))
+                login().then(function(res){
+                    sendGetRequest(url).then(function(){
+                        resolve()
+                    })
+                })
+            }
+            var resdata = ""
+            res.on('data', d => {
+                resdata += d
+            })
+            res.on('end', () => {
+                console.log("Response:", resdata)
+                var obj = JSON.parse(resdata)
+                resolve(obj)
+            })
+        })
+
+        req.on('error', error => {
+            console.error(error)
+            reject(error)
+        })
+        req.end()
+    })
+}
+
+var login = function () {
+    return new Promise(function (resolve, reject) {
+        if (sessionToken != "") resolve("already got")
+        var data = {
+            email_address: credentials.surepet.email,
+            password: credentials.surepet.password,
+            device_id: device_id
+        }
+        sendPostRequest(loginURL, data).then(function (res) {
+            sessionToken = res.data.token            
+		credentials.surepet.sessionToken = res.data.token
+            fs.writeFileSync(credentialsdir, JSON.stringify(credentials))
+            resolve("got new one")
+        }).catch(function () {
+            reject()
+        })
+    })
+}
+
+var getCatLocations = function (name) {
+	return new Promise(function (resolve, reject) {
+		var locations = {}
+		locations[pets[0].name] = "Out"
+		locations[pets[1].name] = "Out"
+		locations[pets[2].name] = "Out"
+
+		var getPetLocationURL = "/api/pet/" + pets[0].id + "/position"
+		sendGetRequest(getPetLocationURL).then(function (res) {
+			if (res.data.where == "1") locations[pets[0].name] = "In"
+			getPetLocationURL = "/api/pet/" + pets[1].id + "/position"
+			sendGetRequest(getPetLocationURL).then(function (res) {
+				if (res.data.where == "1") locations[pets[1].name] = "In"
+				getPetLocationURL = "/api/pet/" + pets[2].id + "/position"
+				sendGetRequest(getPetLocationURL).then(function (res) {
+					if (res.data.where == "1") locations[pets[2].name] = "In"
+					resolve(locations)
+				})
+			})
+		})
+
+	})
+}
+//#endregion

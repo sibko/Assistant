@@ -120,9 +120,12 @@
     </nav>
     <div class="container">
 
-
+        
         <div ng-repeat="location in locations | orderBy:sortbylocation" id="{{location}}" ng-if="location != 'Timers' || timers.length > 0" class="row">
-            <h2>{{location}}</h2>
+            <h2 style="float:left">{{location}}</h2><div ng-if="location=='Top'" style="text-align: center;
+            float: left;
+            display: inline;
+            width: 80%;">Henry: {{catLocations.henry}} - Eddie: {{catLocations.eddie}} - Elwood: {{catLocations.elwood}}</div>
             <table class="table table-sm table-striped">
                 <tr ng-repeat="device in devices | orderBy : 'name'" ng-if="!device.hidden && ((location != 'Timers' && device.location == location ) || (location =='Computers' && (device.type == 'rPI' || device.name == 'PC')) || location == 'All' || (location == 'Top' && poplist.indexOf(device.name) >= 0) )">
 			<td title="{{device.ip}}">{{device.name}}</td>

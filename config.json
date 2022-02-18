@@ -149,7 +149,7 @@
         "Floureone_"
       ],
       "type": "433",
-      "host": "downstairs",
+      "host": "all",
       "location": "Garage",
       "functions": [
         "On",
@@ -752,7 +752,9 @@
         "Update Music",
         "Create Playlists",
         "Custom Playlists Converter",
-        "Music Manager"
+	"Volume Up",
+	"Volume Down",
+	"Music Manager"
       ],
       "aliases": [
         "bedroompi",
@@ -777,7 +779,9 @@
         "Update Music",
         "Create Playlists",
         "Custom Playlists Converter",
-        "Music Manager"
+        "Volume Up",
+        "Volume Down",
+	"Music Manager"
       ],
       "aliases": [
         "diningpi",
@@ -800,7 +804,9 @@
         "Off",
         "Update Music",
         "Create Playlists",
-        "Music Manager"
+        "Volume Up",
+        "Volume Down",
+	"Music Manager"
       ],
       "aliases": [
         "kitchenpi",
@@ -823,7 +829,9 @@
         "Off",
         "Update Music",
         "Create Playlists",
-        "Music Manager"
+        "Volume Up",
+        "Volume Down",
+	"Music Manager"
       ],
       "aliases": [
         "loungepi",
@@ -847,7 +855,9 @@
         "Off",
         "Update Music",
         "Create Playlists",
-        "Music Manager"
+        "Volume Up",
+        "Volume Down",
+	"Music Manager"
       ],
       "aliases": [
         "sittingroompi",
@@ -1352,8 +1362,8 @@
       ],
       "timeout": "10",
       "actionsOnEachTrigger": [],
-      "lastDetection": 1643042730493,
-      "processed": false,
+      "lastDetection": 1645142386992,
+      "processed": true,
       "friendlyName": "Hall",
       "fromHours": "17",
       "fromMinutes": "30",
@@ -1382,7 +1392,7 @@
       "disabled": true
     },
     "we2": {
-      "lastDetection": 1642978068613,
+      "lastDetection": 1645140554380,
       "processed": true,
       "actionsOnFirstTrigger": [
         {
