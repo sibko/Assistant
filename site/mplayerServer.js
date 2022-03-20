@@ -200,6 +200,7 @@ var startMplayer = function(file, additionalParams){
 	if (additionalParams){
 		mplayerArgs.push(additionalParams)
 	}
+	mplayerArgs.push('-softvol')
 	mplayerArgs.push('-quiet')
 	mplayerArgs.push('-really-quiet')
 	mplayerArgs.push('-volume')
