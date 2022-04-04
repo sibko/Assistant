@@ -26,7 +26,7 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 			$scope.locations = ['Top', 'Groups', 'All', 'Computers']
 			console.log($scope.devices)
 			$scope.devices.forEach(function (device) {
-				if (!$scope.locations.includes(device.location)) {
+				if (!$scope.locations.includes(device.location) && !device.hidden) {
 					$scope.locations.push(device.location)
 				}
 				if (device.groupFunctions) {
