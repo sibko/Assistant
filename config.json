@@ -107,7 +107,8 @@
       "aliases": [
         "thehoovercamera",
         "hoovercamera"
-      ]
+      ],
+      "hidden": true
     },
     {
       "name": "Lounge Lamps",
@@ -125,22 +126,6 @@
         "theloungelamps",
         "theloungealarms",
         "loungealarms"
-      ]
-    },
-    {
-      "name": "Test",
-      "ids": [
-        "silvercrestall_"
-      ],
-      "type": "433",
-      "host": "downstairs",
-      "location": "Test",
-      "functions": [
-        "on",
-        "off"
-      ],
-      "aliases": [
-        "diningChristmasTree"
       ]
     },
     {
@@ -178,7 +163,8 @@
       "aliases": [
         "outsidelights",
         "theoutsidelights"
-      ]
+      ],
+      "hidden": true
     },
     {
       "name": "Dining Christmas Tree",
@@ -195,7 +181,8 @@
       "aliases": [
         "diningroomchristmastree",
         "thediningroomchristmastree"
-      ]
+      ],
+      "hidden": true
     },
     {
       "name": "Hall Christmas Lights",
@@ -212,7 +199,8 @@
       "aliases": [
         "hallchristmaslights",
         "thehallchristmaslights"
-      ]
+      ],
+      "hidden": true
     },
     {
       "name": "Hall Lights",
@@ -264,7 +252,8 @@
       "aliases": [
         "theconsoles",
         "theconsole"
-      ]
+      ],
+      "hidden": true
     },
     {
       "name": "Ceiling Lights",
@@ -529,7 +518,8 @@
       "aliases": [
         "thewaterfall",
         "waterfall"
-      ]
+      ],
+      "hidden": true
     },
     {
       "name": "Soundbar",
@@ -974,7 +964,8 @@
       "aliases": [
         "CatLaser",
         "theCatLaser"
-      ]
+      ],
+      "hidden": true
     },
     {
       "name": "Cat Laser onoff",
@@ -990,7 +981,8 @@
       "aliases": [
         "CatLaser",
         "theCatLaser"
-      ]
+      ],
+      "hidden": true
     }
   ],
   "ir": {
@@ -1346,8 +1338,7 @@
     },
     "frontRoomAssistant": {
       "device_id": "ass-pi-downstairs-front-room-pi-iookcz",
-      "devices": {
-      },
+      "devices": {},
       "greeting": "/home/pi/Assistant/media/hi.ogg"
     },
     "diningAssistant": {
@@ -1399,8 +1390,8 @@
       ],
       "timeout": "10",
       "actionsOnEachTrigger": [],
-      "lastDetection": 1647814426232,
-      "processed": false,
+      "lastDetection": 1649198289574,
+      "processed": true,
       "friendlyName": "Hall",
       "fromHours": "17",
       "fromMinutes": "30",
@@ -1429,7 +1420,7 @@
       "disabled": true
     },
     "we2": {
-      "lastDetection": 1647812021323,
+      "lastDetection": 1649197864593,
       "processed": true,
       "actionsOnFirstTrigger": [
         {

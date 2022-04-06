@@ -61,7 +61,6 @@ hasVideo=False
 if ('hasVideo' in config and config['hasVideo'] == True):
     hasVideo=True
 log=open("/home/pi/assLogs.log", "a")
-logging.info(devices)
 class mplayer():
     def play(self, mfile):
         print(c.play(mfile))
