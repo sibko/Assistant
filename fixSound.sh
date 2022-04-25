@@ -3,7 +3,7 @@ piasound="/home/pi/.asoundrc"
 rootasound="/etc/asound.conf"
 auxID=$(cat /proc/asound/modules | grep bcm2835 | cut -d ' ' -f 2)
 if [[ "$(hostname)" == "frontRoomAssistant" || "$(hostname)" == "sittingRoomAssistant" ]]; then
-        auxID=$(aplay -l | grep "USB Audio" | cut -d ' ' -f 2 | cut -d ':' -f 1)
+        auxID=$(aplay -l | grep "USB Audio" | cut -d ' ' -f 2 | cut -d ':' -f 1 | head -n 1)
         speaker=$auxID
 fi
 currentID=$(cat $rootasound | grep "pcm.speaker" -A 3| tail -n 1 | cut -d ':' -f 2 | cut -d '"' -f 1)
