@@ -286,5 +286,6 @@ var stopMplayer = function(){
 	if (mplayerContainer){
 		mplayerContainer.kill()
 	}
+	queue = []
 }
 
