@@ -53,7 +53,7 @@ var zserver = new zerorpc.Server({
 
 zserver.bind("tcp://0.0.0.0:4242");
 
-var globalVolume = '50'
+var globalVolume = ''
 var hostname = execSync('hostname').toString()
 hostname = hostname.substring(0,hostname.length - 1)
 
