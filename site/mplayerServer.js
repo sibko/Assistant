@@ -4,7 +4,7 @@ const app = express();
 const fs = require('fs')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
-const exec = require('child_process').exec;
+const execSync = require('child_process').execSync;
 const http = require('http');
 const querystring = require('querystring');
 const q = require("q");
@@ -53,8 +53,36 @@ var zserver = new zerorpc.Server({
 
 zserver.bind("tcp://0.0.0.0:4242");
 
-var volumefile = '/home/pi/mplayervolume'
-var globalVolume = parseInt(fs.readFileSync(volumefile, 'utf8').replace('\n', '')) || 50
+var globalVolume = '50'
+var hostname = execSync('hostname').toString()
+hostname = hostname.substring(0,hostname.length - 1)
+
+var volOptions = {
+  hostname: '192.168.0.180',
+  port: 1966,
+  path: '/api/rpiVolume/' + hostname,
+  method: 'GET'
+}
+
+var req = http.request(volOptions, res => {
+  console.log(`statusCode: ${res.statusCode}`)
+
+  res.on('data', d => {
+    globalVolume += d
+  })
+})
+
+req.on('error', error => {
+  console.error(error)
+})
+
+req.end()
+try {
+	parseInt(globalVolume)
+} catch {
+	globalVolume = '50'
+}
+
 var queue = []
 
 log4js.configure({
@@ -132,7 +160,21 @@ var saveVolume = function() {
 	if (globalVolume > 100 ) {
                 globalVolume = 100
         }
-        fs.writeFileSync(volumefile, globalVolume, 'utf8')
+        var setVolOptions = {
+			hostname: '192.168.0.180',
+			port: 1966,
+			path: '/api/rpiVolume/' + hostname + '/' + globalVolume,
+			method: 'GET'
+		  }
+		  
+		  var req = http.request(setVolOptions, res => {
+			console.log(`statusCode: ${res.statusCode}`)	
+		  })
+		  
+		  req.on('error', error => {
+			console.error(error)
+		  })
+		  req.end()
 }
 
 var mplayerAction = function(action, additionalparam){

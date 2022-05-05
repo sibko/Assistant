@@ -167,6 +167,16 @@ getdevice = function (requested) {
 		}
 	})
 	if (ret == '') {
+		devices.forEach(function (device) {
+			device.ids.forEach(function (id){
+				if (id.toLowerCase() == requested.toLowerCase()) {
+					return ret = device;
+				}
+			})			
+		})		
+	}
+	if (ret == '') {
+		
 		throw 'device not found';
 	} else {
 		logger.info(ret)
@@ -267,6 +277,19 @@ app.route('/api/device/:name/Logs/').get((req, res) => {
 	getLogs(getdevice(requesteddevice)).then(function (log) {
 		res.send(log);
 	})
+})
+app.route('/api/rpiVolume/:name').get((req, res) => {
+	const requesteddevice = req.params['name'];
+	var ret = getdevice(requesteddevice).volume || 50
+	res.send(ret.toString());
+});
+app.route('/api/rpiVolume/:name/:vol').get((req,res) => {
+	const requesteddevice = req.params['name'];
+	const vol = req.params['vol'];
+	var ret = getdevice(requesteddevice)
+	ret.volume = vol
+	updateConfig(config)
+	res.end()
 })
 
 var getTime = function(preset) {
@@ -399,8 +422,20 @@ app.route('/api/forceGetMusic/').get((req,res) => {
         res.send(info)
 })
 app.route('/api/camera/').get((req,res) => {
-        var item = fs.readFileSync(dir + "wakecamera", 'utf8')
-	res.send(item)
+        var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+	ip = ip.replace("::ffff:", "")
+	var camFile = fs.readFileSync(dir + "wakecamera", 'utf8')
+	var lines = camFile.toString().split("\n");
+	var found = false
+	lines.forEach(function (line){
+		var camip = line.toString().split(" ")[0];
+		if (camip == ip) {
+			found = true
+			res.send(line.toString().split(" ")[1])
+			return
+		}
+	})
+	if (!found) res.send("false")
 })
 app.route('/api/updateMotion/').post((req,res) => {
         logger.info("update Motion", req.body)
