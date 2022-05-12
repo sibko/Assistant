@@ -216,7 +216,7 @@ getDirTree = function(filename) {
         // Assuming it's a file. In real life it could be a symlink or
 		// something else!
 		var extension = filename.substring(filename.length -4).toLowerCase()
-		var validFormats = ['.mp3', 'flac', '.wma', '.m4a', '.m3u', '.pls', '.asx', '.wav','.ogg']
+		var validFormats = ['.mp3', 'flac', '.wma', '.m4a', '.m3u', '.pls', '.asx', '.wav','.ogg','.mp4','.mpg','.avi','.wmv','.mpeg','.mkv','.m4v','.MPG','.webm','.ts']
 		if (validFormats.indexOf(extension) >= 0) {
 			info.push(filename);
 		}
@@ -401,6 +401,7 @@ var waiting = false
 app.route('/api/getMusic/').get((req,res) => {
 	if (info.length == 0) {
 		getDirTree('/music/')
+		getDirTree('/musicvids/')
 	}	
 	res.send(info)
 })
@@ -419,6 +420,7 @@ app.route('/api/getFreePlugs/:hidden').get((req,res) => {
 app.route('/api/forceGetMusic/').get((req,res) => {
         info = []
 	getDirTree('/music/')
+	getDirTree('/musicvids/')
         res.send(info)
 })
 app.route('/api/camera/').get((req,res) => {
@@ -532,7 +534,7 @@ app.route('/api/updatePis/').get((req,res) => {
 
 
 getDirTree('/music/')
-
+getDirTree('/musicvids/')
 //#region CATFLAP
 var endpoint = "app.api.surehub.io"
 var loginURL = "/api/auth/login"
