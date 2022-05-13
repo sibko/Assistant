@@ -78,6 +78,8 @@ app.listen(1967, () => {
 });
 var tried = 0
 var globalVolume = ''
+var hostname = execSync('hostname').toString()
+hostname = hostname.substring(0,hostname.length - 1)
 var checkVolume = function () {
 	logger.debug('initial volume', globalVolume)
         try {
@@ -88,9 +90,6 @@ var checkVolume = function () {
         }
 }
 var getGlobalVolume = function() {
-	var hostname = execSync('hostname').toString()
-	hostname = hostname.substring(0,hostname.length - 1)
-	
 	var volOptions = {
 	  hostname: '192.168.0.180',
 	  port: 1966,
