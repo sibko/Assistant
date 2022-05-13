@@ -53,38 +53,6 @@ var zserver = new zerorpc.Server({
 
 zserver.bind("tcp://0.0.0.0:4242");
 
-var globalVolume = ''
-var hostname = execSync('hostname').toString()
-hostname = hostname.substring(0,hostname.length - 1)
-
-var volOptions = {
-  hostname: '192.168.0.180',
-  port: 1966,
-  path: '/api/rpiVolume/' + hostname,
-  method: 'GET'
-}
-
-var req = http.request(volOptions, res => {
-  console.log(`statusCode: ${res.statusCode}`)
-
-  res.on('data', d => {
-    globalVolume += d
-  })
-})
-
-req.on('error', error => {
-  console.error(error)
-})
-
-req.end()
-try {
-	parseInt(globalVolume)
-} catch {
-	globalVolume = '50'
-}
-
-var queue = []
-
 log4js.configure({
 	appenders: {
 		cons: { type: 'console' },
@@ -108,6 +76,53 @@ app.use(function(req,res,next) {
 app.listen(1967, () => {
 	logger.info('Server started!');
 });
+var tried = 0
+var globalVolume = ''
+var checkVolume = function () {
+	logger.debug('initial volume', globalVolume)
+        try {
+                parseInt(globalVolume)
+        } catch {
+		logger.debug('setting to default 50')
+                globalVolume = '50'
+        }
+}
+var getGlobalVolume = function() {
+	var hostname = execSync('hostname').toString()
+	hostname = hostname.substring(0,hostname.length - 1)
+	
+	var volOptions = {
+	  hostname: '192.168.0.180',
+	  port: 1966,
+	  path: '/api/rpiVolume/' + hostname,
+	  method: 'GET'
+	}
+	
+	var req = http.request(volOptions, res => {
+	        logger.debug(`statusCode: ${res.statusCode}`)
+	  res.on('data', d => {
+	    globalVolume += d
+	  })
+	  res.on('end', function() {
+	  	checkVolume()
+	  })
+	})
+	
+	req.on('error', function (err) {
+	  if (tried > 10) {
+		checkVolume()
+	  } else {
+	  	tried++
+		logger.debug('error', err.message)
+		setTimeout( getGlobalVolume,3000)
+	  }
+	})
+	
+	req.end()
+}
+getGlobalVolume()
+
+var queue = []
 
 app.route('/api/queue/').get((req, res) => {
 	logger.debug('get queue')
