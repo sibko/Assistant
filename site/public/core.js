@@ -489,7 +489,7 @@ deviceControl.controller("TimerHandlerController", function ($scope, $http, $uib
 
 });
 
-deviceControl.controller("MediaHandlerController", function ($scope, $http, $uibModalInstance, device, func) {
+deviceControl.controller("MediaHandlerController", function ($scope, $http, $uibModalInstance, device, func, $rootScope) {
 	console.log("mediamodal", device, func)
 	$scope.device = device
 	$scope.func = func
@@ -502,7 +502,8 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
 	var volumeTimeout = ''
 	$scope.setVolume = 50
 	$scope.queue = []
-	$scope.queueInterval = setInterval(function() {$scope.getQueue()}, 5000)
+	if ($rootScope.queueInterval) clearInterval($rootScope.queueInterval)
+	$rootScope.queueInterval = setInterval(function() {$scope.getQueue()}, 5000)
 	$scope.getQueue = function() {
 		$http.get('http://' + device.ip + ':1967/api/queue').then(function (data) {
 			console.log('got queue', data.data)
