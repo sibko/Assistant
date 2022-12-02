@@ -273,6 +273,187 @@ deviceControl.controller("MainController", ['$scope', '$http', '$uibModal', '$ro
 	$scope.getMotions()
 }])
 
+
+
+deviceControl.controller("mediaController", ['$scope', '$http', '$uibModal', '$rootScope', function ($scope, $http, $uibModal, $rootScope) {
+	$scope.formData = {};
+	$scope.device = {}
+	$http.get('/api/devices')
+		.then(function (data) {
+			$scope.devices = data.data;
+			$scope.pis = []
+			console.log($scope.devices)
+			$scope.devices.forEach(function (device) {
+				var exists = false
+				$scope.pis.forEach(function(pi){
+					if (pi.name == device.name) exists=true
+				})
+				if (!exists && !device.hidden && device.type == 'rPI' && device.name != 'Microserver') {
+					$scope.pis.push(device)
+				}
+			})
+			$scope.selectPi($scope.pis[0])
+			console.log($scope.pis)
+		})
+		
+	
+	$rootScope.performAction = function (device, action) {
+		$http.get('/api/device/' + device.name + '/' + action)
+			.then(function (data) {
+				console.log("action complete", data);
+			}, function (error) {
+				console.log('Error: ' + error);
+			});
+	}
+
+	$scope.openDeviceModal = function (device) {
+		$scope.modalInstance = $uibModal.open({
+			ariaLabelledBy: 'modal-title',
+			ariaDescribedBy: 'modal-body',
+			templateUrl: 'deviceModal.html',
+			controller: 'DeviceHandlerController',
+			controllerAs: '$ctrl',
+			size: 'lg',
+			resolve: {
+				device: function () {
+					return device
+				}
+			}
+		})
+
+	}
+	$scope.selectPi = function(pi) {
+		$scope.device = pi
+		$scope.getVolume()
+		$scope.online = 'unknown'
+		$http.get('/api/device/' + $scope.device.name + '/ping/')
+	        .then(function (data) {
+	                console.log("PING",data)
+			var packetLoss = data.data.split('%')[0].split('received, ')[1]
+	                if (packetLoss && packetLoss == '100') {
+				$scope.online = 'false'
+			} else {
+				$scope.online = 'true'
+			}
+
+	        }, function (error) {
+	                console.log('Error: ' + JSON.stringify(error));
+	        });
+
+	        $scope.serverStatus = 'unknown'
+	
+	        $http.get('http://' + $scope.device.ip + ':1967/api/queue').then(function (data) {
+        	        $scope.serverStatus = 'online'
+	        }).catch(function (e) {
+			console.log(e)
+	                $scope.serverStatus = 'offline'
+	        })
+
+
+	}
+	$scope.actions = ['Volume Up','Pause','Volume Down','Skip','Set Volume','Stop','Get Music', '2 Hours', 'Clear Queue']
+	$scope.lines = [1,2,3]
+	$scope.closeModal = function () {
+		$uibModalInstance.close();
+	}
+	var volumeTimeout = ''
+	$scope.setVolume = 50
+	$scope.queue = []
+	if ($rootScope.queueInterval) clearInterval($rootScope.queueInterval)
+	$rootScope.queueInterval = setInterval(function() {$scope.getQueue()}, 5000)
+	$scope.getQueue = function() {
+		if (!$scope.device.ip) return
+		$http.get('http://' + $scope.device.ip + ':1967/api/queue').then(function (data) {
+			console.log('got queue', data.data)
+			$scope.queue = data.data
+		})
+	}
+
+	$scope.mediaAction = function (action, parameter) {
+		console.log(action, parameter, $scope.device)
+		if (action == 'Set Volume' && parameter){			
+			clearTimeout(volumeTimeout)
+			volumeTimeout = setTimeout(function(){
+				$http.get('http://' + $scope.device.ip + ':1967/api/setvolume/' + parameter).then(function(response){
+					$scope.getVolume()
+				})
+			},500)
+			
+		} else if (action=='Get Music') {
+			var url = '/api/getMusic/'
+			if (parameter == 'force'){
+				console.log('force')
+                                url = '/api/forceGetMusic'
+                        }
+			$http.get(url).then(function (data) {
+				console.log('got Music')
+                                $scope.musicDir = data.data
+                        }, function (error) {
+                                console.log('Error: ' + error);
+                        });
+		} else if (action == '2 Hours') {
+			var url = '/api/stopIn2Hours/'
+
+	        	$http.post('/api/stopIn2Hours/', { url: 'http://' + $scope.device.ip + ':1967/api/stop/' }).then(function(data) {
+				console.log("RECEIVED RESPONSE:", data)
+		        })
+		}  else {
+			$http.get('http://' + $scope.device.ip + ':1967/api/'+ action.replace(' ', '').toLowerCase() + '/').then(function(response){
+					console.log(response)
+					if (action.toLowerCase().indexOf("volume") >= 0) $scope.getVolume()
+				})
+		}
+		$scope.getQueue()
+	}
+	if (!$scope.musicDir || $scope.musicDir.length == 0) {
+		$scope.mediaAction('Get Music')
+	}
+	$scope.playMusic = function(file) {
+		console.log($scope.device)
+		$http.post('http://' + $scope.device.ip + ':1967/api/play/', {'file':file}).then(function(data) {
+			console.log(data)
+		}, function (error) {
+			console.log('Error: ' + error);
+		})
+	}
+	$scope.shuffleMusic = function(file) {
+                $http.post('http://' + $scope.device.ip + ':1967/api/shuffle/', {'file':file}).then(function(data) {
+                        console.log(data)
+                }, function (error) {
+                        console.log('Error: ' + error);
+                })
+        }
+	$scope.queueMusic = function(file) {
+		if (!$scope.device.ip) return
+		$http.post('http://' + $scope.device.ip + ':1967/api/queue/', {'file':file}).then(function(data) {
+			console.log(data)
+			$scope.queue.push(file)
+		}, function (error) {
+			console.log('Error: ' + error);
+		})
+	}
+	$scope.getVolume = function() {
+		if (!$scope.device.ip) return
+		$http.get('http://' + $scope.device.ip + ':1967/api/volume').then(function (data) {
+			console.log('got volume "' + data.data +'"')
+			$scope.setVolume = parseInt(data.data)
+		})
+	}
+	$scope.getQueue = function() {
+		if (!$scope.device.ip) return
+		$http.get('http://' + $scope.device.ip + ':1967/api/queue').then(function (data) {
+			console.log('got queue', data.data)
+			$scope.queue = data.data
+		})
+	}
+	$scope.online = 'unknown'
+	$scope.serverStatus = 'unknown'
+	
+	$scope.getVolume()
+	$scope.getQueue()
+
+}])
+
 deviceControl.controller("freePlugsHandlerController", function ($scope, $http, $uibModal, $uibModalInstance, $rootScope) {
         var url = '/api/getFreePlugs/false'
         $http.get(url).then(function (data) {
@@ -517,7 +698,7 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
 			clearTimeout(volumeTimeout)
 			volumeTimeout = setTimeout(function(){
 				$http.get('http://' + device.ip + ':1967/api/setvolume/' + parameter).then(function(response){
-					console.log(response)
+					$scope.getVolume()
 				})
 			},500)
 			
@@ -542,6 +723,7 @@ deviceControl.controller("MediaHandlerController", function ($scope, $http, $uib
 		}  else {
 			$http.get('http://' + device.ip + ':1967/api/'+ action.replace(' ', '').toLowerCase() + '/').then(function(response){
 					console.log(response)
+					if (action.toLowerCase().indexOf("volume") >= 0) $scope.getVolume()
 				})
 		}
 		$scope.getQueue()

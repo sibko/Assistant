@@ -1,0 +1,180 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="deviceControl">
+
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Optimize mobile viewport -->
+
+    <title>Device Control</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="scripts/bootstrap.min.css">
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <!-- load bootstrap -->
+    <style>
+        html {
+            overflow-y: scroll;
+        }
+
+        body {
+            padding-top: 70px;
+            min-height: 75rem;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        #device-list {
+            margin-bottom: 30px;
+        }
+
+
+        .hidden {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        #modal-container {
+            position: fixed;
+            top: 300px;
+            left: 50%;
+            width: 375px;
+            background: white;
+            margin-left: -187.5px;
+            text-align: center;
+            box-shadow: 0px 0px 2px 1px black;
+            z-index: 100;
+        }
+
+        #overlay {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 99;
+            background: rgba(0, 0, 0, 0.8);
+            width: 100%;
+            height: 100%;
+        }
+
+        .table-borderless td {
+            text-align: center;
+            border: none !important;
+        }
+
+        .scroll {
+            white-space: nowrap;
+            overflow-x: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .navbar-nav li {
+            display: inline-block;
+        }
+        .btn {
+            min-width: 75px;
+        }
+    </style>
+
+    <!-- load jquery -->
+    <script src="scripts/angular.min.js"></script>
+
+    <script src="scripts/angular-route.js"></script>
+    <script src="scripts/angular-animate.js"></script>
+    <script src="scripts/angular-touch.min.js"></script>
+    <script type="text/javascript" src="node_modules/ng-prettyjson/dist/ng-prettyjson.min.js"></script>
+    <script type="text/javascript" src="node_modules/ace/ace.js"  charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="node_modules/ng-prettyjson/dist/ng-prettyjson.min.css">
+    <script src="scripts/ui-bootstrap-tpls-2.5.0.js"></script>
+
+    <!-- load angular -->
+    <script src="core.js"></script>
+    <script> 
+        window.addEventListener("hashchange", function () { scrollBy(0, -50) });
+
+    </script>
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+</head>
+<!-- SET THE CONTROLLER AND GET ALL TODOS -->
+
+<body ng-app="deviceControl" ng-controller="mediaController">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav scroll">
+                <li ng-repeat="pi in pis | orderBy:name" >
+                    <a class="nav-link" ng-click="selectPi(pi)">{{pi.name.replace(" Assistant", "")}}</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+
+        <h3 style="width:100%;text-align: center;">{{device.name.replace(" Assistant", "")}}
+		<a ng-click="openDeviceModal(device)"><i style="float:right"  class="glyphicon glyphicon-wrench"></i>
+		<i ng-if="serverStatus == 'online'" style="color:green;float:right"  class="glyphicon glyphicon-globe"></i>
+                <i ng-if="serverStatus == 'unknown'" style="color:grey;float:right"  class="glyphicon glyphicon-globe"></i>
+                <i ng-if="serverStatus == 'offline'" style="color:red;float:right"  class="glyphicon glyphicon-globe"></i>
+		<i ng-if="online == 'true'" style="color:green;float:right"  class="glyphicon glyphicon-transfer"></i>
+		<i ng-if="online == 'false'" style="color:red;float:right"  class="glyphicon glyphicon-transfer"></i>
+		<i ng-if="online == 'unknown'" style="color:grey;float:right"  class="glyphicon glyphicon-transfer"></i>
+        </a></h2>
+        <table class="table table-sm table-striped">
+            <tr ng-if="lines.length > 0">
+                <td colspan="2" style="text-align: center;" >
+                        <table class="table table-borderless">                    
+                            <tr ng-repeat="line in lines"> 
+                                <td ng-repeat="action in actions" ng-if="$index >= line * 3 - 3 && $index < line * 3" style="width:33%">
+                                    <button ng-if="$index % 2 == 0 && action != '' && action != 'Set Volume'" type="button" class="btn btn-info" ng-click="mediaAction(action, 'force')">{{action.replace('Volume', 'Vol')}}</button>
+                                    <button ng-if="$index % 2 == 1 && action != '' && action != 'Set Volume'" type="button" class="btn btn-warning" ng-click="mediaAction(action, 'force')">{{action.replace('Volume', 'Vol')}}</button>
+                                    <input id="volumeSlider" style="-webkit-appearance: slider" ng-change="mediaAction('Set Volume', setVolume)" ng-model="setVolume" ng-if="action=='Set Volume'" class="input-range" orient="vertical" type="range" step="1" min="0" max="100">
+                                </td>                        
+                            </tr>                    
+                        </table>
+                    </td>
+            </tr>
+            </table>
+            <h4 ng-if="queue && queue.length > 0">Queue:</h4>
+            <table ng-if="queue && queue.length > 0" class="table table-sm table-striped">
+                <tr  ng-repeat="qitem in queue track by $index">
+                    <td>
+                        <span>{{qitem.substring(7)}}</span>
+                    </td>
+                </tr>
+            </table>
+            <table class="table table-sm table-striped">
+            <tr>
+                <td colspan="2">
+                        <div class="col-form-label">Music: {{musicDir.length}}</div>
+                </td>
+                <td >
+                    <input id="musicFilter" ng-model="mfilter">
+                </td>
+            </tr>
+        </table>
+        <table ng-if="mfilter.length > 3" class="table table-responsive-sm table-striped" ng-if="musicDir">
+            <tr ng-repeat="item in musicDir| musicFilter : mfilter">
+            <td><button style="min-width: 50px" type=" button " class="btn btn-success " ng-click="queueMusic(item)"><span class=" glyphicon glyphicon-list"></span></button></td>
+            <td>
+                    <span ng-if="item.substring(item.length - 3) == 'm3u'" ng-click="playMusic(item)" style="color:blue">{{item.substring(7)}}</span>
+                    <span ng-click="playMusic(item)" ng-if="item.substring(item.length - 3) != 'm3u'">{{item.substring(7)}}</span>
+                </td>
+                        <td>
+                        <button style="min-width:50px" ng-if="item.substring(item.length - 3) == 'm3u'" type="button" class="btn btn-warning" ng-click="shuffleMusic(item)"><span class="glyphicon glyphicon-random"></span></button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

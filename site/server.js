@@ -216,7 +216,7 @@ getDirTree = function(filename) {
         // Assuming it's a file. In real life it could be a symlink or
 		// something else!
 		var extension = filename.substring(filename.length -4).toLowerCase()
-		var validFormats = ['.mp3', 'flac', '.wma', '.m4a', '.m3u', '.pls', '.asx', '.wav','.ogg','.mp4','.mpg','.avi','.wmv','.mpeg','.mkv','.m4v','.MPG','.webm','.ts']
+		var validFormats = ['opus', '.mp3', 'flac', '.wma', '.m4a', '.m3u', '.pls', '.asx', '.wav','.ogg','.mp4','.mpg','.avi','.wmv','mpeg','.mkv','.m4v','.MPG','webm','.ts']
 		if (validFormats.indexOf(extension) >= 0) {
 			info.push(filename);
 		}
@@ -225,6 +225,9 @@ getDirTree = function(filename) {
 
 app.get('/', function (req, res) {
 	res.sendfile('./public/index.html');
+});
+app.get('/media', function (req, res) {
+	res.sendfile('./public/mediaSite.html');
 });
 app.get('/api/catLocations', function(req,res){
 	getCatLocations().then(function(locations) { res.send(locations)})

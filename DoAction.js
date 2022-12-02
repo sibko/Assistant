@@ -485,11 +485,78 @@ var processActions = function (device, actions) {
                 var promise = linuxControl(dev, action)
                 promises.push(promise);
                 break
+	    case 'HA':
+		var functions = dev.functions.map(function (item) {
+                    return item.replace(" ", "").toLowerCase()
+                })
+                if (functions.indexOf(action) < 0) {
+                    console.log("ACTION NOT FOUND")
+                    return
+                }
+		dev.ids.forEach(function(id){
+                            var promise = sendToHA(id, action);
+                        promises.push(promise)
+
+                })
+                        break;
+
         }
 
     })
 
     return q.all(promises);
+}
+var sendToHA = function(id, action) {
+	var domain = id.split(".")[0]
+	switch (action.toLowerCase()) {
+		case 'on':
+			action = 'turn_on'
+			break;
+		case 'off':
+			action = 'turn_off'
+			break;
+	}
+
+
+var options = {
+  'method': 'POST',
+  'hostname': '192.168.0.180',
+  'port': 8123,
+  'path': '/api/services/' + domain + '/' + action,
+  'headers': {
+    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiMDc3NzFiY2Q5ZmI0M2YyOTQwMDRhMDFjODJjMzQzZCIsImlhdCI6MTY1NjA4NjgxMCwiZXhwIjoxOTcxNDQ2ODEwfQ.VAvOjUNtwMbbsq-xe7WiVFYm3AbeG8S7EHhJtHUBnTM',
+    'Content-Type': 'application/json'
+  },
+  'maxRedirects': 20
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function (chunk) {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+
+  res.on("error", function (error) {
+    console.error(error);
+  });
+});
+
+var postData = JSON.stringify({
+  "entity_id": id
+});
+
+req.write(postData);
+
+req.end();
+
+
+
 }
 
 var device = process.argv[2];

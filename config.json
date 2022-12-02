@@ -113,9 +113,9 @@
     {
       "name": "Lounge Lamps",
       "ids": [
-        "Energenieb_"
+        "switch.lounge_lamps_zha_group_0x0007"
       ],
-      "type": "433",
+      "type": "HA",
       "location": "Lounge",
       "functions": [
         "On",
@@ -131,9 +131,9 @@
     {
       "name": "3D Printer",
       "ids": [
-        "Floureone_"
+        "switch.3d_printer_on_off"
       ],
-      "type": "433",
+      "type": "HA",
       "host": "all",
       "location": "Garage",
       "functions": [
@@ -150,8 +150,7 @@
     {
       "name": "Outside Lights",
       "ids": [
-        "Floureonb_",
-        "Silvercrestc_"
+        "Floureonb_"
       ],
       "type": "433",
       "host": "downstairs",
@@ -169,9 +168,9 @@
     {
       "name": "Dining Christmas Tree",
       "ids": [
-        "Generica_"
+        "switch.dining_room_christmas_on_off"
       ],
-      "type": "433",
+      "type": "HA",
       "host": "upstairs",
       "location": "Dining Room",
       "functions": [
@@ -200,16 +199,14 @@
         "hallchristmaslights",
         "thehallchristmaslights"
       ],
-      "hidden": true
+      "hidden": false
     },
     {
       "name": "Hall Lights",
       "ids": [
-        "Silvercrestb_",
-        "Energenief_"
+        "switch.hall_lights_on_off"
       ],
-      "type": "433",
-      "host": "all",
+      "type": "HA",
       "location": "Hall",
       "functions": [
         "On",
@@ -218,6 +215,40 @@
       "aliases": [
         "halllights",
         "thehalllights"
+      ]
+    },
+    {
+      "name": "Arcade Machine",
+      "ids": [
+        "switch.arcade_machine_on_off"
+      ],
+      "type": "HA",
+      "host": "all",
+      "location": "Breakfast Room",
+      "functions": [
+        "On",
+        "Off"
+      ],
+      "aliases": [
+        "arcademachine",
+        "thearcademachine"
+      ]
+    },
+    {
+      "name": "Arcade Consoles",
+      "ids": [
+        "switch.arcade_consoles_on_off"
+      ],
+      "type": "HA",
+      "host": "all",
+      "location": "Breakfast Room",
+      "functions": [
+        "On",
+        "Off"
+      ],
+      "aliases": [
+        "arcadeconsoles",
+        "thearcadeconsoles"
       ]
     },
     {
@@ -258,9 +289,9 @@
     {
       "name": "Ceiling Lights",
       "ids": [
-        "Energeniea_"
+        "switch.ceiling_lights_on_off"
       ],
-      "type": "433",
+      "type": "HA",
       "location": "Lounge",
       "functions": [
         "On",
@@ -298,9 +329,9 @@
     {
       "name": "Turntable Light",
       "ids": [
-        "x10d_"
+        "switch.turntable_lights_on_off"
       ],
-      "type": "433",
+      "type": "HA",
       "host": "upstairs",
       "location": "Lounge",
       "functions": [
@@ -317,9 +348,9 @@
     {
       "name": "Bedroom Lights",
       "ids": [
-        "LightSwitcha_"
+        "light.bedroom_light_zha_group_0x0004"
       ],
-      "type": "433",
+      "type": "HA",
       "host": "upstairs",
       "location": "Bedroom",
       "functions": [
@@ -338,9 +369,9 @@
     {
       "name": "Bed Lights",
       "ids": [
-        "x10b_"
+        "switch.bed_lights_on_off"
       ],
-      "type": "433",
+      "type": "HA",
       "host": "upstairs",
       "location": "Bedroom",
       "functions": [
@@ -359,9 +390,9 @@
     {
       "name": "Kitchen Lights",
       "ids": [
-        "Floureona_"
+        "switch.kitchen_lamps_zha_group_0x0005"
       ],
-      "type": "433",
+      "type": "HA",
       "location": "Kitchen",
       "host": "all",
       "functions": [
@@ -378,9 +409,9 @@
     {
       "name": "Lounge Lights",
       "ids": [
-        "LightSwitchb_"
+        "light.lounge_light_zha_group_0x0003"
       ],
-      "type": "433",
+      "type": "HA",
       "location": "Lounge",
       "host": "upstairs",
       "functions": [
@@ -399,10 +430,9 @@
     {
       "name": "Dining Room Lamps",
       "ids": [
-        "Genericd_",
-        "Silvercresta_"
+        "switch.dining_room_lamps_zha_group_0x0006"
       ],
-      "type": "433",
+      "type": "HA",
       "host": "all",
       "location": "Dining Room",
       "functions": [
@@ -431,11 +461,10 @@
     {
       "name": "Breakfast Room Lamp",
       "ids": [
-        "Floureond_"
+        "switch.breakfast_room_lamp_on_off"
       ],
-      "type": "433",
+      "type": "HA",
       "location": "Breakfast Room",
-      "host": "downstairs",
       "functions": [
         "On",
         "Off"
@@ -469,9 +498,9 @@
     {
       "name": "Christmas Tree",
       "ids": [
-        "Genericb_"
+        "switch.lounge_christmas_tree_on_off"
       ],
-      "type": "433",
+      "type": "HA",
       "location": "Lounge",
       "host": "upstairs",
       "functions": [
@@ -487,10 +516,9 @@
     {
       "name": "Christmas Lights",
       "ids": [
-        "Silvercrestc_",
-        "Energenieb_"
+        "switch.christmas_lounge"
       ],
-      "type": "433",
+      "type": "HA",
       "host": "upstairs",
       "location": "Lounge",
       "functions": [
@@ -713,9 +741,9 @@
     {
       "name": "Fridge",
       "ids": [
-        "Generice_"
+        "switch.fridge_on_off"
       ],
-      "type": "433",
+      "type": "HA",
       "host": "upstairs",
       "location": "Lounge",
       "functions": [
@@ -752,14 +780,15 @@
         "bedroomassistant",
         "thebedroomassistant"
       ],
-      "user": "pi"
+      "user": "pi",
+      "volume": "100"
     },
     {
       "name": "Front Room Assistant",
       "ids": [
         "frontroomassistant"
       ],
-      "ip": "192.168.0.36",
+      "ip": "192.168.0.26",
       "type": "rPI",
       "location": "Front Room",
       "functions": [
@@ -779,7 +808,8 @@
         "frontroomassistant",
         "thefrontroomassistant"
       ],
-      "user": "pi"
+      "user": "pi",
+      "volume": "12"
     },
     {
       "name": "Dining Room Assistant",
@@ -806,7 +836,8 @@
         "diningroomassistant",
         "thediningroomassistant"
       ],
-      "user": "pi"
+      "user": "pi",
+      "volume": "39"
     },
     {
       "name": "Kitchen Assistant",
@@ -832,7 +863,8 @@
         "kitchenassistant",
         "thekitchenassistant"
       ],
-      "user": "pi"
+      "user": "pi",
+      "volume": "22"
     },
     {
       "name": "Lounge Assistant",
@@ -858,7 +890,8 @@
         "loungeassistant",
         "theloungeassistant"
       ],
-      "user": "pi"
+      "user": "pi",
+      "volume": "7"
     },
     {
       "name": "Sitting Room Assistant",
@@ -954,6 +987,36 @@
       ]
     },
     {
+      "name": "Arcade PC",
+      "ids": [
+        "192.168.0.33"
+      ],
+      "type": "ESP",
+      "location": "Breakfast Room",
+      "functions": [
+        "On"
+      ],
+      "aliases": [
+        "arcadepc",
+        "thearcadepc"
+      ]
+    },
+    {
+      "name": "Mega PC",
+      "ids": [
+        "192.168.0.36"
+      ],
+      "type": "ESP",
+      "location": "Lounge",
+      "functions": [
+        "On"
+      ],
+      "aliases": [
+        "megapc",
+        "themegapc"
+      ]
+    },
+    {
       "name": "Cat Laser",
       "ids": [
         "192.168.0.207"
@@ -990,7 +1053,7 @@
       "bedroomHost": "192.168.0.193",
       "kitchenHost": "",
       "loungeHost": "192.168.0.194",
-      "sittingRoomHost": "192.168.0.197"
+      "sittingRoomHost": "192.168.0.9"
     },
     "devices": {
       "bedroomtv": {
@@ -1025,7 +1088,7 @@
       "aircon": {
         "host": "bedroomHost",
         "on": "[{data:[1300,450, 1250,450, 450,1300, 1250,450, 1250,450, 450,1300, 400,1350, 400,1350, 400,1350, 400,1350, 400,1350, 1250,7250, 1200,500, 1250,450, 400,1350, 1250,450, 1250,450, 400,1350, 400,1350, 400], type:'raw', khz:38, 'repeat':2}]",
-        "up": "[{data:[400,1350, 400,1350, 1200,500, 400,1350, 400,8100, 1250,500, 1250,500, 400,1350, 1200,500, 1250,500, 400,1350, 400,1350, 400,1350, 400,1350, 1200,500, 400,1350, 400,8100, 1200,550, 1200,550, 350,1400, 1200,550, 1200,550, 350,1400, 350,1400, 350,1400, 350,1400, 1200,550, 350,1400, 350,8100, 1200,550, 1200,550, 300,1400, 1150,550, 1150,600, 300,1450, 250,1450, 250,1500, 250,1500, 1100,700, 200,1550, 150], type:'raw', khz:38}]",
+        "speed": "[{data:[400,1350, 400,1350, 1200,500, 400,1350, 400,8100, 1250,500, 1250,500, 400,1350, 1200,500, 1250,500, 400,1350, 400,1350, 400,1350, 400,1350, 1200,500, 400,1350, 400,8100, 1200,550, 1200,550, 350,1400, 1200,550, 1200,550, 350,1400, 350,1400, 350,1400, 350,1400, 1200,550, 350,1400, 350,8100, 1200,550, 1200,550, 300,1400, 1150,550, 1150,600, 300,1450, 250,1450, 250,1500, 250,1500, 1100,700, 200,1550, 150], type:'raw', khz:38}]",
         "sleep": "[{data:[1250,450, 1250,450, 400,1350, 400,1350, 400,1350, 1250,450, 400,1350, 400,1350, 400,8050, 1250,500, 1200,500, 400,1350, 1200,500, 1200,500, 400,1350, 400,1350, 400,1350, 1200,500, 400,1350, 400,1350, 400,8100, 1200,500, 1200,500, 400,1350, 1200,500, 1200,500, 400,1350, 400,1350, 400,1400, 1200,550, 350,1400, 350,1400, 350,8100, 1200,550, 1200,550, 350,1400, 1200,550, 1200,550, 350,1400, 350,1400, 350,1400, 1200,550, 350,1400, 300,1400, 300,8200, 1100,650, 1100,700, 200,1600, 950], type:'raw', khz:38}]",
         "evaporate": "[{data:[450,1300, 450,8050, 1300,450, 1250,450, 450,1300, 1250,450, 1250,500, 400,1300, 400,1350, 1250,500, 400,1350, 400,1350, 400,1350, 400,8050, 1250,500, 1250,500, 400,1350, 1250,500, 1250,500, 400,1350, 400,1350, 1250,500, 400,1350, 400,1400, 350,1400, 350,8100, 1200,550, 1200,550, 350,1400, 1200,550, 1200,550, 350,1400, 350,1400, 1150,550, 350,1400, 300,1400, 300,1400, 300,8150, 1150,550, 1150,550, 300,1450, 1150,600, 1150,600, 300,1450, 250,1500, 1100,700, 200], type:'raw', khz:38}]",
         "rotate": "[{data:[1350,450, 1300,400, 450,1300, 1300,450, 1250,500, 1300,400, 500,1250, 450,1300, 400,1300, 1250,450, 1250,450, 500,7950, 1350,450, 1300,450, 450,1250, 1350,450, 1300,450, 1300,450, 450,1250, 450,1300, 450,1250, 1300,450, 1300,450, 450,7950, 1350,450, 450], type:'raw', khz:38}]",
@@ -1390,7 +1453,7 @@
       ],
       "timeout": "10",
       "actionsOnEachTrigger": [],
-      "lastDetection": 1649198289574,
+      "lastDetection": 1656971845926,
       "processed": true,
       "friendlyName": "Hall",
       "fromHours": "17",
@@ -1420,7 +1483,7 @@
       "disabled": true
     },
     "we2": {
-      "lastDetection": 1649197864593,
+      "lastDetection": 1656974352817,
       "processed": true,
       "actionsOnFirstTrigger": [
         {
