@@ -1369,7 +1369,13 @@
         ],
         "lamp": [
           "Lounge Lamps"
-        ]
+        ],
+	"pc": [
+	  "Mega PC"
+	],
+	"thepc": [
+		"Mega PC"
+	]
       },
       "greeting": "/home/pi/Assistant/media/r2d2.ogg"
     },
