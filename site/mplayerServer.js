@@ -78,6 +78,7 @@ app.listen(1967, () => {
 });
 var tried = 0
 var globalVolume = ''
+var globalDoorbellVolume = ''
 var hostname = execSync('hostname').toString()
 hostname = hostname.substring(0,hostname.length - 1)
 var checkVolume = function () {
