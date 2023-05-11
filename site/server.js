@@ -286,6 +286,11 @@ app.route('/api/rpiVolume/:name').get((req, res) => {
 	var ret = getdevice(requesteddevice).volume || 50
 	res.send(ret.toString());
 });
+app.route('/api/rpiDoorbellVolume/:name').get((req, res) => {
+        const requesteddevice = req.params['name'];
+        var ret = getdevice(requesteddevice).doorbellVolume || 50
+        res.send(ret.toString());
+});
 app.route('/api/rpiVolume/:name/:vol').get((req,res) => {
 	const requesteddevice = req.params['name'];
 	const vol = req.params['vol'];

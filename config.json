@@ -781,7 +781,8 @@
         "thebedroomassistant"
       ],
       "user": "pi",
-      "volume": "100"
+      "volume": "100",
+      "doorbellVolume": "100"
     },
     {
       "name": "Front Room Assistant",
@@ -809,7 +810,8 @@
         "thefrontroomassistant"
       ],
       "user": "pi",
-      "volume": "12"
+      "volume": "12",
+      "doorbellVolume": "24"
     },
     {
       "name": "Dining Room Assistant",
@@ -837,7 +839,8 @@
         "thediningroomassistant"
       ],
       "user": "pi",
-      "volume": "39"
+      "volume": "12",
+      "doorbellVolume": "24"
     },
     {
       "name": "Kitchen Assistant",
@@ -864,7 +867,8 @@
         "thekitchenassistant"
       ],
       "user": "pi",
-      "volume": "22"
+      "volume": "12",
+      "doorbellVolume": "24"
     },
     {
       "name": "Lounge Assistant",
@@ -891,7 +895,8 @@
         "theloungeassistant"
       ],
       "user": "pi",
-      "volume": "7"
+      "volume": "7",
+      "doorbellVolume": "14"
     },
     {
       "name": "Sitting Room Assistant",
@@ -1370,12 +1375,12 @@
         "lamp": [
           "Lounge Lamps"
         ],
-	"pc": [
-	  "Mega PC"
-	],
-	"thepc": [
-		"Mega PC"
-	]
+        "pc": [
+          "Mega PC"
+        ],
+        "thepc": [
+          "Mega PC"
+        ]
       },
       "greeting": "/home/pi/Assistant/media/r2d2.ogg"
     },

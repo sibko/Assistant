@@ -81,26 +81,34 @@ var globalVolume = ''
 var hostname = execSync('hostname').toString()
 hostname = hostname.substring(0,hostname.length - 1)
 var checkVolume = function () {
-	logger.debug('initial volume', globalVolume)
+	logger.debug('initial volume', globalVolume, globalDoorbellVolume)
         try {
                 parseInt(globalVolume)
+		
         } catch {
 		logger.debug('setting to default 50')
                 globalVolume = '50'
         }
+	try {
+		parseInt(globalDoorbellVolume)
+	} catch {
+		logger.debug('setting doorbell to default 50')
+		globalDoorbellVolume = '50'
+	}
 }
-var getGlobalVolume = function() {
+var getVolumes = function(volName) {
 	var volOptions = {
 	  hostname: '192.168.0.180',
 	  port: 1966,
-	  path: '/api/rpiVolume/' + hostname,
+	  path: '/api/' + volName + '/' + hostname,
 	  method: 'GET'
 	}
 	
 	var req = http.request(volOptions, res => {
 	        logger.debug(`statusCode: ${res.statusCode}`)
 	  res.on('data', d => {
-	    globalVolume += d
+            if (volName == 'rpiVolume') globalVolume += d
+	    if (volName == 'rpiDoorbellVolume') globalDoorbellVolume += d 
 	  })
 	  res.on('end', function() {
 	  	checkVolume()
@@ -113,13 +121,15 @@ var getGlobalVolume = function() {
 	  } else {
 	  	tried++
 		logger.debug('error', err.message)
-		setTimeout( getGlobalVolume,3000)
+		setTimeout( getVolumes(volName),3000)
 	  }
 	})
 	
 	req.end()
 }
-getGlobalVolume()
+getVolumes('rpiVolume')
+getVolumes('rpiDoorbellVolume')
+
 
 var queue = []
 
@@ -148,6 +158,23 @@ app.post('/api/play/', function(req,res){
         if (req.body && req.body.file){
             stopMplayer()
 	        startMplayer(req.body.file)		
+        }
+        res.send('end')
+})
+app.post('/api/doorbell/', function(req,res){
+        logger.debug('file post' + JSON.stringify(req.body))
+        if (req.body && req.body.file){
+	   var path = "/home/pi/Assistant/Doorbell/" + req.body.file
+	   if (!fs.existsSync(path)) {
+		   logger.debug("file doesnt exist " + path)
+		   path = "/music/Doorbell/" + req.body.file
+	   }
+            stopMplayer()
+		var actVolume = globalVolume
+		globalVolume = globalDoorbellVolume
+                startMplayer(path)
+		globalVolume = actVolume
+
         }
         res.send('end')
 })
