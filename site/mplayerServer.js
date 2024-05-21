@@ -246,8 +246,10 @@ var mplayerAction = function(action, additionalparam){
 		'resume': 'p',
 		'clearqueue': function(){
 			queue = []
-		}
-		
+		},
+		'backward':  '\u001b[D',
+                'ff':  '\u001b[C',
+                '10xff': '\u001b[C'		
 	}
 	if (action == 'volumeup') {
 		globalVolume +=3
@@ -275,6 +277,16 @@ var mplayerAction = function(action, additionalparam){
 	}
 	logger.info('writing' + actions[action])
 	mplayerContainer.stdin.write(actions[action])
+	        logger.info(action)
+        if (action == '1u0xff') {
+                var i = 0
+                while ( i<9 ) {
+                        logger.info(i)
+                        mplayerContainer.stdin.write(actions[action])
+                        i+=1
+                }
+        }
+
 	return 'finished'
 }
 
