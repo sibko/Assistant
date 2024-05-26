@@ -249,7 +249,7 @@ var mplayerAction = function(action, additionalparam){
 		},
 		'backward':  '\u001b[B',
                 'ff':  '\u001b[A',
-                '10xff': '\u001b[C'		
+                '10xff': '\u001b[5~'		
 	}
 	if (action == 'volumeup') {
 		globalVolume +=3
