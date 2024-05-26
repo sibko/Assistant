@@ -247,8 +247,8 @@ var mplayerAction = function(action, additionalparam){
 		'clearqueue': function(){
 			queue = []
 		},
-		'backward':  '\u001b[D',
-                'ff':  '\u001b[C',
+		'backward':  '\u001b[B',
+                'ff':  '\u001b[A',
                 '10xff': '\u001b[C'		
 	}
 	if (action == 'volumeup') {
