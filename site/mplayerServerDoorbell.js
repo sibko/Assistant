@@ -9,54 +9,11 @@ const http = require('http');
 const querystring = require('querystring');
 const q = require("q");
 var cp = require('child_process');
-var zerorpc = require("zerorpc");
 var playing = false;
-var zserver = new zerorpc.Server({
-    volume: function(direction, reply) {
-		mplayerAction('volume' + direction.toString())
-		reply(null,'zvolume' + direction)
-	},
-	setvolume: function(volume, reply) {
-		mplayerAction('setvolume', volume.toString())
-		reply(null,'zsetvolume ' + volume.toString())
-	},
-	skip: function(reply) {
-		mplayerAction('skip')
-		reply(null,'zskip')
-	},
-	pause: function(assistant, reply) {
-		mplayerAction('pause', assistant)
-		reply(null,"zpause")
-	},
-	resume: function(assistant, reply) {
-		mplayerAction('pause', assistant)
-		reply(null,"zresume")
-	},
-	stop: function(reply) {
-		mplayerAction('stop')
-		reply(null,"zstop")
-	},
-	play: function(mfile, reply) {
-		stopMplayer()
-		startMplayer(mfile.toString())
-		reply(null, "zplay")
-	},
-	shuffle: function(mfile, reply) {
-		stopMplayer()
-		startMplayerShuffle(mfile.toString())
-		reply(null, "zplay")
-	},
-	isalive: function(reply) {
-		reply(null, playing)
-	}
-});
-
-zserver.bind("tcp://0.0.0.0:4242");
-
 log4js.configure({
 	appenders: {
 		cons: { type: 'console' },
-		server: { type: 'file', filename: 'server.log' }
+		server: { type: 'file', filename: 'serverDoorbell.log' }
 	},
 	categories: {
 		default: { appenders: ['cons', 'server'], level: 'debug' }
@@ -73,7 +30,7 @@ app.use(function(req,res,next) {
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
 })
-app.listen(1967, () => {
+app.listen(1912, () => {
 	logger.info('Server started!');
 });
 var tried = 0

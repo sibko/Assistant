@@ -13,7 +13,7 @@ const os = require("os");
 var dir = '/home/pi/'
 const path = require('path')
 
-if (os.hostname() == 'Microserver') {
+if (os.hostname() == 'myNode') {
 	dir = '/home/sibko/'
 }
 
@@ -107,7 +107,7 @@ restartServer = function () {
 getLogs = function (device) {
 	var d = q.defer()
 	var command = 'echo "tail -n 500 /home/pi/assLogs.log | tac" | ssh -q ' + device.user + '@' + device.ip
-	if (device.name && device.name == 'Microserver') {
+	if (device.name && device.name == 'myNode') {
 		command = "tail -n 500 /home/sibko/logs/server.log | tac"
 	}
 	exec(command,{maxBuffer: 1024 * 10000}, function (err, stdout, stderr) {
@@ -412,8 +412,8 @@ app.route('/api/device/:name/:action').get((req, res) => {
 var waiting = false
 app.route('/api/getMusic/').get((req,res) => {
 	if (info.length == 0) {
-		getDirTree('/music/')
-		getDirTree('/raid/Music-Videos/')
+		getDirTree('/mnt/bigfucker/Music/')
+		getDirTree('/mnt/bigfucker/Music-Videos/')
 	}	
 	res.send(info)
 })
@@ -431,9 +431,9 @@ app.route('/api/getFreePlugs/:hidden').get((req,res) => {
 })
 app.route('/api/forceGetMusic/').get((req,res) => {
         info = []
-	getDirTree('/music/')
-	getDirTree('/raid/Music-Videos/')
-        res.send(info)
+	getDirTree('/mnt/bigfucker/Music/')
+	getDirTree('/mnt/bigfucker/Music-Videos/')
+	res.send(info)
 })
 app.route('/api/camera/').get((req,res) => {
         var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -545,8 +545,9 @@ app.route('/api/updatePis/').get((req,res) => {
 })
 
 
-getDirTree('/music/')
-getDirTree('/raid/Music-Videos/')
+getDirTree('/mnt/bigfucker/Music/')
+getDirTree('/mnt/bigfucker/Music-Videos/')
+
 //#region CATFLAP
 var endpoint = "app.api.surehub.io"
 var loginURL = "/api/auth/login"
@@ -555,7 +556,7 @@ const device_id = "9123499999"
 const https = require('https')
 
 var credentialsdir = '/home/pi/Assistant/credentials.json'
-if (os.hostname() == 'Microserver') {
+if (os.hostname() == 'myNode') {
     credentialsdir = '/home/sibko/Assistant/credentials.json'
 }
 var credentials = fs.readFileSync(credentialsdir, 'utf8')
