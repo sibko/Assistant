@@ -1,0 +1,4 @@
+2024-09-25 19:16:13,097 [8173:MainThread.config_setup.setup_config.19] [INFO]  Config file not found.
+2024-09-25 19:16:13,097 [8173:MainThread.config_setup.setup_config.25] [INFO]  Created new template: /home/sibko/Assistant/site/lnxlink.yaml
+2024-09-25 19:16:13,111 [8173:MainThread.config_setup.userprompt_config.123] [INFO]  
+Leave empty for default
