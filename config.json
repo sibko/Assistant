@@ -304,7 +304,7 @@
     {
       "name": "Ceiling Moods",
       "ids": [
-        "192.168.0.176"
+        "192.168.0.203"
       ],
       "type": "ESP",
       "location": "Lounge",
@@ -760,7 +760,7 @@
       "ids": [
         "bedroomassistant"
       ],
-      "ip": "192.168.0.189",
+      "ip": "192.168.0.155",
       "type": "rPI",
       "location": "Bedroom",
       "functions": [
@@ -781,17 +781,17 @@
         "thebedroomassistant"
       ],
       "user": "pi",
-      "volume": "100",
-      "doorbellVolume": "100"
+      "volume": "6",
+      "doorbellVolume": "50"
     },
     {
-      "name": "Front Room Assistant",
+      "name": "HomeAssistant",
       "ids": [
-        "frontroomassistant"
+        "homeassistant"
       ],
-      "ip": "192.168.0.26",
+      "ip": "192.168.0.160",
       "type": "rPI",
-      "location": "Front Room",
+      "location": "Kitchen",
       "functions": [
         "Restart",
         "Off",
@@ -804,21 +804,19 @@
         "Music Manager"
       ],
       "aliases": [
-        "frontroompi",
-        "thefrontroompi",
-        "frontroomassistant",
-        "thefrontroomassistant"
+        "homeassistant"
       ],
       "user": "pi",
-      "volume": "12",
-      "doorbellVolume": "24"
+      "volume": "27",
+      "doorbellVolume": "24",
+      "catVolume": "24"
     },
     {
       "name": "Dining Room Assistant",
       "ids": [
         "diningassistant"
       ],
-      "ip": "192.168.0.101",
+      "ip": "192.168.0.156",
       "type": "rPI",
       "location": "Dining Room",
       "functions": [
@@ -839,43 +837,15 @@
         "thediningroomassistant"
       ],
       "user": "pi",
-      "volume": "12",
-      "doorbellVolume": "24"
-    },
-    {
-      "name": "Kitchen Assistant",
-      "ids": [
-        "kitchenassistant"
-      ],
-      "ip": "192.168.0.23",
-      "type": "rPI",
-      "location": "Kitchen",
-      "functions": [
-        "Restart",
-        "Off",
-        "Restart Assistant",
-        "Update Music",
-        "Create Playlists",
-        "Volume Up",
-        "Volume Down",
-        "Music Manager"
-      ],
-      "aliases": [
-        "kitchenpi",
-        "thekitchenpi",
-        "kitchenassistant",
-        "thekitchenassistant"
-      ],
-      "user": "pi",
-      "volume": "12",
-      "doorbellVolume": "24"
+      "volume": "33",
+      "doorbellVolume": "80"
     },
     {
       "name": "Lounge Assistant",
       "ids": [
         "loungeassistant"
       ],
-      "ip": "192.168.0.187",
+      "ip": "192.168.0.157",
       "type": "rPI",
       "location": "Lounge",
       "functions": [
@@ -895,8 +865,8 @@
         "theloungeassistant"
       ],
       "user": "pi",
-      "volume": "7",
-      "doorbellVolume": "14"
+      "volume": "100",
+      "doorbellVolume": "40"
     },
     {
       "name": "Sitting Room Assistant",
@@ -994,7 +964,7 @@
     {
       "name": "Arcade PC",
       "ids": [
-        "192.168.0.33"
+        "192.168.0.202"
       ],
       "type": "ESP",
       "location": "Breakfast Room",

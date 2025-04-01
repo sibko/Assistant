@@ -34,7 +34,6 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));
 app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
-
 app.listen(1966, () => {
 	logger.info('Server started!');
 });
@@ -291,6 +290,11 @@ app.route('/api/rpiDoorbellVolume/:name').get((req, res) => {
         var ret = getdevice(requesteddevice).doorbellVolume || 50
         res.send(ret.toString());
 });
+app.route('/api/rpiCatVolume/:name').get((req, res) => {
+        const requesteddevice = req.params['name'];
+        var ret = getdevice(requesteddevice).catVolume || 50
+        res.send(ret.toString());
+});
 app.route('/api/rpiVolume/:name/:vol').get((req,res) => {
 	const requesteddevice = req.params['name'];
 	const vol = req.params['vol'];
@@ -409,7 +413,7 @@ var waiting = false
 app.route('/api/getMusic/').get((req,res) => {
 	if (info.length == 0) {
 		getDirTree('/music/')
-		getDirTree('/musicvids/')
+		getDirTree('/raid/Music-Videos/')
 	}	
 	res.send(info)
 })
@@ -428,7 +432,7 @@ app.route('/api/getFreePlugs/:hidden').get((req,res) => {
 app.route('/api/forceGetMusic/').get((req,res) => {
         info = []
 	getDirTree('/music/')
-	getDirTree('/musicvids/')
+	getDirTree('/raid/Music-Videos/')
         res.send(info)
 })
 app.route('/api/camera/').get((req,res) => {
@@ -542,7 +546,7 @@ app.route('/api/updatePis/').get((req,res) => {
 
 
 getDirTree('/music/')
-getDirTree('/musicvids/')
+getDirTree('/raid/Music-Videos/')
 //#region CATFLAP
 var endpoint = "app.api.surehub.io"
 var loginURL = "/api/auth/login"
