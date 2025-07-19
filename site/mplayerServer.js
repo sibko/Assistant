@@ -220,7 +220,7 @@ var saveVolume = function() {
 }
 
 var mplayerAction = function(action, additionalparam){
-	if (!mplayerContainer){ 
+	if (action != 'ambient' && action != 'random' && action != 'ambientchristmas' && !mplayerContainer ){ 
 		return
 	}
 	var actions = {
@@ -249,7 +249,10 @@ var mplayerAction = function(action, additionalparam){
 		},
 		'backward':  '\u001b[B',
                 'ff':  '\u001b[A',
-                '10xff': '\u001b[5~'		
+                '10xff': '\u001b[5~',
+		'random': random,
+		'ambient': ambient,
+		'ambientchristmas': ambientchristmas		
 	}
 	if (action == 'volumeup') {
 		globalVolume +=3
@@ -318,6 +321,7 @@ var startMplayer = function(file, additionalParams){
 	playing = true;
 }
 var startMplayerShuffle = function(file){
+	stopMplayer()
 	return startMplayer(file, '-shuffle')
 }
 
@@ -341,5 +345,22 @@ var stopMplayer = function(){
 		mplayerContainer.kill()
 	}
 	queue = []
+}
+
+var ambient = function(){
+	stopMplayer()
+	var file = '/mnt/bigfucker/Music/0Ambient/0Ambient.m3u'
+	return startMplayer(file, '-shuffle')
+}
+var random = function(){
+        stopMplayer()
+	var file = '/mnt/bigfucker/Music/music.m3u'
+        return startMplayer(file, '-shuffle')
+}
+
+var ambientchristmas = function(){
+        stopMplayer()
+	var file = '/mnt/bigfucker/Music/0Ambient Christmas/0Ambient Christmas.m3u'
+        return startMplayer(file, '-shuffle')
 }
 
