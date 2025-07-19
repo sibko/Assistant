@@ -148,7 +148,7 @@
             <table ng-if="queue && queue.length > 0" class="table table-sm table-striped">
                 <tr  ng-repeat="qitem in queue track by $index">
                     <td>
-                        <span>{{qitem.substring(21)}}</span>
+                        <span>{{qitem.substring(7)}}</span>
                     </td>
                 </tr>
             </table>
@@ -166,8 +166,8 @@
             <tr ng-repeat="item in musicDir| musicFilter : mfilter">
             <td><button style="min-width: 50px" type=" button " class="btn btn-success " ng-click="queueMusic(item)"><span class=" glyphicon glyphicon-list"></span></button></td>
             <td>
-                    <span ng-if="item.substring(item.length - 3) == 'm3u'" ng-click="playMusic(item)" style="color:blue">{{item.substring(21)}}</span>
-                    <span ng-click="playMusic(item)" ng-if="item.substring(item.length - 3) != 'm3u'">{{item.substring(21)}}</span>
+                    <span ng-if="item.substring(item.length - 3) == 'm3u'" ng-click="playMusic(item)" style="color:blue">{{item.substring(7)}}</span>
+                    <span ng-click="playMusic(item)" ng-if="item.substring(item.length - 3) != 'm3u'">{{item.substring(7)}}</span>
                 </td>
                         <td>
                         <button style="min-width:50px" ng-if="item.substring(item.length - 3) == 'm3u'" type="button" class="btn btn-warning" ng-click="shuffleMusic(item)"><span class="glyphicon glyphicon-random"></span></button>

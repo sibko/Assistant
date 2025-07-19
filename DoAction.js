@@ -7,7 +7,7 @@ const request = require("request");
 const exec = require('child_process').exec;
 const execSync = require('child_process').execSync;
 var confdir = '/home/pi/Assistant/config.json'
-if (os.hostname() == 'myNode') {
+if (os.hostname() == 'Microserver') {
     confdir = '/home/sibko/Assistant/config.json'
 }
 var config = fs.readFileSync(confdir, 'utf8')
@@ -21,7 +21,7 @@ const device_id = "9123499999"
 const https = require('https')
 
 var credentialsdir = '/home/pi/Assistant/credentials.json'
-if (os.hostname() == 'myNode') {
+if (os.hostname() == 'Microserver') {
     credentialsdir = '/home/sibko/Assistant/credentials.json'
 }
 var credentials = fs.readFileSync(credentialsdir, 'utf8')
@@ -308,13 +308,13 @@ linuxControl = function (device, action) {
             command = "echo sudo shutdown -h now | ssh " + device.user + "@" + device.ip
             break;
         case 'updatemusic':
-            command = "echo sudo updatedb --netpaths='/mnt/bigfucker/Music' | ssh " + device.user + "@" + device.ip
+            command = "echo sudo updatedb --netpaths='/music' | ssh " + device.user + "@" + device.ip
             break;
         case 'createplaylists':
-            command = "cd /mnt/bigfucker/Music && bash createplaylists.sh &"
+            command = "cd /music && bash createplaylists.sh &"
             break;
         case 'customplaylistsconverter':
-            command = "bash " + dir + "Assistant/customPlaylistConverter.sh; updatedb --netpaths='/mnt/bigfucker/Music' "
+            command = "bash " + dir + "Assistant/customPlaylistConverter.sh; updatedb --netpaths='/music' "
             break;
 	case 'volumeup':
 	    command = "echo 'sudo amixer set -M Headphone 10%+' | ssh " + device.user + "@" + device.ip

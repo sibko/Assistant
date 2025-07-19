@@ -781,37 +781,8 @@
         "thebedroomassistant"
       ],
       "user": "pi",
-      "volume": "94",
+      "volume": "6",
       "doorbellVolume": "50"
-    },
-    {
-      "name": "Front Room Assistant",
-      "ids": [
-        "frontroomassistant"
-      ],
-      "ip": "192.168.0.168",
-      "type": "rPI",
-      "location": "Front Room",
-      "functions": [
-        "Restart",
-        "Off",
-        "Restart Assistant",
-        "Update Music",
-        "Create Playlists",
-        "Custom Playlists Converter",
-        "Volume Up",
-        "Volume Down",
-        "Music Manager"
-      ],
-      "aliases": [
-        "frontroompi",
-        "thefrontroompi",
-        "frontroomassistant",
-        "thefrontroomassistant"
-      ],
-      "user": "pi",
-      "volume": "18",
-      "doorbellVolume": "80"
     },
     {
       "name": "HomeAssistant",
@@ -845,7 +816,7 @@
       "ids": [
         "diningassistant"
       ],
-      "ip": "192.168.0.165",
+      "ip": "192.168.0.156",
       "type": "rPI",
       "location": "Dining Room",
       "functions": [
@@ -866,7 +837,7 @@
         "thediningroomassistant"
       ],
       "user": "pi",
-      "volume": "9",
+      "volume": "33",
       "doorbellVolume": "80"
     },
     {
@@ -874,7 +845,7 @@
       "ids": [
         "loungeassistant"
       ],
-      "ip": "192.168.0.167",
+      "ip": "192.168.0.157",
       "type": "rPI",
       "location": "Lounge",
       "functions": [
@@ -894,15 +865,15 @@
         "theloungeassistant"
       ],
       "user": "pi",
-      "volume": "21",
-      "doorbellVolume": "70"
+      "volume": "100",
+      "doorbellVolume": "40"
     },
     {
       "name": "Sitting Room Assistant",
       "ids": [
         "sittingroomassistant"
       ],
-      "ip": "192.168.0.164",
+      "ip": "192.168.0.20",
       "type": "rPI",
       "location": "Sitting Room",
       "functions": [
@@ -922,9 +893,7 @@
         "sittingroomassistant",
         "thesittingroomassistant"
       ],
-      "user": "pi",
-      "volume": "9",
-      "doorbellVolume": "10"
+      "user": "pi"
     },
     {
       "name": "Porch Pi Cam",

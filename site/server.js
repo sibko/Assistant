@@ -205,7 +205,8 @@ deleteTimer = function (timer) {
 }
 var info = []
 getDirTree = function(filename) {
-	var stats = fs.lstatSync(filename)	        
+	var stats = fs.lstatSync(filename)
+	        
     if (stats.isDirectory()) {
         fs.readdirSync(filename).map(function(child) {
 			getDirTree(filename + '/' + child)			
@@ -411,8 +412,8 @@ app.route('/api/device/:name/:action').get((req, res) => {
 var waiting = false
 app.route('/api/getMusic/').get((req,res) => {
 	if (info.length == 0) {
-		getDirTree('/mnt/bigfucker/Music')
-		getDirTree('/mnt/bigfucker/Music-Videos')
+		getDirTree('/mnt/bigfucker/Music/')
+		getDirTree('/mnt/bigfucker/Music-Videos/')
 	}	
 	res.send(info)
 })
@@ -430,8 +431,8 @@ app.route('/api/getFreePlugs/:hidden').get((req,res) => {
 })
 app.route('/api/forceGetMusic/').get((req,res) => {
         info = []
-	getDirTree('/mnt/bigfucker/Music')
-	getDirTree('/mnt/bigfucker/Music-Videos')
+	getDirTree('/mnt/bigfucker/Music/')
+	getDirTree('/mnt/bigfucker/Music-Videos/')
 	res.send(info)
 })
 app.route('/api/camera/').get((req,res) => {
@@ -544,8 +545,8 @@ app.route('/api/updatePis/').get((req,res) => {
 })
 
 
-getDirTree('/mnt/bigfucker/Music')
-getDirTree('/mnt/bigfucker/Music-Videos')
+getDirTree('/mnt/bigfucker/Music/')
+getDirTree('/mnt/bigfucker/Music-Videos/')
 
 //#region CATFLAP
 var endpoint = "app.api.surehub.io"
