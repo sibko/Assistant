@@ -351,8 +351,8 @@ deviceControl.controller("mediaController", ['$scope', '$http', '$uibModal', '$r
 
 
 	}
-	$scope.actions = ['Volume Up','Pause','Volume Down','Skip','Set Volume','Stop','Backward','FF', '10x FF', 'Get Music', '2 Hours', 'Clear Queue']
-	$scope.lines = [1,2,3,4]
+	$scope.actions = ['Volume Up','Pause','Volume Down','Skip','Set Volume','Stop','Backward','FF', '10x FF', 'Get Music', '2 Hours', 'Clear Queue', 'Random', 'Ambient', 'Ambient Christmas']
+	$scope.lines = [1,2,3,4, 5]
 	$scope.closeModal = function () {
 		$uibModalInstance.close();
 	}
