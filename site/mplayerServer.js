@@ -134,6 +134,11 @@ getVolumes('rpiDoorbellVolume')
 
 var queue = []
 
+app.route('/api/playing/').get((req, res) => {
+        logger.debug('playing', playing)
+        res.send(playing)
+})
+
 app.route('/api/queue/').get((req, res) => {
 	logger.debug('get queue')
 	res.send(queue)
