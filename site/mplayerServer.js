@@ -133,6 +133,15 @@ getVolumes('rpiDoorbellVolume')
 
 
 var queue = []
+app.route('/api/checkplayingthenambient/').get((req, res) => {
+        logger.debug('playing', playing)
+        if (!playing) {
+		stopMplayer()
+        	var file = '/mnt/bigfucker/Music/0Ambient/0Ambient.m3u'
+	        startMplayer(file, '-shuffle')
+	}
+	res.end()
+})
 
 app.route('/api/playing/').get((req, res) => {
         logger.debug('playing', playing)
