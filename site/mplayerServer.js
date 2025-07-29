@@ -171,9 +171,9 @@ app.route('/api/setvolume/:volume').get((req, res) => {
 app.post('/api/play/', function(req,res){
 	logger.debug('file post' + JSON.stringify(req.body))
         if (req.body && req.body.file){
-            stopMplayer()
-	        startMplayer(req.body.file)		
-        }
+		stopMplayer()
+		startMplayer(req.body.file)		
+	}
         res.send('end')
 })
 app.post('/api/doorbell/', function(req,res){
@@ -208,7 +208,6 @@ app.post('/api/queue/', function(req,res){
         }
         res.send('end')
 })
-
 
 var mplayerContainer
 
@@ -328,9 +327,8 @@ var startMplayer = function(file, additionalParams){
 	mplayerArgs.push(file)
 	console.log(mplayerArgs)
 	mplayerContainer = cp.spawn('mplayer', mplayerArgs);
-	
+	mplayerContainer.on('exit', mplayerExit)	
 	mplayerContainer.stdout.setEncoding('utf8')
-	mplayerContainer.on('exit', mplayerExit)
 	mplayerContainer.on('err', mplayerError)
 	playing = true;
 }
@@ -340,7 +338,6 @@ var startMplayerShuffle = function(file){
 }
 
 var mplayerExit = function(){
-	playing = false
 	logger.info("mplayer exited")
 	saveVolume()
 	if ( queue.length > 0) {
@@ -357,6 +354,9 @@ var mplayerError = function(err){
 var stopMplayer = function(){
 	if (mplayerContainer){
 		mplayerContainer.kill()
+		logger.info("stop playing", playing)
+		playing = false
+		logger.info("end playing", playing)
 	}
 	queue = []
 }
