@@ -331,6 +331,7 @@ var startMplayer = function(file, additionalParams){
 	mplayerContainer.stdout.setEncoding('utf8')
 	mplayerContainer.on('err', mplayerError)
 	playing = true;
+	logger.info("mplayer started " , playing)
 }
 var startMplayerShuffle = function(file){
 	stopMplayer()
@@ -344,10 +345,12 @@ var mplayerExit = function(){
 		startMplayer(queue[0])
 		queue.splice(0,1)
 	}
+	playing = false
+	logger.info("mplayer exit", playing) 
 }
 var mplayerError = function(err){
 	playing = false
-	logger.info("mplayer error", err)
+	logger.info("mplayer error", err, playing)
 	mplayerContainer = ''
 }
 
