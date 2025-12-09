@@ -345,7 +345,6 @@ var mplayerExit = function(){
 		startMplayer(queue[0])
 		queue.splice(0,1)
 	}
-	playing = false
 	logger.info("mplayer exit", playing) 
 }
 var mplayerError = function(err){
